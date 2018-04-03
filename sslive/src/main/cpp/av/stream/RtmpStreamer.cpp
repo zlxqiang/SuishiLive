@@ -196,7 +196,7 @@ void *RtmpStreamer::PushAudioStreamTask(void *pObj) {
             LOG_D(DEBUG, "after audio encode pts:%lld", pAudioData->mAVPacket->pts);
         }
         if (pAudioData != NULL && pAudioData->mAVPacket->size > 0) {
-            rtmpStreamer->SendFrame(pAudioData, rtmpStreamer->audioStreamIndex);
+          //  rtmpStreamer->SendFrame(pAudioData, rtmpStreamer->audioStreamIndex);
         }
     }
 

@@ -65,12 +65,12 @@ public class AudioManager {
      * 当然大家可以根据自己的情况来修改，这里只是抛砖引玉。
      */
     public boolean initAudioDevice() {
-        int minsize = AudioRecord.getMinBufferSize(mAudioConfig.getmSampleRate(), mAudioConfig.getmChannelConfig(), mAudioConfig.getmAudioFormat());
+        int minsize = AudioRecord.getMinBufferSize(mAudioConfig.getSampleRate(), mAudioConfig.getmChannelConfig(), mAudioConfig.getAudioFormat());
        // if(minsize< mAudioConfig.getmBuffsize()){
-            minsize=mAudioConfig.getmBuffsize();
+            minsize=mAudioConfig.getBuffsize();
       //  }
-        mAudioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, mAudioConfig.getmSampleRate(), mAudioConfig.getmChannelConfig(),
-                mAudioConfig.getmAudioFormat(),minsize);
+        mAudioRecord = new AudioRecord(MediaRecorder.AudioSource.MIC, mAudioConfig.getSampleRate(), mAudioConfig.getmChannelConfig(),
+                mAudioConfig.getAudioFormat(),minsize);
         if(Build.VERSION.SDK_INT >= 16) {
             int m_iSessionID = this.mAudioRecord.getAudioSessionId();
             //噪音

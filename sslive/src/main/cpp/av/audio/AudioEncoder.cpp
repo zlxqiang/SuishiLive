@@ -179,7 +179,7 @@ int AudioEncoder::InitEncode() {
     audioCodecContext->bit_rate = 50 * 1024 * 8;
     audioCodecContext->channels = audioProcessor->GetAudioConfig()->channels;
     audioCodecContext->frame_size = audioProcessor->GetAudioConfig()->nb_samples;
-    audioCodecContext->time_base = {1, 1000000};//AUDIO VIDEO 两边时间基数要相同
+    audioCodecContext->time_base = {1, 1000000};
     audioCodecContext->channel_layout = av_get_default_channel_layout(audioCodecContext->channels);
 
 

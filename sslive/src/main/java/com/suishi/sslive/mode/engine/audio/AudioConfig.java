@@ -43,7 +43,7 @@ public class AudioConfig {
     }
 
 
-    public int getmSampleRate() {
+    public int getSampleRate() {
         return mSampleRate;
     }
 
@@ -55,11 +55,11 @@ public class AudioConfig {
         return mChannelConfig;
     }
 
-    public int getmAudioFormat() {
+    public int getAudioFormat() {
         return mAudioFormat;
     }
 
-    public int getmBuffsize() {
+    public int getBuffsize() {
         return mBuffsize;
     }
 }

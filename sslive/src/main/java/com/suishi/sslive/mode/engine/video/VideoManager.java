@@ -59,7 +59,7 @@ public class VideoManager implements Camera.PreviewCallback  {
     }
 
     public boolean initCameraDevice(){
-        mQueue = new ArrayBlockingQueue<byte[]>(5);
+        mQueue = new ArrayBlockingQueue<byte[]>(3);
             return true;
     }
 

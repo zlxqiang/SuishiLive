@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.suishi.live.app.R;
-import com.suishi.sslive.runtimepermissions.PermissionsManager;
-import com.suishi.sslive.runtimepermissions.PermissionsResultAction;
+import com.swbyte.chat.runtimepermissions.PermissionsManager;
+import com.swbyte.chat.runtimepermissions.PermissionsResultAction;
 
 
 public class MainActivity extends Activity {

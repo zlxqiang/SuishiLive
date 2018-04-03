@@ -1,6 +1,8 @@
 package com.suishi.sslive.ui;
 
+import android.app.ActivityManager;
 import android.content.Context;
+import android.media.MediaCodec;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -9,15 +11,19 @@ import com.suishi.sslive.mode.engine.audio.AudioManager;
 import com.suishi.sslive.mode.engine.camera.CameraHelper;
 import com.suishi.sslive.mode.engine.video.VideoConfig;
 import com.suishi.sslive.mode.engine.video.VideoManager;
+import com.suishi.sslive.mode.mediacodec.AudioMediaCodec;
+import com.suishi.sslive.mode.mediacodec.VideoMediaCodec;
 import com.suishi.sslive.mode.stream.StreamManager;
 import com.suishi.sslive.widgets.CameraGlSurfaceView;
+
+import java.nio.ByteBuffer;
 
 /**
  * 推流层
  * Created by admin on 2018/3/8.
  */
 
-public class LiveManager implements StreamManager.PushCallback,AudioManager.AudioStackCallBack,AudioManager.AudioFrameCallBack,VideoManager.VideoFrameCallBack{
+public class LiveManager extends OnLowMemoryCallBack implements StreamManager.PushCallback,AudioManager.AudioStackCallBack,AudioManager.AudioFrameCallBack,VideoManager.VideoFrameCallBack,AudioMediaCodec.OnMediaCodecAudioEncodeListener,VideoMediaCodec.OnMediaCodecVideoEncodeListener{
 
     private CameraGlSurfaceView mFilterGLSurfaceView;
     /**
@@ -78,7 +84,7 @@ public class LiveManager implements StreamManager.PushCallback,AudioManager.Audi
     private boolean InitNative() {
         int ret = 0;
         AudioConfig config = AudioManager.instance().getAudioConfig();
-        ret = StreamManager.getInstance().InitAudio(config.getmChannel(), config.getmSampleRate(), 16);
+        ret = StreamManager.getInstance().InitAudio(config.getmChannel(), config.getSampleRate(), 16);
         if (ret < 0) {
             Log.e("initNative", "init audio capture failed!");
             return false;
@@ -179,13 +185,73 @@ public class LiveManager implements StreamManager.PushCallback,AudioManager.Audi
 
     }
 
+    /**
+     * 原始数据回调
+     * @param data
+     * @param length
+     */
     @Override
-    public void onAudioFrame(byte[] chunkPCM, int length) {
-        StreamManager.getInstance().Encode2AAC(chunkPCM,length);
+    public void onAudioFrame(byte[] data, int length) {
+        StreamManager.getInstance().Encode2AAC(data,length);
     }
 
+    /**
+     * 原始数据回调
+     * @param data
+     * @param length
+     */
     @Override
     public void onVideoFrame(byte[] data, int length) {
         StreamManager.getInstance().Encode2H264(data,length);
+    }
+    /**
+     * 硬编码回调
+     * @param bb
+     * @param bi
+     */
+    @Override
+    public void onMediaCodecAudioEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
+
+    }
+
+    /**
+     * 硬编码回调
+     * @param bb
+     * @param bi
+     */
+    @Override
+    public void onMediaCodecVideoEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
+
+    }
+
+
+    /**
+     * 低内存处理
+     */
+    @Override
+    public void onTrimMemory(int level) {
+        switch (level){
+            case TRIM_MEMORY_COMPLETE:
+                //lru尾部很快被杀死
+                break;
+            case TRIM_MEMORY_MODERATE:
+                //lru中部
+                break;
+            case TRIM_MEMORY_BACKGROUND:
+                //lru头部，准备杀死中部进程
+                break;
+            case TRIM_MEMORY_UI_HIDDEN:
+                //ui不可见
+                break;
+            case TRIM_MEMORY_RUNNING_CRITICAL:
+                //准备杀死后台进程
+                break;
+            case TRIM_MEMORY_RUNNING_LOW:
+                //影响用户体验
+                break;
+            case TRIM_MEMORY_RUNNING_MODERATE:
+                //低内存运行状态
+                break;
+        }
     }
 }
