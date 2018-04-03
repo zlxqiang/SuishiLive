@@ -1,4 +1,4 @@
-package com.suishi.sslive.mode.engine.video;
+package com.suishi.sslive.mode.engine.camera;
 
 import android.graphics.ImageFormat;
 import android.graphics.Rect;
@@ -23,7 +23,7 @@ import java.util.List;
  */
 public class CameraHelper {
 
-    private static final int FPS = 24;//默认帧
+    public static final int FPS = 24;//默认帧
     private static final String TAG = "CameraHelper";
 
     private Camera mCamera;

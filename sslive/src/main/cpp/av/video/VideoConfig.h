@@ -1,5 +1,5 @@
 //
-// Created by 赵增强 on 2018/3/21.
+// Created by zhzq  on 2018/3/21.
 //
 
 #ifndef SUISHILIVE_VIDEOCONFIG_H

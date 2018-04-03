@@ -14,7 +14,7 @@ import com.suishi.sslive.utils.LiveLog;
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- * Created by 赵增强 on 2018/3/24.
+ * Created by zhzq  on 2018/3/24.
  */
 public class AudioManager {
 

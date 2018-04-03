@@ -1,4 +1,4 @@
-package com.seu.magicfilter.camera.interfaces;
+package com.suishi.sslive.mode.engine.camera.interfaces;
 
 /**
  * 切换摄像头回调

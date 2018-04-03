@@ -1,4 +1,4 @@
-package com.seu.magicfilter.camera.interfaces;
+package com.suishi.sslive.mode.engine.camera.interfaces;
 
 /**
  * 摄像头聚焦回调

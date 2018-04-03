@@ -9,8 +9,6 @@ import android.support.annotation.RequiresApi;
 
 import com.seu.magicfilter.R;
 import com.seu.magicfilter.beautify.MagicJni;
-import com.seu.magicfilter.camera.RecordHelper;
-import com.seu.magicfilter.camera.interfaces.OnRecordListener;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.seu.magicfilter.utils.OpenGlUtils;
 

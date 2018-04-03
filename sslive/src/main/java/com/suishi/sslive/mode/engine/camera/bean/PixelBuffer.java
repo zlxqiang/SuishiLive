@@ -1,4 +1,4 @@
-package com.seu.magicfilter.camera.bean;
+package com.suishi.sslive.mode.engine.camera.bean;
 
 import java.util.Arrays;
 

@@ -1,4 +1,4 @@
-package com.seu.magicfilter.camera.utils;
+package com.suishi.sslive.mode.engine.camera.utils;
 
 import android.hardware.Camera;
 

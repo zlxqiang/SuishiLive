@@ -1,7 +1,6 @@
 package com.suishi.sslive.widgets;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
@@ -9,17 +8,14 @@ import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.seu.magicfilter.camera.interfaces.OnErrorListener;
-import com.seu.magicfilter.camera.interfaces.OnFocusListener;
-import com.seu.magicfilter.camera.interfaces.OnRecordListener;
-import com.seu.magicfilter.camera.interfaces.OnSwitchCameraListener;
+import com.suishi.sslive.mode.engine.camera.interfaces.OnFocusListener;
+import com.suishi.sslive.mode.engine.camera.interfaces.OnRecordListener;
 import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
 import com.seu.magicfilter.filter.base.MagicRecordFilter;
 import com.seu.magicfilter.utils.OpenGlUtils;
 import com.seu.magicfilter.utils.TextureRotationUtil;
-import com.suishi.sslive.mode.engine.video.CameraHelper;
+import com.suishi.sslive.mode.engine.camera.CameraHelper;
 import com.suishi.sslive.mode.engine.video.VideoManager;
-import com.suishi.sslive.mode.stream.StreamManager;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

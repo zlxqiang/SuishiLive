@@ -1,20 +1,15 @@
 package com.suishi.sslive.mode.engine.video;
 
-import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 
-import com.seu.magicfilter.camera.CameraConfiguration;
-import com.seu.magicfilter.camera.CameraEngine;
-import com.suishi.sslive.mode.engine.audio.AudioManager;
-import com.suishi.sslive.mode.stream.StreamManager;
-import com.suishi.sslive.ui.LiveManager;
+import com.suishi.sslive.mode.engine.camera.CameraHelper;
 import com.suishi.sslive.utils.LiveLog;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
 /**
- * Created by admin on 2018/3/25.
+ * Created by zhzq on 2018/3/25.
  */
 
 public class VideoManager implements Camera.PreviewCallback  {
@@ -23,7 +18,7 @@ public class VideoManager implements Camera.PreviewCallback  {
 
     private ArrayBlockingQueue<byte[]> mQueue;
 
-    private int m_nDuration=1000 / CameraConfiguration.DEFAULT_FPS;
+    private int m_nDuration=1000 / CameraHelper.FPS;
 
     private long m_nSumTime;
 
@@ -65,13 +60,12 @@ public class VideoManager implements Camera.PreviewCallback  {
 
     public boolean initCameraDevice(){
         mQueue = new ArrayBlockingQueue<byte[]>(5);
-     //   CameraEngine.setPreviewCallBack(this);
             return true;
     }
 
     public void start(){
         mQueue.clear();
-        this.m_nDuration = 1000 / CameraConfiguration.DEFAULT_FPS;
+        this.m_nDuration = 1000 / CameraHelper.FPS;
         this.m_nSumTime = 0L;
         this.m_nPrevTime = System.currentTimeMillis();
         isRecord=true;
@@ -101,9 +95,6 @@ public class VideoManager implements Camera.PreviewCallback  {
         }
 
         this.m_nPrevTime = this.m_nCurrentTime;
-
-        if(camera!=null)
-        CameraEngine.addCallbackBuffer();
     }
 
     public void setCallBack(VideoManager.VideoStackCallBack callBack){
@@ -115,8 +106,8 @@ public class VideoManager implements Camera.PreviewCallback  {
     }
 
     private class EncodeRunnable implements Runnable {
-        byte[] m_nv21Data = new byte[CameraEngine.cameraConfiguration.width
-                * CameraEngine.cameraConfiguration.height * 3 / 2];
+        byte[] m_nv21Data = new byte[CameraHelper.getInstance().getPreviewWidth()
+                * CameraHelper.getInstance().getPreviewHeight() * 3 / 2];
         @Override
         public void run() {
             LiveLog.d(this,"编码线程开始");
@@ -129,7 +120,7 @@ public class VideoManager implements Camera.PreviewCallback  {
                 if(!mQueue.isEmpty()){
                     byte[] chunkPCM = mQueue.poll();
                     if (chunkPCM != null && mFrameCallBack!=null) {
-                        System.arraycopy(chunkPCM,0,m_nv21Data,0,CameraEngine.minLength);
+                        //System.arraycopy(chunkPCM,0,m_nv21Data,0,chunkPCM.length);
                         mFrameCallBack.onVideoFrame(chunkPCM, chunkPCM.length);
                     }
                 }

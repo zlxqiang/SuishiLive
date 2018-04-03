@@ -1,4 +1,4 @@
-package com.seu.magicfilter.camera.utils;
+package com.suishi.sslive.mode.engine.camera.utils;
 
 /**
  * Created by why8222 on 2016/2/25.

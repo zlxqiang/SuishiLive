@@ -1,5 +1,5 @@
 //
-// Created by 赵增强 on 2018/3/22.
+// Created by zhzq  on 2018/3/22.
 //
 #include <android/bitmap.h>
 #include "LiveManager.h"

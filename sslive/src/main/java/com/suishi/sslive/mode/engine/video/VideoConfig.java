@@ -1,7 +1,7 @@
 package com.suishi.sslive.mode.engine.video;
 
 /**
- * Created by admin on 2018/3/25.
+ * Created by zhzq  on 2018/3/25.
  */
 
 public class VideoConfig {

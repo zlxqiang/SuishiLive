@@ -4,9 +4,9 @@ import android.content.Context;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.seu.magicfilter.camera.CameraEngine;
 import com.suishi.sslive.mode.engine.audio.AudioConfig;
 import com.suishi.sslive.mode.engine.audio.AudioManager;
+import com.suishi.sslive.mode.engine.camera.CameraHelper;
 import com.suishi.sslive.mode.engine.video.VideoConfig;
 import com.suishi.sslive.mode.engine.video.VideoManager;
 import com.suishi.sslive.mode.stream.StreamManager;
@@ -145,7 +145,7 @@ public class LiveManager implements StreamManager.PushCallback,AudioManager.Audi
     }
 
     public void switchCamera(){
-        CameraEngine.switchCamera();
+        CameraHelper.getInstance().switchCamera();
     }
 
 

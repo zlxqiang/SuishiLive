@@ -1,4 +1,4 @@
-package com.seu.magicfilter.camera.interfaces;
+package com.suishi.sslive.mode.engine.camera.interfaces;
 
 /**
  * 错误回调
