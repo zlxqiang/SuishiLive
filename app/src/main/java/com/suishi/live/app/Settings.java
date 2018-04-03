@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.suishi.live.apps.R;
+import com.suishi.live.app.R;
 
 public class Settings {
     private Context mAppContext;

@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.ImageButton;
 
 import com.seu.magicfilter.filter.helper.MagicFilterType;
-import com.suishi.live.apps.R;
+import com.suishi.live.app.R;
 import com.suishi.live.app.widgets.MultiToggleImageButton;
 import com.suishi.sslive.ui.LiveManager;
 import com.suishi.sslive.widgets.CameraGlSurfaceView;
@@ -50,7 +50,6 @@ public class PortraitActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-      //  filter.resume();
 
     }
 

@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.suishi.live.apps.R;
+import com.suishi.live.app.R;
 
 
 public class TableLayoutBinder {

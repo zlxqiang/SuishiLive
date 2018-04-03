@@ -39,7 +39,7 @@ import android.widget.MediaController;
 import android.widget.TableLayout;
 import android.widget.TextView;
 
-import com.suishi.live.apps.R;
+import com.suishi.live.app.R;
 import com.suishi.live.app.Settings;
 import com.suishi.live.app.services.MediaPlayerService;
 

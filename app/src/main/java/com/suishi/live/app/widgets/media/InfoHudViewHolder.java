@@ -7,7 +7,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.TableLayout;
 
-import com.suishi.live.apps.R;
+import com.suishi.live.app.R;
 
 import java.util.Locale;
 

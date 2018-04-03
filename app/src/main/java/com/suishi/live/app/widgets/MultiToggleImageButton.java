@@ -31,7 +31,7 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.suishi.live.apps.R;
+import com.suishi.live.app.R;
 
 
 /*

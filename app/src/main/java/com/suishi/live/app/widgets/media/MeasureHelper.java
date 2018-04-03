@@ -21,7 +21,7 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 import android.view.View;
 
-import com.suishi.live.apps.R;
+import com.suishi.live.app.R;
 
 import java.lang.ref.WeakReference;
 
