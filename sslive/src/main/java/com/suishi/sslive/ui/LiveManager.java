@@ -1,9 +1,6 @@
 package com.suishi.sslive.ui;
 
 import android.content.Context;
-import android.hardware.Camera;
-import android.support.v4.widget.ContentLoadingProgressBar;
-import android.util.AttributeSet;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -13,14 +10,7 @@ import com.suishi.sslive.mode.engine.audio.AudioManager;
 import com.suishi.sslive.mode.engine.video.VideoConfig;
 import com.suishi.sslive.mode.engine.video.VideoManager;
 import com.suishi.sslive.mode.stream.StreamManager;
-import com.suishi.sslive.utils.LiveLog;
 import com.suishi.sslive.widgets.CameraGlSurfaceView;
-import com.suishi.sslive.widgets.FilterGLSurfaceView;
-
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-
-import javax.microedition.khronos.opengles.GL10;
 
 /**
  * 推流层

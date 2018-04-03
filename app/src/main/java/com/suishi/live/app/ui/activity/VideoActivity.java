@@ -59,9 +59,6 @@ public class VideoActivity extends AppCompatActivity{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_player);
 
-       // mSettings = new Settings(this);
-
-        // handle arguments
         mVideoPath = getIntent().getStringExtra("videoPath");
         mVideoPath="rtmp://192.168.1.101/live/stream";
 

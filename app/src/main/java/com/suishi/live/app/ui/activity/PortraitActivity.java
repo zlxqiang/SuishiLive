@@ -2,16 +2,13 @@ package com.suishi.live.app.ui.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.GestureDetector;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.seu.magicfilter.filter.helper.MagicFilterType;
 import com.suishi.live.app.R;
 import com.suishi.live.app.widgets.MultiToggleImageButton;
 import com.suishi.sslive.ui.LiveManager;
 import com.suishi.sslive.widgets.CameraGlSurfaceView;
-import com.suishi.sslive.widgets.FilterGLSurfaceView;
 
 public class PortraitActivity extends Activity {
 
