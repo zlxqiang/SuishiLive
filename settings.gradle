@@ -1,0 +1,3 @@
+include ':app', ':resource', ':chat'
+include ':sslive'
+include ':magicfilter'
