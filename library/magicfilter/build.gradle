@@ -1,0 +1,38 @@
+apply plugin: 'com.android.library'
+apply from: '../../constants.gradle'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        versionCode = 1
+        versionName = "1.0"
+        externalNativeBuild {
+            cmake {
+                cppFlags "-fexceptions"
+            }
+        }
+        ndk {
+            abiFilters 'armeabi'
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path "CMakeLists.txt"
+        }
+    }
+    buildTypes {
+    }
+}
+
+
+
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile project(modulePrefix+'resource')
+}
