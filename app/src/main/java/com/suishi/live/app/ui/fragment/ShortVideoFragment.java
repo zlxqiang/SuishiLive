@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import com.suishi.live.app.R;
 
 /**
- * 播放
+ * 短视频
  */
-public class PlayFragment extends Fragment {
+public class ShortVideoFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -19,17 +19,17 @@ public class PlayFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private static PlayFragment fragment=null;
+    private static ShortVideoFragment fragment=null;
 
-    public PlayFragment() {
+    public ShortVideoFragment() {
         // Required empty public constructor
     }
 
     /**
      */
-    public static PlayFragment newInstance() {
+    public static ShortVideoFragment newInstance() {
         if(fragment==null) {
-            fragment = new PlayFragment();
+            fragment = new ShortVideoFragment();
             Bundle args = new Bundle();
             fragment.setArguments(args);
         }
@@ -48,7 +48,7 @@ public class PlayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_play, container, false);
+        return inflater.inflate(R.layout.fragment_short_video, container, false);
     }
 
 

@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import com.suishi.live.app.R;
 
 /**
- * 播放
+ * 推流
  */
-public class PlayFragment extends Fragment {
+public class PushFragment extends Fragment {
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
@@ -19,17 +19,18 @@ public class PlayFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private static PlayFragment fragment=null;
+    private static PushFragment fragment=null;
 
-    public PlayFragment() {
+
+    public PushFragment() {
         // Required empty public constructor
     }
 
     /**
      */
-    public static PlayFragment newInstance() {
+    public static PushFragment newInstance() {
         if(fragment==null) {
-            fragment = new PlayFragment();
+            fragment = new PushFragment();
             Bundle args = new Bundle();
             fragment.setArguments(args);
         }
@@ -48,7 +49,7 @@ public class PlayFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_play, container, false);
+        return inflater.inflate(R.layout.fragment_push, container, false);
     }
 
 

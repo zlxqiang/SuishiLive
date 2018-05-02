@@ -32,4 +32,5 @@ project.ext {
     truthVersion = '0.39'
     robolectricVersion = '3.7.1'
     modulePrefix = ':'
+    butterknife_version = '8.8.1'
 }
