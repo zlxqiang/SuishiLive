@@ -5,10 +5,14 @@ buildscript {
     ext.butterknife_version = '8.8.1'
 
     repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
         jcenter()
+        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.2.2'
+        classpath 'com.android.tools.build:gradle:3.2.0'
       //  classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "com.jakewharton:butterknife-gradle-plugin:$butterknife_version"
         classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
@@ -22,23 +26,26 @@ buildscript {
 
 allprojects {
     repositories {
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
         jcenter()
+        google()
     }
 }
 
 task clean(type: Delete) {
     delete rootProject.buildDir
 }
+
+
 ext {
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.0"
-
-    targetSdkVersion = 25
-
-    versionCode = 700700
-    versionName = "0.7.7"
+    IsBuildModule = false
+    compileSdkVersion = 28
+    buildToolsVersion = "28.0.2"
+    minSdkVersion = 18
+    targetSdkVersion = 28
 }
-
-wrapper {
-    gradleVersion = '2.14.1'
-}
+//wrapper {
+//    gradleVersion = '2.14.1'
+//}

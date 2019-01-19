@@ -1,23 +1,23 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 18
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
-
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        ndk {
-            abiFilters 'armeabi'
-            ldLibs "log"
-        }
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11 -frtti -fno-exceptions"
+                targets 'svrplugin'
+ //               abiFilters 'armeabi-v7a'
+              //  cppFlags "-frtti -fexceptions -D__STDC_FORMAT_MACROS -std=c++11"
+//                arguments '-DANDROID_PLATFORM=android-19',
+//                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=stlport_static'
             }
         }
     }
@@ -39,8 +39,8 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':magicfilter')
-    compile project(':chat')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':magicfilter')
+    api project(':chat')
 }
 

@@ -2,31 +2,25 @@ apply plugin: 'com.android.library'
 
 
 android {
-    compileSdkVersion = 25
-    buildToolsVersion = "25.0.0"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 25
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode = 1
         versionName = "1.0"
         externalNativeBuild {
             cmake {
-                cppFlags "-fexceptions"
+                cppFlags "-std=c++11 -frtti -fno-exceptions"
+ //               targets 'svrplugin'
+              //  abiFilters 'armeabi-v7a'
+                //  cppFlags "-frtti -fexceptions -D__STDC_FORMAT_MACROS -std=c++11"
+//                arguments '-DANDROID_PLATFORM=android-19',
+//                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=stlport_static'
             }
         }
-        ndk {
-            abiFilters 'armeabi'
-        }
     }
-//        ndk {
-//            moduleName = "MagicBeautify"
-//            cppFlags.add("-DANDROID_NDK")
-//            cppFlags.add("-D_DEBUG")
-//            ldLibs.add("log")
-//            ldLibs.add("jnigraphics")
-//            stl = "stlport_static"
-//        }
 
     externalNativeBuild {
         cmake {
@@ -41,6 +35,6 @@ android {
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(':resource')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(':resource')
 }

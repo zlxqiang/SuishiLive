@@ -1,12 +1,12 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.2"
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        minSdkVersion 15
-        targetSdkVersion 26
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
 
     }
@@ -27,6 +27,6 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: 'libs', include: '*.jar')
-    compile project(':resource')
+    api fileTree(dir: 'libs', include: '*.jar')
+    api project(':resource')
 }
