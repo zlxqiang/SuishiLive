@@ -3,12 +3,7 @@ package com.suishi.live.app.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -16,32 +11,18 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.suishi.live.app.R;
-import com.suishi.live.app.ui.fragment.PlayFragment;
-import com.suishi.live.app.ui.fragment.PushFragment;
-import com.suishi.live.app.ui.fragment.ShortVideoFragment;
 import com.swbyte.chat.runtimepermissions.PermissionsManager;
 import com.swbyte.chat.runtimepermissions.PermissionsResultAction;
 
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 
-
-public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
-
-    @BindView(R.id.navigation)
-    BottomNavigationView mBottomNavigationView;
-
-    Fragment mCurrent=null;
-
-    private Unbinder unbinder;
+public class MainActivity extends Activity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        unbinder=ButterKnife.bind(this);
-
+        GridView grid = findViewById(R.id.grid);
+        grid.setAdapter(new HoloTilesAdapter());
         PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
             @Override
             public void onGranted() {
@@ -53,47 +34,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
             }
         });
-
-        mBottomNavigationView.setOnNavigationItemSelectedListener(this);
-       // switchContent(PlayFragment.newInstance());
-        mCurrent=PlayFragment.newInstance();
-        getSupportFragmentManager()
-                .beginTransaction().add(R.id.content,mCurrent).commit();
     }
 
-    @Override
-    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
 
-        switch (item.getItemId()) {
-            case R.id.navigation_home:
-                //播放
-                switchContent(PlayFragment.newInstance());
-                return true;
-            case R.id.navigation_dashboard:
-                //推流
-                switchContent(PushFragment.newInstance());
-                return true;
-            case R.id.navigation_notifications:
-                //小视频
-                switchContent(ShortVideoFragment.newInstance());
-                break;
-        }
-        return true;
-    }
-
-    /** 修改显示的内容 不会重新加载 **/
-    public void switchContent(Fragment to) {
-        if (mCurrent != to) {
-            FragmentTransaction transaction = getSupportFragmentManager()
-                    .beginTransaction();
-            if (!to.isAdded()) { // 先判断是否被add过
-                transaction.hide(mCurrent).add(R.id.content, to).commit();
-            } else {
-                transaction.hide(mCurrent).show(to).commit();
-            }
-            mCurrent = to;
-        }
-    }
 
     public class HoloTilesAdapter extends BaseAdapter {
 
@@ -178,9 +121,4 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         startActivity(intent);
     }
 
-    @Override
-    protected void onDestroy() {
-        unbinder.unbind();
-        super.onDestroy();
-    }
 }
