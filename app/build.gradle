@@ -1,31 +1,31 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'com.jakewharton.butterknife'
+apply from: '../constants.gradle'
 
 android {
+    lintOptions {
+        abortOnError false
+    }
+    compileSdkVersion project.ext.compileSdkVersion
+    buildToolsVersion project.ext.buildToolsVersion
 
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
         applicationId "com.suishi.live.app"
-        minSdkVersion rootProject.ext.minSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
+        ndk {
+            abiFilters 'armeabi'
+            ldLibs "log"
+        }
         externalNativeBuild {
             cmake {
-                cppFlags "-std=c++11 -frtti -fno-exceptions"
-//                targets 'svrplugin'
-             //   abiFilters 'armeabi-v7a'
-                //  cppFlags "-frtti -fexceptions -D__STDC_FORMAT_MACROS -std=c++11"
-//                arguments '-DANDROID_PLATFORM=android-19',
-//                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=stlport_static'
+                cppFlags "-frtti -fexceptions"
             }
         }
-        lintOptions {
-            abortOnError false
-        }
+        multiDexEnabled true
     }
 
     buildTypes {
@@ -46,12 +46,13 @@ android {
 }
 
 dependencies {
-    api fileTree(include: ['*.jar'], dir: 'libs')
-    api project(':sslive')
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile project(':sslive')
 }
+
 repositories {
-    maven {
-        url 'http://maven.aliyun.com/nexus/content/groups/public/'
-    }
     mavenCentral()
 }

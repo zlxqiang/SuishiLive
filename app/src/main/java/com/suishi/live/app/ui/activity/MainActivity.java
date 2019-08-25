@@ -3,10 +3,13 @@ package com.suishi.live.app.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -14,15 +17,22 @@ import com.suishi.live.app.R;
 import com.swbyte.chat.runtimepermissions.PermissionsManager;
 import com.swbyte.chat.runtimepermissions.PermissionsResultAction;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-public class MainActivity extends Activity {
+
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+
+    @BindView(R.id.navigation)
+    BottomNavigationView mBottomNavigationView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        GridView grid = findViewById(R.id.grid);
-        grid.setAdapter(new HoloTilesAdapter());
+        ButterKnife.bind(this);
+
+
         PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
             @Override
             public void onGranted() {
@@ -34,8 +44,24 @@ public class MainActivity extends Activity {
 
             }
         });
+
+        mBottomNavigationView.setOnNavigationItemSelectedListener(this);
+
     }
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+        switch (item.getItemId()) {
+            case R.id.navigation_home:
+                return true;
+            case R.id.navigation_dashboard:
+                return true;
+            case R.id.navigation_notifications:
+        }
+
+        return false;
+    }
 
 
     public class HoloTilesAdapter extends BaseAdapter {

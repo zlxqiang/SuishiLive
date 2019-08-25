@@ -1,3 +1,15 @@
-include ':app', ':resource', ':chat'
-include ':sslive'
-include ':magicfilter'
+include ':app'
+include ':resource'
+
+def modulePrefix = ':'
+if (gradle.ext.has('exoplayerModulePrefix')) {
+    modulePrefix += gradle.ext.exoplayerModulePrefix
+}
+
+include modulePrefix+'chat'
+include modulePrefix+'sslive'
+include modulePrefix+'magicfilter'
+
+project(modulePrefix + 'chat').projectDir = new File(rootDir, 'library/chat')
+project(modulePrefix + 'sslive').projectDir = new File(rootDir, 'library/sslive')
+project(modulePrefix + 'magicfilter').projectDir = new File(rootDir, 'library/magicfilter')
