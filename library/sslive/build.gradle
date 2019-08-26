@@ -1,20 +1,16 @@
-apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
-apply from: '../constants.gradle'
+apply plugin: 'com.android.library'
+apply from: '../../constants.gradle'
 
 android {
-    lintOptions {
-        abortOnError false
-    }
     compileSdkVersion project.ext.compileSdkVersion
     buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.suishi.live.app"
         minSdkVersion project.ext.minSdkVersion
         targetSdkVersion project.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
             abiFilters 'armeabi'
@@ -22,22 +18,20 @@ android {
         }
         externalNativeBuild {
             cmake {
-                cppFlags "-frtti -fexceptions"
+                cppFlags "-std=c++11 -frtti -fno-exceptions"
             }
         }
-        multiDexEnabled true
     }
-
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            jniDebuggable true
         }
         debug {
             jniDebuggable true
         }
     }
+
     externalNativeBuild {
         cmake {
             path "CMakeLists.txt"
@@ -47,14 +41,7 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile project(':sslive')
-    compile "com.jakewharton:butterknife:$butterknife_version"
-    annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
+    compile project(modulePrefix+'magicfilter')
+    compile project(modulePrefix+'chat')
 }
 
-repositories {
-    mavenCentral()
-}
