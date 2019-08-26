@@ -3,7 +3,6 @@ apply from: '../../constants.gradle'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
-    buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion project.ext.minSdkVersion
@@ -13,12 +12,15 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters 'armeabi'
             ldLibs "log"
         }
         externalNativeBuild {
             cmake {
                 cppFlags "-std=c++11 -frtti -fno-exceptions"
+               abiFilters 'armeabi-v7a'
+              //  cppFlags "-frtti -fexceptions -D__STDC_FORMAT_MACROS -std=c++11"
+//                arguments '-DANDROID_PLATFORM=android-19',
+//                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=stlport_static'
             }
         }
     }
@@ -37,11 +39,16 @@ android {
             path "CMakeLists.txt"
         }
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(modulePrefix+'magicfilter')
-    compile project(modulePrefix+'chat')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(modulePrefix+'magicfilter')
+    api project(modulePrefix+'chat')
 }
 

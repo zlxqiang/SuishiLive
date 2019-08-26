@@ -3,7 +3,6 @@ apply from: '../../constants.gradle'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
-    buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
         minSdkVersion project.ext.minSdkVersion
@@ -16,7 +15,7 @@ android {
             }
         }
         ndk {
-            abiFilters 'armeabi'
+            abiFilters 'armeabi-v7a'
         }
     }
 
@@ -33,6 +32,6 @@ android {
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(modulePrefix+'resource')
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api project(modulePrefix+'resource')
 }

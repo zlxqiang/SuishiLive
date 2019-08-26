@@ -1,5 +1,4 @@
 apply plugin: 'com.android.application'
-apply plugin: 'com.jakewharton.butterknife'
 apply from: '../constants.gradle'
 
 android {
@@ -7,7 +6,6 @@ android {
         abortOnError false
     }
     compileSdkVersion project.ext.compileSdkVersion
-    buildToolsVersion project.ext.buildToolsVersion
 
     defaultConfig {
         applicationId "com.suishi.live.app"
@@ -17,8 +15,9 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         ndk {
-            abiFilters 'armeabi'
-            ldLibs "log"
+//            abiFilters 'arm64-v8a, armeabi-v7a, x86, x86_64]'
+//            ldLibs "log"
+            abiFilters 'armeabi-v7a'
         }
         externalNativeBuild {
             cmake {
@@ -46,12 +45,9 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile project(':sslive')
-    compile "com.jakewharton:butterknife:$butterknife_version"
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':sslive')
+    implementation "com.jakewharton:butterknife:$butterknife_version"
     annotationProcessor "com.jakewharton:butterknife-compiler:$butterknife_version"
 }
 

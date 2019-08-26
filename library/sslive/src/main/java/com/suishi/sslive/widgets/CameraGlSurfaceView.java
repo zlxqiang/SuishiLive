@@ -1,10 +1,12 @@
 package com.suishi.sslive.widgets;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.GLSurfaceView;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
@@ -117,6 +119,7 @@ public class CameraGlSurfaceView extends BaseGlSurfaceView implements GLSurfaceV
         mRecordTextureBuffer.put(data[1]).position(0);
     }
 
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onDrawFrame(GL10 gl) {
         super.onDrawFrame(gl);

@@ -2,7 +2,7 @@
 
 buildscript {
     ext.kotlin_version = '1.2.30'
-    ext.butterknife_version = '8.8.1'
+    ext.butterknife_version = '10.0.0'
 
     repositories {
         mavenCentral()
@@ -10,13 +10,13 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.4.2'
       //  classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath "com.jakewharton:butterknife-gradle-plugin:8.4.0"
+        classpath "com.jakewharton:butterknife-gradle-plugin:$butterknife_version"
         //classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
-
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:1.4.1'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7'
+        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+       // classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
 
     }
 }
@@ -32,12 +32,3 @@ task clean(type: Delete) {
     delete rootProject.buildDir
 }
 
-ext {
-    compileSdkVersion=26
-    buildToolsVersion="26.0.2"
-
-    targetSdkVersion = 26
-
-    versionCode = 700700
-    versionName = "0.7.7"
-}

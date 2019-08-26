@@ -2,9 +2,7 @@ include ':app'
 include ':resource'
 
 def modulePrefix = ':'
-if (gradle.ext.has('exoplayerModulePrefix')) {
-    modulePrefix += gradle.ext.exoplayerModulePrefix
-}
+
 
 include modulePrefix+'chat'
 include modulePrefix+'sslive'

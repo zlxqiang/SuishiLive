@@ -9,7 +9,6 @@ import com.suishi.live.app.utils.CrashHandler;
 /**
  * Created by admin on 2017/7/1.
  */
-
 public class AppApplication extends MultiDexApplication{
 
     public static Context mContext;
@@ -18,7 +17,7 @@ public class AppApplication extends MultiDexApplication{
     public void onCreate() {
         super.onCreate();
         mContext=this;
-        CrashHandler.getInstance().init(this);//初始化全局异常管理
+        CrashHandler.getInstance().init(this);
         MagicParams.context=this;
         //存储空间检测，是否充足
 
@@ -27,6 +26,9 @@ public class AppApplication extends MultiDexApplication{
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
+
+
+
     }
 
 }
