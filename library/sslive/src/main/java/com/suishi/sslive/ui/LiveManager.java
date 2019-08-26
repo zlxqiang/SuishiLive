@@ -22,53 +22,62 @@ import java.nio.ByteBuffer;
  * Created by admin on 2018/3/8.
  */
 
-public class LiveManager extends OnLowMemoryCallBack implements StreamManager.PushCallback,AudioManager.AudioStackCallBack,AudioManager.AudioFrameCallBack,VideoManager.VideoFrameCallBack,AudioMediaCodec.OnMediaCodecAudioEncodeListener,VideoMediaCodec.OnMediaCodecVideoEncodeListener{
+public class LiveManager extends OnLowMemoryCallBack implements StreamManager.PushCallback, AudioManager.AudioStackCallBack, AudioManager.AudioFrameCallBack, VideoManager.VideoFrameCallBack, AudioMediaCodec.OnMediaCodecAudioEncodeListener, VideoMediaCodec.OnMediaCodecVideoEncodeListener {
 
     private CameraGlSurfaceView mFilterGLSurfaceView;
     /**
      *
      */
-    private String url = "rtmp://192.168.1.101/live/stream";
+    private String url = "rtmp://172.18.2.90/live/stream";
 
     private Context mContext;
 
     public LiveManager(Context context) {
-
+        this.mContext = context;
     }
 
     public LiveManager(Context context, CameraGlSurfaceView filterGLSurfaceView) {
-        this.mContext=context;
-        mFilterGLSurfaceView=filterGLSurfaceView;
+        this.mContext = context;
+        mFilterGLSurfaceView = filterGLSurfaceView;
     }
 
 
+    /**
+     * 初始化操作
+     *
+     * @return
+     */
     public boolean init() {
 
-        boolean videoInit=false;
+        boolean videoInit = false;
 
-        boolean audioInit=false;
+        boolean audioInit = false;
         try {
-            if(VideoManager.instance().initCameraDevice() && mFilterGLSurfaceView.resume()) {
+            //1.视频采集器初始化
+            if (VideoManager.instance().initCameraDevice() && mFilterGLSurfaceView.resume()) {
                 VideoManager.instance().setFrameCallBack(this);
-                videoInit=true;
-            }else{
-                Toast.makeText(mContext,"相机不能用",Toast.LENGTH_SHORT).show();
+                videoInit = true;
+            } else {
+                Toast.makeText(mContext, "相机不能用", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
+            //2 音频采集器初始化
             if (AudioManager.instance().initAudioDevice()) {
                 AudioManager.instance().setCallBack(this);
                 AudioManager.instance().setFrameCallBack(this);
-                audioInit=true;
+                audioInit = true;
             }
-            if(InitNative()) {
-                if(videoInit)
-                VideoManager.instance().start();
 
-                if(audioInit)
-                AudioManager.instance().start();
-            }else {
-                Toast.makeText(mContext,"推流器不能用",Toast.LENGTH_SHORT).show();
+            //3.native 推流器初始化
+            if (InitNative()) {
+                if (videoInit)
+                    VideoManager.instance().start();
+
+                if (audioInit)
+                    AudioManager.instance().start();
+            } else {
+                Toast.makeText(mContext, "推流器不能用", Toast.LENGTH_SHORT).show();
                 return false;
             }
 
@@ -77,6 +86,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
         }
         return true;
     }
+
     /**
      * 初始化底层采集与编码器
      */
@@ -88,7 +98,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
             Log.e("initNative", "init audio capture failed!");
             return false;
         }
-        ret = StreamManager.getInstance().InitVideo(VideoConfig.width,VideoConfig.height,VideoConfig.width, VideoConfig.height, 25, true);
+        ret = StreamManager.getInstance().InitVideo(VideoConfig.width, VideoConfig.height, VideoConfig.width, VideoConfig.height, 25, true);
         if (ret < 0) {
             Log.e("initNative", "init video capture failed!");
             return false;
@@ -113,21 +123,22 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
         return true;
     }
 
-    private boolean isStarting=false;
+    private boolean isStarting = false;
 
     /**
      * 开始推流
      */
     public void onStartStream() {
-        if(!isStarting)
-        isStarting=init();
+        if (!isStarting)
+            isStarting = init();
     }
 
     /**
      * 是否可以推流
+     *
      * @return
      */
-    public boolean isStarting(){
+    public boolean isStarting() {
         return isStarting;
     }
 
@@ -149,16 +160,17 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
 
     }
 
-    public void switchCamera(){
+    public void switchCamera() {
         CameraHelper.getInstance().switchCamera();
     }
+
     /**
      * 锁毁推流器
      *
      * @return
      */
     public void destroy() {
-        isStarting=false;
+        isStarting = false;
         mFilterGLSurfaceView.pause();
         AudioManager.instance().stop();
         VideoManager.instance().stop();
@@ -184,25 +196,29 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
 
     /**
      * 原始数据回调
+     *
      * @param data
      * @param length
      */
     @Override
     public void onAudioFrame(byte[] data, int length) {
-        StreamManager.getInstance().Encode2AAC(data,length);
+        StreamManager.getInstance().Encode2AAC(data, length);
     }
 
     /**
      * 原始数据回调
+     *
      * @param data
      * @param length
      */
     @Override
     public void onVideoFrame(byte[] data, int length) {
-        StreamManager.getInstance().Encode2H264(data,length);
+        StreamManager.getInstance().Encode2H264(data, length);
     }
+
     /**
      * 硬编码回调
+     *
      * @param bb
      * @param bi
      */
@@ -213,6 +229,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
 
     /**
      * 硬编码回调
+     *
      * @param bb
      * @param bi
      */
@@ -227,7 +244,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onTrimMemory(int level) {
-        switch (level){
+        switch (level) {
             case TRIM_MEMORY_COMPLETE:
                 //lru尾部很快被杀死
                 break;

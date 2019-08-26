@@ -30,7 +30,7 @@ public class VideoActivity extends AppCompatActivity{
 
     private static final String TAG = "VideoActivity";
 
-    private String mVideoPath="rtmp://192.168.1.101/live/stream";
+    private String mVideoPath="rtmp://172.18.2.90/live/stream";
     private Uri mVideoUri;
 
     private AndroidMediaController mMediaController;

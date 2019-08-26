@@ -29,20 +29,21 @@ public class PortraitActivity extends Activity {
     private ImageButton mRecordBtn;
 
     private boolean isGray;
-    
+
     private boolean isRecording;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_portrait);
-        filter= findViewById(R.id.surface);
-        mLiveManager=new LiveManager(this,filter);
+        filter = findViewById(R.id.surface);
+        mLiveManager = new LiveManager(this, filter);
         initViews();
         initListeners();
     }
 
     /**
+     *
      */
     @Override
     protected void onResume() {
@@ -60,7 +61,7 @@ public class PortraitActivity extends Activity {
     }
 
     private void initViews() {
-      //  mLFLiveView = (LivingView) findViewById(R.id.liveView);
+        //  mLFLiveView = (LivingView) findViewById(R.id.liveView);
         mMicBtn = findViewById(R.id.record_mic_button);
         mFlashBtn = findViewById(R.id.camera_flash_button);
         mFaceBtn = findViewById(R.id.camera_switch_button);
@@ -70,49 +71,34 @@ public class PortraitActivity extends Activity {
     }
 
     private void initListeners() {
-        mMicBtn.setOnStateChangeListener(new MultiToggleImageButton.OnStateChangeListener() {
-            @Override
-            public void stateChanged(View view, int state) {
-             //   mLFLiveView.mute(true);
-            }
+        mMicBtn.setOnStateChangeListener((view, state) -> {
+            //   mLFLiveView.mute(true);
         });
-        mFlashBtn.setOnStateChangeListener(new MultiToggleImageButton.OnStateChangeListener() {
-            @Override
-            public void stateChanged(View view, int state) {
-              //  mLFLiveView.switchTorch();
-            }
+        mFlashBtn.setOnStateChangeListener((view, state) -> {
+            //  mLFLiveView.switchTorch();
         });
-        mFaceBtn.setOnStateChangeListener(new MultiToggleImageButton.OnStateChangeListener() {
-            @Override
-            public void stateChanged(View view, int state) {
-              //  mLFLiveView.switchCamera();
-                mLiveManager.switchCamera();
-            }
+        mFaceBtn.setOnStateChangeListener((view, state) -> {
+            // 切换摄像头
+            mLiveManager.switchCamera();
         });
-        mBeautyBtn.setOnStateChangeListener(new MultiToggleImageButton.OnStateChangeListener() {
-            @Override
-            public void stateChanged(View view, int state) {
-                isGray = !isGray;
-            }
+
+        mBeautyBtn.setOnStateChangeListener((view, state) -> isGray = !isGray);
+
+        mFocusBtn.setOnStateChangeListener((view, state) -> {
+            // mLFLiveView.switchFocusMode();
         });
-        mFocusBtn.setOnStateChangeListener(new MultiToggleImageButton.OnStateChangeListener() {
-            @Override
-            public void stateChanged(View view, int state) {
-               // mLFLiveView.switchFocusMode();
-            }
-        });
-        mRecordBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(isRecording) {
-                    mRecordBtn.setBackgroundResource(R.mipmap.ic_record_start);
-                    mLiveManager.onStopStream();
-                    isRecording = false;
-                } else {
-                    mRecordBtn.setBackgroundResource(R.mipmap.ic_record_stop);
-                    mLiveManager.onStartStream();
-                    isRecording = true;
-                }
+
+        mRecordBtn.setOnClickListener(v -> {
+            if (isRecording) {
+                //停止推流
+                mRecordBtn.setBackgroundResource(R.mipmap.ic_record_start);
+                mLiveManager.onStopStream();
+                isRecording = false;
+            } else {
+                //开始推流
+                mRecordBtn.setBackgroundResource(R.mipmap.ic_record_stop);
+                mLiveManager.onStartStream();
+                isRecording = true;
             }
         });
     }
