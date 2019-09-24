@@ -4,7 +4,7 @@ import android.content.Context;
 import android.support.multidex.MultiDexApplication;
 
 import com.seu.magicfilter.utils.MagicParams;
-import com.suishi.live.app.utils.CrashHandler;
+import com.suishi.utils.CrashHandler;
 
 /**
  * Created by admin on 2017/7/1.
