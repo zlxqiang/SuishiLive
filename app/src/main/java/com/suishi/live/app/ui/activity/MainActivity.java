@@ -11,8 +11,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.suishi.live.app.R;
-import com.swbyte.chat.runtimepermissions.PermissionsManager;
-import com.swbyte.chat.runtimepermissions.PermissionsResultAction;
 
 
 public class MainActivity extends Activity {
@@ -23,17 +21,17 @@ public class MainActivity extends Activity {
         setContentView(R.layout.activity_main);
         GridView grid = findViewById(R.id.grid);
         grid.setAdapter(new HoloTilesAdapter());
-        PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
-            @Override
-            public void onGranted() {
-
-            }
-
-            @Override
-            public void onDenied(String permission) {
-
-            }
-        });
+//        PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
+//            @Override
+//            public void onGranted() {
+//
+//            }
+//
+//            @Override
+//            public void onDenied(String permission) {
+//
+//            }
+//        });
     }
 
 

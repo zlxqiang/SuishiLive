@@ -35,20 +35,22 @@ public class CameraGlSurfaceView extends BaseGlSurfaceView implements GLSurfaceV
         Camera.AutoFocusCallback {
 
     public static final int RECORD_WIDTH = 480, RECORD_HEIGHT = 640;
-
-    private final FloatBuffer mRecordCubeBuffer;//顶点坐标
-    private final FloatBuffer mRecordTextureBuffer;//纹理坐标
-
-    private MagicCameraInputFilter mCameraInputFilter;//绘制到屏幕上
-    private MagicRecordFilter mRecordFilter;//绘制到FBO
-    private SurfaceTexture mSurfaceTexture;//surface纹理
+    //顶点坐标
+    private final FloatBuffer mRecordCubeBuffer;
+    //纹理坐标
+    private final FloatBuffer mRecordTextureBuffer;
+    //绘制到屏幕上
+    private MagicCameraInputFilter mCameraInputFilter;
+    //绘制到FBO
+    private MagicRecordFilter mRecordFilter;
+    //surface纹理
+    private SurfaceTexture mSurfaceTexture;
 
     private CameraHelper mCameraHelper;
 
    // private ThreadHelper mThreadHelper;
 
     private OnFocusListener mOnFocusListener;
-    private OnRecordListener mOnRecordListener;
 
     public CameraGlSurfaceView(Context context) {
         this(context, null);

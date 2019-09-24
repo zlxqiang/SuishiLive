@@ -5,10 +5,13 @@ precision mediump float;
 varying mediump vec2 textureCoordinate;
 
 uniform samplerExternalOES inputImageTexture;
+
 uniform vec2 singleStepOffset;
+
 const vec4 params = vec4(0.33, 0.63, 0.4, 0.35);
 
 const highp vec3 W = vec3(0.299,0.587,0.114);
+
 vec2 blurCoordinates[20];
 
 float hardLight(float color)
@@ -65,20 +68,14 @@ void main(){
     sampleColor += texture2D(inputImageTexture, blurCoordinates[17]).g * 2.0;
     sampleColor += texture2D(inputImageTexture, blurCoordinates[18]).g * 2.0;
     sampleColor += texture2D(inputImageTexture, blurCoordinates[19]).g * 2.0;
-
     sampleColor = sampleColor / 48.0;
-
     float highPass = centralColor.g - sampleColor + 0.5;
-
     for(int i = 0; i < 5;i++)
     {
         highPass = hardLight(highPass);
     }
     float luminance = dot(centralColor, W);
-
     float alpha = pow(luminance, params);
-
     vec3 smoothColor = centralColor + (centralColor-vec3(highPass))*alpha*0.1;
-
     gl_FragColor = vec4(mix(smoothColor.rgb, max(smoothColor, centralColor), alpha), 1.0);
 }
