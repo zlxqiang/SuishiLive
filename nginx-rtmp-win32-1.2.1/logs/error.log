@@ -1,0 +1,449 @@
+2019/08/26 15:33:00 [notice] 5172#12792: using the "select" event method
+2019/08/26 15:33:00 [notice] 5172#12792: nginx/1.13.12
+2019/08/26 15:33:00 [info] 5172#12792: OS: 260200 build:9200, "", suite:300, type:1
+2019/08/26 15:33:00 [notice] 5172#12792: start worker processes
+2019/08/26 15:33:00 [notice] 5172#12792: start worker process 11716
+2019/08/26 15:33:00 [notice] 11716#15564: nginx/1.13.12
+2019/08/26 15:33:00 [info] 11716#15564: OS: 260200 build:9200, "", suite:300, type:1
+2019/08/26 15:33:00 [notice] 11716#15564: create thread 3452
+2019/08/26 15:33:00 [notice] 11716#15564: create thread 5168
+2019/08/26 15:33:00 [notice] 11716#15564: create thread 9236
+2019/08/26 15:33:47 [error] 11716#3452: *2 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 15:33:47 [error] 11716#3452: *1 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 15:33:58 [error] 11716#3452: *3 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 15:33:58 [error] 11716#3452: *1 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 15:34:04 [error] 11716#3452: *2 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:34:04 [error] 11716#3452: *3 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:34:21 [info] 11716#3452: *5 client 127.0.0.1 closed keepalive connection (10054: An existing connection was forcibly closed by the remote host)
+2019/08/26 15:34:21 [info] 11716#3452: *4 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host) while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/08/26 15:34:24 [error] 11716#3452: *3 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:34:24 [error] 11716#3452: *2 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:39:43 [error] 11716#3452: *7 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:39:43 [error] 11716#3452: *6 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:39:49 [notice] 5512#11524: signal process started
+2019/08/26 15:39:49 [notice] 5172#12792: exiting
+2019/08/26 15:39:49 [notice] 11716#15564: gracefully shutting down
+2019/08/26 15:39:49 [notice] 11716#5168: exiting
+2019/08/26 15:39:49 [notice] 11716#3452: exiting
+2019/08/26 15:39:49 [notice] 11716#15564: exit
+2019/08/26 15:39:49 [notice] 5172#12792: worker process 11716 exited with code 0
+2019/08/26 15:39:49 [notice] 5172#12792: exit
+2019/08/26 15:39:56 [notice] 15776#8444: using the "select" event method
+2019/08/26 15:39:56 [notice] 15776#8444: nginx/1.13.12
+2019/08/26 15:39:56 [info] 15776#8444: OS: 260200 build:9200, "", suite:300, type:1
+2019/08/26 15:39:56 [notice] 15776#8444: start worker processes
+2019/08/26 15:39:56 [notice] 15776#8444: start worker process 12156
+2019/08/26 15:39:56 [notice] 12156#3560: nginx/1.13.12
+2019/08/26 15:39:56 [info] 12156#3560: OS: 260200 build:9200, "", suite:300, type:1
+2019/08/26 15:39:56 [notice] 12156#3560: create thread 2480
+2019/08/26 15:39:56 [notice] 12156#3560: create thread 10584
+2019/08/26 15:39:56 [notice] 12156#3560: create thread 12436
+2019/08/26 15:39:59 [error] 12156#2480: *1 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:39:59 [error] 12156#2480: *2 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/index.html"
+2019/08/26 15:41:20 [info] 12156#2480: *3 client 127.0.0.1 closed keepalive connection (10054: An existing connection was forcibly closed by the remote host)
+2019/08/26 15:41:22 [info] 12156#2480: *2 client 127.0.0.1 closed keepalive connection (10054: An existing connection was forcibly closed by the remote host)
+2019/08/26 15:41:36 [notice] 7944#14284: signal process started
+2019/08/26 15:41:36 [notice] 15776#8444: exiting
+2019/08/26 15:41:36 [notice] 12156#3560: gracefully shutting down
+2019/08/26 15:41:36 [notice] 12156#10584: exiting
+2019/08/26 15:41:36 [notice] 12156#2480: exiting
+2019/08/26 15:41:36 [notice] 12156#3560: exit
+2019/08/26 15:41:36 [notice] 15776#8444: worker process 12156 exited with code 0
+2019/08/26 15:41:36 [notice] 15776#8444: exit
+2019/08/26 15:46:25 [notice] 13912#15920: signal process started
+2019/08/26 15:46:25 [error] 13912#15920: CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/logs/nginx.pid" failed (2: The system cannot find the file specified)
+2019/08/26 15:46:59 [notice] 6016#5684: using the "select" event method
+2019/08/26 15:46:59 [notice] 6016#5684: nginx/1.13.12
+2019/08/26 15:46:59 [info] 6016#5684: OS: 260200 build:9200, "", suite:300, type:1
+2019/08/26 15:46:59 [notice] 6016#5684: start worker processes
+2019/08/26 15:46:59 [notice] 6016#5684: start worker process 15368
+2019/08/26 15:46:59 [notice] 15368#13968: nginx/1.13.12
+2019/08/26 15:46:59 [info] 15368#13968: OS: 260200 build:9200, "", suite:300, type:1
+2019/08/26 15:46:59 [notice] 15368#13968: create thread 3524
+2019/08/26 15:46:59 [notice] 15368#13968: create thread 12128
+2019/08/26 15:46:59 [notice] 15368#13968: create thread 9340
+2019/08/26 15:47:02 [error] 15368#3524: *1 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 15:47:02 [error] 15368#3524: *2 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 15:47:08 [info] 15368#3524: *5 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/08/26 15:47:08 [info] 15368#3524: *3 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/08/26 15:47:08 [info] 15368#3524: *4 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/08/26 15:47:23 [info] 15368#3524: *6 client connected '127.0.0.1'
+2019/08/26 15:47:23 [info] 15368#3524: *6 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://localhost:8080/Main.swf' tc_url='rtmp://localhost/live' page_url='http://localhost:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:47:23 [info] 15368#3524: *6 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:47:23 [info] 15368#3524: *6 publish: name='stream' args='' type= silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:47:23 [error] 15368#3524: *6 codec: error parsing data frame, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:48:42 [info] 15368#3524: *7 client connected '127.0.0.1'
+2019/08/26 15:48:42 [info] 15368#3524: *7 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://localhost:8080/Main.swf' tc_url='rtmp://localhost/live' page_url='http://localhost:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:48:42 [info] 15368#3524: *7 createStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:48:42 [info] 15368#3524: *7 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:49:45 [info] 15368#3524: *6 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:49:45 [info] 15368#3524: *6 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 15:49:45 [info] 15368#3524: *6 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 16:10:29 [info] 15368#3524: *8 client connected '192.168.1.221'
+2019/08/26 16:10:29 [info] 15368#3524: *8 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://localhost:8080/Main.swf' tc_url='rtmp://192.168.1.221/live' page_url='http://localhost:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:10:29 [info] 15368#3524: *8 createStream, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:10:29 [info] 15368#3524: *8 publish: name='stream' args='' type= silent=0, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:10:29 [error] 15368#3524: *8 codec: error parsing data frame, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:17:16 [info] 15368#3524: *8 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:17:16 [info] 15368#3524: *8 disconnect, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:17:16 [info] 15368#3524: *8 deleteStream, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:17:16 [info] 15368#3524: *7 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 16:17:16 [info] 15368#3524: *7 disconnect, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 16:17:16 [info] 15368#3524: *7 deleteStream, client: 127.0.0.1, server: 0.0.0.0:1935
+2019/08/26 16:17:16 [error] 15368#3524: *9 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 192.168.1.221, server: , request: "GET /history/history.css HTTP/1.1", host: "192.168.1.221:8080", referrer: "http://192.168.1.221:8080/"
+2019/08/26 16:17:16 [error] 15368#3524: *9 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 192.168.1.221, server: , request: "GET /history/history.js HTTP/1.1", host: "192.168.1.221:8080", referrer: "http://192.168.1.221:8080/"
+2019/08/26 16:17:16 [error] 15368#3524: *10 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/favicon.ico" failed (2: The system cannot find the file specified), client: 192.168.1.221, server: , request: "GET /favicon.ico HTTP/1.1", host: "192.168.1.221:8080"
+2019/08/26 16:17:40 [info] 15368#3524: *11 client connected '192.168.1.221'
+2019/08/26 16:17:40 [info] 15368#3524: *11 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://192.168.1.221:8080/Main.swf' tc_url='rtmp://192.168.1.221/live' page_url='http://192.168.1.221:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:17:40 [info] 15368#3524: *11 createStream, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:17:40 [info] 15368#3524: *11 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:18:14 [info] 15368#3524: *9 client 192.168.1.221 closed keepalive connection
+2019/08/26 16:18:15 [info] 15368#3524: *10 client 192.168.1.221 closed keepalive connection
+2019/08/26 16:20:42 [info] 15368#3524: *11 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:20:42 [info] 15368#3524: *11 disconnect, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:20:42 [info] 15368#3524: *11 deleteStream, client: 192.168.1.221, server: 0.0.0.0:1935
+2019/08/26 16:23:17 [error] 15368#3524: *12 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 16:23:17 [error] 15368#3524: *12 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/08/26 16:23:23 [info] 15368#3524: *14 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/08/26 16:23:23 [info] 15368#3524: *13 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/08/26 16:23:55 [error] 15368#3524: *15 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.90, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:23:55 [error] 15368#3524: *15 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.90, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:23:55 [error] 15368#3524: *15 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/favicon.ico" failed (2: The system cannot find the file specified), client: 172.18.2.90, server: , request: "GET /favicon.ico HTTP/1.1", host: "172.18.2.90:8080"
+2019/08/26 16:24:53 [info] 15368#3524: *15 client 172.18.2.90 closed keepalive connection
+2019/08/26 16:27:28 [error] 15368#3524: *17 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.166, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:27:33 [error] 15368#3524: *19 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:27:33 [error] 15368#3524: *20 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:27:33 [error] 15368#3524: *18 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.166, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:27:33 [error] 15368#3524: *21 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/favicon.ico" failed (2: The system cannot find the file specified), client: 172.18.2.39, server: , request: "GET /favicon.ico HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:27:40 [error] 15368#3524: *21 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:27:40 [error] 15368#3524: *20 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:28:10 [info] 15368#3524: *22 client closed connection while waiting for request, client: 172.18.2.166, server: 0.0.0.0:8080
+2019/08/26 16:28:13 [error] 15368#3524: *16 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/favicon.ico" failed (2: The system cannot find the file specified), client: 172.18.2.166, server: , request: "GET /favicon.ico HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:29:00 [info] 15368#3524: *23 client connected '172.18.2.90'
+2019/08/26 16:29:00 [info] 15368#3524: *23 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:29:00 [info] 15368#3524: *23 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:29:00 [info] 15368#3524: *23 publish: name='stream' args='' type= silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:29:00 [error] 15368#3524: *23 codec: error parsing data frame, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:29:10 [error] 15368#3524: *24 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:29:10 [error] 15368#3524: *25 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:29:45 [error] 15368#3524: *25 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:29:45 [error] 15368#3524: *24 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:29:49 [error] 15368#3524: *24 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:29:49 [error] 15368#3524: *25 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:29:58 [info] 15368#3524: *26 client connected '172.18.2.39'
+2019/08/26 16:29:58 [info] 15368#3524: *26 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:29:58 [info] 15368#3524: *26 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:29:58 [info] 15368#3524: *26 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:04 [info] 15368#3524: *27 client connected '172.18.2.39'
+2019/08/26 16:30:04 [info] 15368#3524: *27 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:04 [info] 15368#3524: *27 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:04 [info] 15368#3524: *27 publish: name='stream' args='' type= silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:04 [error] 15368#3524: *27 live: already publishing, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:04 [error] 15368#3524: *27 codec: error parsing data frame, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:04 [info] 15368#3524: *27 closeStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:16 [info] 15368#3524: *27 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:16 [info] 15368#3524: *27 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:19 [info] 15368#3524: *28 client connected '172.18.2.39'
+2019/08/26 16:30:19 [info] 15368#3524: *28 connect: app='live/stream' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live/stream' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:19 [info] 15368#3524: *28 connect: application not found: 'live/stream', client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:19 [info] 15368#3524: *28 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:19 [info] 15368#3524: *28 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:26 [info] 15368#3524: *26 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:26 [info] 15368#3524: *26 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:30 [info] 15368#3524: *29 client connected '172.18.2.39'
+2019/08/26 16:30:30 [info] 15368#3524: *29 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:30 [info] 15368#3524: *29 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:30 [info] 15368#3524: *29 publish: name='stream' args='' type= silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:30 [error] 15368#3524: *29 live: already publishing, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:30 [error] 15368#3524: *29 codec: error parsing data frame, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:30 [info] 15368#3524: *29 closeStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:32 [info] 15368#3524: *29 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:32 [info] 15368#3524: *29 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:33 [info] 15368#3524: *30 client connected '172.18.2.39'
+2019/08/26 16:30:34 [info] 15368#3524: *30 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:34 [info] 15368#3524: *30 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:34 [info] 15368#3524: *30 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:42 [info] 15368#3524: *23 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:30:42 [info] 15368#3524: *23 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:30:42 [info] 15368#3524: *23 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:30:53 [info] 15368#3524: *31 client connected '172.18.2.39'
+2019/08/26 16:30:53 [info] 15368#3524: *31 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:53 [info] 15368#3524: *31 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:53 [info] 15368#3524: *31 publish: name='stream' args='' type= silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:30:53 [error] 15368#3524: *31 codec: error parsing data frame, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:05 [info] 15368#3524: *31 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:05 [info] 15368#3524: *31 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:06 [info] 15368#3524: *32 client connected '172.18.2.39'
+2019/08/26 16:31:06 [info] 15368#3524: *32 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:06 [info] 15368#3524: *32 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:06 [info] 15368#3524: *32 publish: name='stream' args='' type= silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:06 [error] 15368#3524: *32 codec: error parsing data frame, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:10 [info] 15368#3524: *32 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:10 [info] 15368#3524: *32 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:10 [info] 15368#3524: *33 client connected '172.18.2.39'
+2019/08/26 16:31:10 [info] 15368#3524: *33 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:10 [info] 15368#3524: *33 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:10 [info] 15368#3524: *33 publish: name='stream' args='' type= silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:10 [error] 15368#3524: *33 codec: error parsing data frame, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:21 [info] 15368#3524: *33 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:21 [info] 15368#3524: *33 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:21 [info] 15368#3524: *30 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:21 [info] 15368#3524: *30 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:21 [error] 15368#3524: *34 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:31:21 [error] 15368#3524: *35 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.39, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 16:31:31 [info] 15368#3524: *36 client connected '172.18.2.39'
+2019/08/26 16:31:31 [info] 15368#3524: *36 connect: app='live' args='' flashver='MAC 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:31 [info] 15368#3524: *36 createStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:31 [info] 15368#3524: *36 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:57 [info] 15368#3524: *36 disconnect, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:31:57 [info] 15368#3524: *36 deleteStream, client: 172.18.2.39, server: 0.0.0.0:1935
+2019/08/26 16:33:45 [info] 15368#3524: *37 client connected '172.18.2.90'
+2019/08/26 16:33:45 [info] 15368#3524: *37 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:45 [info] 15368#3524: *37 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:45 [info] 15368#3524: *37 publish: name='stream' args='' type= silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:45 [error] 15368#3524: *37 codec: error parsing data frame, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:50 [info] 15368#3524: *37 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:50 [info] 15368#3524: *37 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:50 [info] 15368#3524: *37 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:54 [info] 15368#3524: *38 client connected '172.18.2.90'
+2019/08/26 16:33:54 [info] 15368#3524: *38 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:54 [info] 15368#3524: *38 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:54 [info] 15368#3524: *38 publish: name='streae' args='' type= silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:54 [error] 15368#3524: *38 codec: error parsing data frame, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:58 [info] 15368#3524: *39 client connected '172.18.2.90'
+2019/08/26 16:33:58 [info] 15368#3524: *39 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:58 [info] 15368#3524: *39 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:33:58 [info] 15368#3524: *39 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:34:04 [info] 15368#3524: *39 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:34:04 [info] 15368#3524: *39 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:34:04 [info] 15368#3524: *39 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:34:05 [info] 15368#3524: *40 client connected '172.18.2.90'
+2019/08/26 16:34:05 [info] 15368#3524: *40 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:34:05 [info] 15368#3524: *40 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:34:06 [info] 15368#3524: *40 play: name='streae' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:47 [info] 15368#3524: *38 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:47 [info] 15368#3524: *38 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:47 [info] 15368#3524: *38 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:53 [info] 15368#3524: *40 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:53 [info] 15368#3524: *40 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:53 [info] 15368#3524: *40 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:54 [info] 15368#3524: *41 client connected '172.18.2.90'
+2019/08/26 16:37:54 [info] 15368#3524: *41 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:54 [info] 15368#3524: *41 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:37:54 [info] 15368#3524: *41 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:48:10 [info] 15368#3524: *42 client connected '172.18.2.166'
+2019/08/26 16:48:24 [info] 15368#3524: *42 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:48:46 [info] 15368#3524: *42 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:49:00 [info] 15368#3524: *42 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:49:54 [info] 15368#3524: *41 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:49:54 [info] 15368#3524: *41 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:49:54 [info] 15368#3524: *41 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:49:55 [info] 15368#3524: *43 client connected '172.18.2.90'
+2019/08/26 16:49:55 [info] 15368#3524: *43 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:49:55 [info] 15368#3524: *43 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:49:55 [info] 15368#3524: *43 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:50:16 [info] 15368#3524: *42 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:50:16 [info] 15368#3524: *42 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:50:16 [info] 15368#3524: *42 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:51:39 [info] 15368#3524: *44 client connected '172.18.2.166'
+2019/08/26 16:51:39 [info] 15368#3524: *44 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:51:39 [info] 15368#3524: *44 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:51:39 [info] 15368#3524: *44 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:52:55 [info] 15368#3524: *45 client connected '172.18.2.166'
+2019/08/26 16:53:04 [info] 15368#3524: *45 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:53:09 [info] 15368#3524: *45 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:53:32 [info] 15368#3524: *45 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:53:32 [error] 15368#3524: *45 live: already publishing, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:53:58 [info] 15368#3524: *44 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:53:58 [info] 15368#3524: *44 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:53:58 [info] 15368#3524: *44 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:54:09 [info] 15368#3524: *45 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:54:09 [info] 15368#3524: *45 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 16:57:06 [info] 15368#3524: *43 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:06 [info] 15368#3524: *43 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:06 [info] 15368#3524: *43 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:07 [info] 15368#3524: *46 client connected '172.18.2.90'
+2019/08/26 16:57:08 [info] 15368#3524: *46 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:08 [info] 15368#3524: *46 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:08 [info] 15368#3524: *46 publish: name='streae' args='' type= silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:08 [error] 15368#3524: *46 codec: error parsing data frame, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:33 [info] 15368#3524: *47 client connected '172.18.2.90'
+2019/08/26 16:57:33 [info] 15368#3524: *47 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:33 [info] 15368#3524: *47 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:33 [info] 15368#3524: *47 play: name='streae' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:38 [info] 15368#3524: *47 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:38 [info] 15368#3524: *47 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 16:57:38 [info] 15368#3524: *47 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:00:12 [info] 15368#3524: *48 client connected '172.18.2.166'
+2019/08/26 17:00:15 [info] 15368#3524: *48 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:00:15 [info] 15368#3524: *48 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:00:15 [info] 15368#3524: *48 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:00:33 [info] 15368#3524: *48 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:00:33 [info] 15368#3524: *48 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:00:33 [info] 15368#3524: *48 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:00:33 [info] 15368#3524: *48 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:03 [info] 15368#3524: *49 client connected '172.18.2.166'
+2019/08/26 17:01:04 [info] 15368#3524: *49 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:04 [info] 15368#3524: *49 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:04 [info] 15368#3524: *49 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:22 [info] 15368#3524: *50 client connected '172.18.2.90'
+2019/08/26 17:01:22 [info] 15368#3524: *50 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:01:22 [info] 15368#3524: *50 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:01:22 [info] 15368#3524: *50 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:01:36 [info] 15368#3524: *49 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:36 [info] 15368#3524: *49 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:49 [info] 15368#3524: *51 client connected '172.18.2.166'
+2019/08/26 17:01:49 [info] 15368#3524: *51 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:49 [info] 15368#3524: *51 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:01:49 [info] 15368#3524: *51 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:07:07 [info] 15368#3524: *51 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:07:07 [info] 15368#3524: *51 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:07:07 [info] 15368#3524: *51 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:07:24 [info] 15368#3524: *50 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:07:24 [info] 15368#3524: *50 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:07:24 [info] 15368#3524: *50 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:13:38 [info] 15368#3524: *52 client connected '172.18.2.166'
+2019/08/26 17:13:40 [info] 15368#3524: *52 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:13:40 [info] 15368#3524: *52 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:13:40 [info] 15368#3524: *52 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:13:51 [info] 15368#3524: *53 client connected '172.18.2.90'
+2019/08/26 17:13:51 [info] 15368#3524: *53 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:13:51 [info] 15368#3524: *53 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:13:51 [info] 15368#3524: *53 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:16:30 [info] 15368#3524: *54 client connected '172.18.2.166'
+2019/08/26 17:16:37 [info] 15368#3524: *54 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:38 [info] 15368#3524: *54 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:38 [info] 15368#3524: *54 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:38 [error] 15368#3524: *54 live: already publishing, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:38 [info] 15368#3524: *54 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:38 [info] 15368#3524: *54 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:45 [info] 15368#3524: *52 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:45 [info] 15368#3524: *52 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:45 [info] 15368#3524: *52 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:48 [info] 15368#3524: *55 client connected '172.18.2.166'
+2019/08/26 17:16:49 [info] 15368#3524: *55 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:49 [info] 15368#3524: *55 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:16:49 [info] 15368#3524: *55 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:17:23 [info] 15368#3524: *53 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:17:23 [info] 15368#3524: *53 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:17:23 [info] 15368#3524: *53 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:17:24 [info] 15368#3524: *56 client connected '172.18.2.90'
+2019/08/26 17:17:24 [info] 15368#3524: *56 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://172.18.2.90:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://172.18.2.90:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:17:24 [info] 15368#3524: *56 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:17:24 [info] 15368#3524: *56 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:20:54 [info] 15368#3524: *55 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:20:54 [info] 15368#3524: *55 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:20:54 [info] 15368#3524: *55 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:26:56 [info] 15368#3524: *57 client connected '172.18.2.166'
+2019/08/26 17:27:10 [info] 15368#3524: *57 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:16 [info] 15368#3524: *57 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:17 [info] 15368#3524: *57 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:17 [info] 15368#3524: *57 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:17 [info] 15368#3524: *57 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:17 [info] 15368#3524: *57 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:17 [info] 15368#3524: *57 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:26 [info] 15368#3524: *58 client connected '172.18.2.166'
+2019/08/26 17:27:28 [info] 15368#3524: *58 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:28 [info] 15368#3524: *58 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:27:29 [info] 15368#3524: *58 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:30:19 [info] 15368#3524: *59 client connected '172.18.2.166'
+2019/08/26 17:30:30 [info] 15368#3524: *58 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:30:30 [info] 15368#3524: *58 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:30:30 [info] 15368#3524: *58 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:31:19 [info] 15368#3524: *59 handshake: recv: client timed out (10060: A connection attempt failed because the connected party did not properly respond after a period of time, or established connection failed because connected host has failed to respond), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:31:19 [info] 15368#3524: *59 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:31:19 [info] 15368#3524: *59 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:31:50 [info] 15368#3524: *60 client connected '172.18.2.166'
+2019/08/26 17:31:58 [info] 15368#3524: *60 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:31:58 [info] 15368#3524: *60 createStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:31:58 [info] 15368#3524: *60 publish: name='stream' args='' type=live silent=0, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:32:38 [info] 15368#3524: *56 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:32:38 [info] 15368#3524: *56 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:32:38 [info] 15368#3524: *56 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:32:38 [info] 15368#3524: *46 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:32:38 [info] 15368#3524: *46 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:32:38 [info] 15368#3524: *46 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/08/26 17:32:39 [error] 15368#3524: *61 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 172.18.2.90, server: , request: "GET /history/history.css HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 17:32:39 [error] 15368#3524: *61 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 172.18.2.90, server: , request: "GET /history/history.js HTTP/1.1", host: "172.18.2.90:8080", referrer: "http://172.18.2.90:8080/"
+2019/08/26 17:33:37 [info] 15368#3524: *61 client 172.18.2.90 closed keepalive connection
+2019/08/26 17:35:46 [info] 15368#3524: *60 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:35:46 [info] 15368#3524: *60 disconnect, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/08/26 17:35:46 [info] 15368#3524: *60 deleteStream, client: 172.18.2.166, server: 0.0.0.0:1935
+2019/10/31 11:35:50 [notice] 2612#2708: using the "select" event method
+2019/10/31 11:35:50 [notice] 2612#2708: nginx/1.13.12
+2019/10/31 11:35:50 [info] 2612#2708: OS: 260200 build:9200, "", suite:300, type:1
+2019/10/31 11:35:50 [notice] 2612#2708: start worker processes
+2019/10/31 11:35:50 [notice] 2612#2708: start worker process 16564
+2019/10/31 11:35:50 [notice] 16564#6968: nginx/1.13.12
+2019/10/31 11:35:50 [info] 16564#6968: OS: 260200 build:9200, "", suite:300, type:1
+2019/10/31 11:35:50 [notice] 16564#6968: create thread 10924
+2019/10/31 11:35:50 [notice] 16564#6968: create thread 2748
+2019/10/31 11:35:50 [notice] 16564#6968: create thread 18192
+2019/10/31 11:36:02 [error] 16564#10924: *2 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:36:02 [error] 16564#10924: *2 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:36:08 [info] 16564#10924: *3 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:36:08 [info] 16564#10924: *4 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:36:08 [info] 16564#10924: *5 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:36:08 [info] 16564#10924: *6 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:36:09 [info] 16564#10924: *7 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:36:09 [info] 16564#10924: *8 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:38:24 [info] 16564#10924: *9 client connected '172.18.2.90'
+2019/10/31 11:38:24 [info] 16564#10924: *9 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://localhost:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://localhost:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:24 [info] 16564#10924: *9 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:24 [info] 16564#10924: *9 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:37 [info] 16564#10924: *10 client connected '172.18.2.90'
+2019/10/31 11:38:37 [info] 16564#10924: *10 connect: app='live' args='' flashver='WIN 32,0,0,238' swf_url='http://localhost:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://localhost:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:37 [info] 16564#10924: *10 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:37 [info] 16564#10924: *10 publish: name='stream' args='' type= silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:37 [error] 16564#10924: *10 codec: error parsing data frame, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:38 [info] 16564#10924: *10 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:38 [info] 16564#10924: *10 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:38 [info] 16564#10924: *10 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:50 [info] 16564#10924: *9 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:50 [info] 16564#10924: *9 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:38:50 [info] 16564#10924: *9 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:43:49 [info] 16564#10924: *13 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:43:49 [info] 16564#10924: *11 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:43:49 [info] 16564#10924: *12 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:43:54 [info] 16564#10924: *14 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:44:26 [info] 16564#10924: *15 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:57:23 [info] 16564#10924: *16 client connected '172.18.2.127'
+2019/10/31 11:57:23 [info] 16564#10924: *16 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 11:57:24 [info] 16564#10924: *16 createStream, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 11:57:24 [info] 16564#10924: *16 publish: name='stream' args='' type=live silent=0, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 11:58:09 [error] 16564#10924: *18 "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/pc/index.html" is not found (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /pc/ HTTP/1.1", host: "localhost:8080"
+2019/10/31 11:58:14 [error] 16564#10924: *18 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:14 [error] 16564#10924: *18 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:19 [error] 16564#10924: *17 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:19 [error] 16564#10924: *18 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:30 [error] 16564#10924: *17 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:30 [error] 16564#10924: *18 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:36 [error] 16564#10924: *19 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.css" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.css HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:36 [error] 16564#10924: *19 CreateFile() "C:\Users\admin\Desktop\nginx-rtmp-win32-1.2.1/html/history/history.js" failed (3: The system cannot find the path specified), client: 127.0.0.1, server: , request: "GET /history/history.js HTTP/1.1", host: "localhost:8080", referrer: "http://localhost:8080/"
+2019/10/31 11:58:42 [info] 16564#10924: *20 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 11:59:10 [info] 16564#10924: *21 client connected '172.18.2.90'
+2019/10/31 11:59:10 [info] 16564#10924: *21 connect: app='live' args='' flashver='WIN 32,0,0,270' swf_url='http://localhost:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://localhost:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:59:10 [info] 16564#10924: *21 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 11:59:10 [info] 16564#10924: *21 play: name='stream' args='' start=0 duration=0 reset=0 silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 12:00:28 [info] 16564#10924: *22 client closed connection while waiting for request, client: 127.0.0.1, server: 0.0.0.0:8080
+2019/10/31 12:00:46 [info] 16564#10924: *16 disconnect, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 12:00:46 [info] 16564#10924: *16 deleteStream, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 12:10:00 [info] 16564#10924: *23 client connected '172.18.2.127'
+2019/10/31 12:10:00 [info] 16564#10924: *23 connect: app='live' args='' flashver='FMLE/3.0 (compatible; Lavf57.56' swf_url='' tc_url='rtmp://172.18.2.90:1935/live' page_url='' acodecs=0 vcodecs=0 object_encoding=0, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 12:10:00 [info] 16564#10924: *23 createStream, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 12:10:00 [info] 16564#10924: *23 publish: name='stream' args='' type=live silent=0, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 12:11:38 [info] 16564#10924: *24 client connected '172.18.2.90'
+2019/10/31 12:11:38 [info] 16564#10924: *24 connect: app='live' args='' flashver='WIN 32,0,0,270' swf_url='http://localhost:8080/Main.swf' tc_url='rtmp://172.18.2.90/live' page_url='http://localhost:8080/' acodecs=3575 vcodecs=252 object_encoding=3, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 12:11:38 [info] 16564#10924: *24 createStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 12:11:38 [info] 16564#10924: *24 publish: name='stream' args='' type= silent=0, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 12:11:38 [error] 16564#10924: *24 live: already publishing, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 12:11:38 [error] 16564#10924: *24 codec: error parsing data frame, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 12:11:38 [info] 16564#10924: *24 closeStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 12:12:36 [info] 16564#10924: *23 disconnect, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 12:12:36 [info] 16564#10924: *23 deleteStream, client: 172.18.2.127, server: 0.0.0.0:1935
+2019/10/31 15:04:05 [info] 16564#10924: *24 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 15:04:05 [info] 16564#10924: *24 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 15:04:05 [info] 16564#10924: *24 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 15:04:05 [info] 16564#10924: *21 WSARecv() failed (10054: An existing connection was forcibly closed by the remote host), client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 15:04:05 [info] 16564#10924: *21 disconnect, client: 172.18.2.90, server: 0.0.0.0:1935
+2019/10/31 15:04:05 [info] 16564#10924: *21 deleteStream, client: 172.18.2.90, server: 0.0.0.0:1935

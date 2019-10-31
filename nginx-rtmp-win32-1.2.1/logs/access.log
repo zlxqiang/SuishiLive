@@ -1,0 +1,142 @@
+127.0.0.1 - - [26/Aug/2019:15:33:47 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:33:47 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:33:47 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:33:47 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:33:58 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:33:58 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:33:58 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:33:58 +0800] "GET /Main.swf HTTP/1.1" 200 95979 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:01 +0800] "GET /vod.html HTTP/1.1" 200 3162 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:01 +0800] "GET /ParsedQueryString.js HTTP/1.1" 200 3066 "http://localhost:8080/vod.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:01 +0800] "GET /GrindPlayer.swf HTTP/1.1" 200 1014231 "http://localhost:8080/vod.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:04 +0800] "GET /index.html HTTP/1.1" 200 5859 "http://localhost:8080/vod.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:04 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:04 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:06 +0800] "GET /stat HTTP/1.1" 200 641 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:06 +0800] "GET /stat.xsl HTTP/1.1" 200 11765 "http://localhost:8080/stat.xsl" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:24 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:34:24 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:39:43 +0800] "GET /index.html HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:39:43 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:39:43 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:39:43 +0800] "GET /swfobject.js HTTP/1.1" 304 0 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:39:59 +0800] "GET /index.html HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:39:59 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:39:59 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:40:17 +0800] "GET /stat HTTP/1.1" 200 641 "http://localhost:8080/index.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:40:17 +0800] "GET /stat.xsl HTTP/1.1" 304 0 "http://localhost:8080/stat.xsl" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:40:29 +0800] "GET /vod.html?src=rtmp%3A%2F%2F192.168.0.10%2Flive%2Fdemo HTTP/1.1" 200 3162 "http://localhost:8080/vod.html" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.140 Safari/537.36 Edge/17.17134"
+127.0.0.1 - - [26/Aug/2019:15:47:02 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+127.0.0.1 - - [26/Aug/2019:15:47:02 +0800] "GET /history/history.js HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+127.0.0.1 - - [26/Aug/2019:15:47:02 +0800] "GET /history/history.css HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+127.0.0.1 - - [26/Aug/2019:15:47:02 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+127.0.0.1 - - [26/Aug/2019:15:47:03 +0800] "GET /Main.swf HTTP/1.1" 200 95979 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+127.0.0.1 [26/Aug/2019:15:49:45 +0800] PUBLISH "live" "stream" "" - 7307159 425 "http://localhost:8080/" "WIN 32,0,0,238" (2m 21s)
+192.168.1.221 - - [26/Aug/2019:16:17:15 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+192.168.1.221 [26/Aug/2019:16:17:16 +0800] PUBLISH "live" "stream" "" - 20901831 473 "http://localhost:8080/" "WIN 32,0,0,238" (6m 46s)
+127.0.0.1 [26/Aug/2019:16:17:16 +0800] PLAY "live" "stream" "" - 627 24011613 "http://localhost:8080/" "WIN 32,0,0,238" (28m 33s)
+192.168.1.221 - - [26/Aug/2019:16:17:16 +0800] "GET /history/history.css HTTP/1.1" 404 170 "http://192.168.1.221:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+192.168.1.221 - - [26/Aug/2019:16:17:16 +0800] "GET /history/history.js HTTP/1.1" 404 170 "http://192.168.1.221:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+192.168.1.221 - - [26/Aug/2019:16:17:16 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://192.168.1.221:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+192.168.1.221 - - [26/Aug/2019:16:17:16 +0800] "GET /Main.swf HTTP/1.1" 200 95979 "http://192.168.1.221:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+192.168.1.221 - - [26/Aug/2019:16:17:16 +0800] "GET /favicon.ico HTTP/1.1" 404 170 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+192.168.1.221 [26/Aug/2019:16:20:42 +0800] PLAY "live" "stream" "" - 461 472 "http://192.168.1.221:8080/" "WIN 32,0,0,238" (3m 2s)
+127.0.0.1 - - [26/Aug/2019:16:23:17 +0800] "GET /history/history.css HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+127.0.0.1 - - [26/Aug/2019:16:23:17 +0800] "GET /history/history.js HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:16:23:54 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:16:23:55 +0800] "GET /history/history.css HTTP/1.1" 404 170 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:16:23:55 +0800] "GET /history/history.js HTTP/1.1" 404 170 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:16:23:55 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:16:23:55 +0800] "GET /Main.swf HTTP/1.1" 200 95979 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:16:23:55 +0800] "GET /favicon.ico HTTP/1.1" 404 170 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.166 - - [26/Aug/2019:16:27:17 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Linux; U; Android 8.1.0; zh-cn; MI 8 SE Build/OPM1.171019.019) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.141 Mobile Safari/537.36 XiaoMi/MiuiBrowser/10.9.2"
+172.18.2.166 - - [26/Aug/2019:16:27:28 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Linux; U; Android 8.1.0; zh-cn; MI 8 SE Build/OPM1.171019.019) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.141 Mobile Safari/537.36 XiaoMi/MiuiBrowser/10.9.2"
+172.18.2.39 - - [26/Aug/2019:16:27:33 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:27:33 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:27:33 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:27:33 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.166 - - [26/Aug/2019:16:27:33 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Linux; U; Android 8.1.0; zh-cn; MI 8 SE Build/OPM1.171019.019) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.141 Mobile Safari/537.36 XiaoMi/MiuiBrowser/10.9.2"
+172.18.2.39 - - [26/Aug/2019:16:27:33 +0800] "GET /favicon.ico HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:27:40 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:27:40 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:27:40 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.166 - - [26/Aug/2019:16:28:09 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://172.18.2.90:8080/" "Mozilla/5.0 (Linux; U; Android 8.1.0; zh-cn; MI 8 SE Build/OPM1.171019.019) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.141 Mobile Safari/537.36 XiaoMi/MiuiBrowser/10.9.2"
+172.18.2.166 - - [26/Aug/2019:16:28:13 +0800] "GET /favicon.ico HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Linux; U; Android 8.1.0; zh-cn; MI 8 SE Build/OPM1.171019.019) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/71.0.3578.141 Mobile Safari/537.36 XiaoMi/MiuiBrowser/10.9.2"
+172.18.2.39 - - [26/Aug/2019:16:29:10 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:10 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:13 +0800] "GET /vod.html HTTP/1.1" 200 3162 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:14 +0800] "GET /ParsedQueryString.js HTTP/1.1" 200 3066 "http://172.18.2.90:8080/vod.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:16 +0800] "GET /vod.html?src=rtmp%3A%2F%2F192.168.0.10%2Flive%2Fdemo HTTP/1.1" 200 3162 "http://172.18.2.90:8080/vod.html" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:45 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:45 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:45 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:49 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:49 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:49 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:29:49 +0800] "GET /Main.swf HTTP/1.1" 200 95979 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 [26/Aug/2019:16:30:16 +0800] PUBLISH "live" "stream" "" - 514 412 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (11s)
+172.18.2.39 [26/Aug/2019:16:30:26 +0800] PLAY "live" "stream" "" - 430 1446863 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (28s)
+172.18.2.39 [26/Aug/2019:16:30:32 +0800] PUBLISH "live" "stream" "" - 518 412 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (2s)
+172.18.2.90 [26/Aug/2019:16:30:42 +0800] PUBLISH "live" "stream" "" - 5324018 425 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (1m 42s)
+172.18.2.39 [26/Aug/2019:16:31:05 +0800] PUBLISH "live" "stream" "" - 481 409 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (12s)
+172.18.2.39 [26/Aug/2019:16:31:10 +0800] PUBLISH "live" "stream" "" - 481 409 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (3s)
+172.18.2.39 - - [26/Aug/2019:16:31:21 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 [26/Aug/2019:16:31:21 +0800] PUBLISH "live" "stream" "" - 481 409 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (10s)
+172.18.2.39 [26/Aug/2019:16:31:21 +0800] PLAY "live" "stream" "" - 430 407137 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (47s)
+172.18.2.39 - - [26/Aug/2019:16:31:21 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 - - [26/Aug/2019:16:31:21 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://172.18.2.90:8080/" "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36"
+172.18.2.39 [26/Aug/2019:16:31:57 +0800] PLAY "live" "stream" "" - 434 436 "http://172.18.2.90:8080/" "MAC 32,0,0,238" (26s)
+172.18.2.90 [26/Aug/2019:16:33:50 +0800] PUBLISH "live" "stream" "" - 283817 409 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (4s)
+172.18.2.90 [26/Aug/2019:16:34:04 +0800] PLAY "live" "stream" "" - 434 436 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (5s)
+172.18.2.90 [26/Aug/2019:16:37:47 +0800] PUBLISH "live" "streae" "" - 12110465 441 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (3m 53s)
+172.18.2.90 [26/Aug/2019:16:37:53 +0800] PLAY "live" "streae" "" - 461 11404532 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (3m 47s)
+172.18.2.90 [26/Aug/2019:16:49:54 +0800] PLAY "live" "stream" "" - 518 634 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (12m 0s)
+172.18.2.166 [26/Aug/2019:16:50:16 +0800] PUBLISH "live" "stream" "" - 345 427 "" "FMLE/3.0 (compatible; Lavf57.56" (2m 6s)
+172.18.2.166 [26/Aug/2019:16:53:58 +0800] PUBLISH "live" "stream" "" - 674 427 "" "FMLE/3.0 (compatible; Lavf57.56" (2m 19s)
+172.18.2.166 [26/Aug/2019:16:54:09 +0800] PUBLISH "live" "stream" "" - 333 412 "" "FMLE/3.0 (compatible; Lavf57.56" (1m 13s)
+172.18.2.90 [26/Aug/2019:16:57:06 +0800] PLAY "live" "stream" "" - 469 943 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (7m 10s)
+172.18.2.90 [26/Aug/2019:16:57:38 +0800] PLAY "live" "streae" "" - 430 291778 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (5s)
+172.18.2.166 [26/Aug/2019:17:00:33 +0800] PUBLISH "live" "stream" "" - 766 529 "" "FMLE/3.0 (compatible; Lavf57.56" (20s)
+172.18.2.166 [26/Aug/2019:17:01:36 +0800] PUBLISH "live" "stream" "" - 666 409 "" "FMLE/3.0 (compatible; Lavf57.56" (33s)
+172.18.2.166 [26/Aug/2019:17:07:07 +0800] PUBLISH "live" "stream" "" - 1482755 427 "" "FMLE/3.0 (compatible; Lavf57.56" (5m 18s)
+172.18.2.90 [26/Aug/2019:17:07:24 +0800] PLAY "live" "stream" "" - 448 1479774 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (6m 2s)
+172.18.2.166 [26/Aug/2019:17:16:38 +0800] PUBLISH "live" "stream" "" - 333 412 "" "FMLE/3.0 (compatible; Lavf57.56" (7s)
+172.18.2.166 [26/Aug/2019:17:16:45 +0800] PUBLISH "live" "stream" "" - 475262 427 "" "FMLE/3.0 (compatible; Lavf57.56" (3m 7s)
+172.18.2.90 [26/Aug/2019:17:17:23 +0800] PLAY "live" "stream" "" - 434 478127 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (3m 31s)
+172.18.2.166 [26/Aug/2019:17:20:54 +0800] PUBLISH "live" "stream" "" - 394291 427 "" "FMLE/3.0 (compatible; Lavf57.56" (4m 5s)
+172.18.2.166 [26/Aug/2019:17:27:17 +0800] PUBLISH "live" "stream" "" - 766 529 "" "FMLE/3.0 (compatible; Lavf57.56" (20s)
+172.18.2.166 [26/Aug/2019:17:30:30 +0800] PUBLISH "live" "stream" "" - 52007 427 "" "FMLE/3.0 (compatible; Lavf57.56" (3m 3s)
+172.18.2.90 - - [26/Aug/2019:17:32:38 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 [26/Aug/2019:17:32:38 +0800] PLAY "live" "stream" "" - 490 279017 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (15m 13s)
+172.18.2.90 [26/Aug/2019:17:32:38 +0800] PUBLISH "live" "streae" "" - 109854437 745 "http://172.18.2.90:8080/" "WIN 32,0,0,238" (35m 30s)
+172.18.2.90 - - [26/Aug/2019:17:32:39 +0800] "GET /history/history.css HTTP/1.1" 404 170 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:17:32:39 +0800] "GET /history/history.js HTTP/1.1" 404 170 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:17:32:39 +0800] "GET /swfobject.js HTTP/1.1" 304 0 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.90 - - [26/Aug/2019:17:32:39 +0800] "GET /Main.swf HTTP/1.1" 304 0 "http://172.18.2.90:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0"
+172.18.2.166 [26/Aug/2019:17:35:46 +0800] PUBLISH "live" "stream" "" - 17036 445 "" "FMLE/3.0 (compatible; Lavf57.56" (3m 56s)
+127.0.0.1 - - [31/Oct/2019:11:36:02 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"
+127.0.0.1 - - [31/Oct/2019:11:36:02 +0800] "GET /history/history.css HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"
+127.0.0.1 - - [31/Oct/2019:11:36:02 +0800] "GET /history/history.js HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"
+127.0.0.1 - - [31/Oct/2019:11:36:02 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"
+127.0.0.1 - - [31/Oct/2019:11:36:02 +0800] "GET /Main.swf HTTP/1.1" 200 95979 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"
+172.18.2.90 [31/Oct/2019:11:38:38 +0800] PUBLISH "live" "stream" "" - 114927 409 "http://localhost:8080/" "WIN 32,0,0,238" (1s)
+172.18.2.90 [31/Oct/2019:11:38:50 +0800] PLAY "live" "stream" "" - 430 114373 "http://localhost:8080/" "WIN 32,0,0,238" (25s)
+127.0.0.1 - - [31/Oct/2019:11:58:09 +0800] "GET /pc/ HTTP/1.1" 404 572 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:14 +0800] "GET / HTTP/1.1" 200 5859 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:14 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:14 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:14 +0800] "GET /swfobject.js HTTP/1.1" 200 10220 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:19 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:19 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:19 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:19 +0800] "GET /Main.swf HTTP/1.1" 200 95979 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:30 +0800] "GET / HTTP/1.1" 304 0 "-" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:30 +0800] "GET /history/history.css HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:30 +0800] "GET /history/history.js HTTP/1.1" 404 572 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:30 +0800] "GET /swfobject.js HTTP/1.1" 304 0 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/70.0.3538.102 Safari/537.36 Edge/18.18362"
+127.0.0.1 - - [31/Oct/2019:11:58:36 +0800] "GET /history/history.css HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"
+127.0.0.1 - - [31/Oct/2019:11:58:36 +0800] "GET /history/history.js HTTP/1.1" 404 170 "http://localhost:8080/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:70.0) Gecko/20100101 Firefox/70.0"
+172.18.2.127 [31/Oct/2019:12:00:46 +0800] PUBLISH "live" "stream" "" - 3683454 409 "" "FMLE/3.0 (compatible; Lavf57.56" (3m 22s)
+172.18.2.127 [31/Oct/2019:12:12:36 +0800] PUBLISH "live" "stream" "" - 6349399 409 "" "FMLE/3.0 (compatible; Lavf57.56" (2m 36s)
+172.18.2.90 [31/Oct/2019:15:04:05 +0800] PUBLISH "live" "stream" "" - 1722 3490 "http://localhost:8080/" "WIN 32,0,0,270" (2h 52m 27s)
+172.18.2.90 [31/Oct/2019:15:04:05 +0800] PLAY "live" "stream" "" - 1712 8010744 "http://localhost:8080/" "WIN 32,0,0,270" (3h 4m 55s)
