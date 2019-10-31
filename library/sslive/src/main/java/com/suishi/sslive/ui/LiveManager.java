@@ -24,6 +24,8 @@ import java.nio.ByteBuffer;
 
 public class LiveManager extends OnLowMemoryCallBack implements StreamManager.PushCallback, AudioManager.AudioStackCallBack, AudioManager.AudioFrameCallBack, VideoManager.VideoFrameCallBack, AudioMediaCodec.OnMediaCodecAudioEncodeListener, VideoMediaCodec.OnMediaCodecVideoEncodeListener {
 
+    private static String TAG = LiveManager.class.getSimpleName();
+
     private CameraGlSurfaceView mFilterGLSurfaceView;
     /**
      *
@@ -105,21 +107,21 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
         }
         ret = StreamManager.getInstance().InitAudioEncoder();
         if (ret < 0) {
-            Log.e("initNative", "init AudioEncoder failed!");
+            Log.e(TAG, "init AudioEncoder failed!");
             return false;
         }
         ret = StreamManager.getInstance().InitVideoEncoder();
         if (ret < 0) {
-            Log.e("initNative", "init VideoEncoder failed!");
+            Log.e(TAG, "init VideoEncoder failed!");
             return false;
         }
         ret = StreamManager.getInstance().StartPush(url);
         if (ret < 0) {
-            Log.d("initNative", "native push failed!");
+            Log.d(TAG, "native push failed!");
             return false;
         }
         //必须在initEncoder后调用
-        Log.d("initNative", "native init success!");
+        Log.d(TAG, "native init success!");
         return true;
     }
 

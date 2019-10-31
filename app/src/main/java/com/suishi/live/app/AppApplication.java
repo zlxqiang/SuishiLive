@@ -1,7 +1,8 @@
 package com.suishi.live.app;
 
 import android.content.Context;
-import android.support.multidex.MultiDexApplication;
+
+import androidx.multidex.MultiDexApplication;
 
 import com.seu.magicfilter.utils.MagicParams;
 import com.suishi.utils.CrashHandler;
@@ -9,7 +10,7 @@ import com.suishi.utils.CrashHandler;
 /**
  * Created by admin on 2017/7/1.
  */
-public class AppApplication extends MultiDexApplication{
+public class AppApplication extends MultiDexApplication {
 
     public static Context mContext;
 

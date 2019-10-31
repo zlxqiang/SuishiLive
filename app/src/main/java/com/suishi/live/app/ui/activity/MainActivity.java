@@ -1,5 +1,6 @@
 package com.suishi.live.app.ui.activity;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,29 +12,34 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.suishi.live.app.R;
+import com.yanzhenjie.permission.AndPermission;
+import com.yanzhenjie.permission.runtime.Permission;
 
-
+/**
+ *
+ */
 public class MainActivity extends Activity {
 
+    @SuppressLint("WrongConstant")
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         GridView grid = findViewById(R.id.grid);
         grid.setAdapter(new HoloTilesAdapter());
-//        PermissionsManager.getInstance().requestAllManifestPermissionsIfNecessary(this, new PermissionsResultAction() {
-//            @Override
-//            public void onGranted() {
-//
-//            }
-//
-//            @Override
-//            public void onDenied(String permission) {
-//
-//            }
-//        });
-    }
+        AndPermission.with(this)
+                .runtime()
+                .permission(Permission.Group.CAMERA, Permission.Group.MICROPHONE)
+                .onGranted(permissions -> {
+                    // Storage permission are allowed.
 
+                })
+                .onDenied(permissions -> {
+                    // Storage permission are not allowed.
+                    finish();
+                })
+                .start();
+    }
 
 
     public class HoloTilesAdapter extends BaseAdapter {

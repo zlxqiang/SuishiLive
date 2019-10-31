@@ -18,8 +18,9 @@
 package com.suishi.live.app.widgets.media;
 
 import android.content.Context;
-import android.support.annotation.NonNull;
 import android.view.View;
+
+import androidx.annotation.NonNull;
 
 import com.suishi.live.app.R;
 

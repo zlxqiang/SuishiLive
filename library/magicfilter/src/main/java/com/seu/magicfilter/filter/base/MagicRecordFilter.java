@@ -5,7 +5,8 @@ import android.hardware.Camera;
 import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
+
+import androidx.annotation.RequiresApi;
 
 import com.seu.magicfilter.R;
 import com.seu.magicfilter.beautify.MagicJni;

@@ -21,7 +21,7 @@ import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.util.AttributeSet;
 
-import com.resource.R;
+import com.resource.app.R;
 
 
 /**

@@ -65,6 +65,7 @@ public class VideoManager implements Camera.PreviewCallback  {
 
     public void start(){
         mQueue.clear();
+        //每帧时间
         this.m_nDuration = 1000 / CameraHelper.FPS;
         this.m_nSumTime = 0L;
         this.m_nPrevTime = System.currentTimeMillis();

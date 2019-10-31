@@ -31,6 +31,8 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.ImageButton;
 
+import androidx.appcompat.widget.AppCompatImageButton;
+
 import com.suishi.live.app.R;
 
 
@@ -44,7 +46,7 @@ import com.suishi.live.app.R;
  * with the corresponding image drawn onto the face of the button.
  * State wraps back to 0 on user touch when button is already at n-1 state.
  */
-public class MultiToggleImageButton extends android.support.v7.widget.AppCompatImageButton {
+public class MultiToggleImageButton extends AppCompatImageButton {
     /*
      * Listener interface for button state changes.
      */

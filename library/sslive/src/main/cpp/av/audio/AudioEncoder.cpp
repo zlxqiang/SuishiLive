@@ -32,7 +32,7 @@ int AudioEncoder::EncodeAAC(Data **originData) {
     ret = avcodec_fill_audio_frame(outputFrame,
                                    audioCodecContext->channels,
                                    audioCodecContext->sample_fmt, (*originData)->mData,
-                                   8192, 0);
+                                   1024 * 8, 0);
     outputFrame->pts = (*originData)->mPts;
     ret = avcodec_send_frame(audioCodecContext, outputFrame);
     if (ret != 0) {
@@ -176,6 +176,7 @@ int AudioEncoder::InitEncode() {
     audioCodecContext->sample_fmt = AV_SAMPLE_FMT_S16;
     audioCodecContext->sample_rate = audioProcessor->GetAudioConfig()->sampleRate;
     audioCodecContext->thread_count = 8;
+    //bit_rate比特率(bps)
     audioCodecContext->bit_rate = 50 * 1024 * 8;
     audioCodecContext->channels = audioProcessor->GetAudioConfig()->channels;
     audioCodecContext->frame_size = audioProcessor->GetAudioConfig()->nb_samples;
