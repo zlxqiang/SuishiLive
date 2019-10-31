@@ -57,6 +57,7 @@ add_library( # Sets the name of the library.
              ${native_src_3}
              src/main/cpp/LiveManager.cpp
              src/main/cpp/debug.cpp
+        src/main/cpp/FpsTools.cpp
              )
 
 find_library( # Sets the name of the path variable.

@@ -5,6 +5,7 @@ import android.hardware.Camera;
 
 import com.suishi.sslive.mode.engine.camera.CameraHelper;
 import com.suishi.sslive.utils.LiveLog;
+import com.suishi.utils.LogUtils;
 
 import java.util.concurrent.ArrayBlockingQueue;
 
@@ -13,6 +14,8 @@ import java.util.concurrent.ArrayBlockingQueue;
  */
 
 public class VideoManager implements Camera.PreviewCallback  {
+
+    private static String TAG = VideoManager.class.getSimpleName();
 
     private static VideoManager sHolder;
 
@@ -93,6 +96,8 @@ public class VideoManager implements Camera.PreviewCallback  {
         if(this.m_nSumTime > (long)this.m_nDuration) {
             this.mQueue.offer(data);
             this.m_nSumTime %= (long)this.m_nDuration;
+        } else {
+            LogUtils.e(TAG, "丢帧");
         }
 
         this.m_nPrevTime = this.m_nCurrentTime;

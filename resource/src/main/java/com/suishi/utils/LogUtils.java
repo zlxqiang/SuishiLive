@@ -3,6 +3,8 @@ package com.suishi.utils;
 
 import android.util.Log;
 
+import com.resource.app.BuildConfig;
+
 
 /**
  * @Author: zzq
@@ -16,7 +18,7 @@ public class LogUtils {
 
     private static final String PREFIX = "Mylog- "; //
 
-    private static boolean isDebug = false;
+    private static boolean isDebug = BuildConfig.DEBUG;
 
     public static void setDebug(boolean is) {
         isDebug = is;

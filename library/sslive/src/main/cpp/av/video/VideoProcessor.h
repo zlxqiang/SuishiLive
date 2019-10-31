@@ -5,7 +5,6 @@
 
 #ifndef SUISHILIVE_VIDEOPROCESSOR_H
 #define SUISHILIVE_VIDEOPROCESSOR_H
-
 #include "VideoConfig.h"
 #include "../AVBaseProcessor.h"
 #include "../Data.h"
@@ -65,5 +64,6 @@ public:
                                 uint8_t *src, uint8_t *dst, CameraID cameraID, int needMirror);
 
     bool enableWaterMark;
+
 };
 #endif //SUISHILIVE_VIDEOPROCESSOR_H

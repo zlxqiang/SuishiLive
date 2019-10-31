@@ -4,8 +4,9 @@
 
 #include "RtmpStreamer.h"
 
-RtmpStreamer::RtmpStreamer() {
+static FpsTools fpsTools = FpsTools();
 
+RtmpStreamer::RtmpStreamer() {
 }
 
 RtmpStreamer::~RtmpStreamer() {
@@ -196,7 +197,7 @@ void *RtmpStreamer::PushAudioStreamTask(void *pObj) {
             LOG_D(DEBUG, "after audio encode pts:%lld", pAudioData->mAVPacket->pts);
         }
         if (pAudioData != NULL && pAudioData->mAVPacket->size > 0) {
-          //  rtmpStreamer->SendFrame(pAudioData, rtmpStreamer->audioStreamIndex);
+            rtmpStreamer->SendFrame(pAudioData, rtmpStreamer->audioStreamIndex);
         }
     }
 
@@ -230,17 +231,19 @@ void *RtmpStreamer::PushVideoStreamTask(void *pObj) {
         //h264 encode
         if (pVideoData != NULL && pVideoData->mData) {
             pVideoData->mPts = pVideoData->mPts - beginTime;
-            LOG_D(DEBUG, "before video encode pts:%lld", pVideoData->mPts);
+            LOG_D(DEBUG, "before video encode pts:%d", pVideoData->mPts);
             rtmpStreamer->videoEncoder->EncodeH264(&pVideoData);
             LOG_D(DEBUG, "after video encode pts:%lld", pVideoData->mAVPacket->pts);
         }
 
         if (pVideoData != NULL && pVideoData->mAVPacket->size > 0) {
             rtmpStreamer->SendFrame(pVideoData, rtmpStreamer->videoStreamIndex);
+            LOG_D(DEBUG, "sendframe:%d", fpsTools.fps());
         }
     }
     return 0;
 }
+
 
 /**
 * 音视频同时推流任务

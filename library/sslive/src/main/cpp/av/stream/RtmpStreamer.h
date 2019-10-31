@@ -6,16 +6,21 @@
 #define SUISHILIVE_RTMPSTREAMER_H
 
 #include "Streamer.h"
+#include "../../FpsTools.h"
+
 /**
  * rtmp 推流
  */
+
 class RtmpStreamer: public Streamer{
 
+
 private:
-    RtmpStreamer();
 
 
 public:
+    RtmpStreamer();
+
     ~RtmpStreamer();
 
     bool writeHeadFinish=false;

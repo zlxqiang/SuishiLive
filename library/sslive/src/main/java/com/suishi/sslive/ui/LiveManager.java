@@ -97,12 +97,12 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
         AudioConfig config = AudioManager.instance().getAudioConfig();
         ret = StreamManager.getInstance().InitAudio(config.getmChannel(), config.getSampleRate(), 16);
         if (ret < 0) {
-            Log.e("initNative", "init audio capture failed!");
+            Log.e(TAG, "init audio capture failed!");
             return false;
         }
         ret = StreamManager.getInstance().InitVideo(VideoConfig.width, VideoConfig.height, VideoConfig.width, VideoConfig.height, 25, true);
         if (ret < 0) {
-            Log.e("initNative", "init video capture failed!");
+            Log.e(TAG, "init video capture failed!");
             return false;
         }
         ret = StreamManager.getInstance().InitAudioEncoder();
