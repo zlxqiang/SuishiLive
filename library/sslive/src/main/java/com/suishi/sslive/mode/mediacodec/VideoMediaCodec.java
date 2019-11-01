@@ -5,19 +5,23 @@ import android.media.MediaCodec;
 import android.media.MediaCodecInfo;
 import android.media.MediaFormat;
 
+import com.suishi.sslive.mode.engine.video.VideoManager;
+
 import java.nio.ByteBuffer;
 
 
 /**
+ *
  */
 @TargetApi(18)
-public class VideoMediaCodec {
+public class VideoMediaCodec implements VideoManager.VideoFrameCallBack {
 
     private MediaCodec mMediaCodec;
 
     private OnMediaCodecVideoEncodeListener mListener;
 
     MediaCodec.BufferInfo mBufferInfo = new MediaCodec.BufferInfo();
+
     public VideoMediaCodec() {
     }
 
@@ -64,13 +68,12 @@ public class VideoMediaCodec {
     }
 
     private void encoder(byte[] input) {
-        if(mMediaCodec == null) {
+        if (mMediaCodec == null) {
             return;
         }
-        ByteBuffer[] inputBuffers = mMediaCodec.getInputBuffers();
-        ByteBuffer[] outputBuffers = mMediaCodec.getOutputBuffers();
-        int inputBufferIndex = mMediaCodec.dequeueInputBuffer(12000);
+        int inputBufferIndex = mMediaCodec.dequeueInputBuffer(-1);
         if (inputBufferIndex >= 0) {
+            ByteBuffer[] inputBuffers = mMediaCodec.getInputBuffers();
             ByteBuffer inputBuffer = inputBuffers[inputBufferIndex];
             inputBuffer.clear();
             inputBuffer.put(input);
@@ -79,8 +82,9 @@ public class VideoMediaCodec {
 
         int outputBufferIndex = mMediaCodec.dequeueOutputBuffer(mBufferInfo, 12000);
         while (outputBufferIndex >= 0) {
+            ByteBuffer[] outputBuffers = mMediaCodec.getOutputBuffers();
             ByteBuffer outputBuffer = outputBuffers[outputBufferIndex];
-            if(mListener != null) {
+            if (mListener != null) {
                 mListener.onMediaCodecVideoEncode(outputBuffer, mBufferInfo);
             }
             mMediaCodec.releaseOutputBuffer(outputBufferIndex, false);
@@ -94,6 +98,11 @@ public class VideoMediaCodec {
             mMediaCodec.release();
             mMediaCodec = null;
         }
+    }
+
+    @Override
+    public void onVideoFrame(byte[] chunkPCM, int length) {
+        encoder(chunkPCM);
     }
 
     public interface OnMediaCodecVideoEncodeListener {

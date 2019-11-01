@@ -10,7 +10,18 @@ package com.suishi.sslive.mode.stream;
  */
 
 public class StreamManager {
+
+    // Used to load the 'native-lib' library on application startup.
+    static {
+        System.loadLibrary("ffmpeg-handle");
+    }
+
     private static StreamManager mInstance;
+
+
+    public StreamManager() {
+
+    }
 
     public synchronized static StreamManager getInstance() {
         if (mInstance == null) {
@@ -19,10 +30,6 @@ public class StreamManager {
         return mInstance;
     }
 
-    // Used to load the 'native-lib' library on application startup.
-    static {
-        System.loadLibrary("ffmpeg-handle");
-    }
 
     /**
      * 前置后置摄像头
@@ -93,7 +100,7 @@ public class StreamManager {
      * @param filterValue 滤镜取值
      * @return
      */
-  //  public static native int Filter(FilterType filterType, int filterValue);
+    //  public static native int Filter(FilterType filterType, int filterValue);
 
     /**
      * 上传音频数据编码AAC
@@ -130,7 +137,7 @@ public class StreamManager {
      * @param y
      * @return
      */
-  //  public static native int DrawText(String fontFilePath, String text, int x, int y);
+    //  public static native int DrawText(String fontFilePath, String text, int x, int y);
 
 
     /**
@@ -151,9 +158,13 @@ public class StreamManager {
 //                                          int positionX,
 //                                          int positionY);
 
+    /**
+     * 编码数据推流
+     */
+    public static native void avInput();
+
     public interface PushCallback {
         /**
-         *
          * @param pts
          * @param dts
          * @param duration
@@ -162,7 +173,6 @@ public class StreamManager {
         void onStreamCallback(long pts, long dts, long duration, long index);
 
         /**
-         *
          * @param error
          */
         void onStreamInitCallBack(String error);

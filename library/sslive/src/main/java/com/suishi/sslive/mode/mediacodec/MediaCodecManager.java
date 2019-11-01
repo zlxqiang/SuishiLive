@@ -5,9 +5,11 @@ import android.media.MediaCodecInfo;
 import android.media.MediaCodecList;
 import android.os.Build;
 
+import com.suishi.sslive.utils.HardWareSupport;
 import com.suishi.sslive.utils.LiveLog;
 
 /**
+ *
  */
 @TargetApi(18)
 public class MediaCodecManager {
@@ -50,6 +52,11 @@ public class MediaCodecManager {
             LiveLog.w(this, "Android sdk version error");
             return false;
         }
+        boolean isSupportHardWareEncode = HardWareSupport.isH265EncoderSupport();
+        if (!isSupportHardWareEncode) {
+            return isSupportHardWareEncode;
+        }
+
         AudioMediaConfig mAudioConfiguration = new AudioMediaConfig();
         VideoMediaConfig mVideoConfiguration = new VideoMediaConfig();
 
@@ -65,12 +72,12 @@ public class MediaCodecManager {
             return false;
         }
 
-        if (mVideoMediaCodec.init(mVideoConfiguration)) {
+        if (!mVideoMediaCodec.init(mVideoConfiguration)) {
             LiveLog.w(this, "Video mediacodec configuration error");
             return false;
         }
 
-        if (mAudioMediaCodec.init(mAudioConfiguration)) {
+        if (!mAudioMediaCodec.init(mAudioConfiguration)) {
             LiveLog.w(this, "Audio mediacodec configuration error");
             return false;
         }
@@ -97,6 +104,26 @@ public class MediaCodecManager {
         mAudioMediaCodec.stop();
         mVideoMediaCodec.stop();
     }
+
+    /**
+     * 视频编码器
+     *
+     * @return
+     */
+    public VideoMediaCodec getVideoMediaCodec() {
+        return mVideoMediaCodec;
+    }
+
+
+    /**
+     * 音频编码器
+     *
+     * @return
+     */
+    public AudioMediaCodec getAudioMediaCodec() {
+        return mAudioMediaCodec;
+    }
+
 
     /**
      * 音频编码回调

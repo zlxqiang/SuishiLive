@@ -30,7 +30,7 @@ AudioEncoder *mAudioEncoder = NULL;
 RtmpStreamer *mRtmpStreamer = NULL;
 
 /**
- * 音视频合成器
+ * 互斥锁
 */
 mutex mMutex;
 

@@ -71,7 +71,7 @@ public class AudioMediaCodec implements AudioManager.AudioFrameCallBack{
         mMediaCodec.start();
     }
 
-    void encoder(byte[] input) {
+    private void encoder(byte[] input) {
         if(mMediaCodec == null) {
             return;
         }

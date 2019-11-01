@@ -2,8 +2,11 @@ package com.suishi.sslive.ui;
 
 import android.content.Context;
 import android.media.MediaCodec;
+import android.os.Build;
 import android.util.Log;
 import android.widget.Toast;
+
+import androidx.annotation.RequiresApi;
 
 import com.suishi.sslive.mode.engine.audio.AudioConfig;
 import com.suishi.sslive.mode.engine.audio.AudioManager;
@@ -11,9 +14,12 @@ import com.suishi.sslive.mode.engine.camera.CameraHelper;
 import com.suishi.sslive.mode.engine.video.VideoConfig;
 import com.suishi.sslive.mode.engine.video.VideoManager;
 import com.suishi.sslive.mode.mediacodec.AudioMediaCodec;
+import com.suishi.sslive.mode.mediacodec.MediaCodecManager;
 import com.suishi.sslive.mode.mediacodec.VideoMediaCodec;
 import com.suishi.sslive.mode.stream.StreamManager;
+import com.suishi.sslive.utils.HardWareSupport;
 import com.suishi.sslive.widgets.CameraGlSurfaceView;
+import com.suishi.utils.LogUtils;
 
 import java.nio.ByteBuffer;
 
@@ -34,10 +40,14 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
 
     private Context mContext;
 
-    public LiveManager(Context context) {
-        this.mContext = context;
-    }
+    /**
+     * 硬编码管理器
+     */
+    private MediaCodecManager mMediaCodecManager;
 
+    private boolean isSupportHardWareEncode = false;
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public LiveManager(Context context, CameraGlSurfaceView filterGLSurfaceView) {
         this.mContext = context;
         mFilterGLSurfaceView = filterGLSurfaceView;
@@ -69,6 +79,14 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
                 AudioManager.instance().setCallBack(this);
                 AudioManager.instance().setFrameCallBack(this);
                 audioInit = true;
+            }
+
+            mMediaCodecManager = new MediaCodecManager();
+            isSupportHardWareEncode = mMediaCodecManager.init();
+            if (isSupportHardWareEncode) {
+                mMediaCodecManager.setAudioEncodeListener(this);
+                mMediaCodecManager.setVideoEncodeListener(this);
+                mMediaCodecManager.start();
             }
 
             //3.native 推流器初始化
@@ -204,7 +222,13 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onAudioFrame(byte[] data, int length) {
-        StreamManager.getInstance().Encode2AAC(data, length);
+        if (isSupportHardWareEncode) {
+            //硬编码
+            //   mMediaCodecManager.getAudioMediaCodec().onAudioFrame(data, length);
+        } else {
+            //软编码
+            StreamManager.getInstance().Encode2AAC(data, length);
+        }
     }
 
     /**
@@ -215,7 +239,13 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onVideoFrame(byte[] data, int length) {
-        StreamManager.getInstance().Encode2H264(data, length);
+        if (isSupportHardWareEncode) {
+            //硬编码
+            mMediaCodecManager.getVideoMediaCodec().onVideoFrame(data, length);
+        } else {
+            //软编码
+            StreamManager.getInstance().Encode2H264(data, length);
+        }
     }
 
     /**
@@ -226,7 +256,8 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onMediaCodecAudioEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
-
+        StreamManager.getInstance().avInput();
+        LogUtils.e("", "hardware audio data");
     }
 
     /**
@@ -237,7 +268,8 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onMediaCodecVideoEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
-
+        StreamManager.getInstance().avInput();
+        LogUtils.e("", "hardware video data");
     }
 
 
