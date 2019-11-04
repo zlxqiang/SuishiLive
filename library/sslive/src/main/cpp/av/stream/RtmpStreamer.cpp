@@ -193,7 +193,7 @@ void *RtmpStreamer::PushAudioStreamTask(void *pObj) {
         if (pAudioData != NULL && pAudioData->mData) {
             pAudioData->mPts = pAudioData->mPts - beginTime;
             LOG_D(DEBUG, "before audio encode pts:%lld", pAudioData->mPts);
-            rtmpStreamer->audioEncoder->EncodeAAC(&pAudioData);
+            //   rtmpStreamer->audioEncoder->EncodeAAC(&pAudioData);
             LOG_D(DEBUG, "after audio encode pts:%lld", pAudioData->mAVPacket->pts);
         }
         if (pAudioData != NULL && pAudioData->mAVPacket->size > 0) {
@@ -232,7 +232,7 @@ void *RtmpStreamer::PushVideoStreamTask(void *pObj) {
         if (pVideoData != NULL && pVideoData->mData) {
             pVideoData->mPts = pVideoData->mPts - beginTime;
             LOG_D(DEBUG, "before video encode pts:%d", pVideoData->mPts);
-            rtmpStreamer->videoEncoder->EncodeH264(&pVideoData);
+            //   rtmpStreamer->videoEncoder->EncodeH264(&pVideoData);
             LOG_D(DEBUG, "after video encode pts:%lld", pVideoData->mAVPacket->pts);
         }
 
@@ -318,11 +318,11 @@ int RtmpStreamer::StartPushStream() {
     pVideoCapture->videoFrameQueue.clear();
     pAudioCapture->audioFrameQueue.clear();
 
-    if(writeHeadFinish) {
+    if (writeHeadFinish) {
         //线程1，2
         pthread_create(&t1, NULL, RtmpStreamer::PushAudioStreamTask, this);
         pthread_create(&t2, NULL, RtmpStreamer::PushVideoStreamTask, this);
-    }else{
+    } else {
         return -1;
     }
     return 0;
@@ -338,7 +338,7 @@ int RtmpStreamer::ClosePushStream() {
             avio_close(iAvFormatContext->pb);
         }
     }
-    writeHeadFinish=false;
+    writeHeadFinish = false;
     return 0;
 }
 
@@ -363,7 +363,7 @@ void *RtmpStreamer::WriteHead(void *pObj) {
         LOG_D(DEBUG, "avformat write header failed!: %s", buf);
         return 0;
     }
-    rtmpStreamer->writeHeadFinish=true;
+    rtmpStreamer->writeHeadFinish = true;
     return 0;
 }
 
@@ -379,12 +379,10 @@ int RtmpStreamer::SendFrame(Data *pData, int streamIndex) {
     if (packet->stream_index == videoStreamIndex) {
         stime = videoCodecContext->time_base;
         dtime = videoStream->time_base;
-    }
-    else if (packet->stream_index == audioStreamIndex) {
+    } else if (packet->stream_index == audioStreamIndex) {
         stime = audioCodecContext->time_base;
         dtime = audioStream->time_base;
-    }
-    else {
+    } else {
         LOG_D(DEBUG, "unknow stream index");
         return -1;
     }
@@ -404,6 +402,9 @@ int RtmpStreamer::SendFrame(Data *pData, int streamIndex) {
         av_strerror(ret, buf, sizeof(buf));
         LOG_D(DEBUG, "stream index %d writer frame failed! :%s", streamIndex, buf);
     }
+
+    free(pData);
+
     return 0;
 }
 

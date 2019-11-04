@@ -16,7 +16,8 @@ public class FpsTools {
     static int fps = 0;
     static long lastTime = 0;
 
-    public static int fps() {
+
+    public int fps() {
         ++frameCount;
         long curTime = SystemClock.currentThreadTimeMillis();
         if (curTime - lastTime > 1000) // 取固定时间间隔为1秒

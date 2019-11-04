@@ -17,6 +17,7 @@ import com.suishi.sslive.mode.mediacodec.AudioMediaCodec;
 import com.suishi.sslive.mode.mediacodec.MediaCodecManager;
 import com.suishi.sslive.mode.mediacodec.VideoMediaCodec;
 import com.suishi.sslive.mode.stream.StreamManager;
+import com.suishi.sslive.utils.FpsTools;
 import com.suishi.sslive.utils.HardWareSupport;
 import com.suishi.sslive.widgets.CameraGlSurfaceView;
 import com.suishi.utils.LogUtils;
@@ -46,6 +47,8 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
     private MediaCodecManager mMediaCodecManager;
 
     private boolean isSupportHardWareEncode = false;
+
+    private FpsTools mFpsTools = new FpsTools();
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     public LiveManager(Context context, CameraGlSurfaceView filterGLSurfaceView) {
@@ -222,7 +225,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onAudioFrame(byte[] data, int length) {
-        if (isSupportHardWareEncode) {
+        if (false) {
             //硬编码
             //   mMediaCodecManager.getAudioMediaCodec().onAudioFrame(data, length);
         } else {
@@ -241,11 +244,14 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
     public void onVideoFrame(byte[] data, int length) {
         if (isSupportHardWareEncode) {
             //硬编码
-            mMediaCodecManager.getVideoMediaCodec().onVideoFrame(data, length);
+            byte[] dst = new byte[VideoConfig.height * VideoConfig.width * 3 / 2];
+            StreamManager.abgr2yuv(data, dst);
+            mMediaCodecManager.getVideoMediaCodec().onVideoFrame(dst, length);
         } else {
             //软编码
             StreamManager.getInstance().Encode2H264(data, length);
         }
+        LogUtils.e(TAG, mFpsTools.fps() + "");
     }
 
     /**
@@ -256,8 +262,8 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onMediaCodecAudioEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
-        StreamManager.getInstance().avInput();
-        LogUtils.e("", "hardware audio data");
+        StreamManager.getInstance().avOutputStream(bb.array());
+        LogUtils.e(TAG, "hardware audio data");
     }
 
     /**
@@ -268,10 +274,16 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onMediaCodecVideoEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
-        StreamManager.getInstance().avInput();
-        LogUtils.e("", "hardware video data");
+        StreamManager.getInstance().avOutputStream(decodeValue(bb));
+        LogUtils.e(TAG, "hardware video data");
     }
 
+    public byte[] decodeValue(ByteBuffer bytes) {
+        int len = bytes.limit() - bytes.position();
+        byte[] bytes1 = new byte[len];
+        bytes.get(bytes1);
+        return bytes1;
+    }
 
     /**
      * 低内存处理

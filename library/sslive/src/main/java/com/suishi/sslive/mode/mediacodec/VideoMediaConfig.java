@@ -16,9 +16,9 @@ public class VideoMediaConfig {
     public static final int DEFAULT_IFI = 2;
     public static final String DEFAULT_MIME = "video/avc";
 
-    public final int height= VideoConfig.height;
+    public static int height = VideoConfig.height;
 
-    public final int width=VideoConfig.width;
+    public static int width = VideoConfig.width;
 
     public final int minBps=400;
 

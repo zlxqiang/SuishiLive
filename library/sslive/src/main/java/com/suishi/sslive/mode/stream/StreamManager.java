@@ -161,7 +161,10 @@ public class StreamManager {
     /**
      * 编码数据推流
      */
-    public static native void avInput();
+    public static native void avOutputStream(byte[] videoBuffer);
+
+
+    public static native void abgr2yuv(byte[] videoBuffer, byte[] dstBuffer);
 
     public interface PushCallback {
         /**

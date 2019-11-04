@@ -29,7 +29,7 @@ public class MainActivity extends Activity {
         grid.setAdapter(new HoloTilesAdapter());
         AndPermission.with(this)
                 .runtime()
-                .permission(Permission.Group.CAMERA, Permission.Group.MICROPHONE)
+                .permission(Permission.Group.CAMERA, Permission.Group.MICROPHONE, Permission.Group.STORAGE)
                 .onGranted(permissions -> {
                     // Storage permission are allowed.
 

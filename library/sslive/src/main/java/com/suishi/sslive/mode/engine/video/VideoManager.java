@@ -12,7 +12,6 @@ import java.util.concurrent.ArrayBlockingQueue;
 /**
  * Created by zhzq on 2018/3/25.
  */
-
 public class VideoManager implements Camera.PreviewCallback {
 
     private static String TAG = VideoManager.class.getSimpleName();
@@ -40,6 +39,7 @@ public class VideoManager implements Camera.PreviewCallback {
 
     private VideoFrameCallBack mFrameCallBack;
 
+    private FpsTools mFpsTools = new FpsTools();
 
     private VideoManager() {
     }
@@ -78,7 +78,7 @@ public class VideoManager implements Camera.PreviewCallback {
      */
     @Override
     public void onPreviewFrame(byte[] data, Camera camera) {
-        LogUtils.e(TAG, FpsTools.fps() + "");
+        LogUtils.e(TAG, mFpsTools.fps() + "");
         if (mQueue == null)
             return;
         if (this.mQueue.size() == 2) {

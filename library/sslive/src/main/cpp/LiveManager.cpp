@@ -141,22 +141,16 @@ Java_com_suishi_sslive_mode_stream_StreamManager_Encode2H264(JNIEnv *env, jclass
         int len = mVideoProcessor->videoEncodeArgs->in_width *
                   mVideoProcessor->videoEncodeArgs->in_height * 3 / 2;
         uint8_t *videoDstData = (uint8_t *) malloc(len);
-        uint8_t *dstData = (uint8_t *) malloc(len);
 
-        //格式转换
-//        VideoMachining::NV21TOI420(mVideoProcessor->videoEncodeArgs->in_width,
-//                                   mVideoProcessor->videoEncodeArgs->in_height,
-//                                   (const uint8_t *) videoSrc,
-//                                   (uint8_t *) videoDstData);
-        int width=mVideoProcessor->videoEncodeArgs->in_width;
-        int height=mVideoProcessor->videoEncodeArgs->in_height;
+        int width = mVideoProcessor->videoEncodeArgs->in_width;
+        int height = mVideoProcessor->videoEncodeArgs->in_height;
         int y_stride = width;
         int u_stride = width >> 1;
         int v_stride = u_stride;
         size_t ySize = (size_t) (width * height);
-        size_t uSize = (size_t) (width * height /4);
+        size_t uSize = (size_t) (width * height / 4);
         VideoMachining::BGRA2I420((const uint8 *) videoSrc,
-                                  4* width,
+                                  4 * width,
                                   (uint8 *) videoDstData, y_stride,//y
                                   (uint8 *) (videoDstData) + ySize, u_stride,//u
                                   (uint8 *) (videoDstData) + ySize + uSize, v_stride,//v
@@ -177,6 +171,43 @@ Java_com_suishi_sslive_mode_stream_StreamManager_Encode2H264(JNIEnv *env, jclass
     return 0;
 
 }
+
+/**
+ * abgr to yuv
+ * @param env
+ * @param type
+ */
+JNIEXPORT void JNICALL
+Java_com_suishi_sslive_mode_stream_StreamManager_abgr2yuv(JNIEnv *env, jclass type,
+                                                          jbyteArray videoBuffer,
+                                                          jbyteArray dstData) {
+
+    if (mVideoInit && !isClose) {
+        jbyte *videoSrc = env->GetByteArrayElements(videoBuffer, 0);
+        int len = mVideoProcessor->videoEncodeArgs->in_width *
+                  mVideoProcessor->videoEncodeArgs->in_height * 3 / 2;
+        jbyte *cdstData = env->GetByteArrayElements(dstData, 0);
+        uint8_t *videoDstData = (uint8_t *) cdstData;
+
+        int width = mVideoProcessor->videoEncodeArgs->in_width;
+        int height = mVideoProcessor->videoEncodeArgs->in_height;
+        int y_stride = width;
+        int u_stride = width >> 1;
+        int v_stride = u_stride;
+        size_t ySize = (size_t) (width * height);
+        size_t uSize = (size_t) (width * height / 4);
+        VideoMachining::BGRA2I420((const uint8 *) videoSrc,
+                                  4 * width,
+                                  (uint8 *) videoDstData, y_stride,//y
+                                  (uint8 *) (videoDstData) + ySize, u_stride,//u
+                                  (uint8 *) (videoDstData) + ySize + uSize, v_stride,//v
+                                  width,
+                                  height);
+        env->ReleaseByteArrayElements(videoBuffer, videoSrc, 0);
+        env->ReleaseByteArrayElements(dstData, cdstData, 0);
+    }
+}
+
 
 /**
  * 接收APP层数据,AAC编码
@@ -257,6 +288,25 @@ Java_com_suishi_sslive_mode_stream_StreamManager_SetCameraID(JNIEnv *env, jclass
     return;
 }
 
+/**
+ * 硬编码推流
+ * @param env
+ * @param type
+ * @param videoBuffer_
+ */
+JNIEXPORT void JNICALL
+Java_com_suishi_sslive_mode_stream_StreamManager_avOutputStream(JNIEnv *env, jclass type,
+                                                                jbyteArray videoBuffer_) {
+    jbyte *videoBuffer = env->GetByteArrayElements(videoBuffer_, NULL);
+    uint8_t *videoDstData = (uint8_t *) videoBuffer;
+    int len = mVideoProcessor->videoEncodeArgs->in_width *
+              mVideoProcessor->videoEncodeArgs->in_height * 3 / 2;
+    Data *videoData = new Data();
+    videoData->mSize = len;
+    videoData->mData = videoDstData;
+    mVideoProcessor->PushVideoData(videoData);
+    env->ReleaseByteArrayElements(videoBuffer_, videoBuffer, 0);
+}
 
 
 #ifdef __cplusplus

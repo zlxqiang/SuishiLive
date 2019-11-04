@@ -13,7 +13,6 @@ import java.nio.ByteBuffer;
 /**
  *
  */
-@TargetApi(18)
 public class VideoMediaCodec implements VideoManager.VideoFrameCallBack {
 
     private MediaCodec mMediaCodec;
@@ -30,7 +29,7 @@ public class VideoMediaCodec implements VideoManager.VideoFrameCallBack {
         int videoHeight = getVideoSize(videoConfiguration.height);
         MediaFormat format = MediaFormat.createVideoFormat(videoConfiguration.mime, videoWidth, videoHeight);
         format.setInteger(MediaFormat.KEY_COLOR_FORMAT,
-                MediaCodecInfo.CodecCapabilities.COLOR_FormatSurface);
+                MediaCodecInfo.CodecCapabilities.COLOR_FormatYUV420SemiPlanar);
         format.setInteger(MediaFormat.KEY_BIT_RATE, videoConfiguration.maxBps * 1024);
         int fps = videoConfiguration.fps;
         //设置摄像头预览帧率
@@ -38,7 +37,7 @@ public class VideoMediaCodec implements VideoManager.VideoFrameCallBack {
         format.setInteger(MediaFormat.KEY_I_FRAME_INTERVAL, videoConfiguration.ifi);
         format.setInteger(MediaFormat.KEY_BITRATE_MODE, MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_VBR);
         format.setInteger(MediaFormat.KEY_COMPLEXITY, MediaCodecInfo.EncoderCapabilities.BITRATE_MODE_CBR);
-
+        //  format.setInteger(MediaFormat.KEY_MAX_INPUT_SIZE, 1228800);
         try {
             mMediaCodec = MediaCodec.createEncoderByType(videoConfiguration.mime);
             mMediaCodec.configure(format, null, null, MediaCodec.CONFIGURE_FLAG_ENCODE);
@@ -71,11 +70,21 @@ public class VideoMediaCodec implements VideoManager.VideoFrameCallBack {
         if (mMediaCodec == null) {
             return;
         }
-        int inputBufferIndex = mMediaCodec.dequeueInputBuffer(-1);
+        int inputBufferIndex = mMediaCodec.dequeueInputBuffer(12000);
         if (inputBufferIndex >= 0) {
             ByteBuffer[] inputBuffers = mMediaCodec.getInputBuffers();
             ByteBuffer inputBuffer = inputBuffers[inputBufferIndex];
             inputBuffer.clear();
+//            int longs=0;
+//            if(input.length<= inputBuffer.remaining()) {
+//                inputBuffer.put(input);
+//                longs=input.length;
+//            } else {
+//                // 这样会截掉一部分
+//                byte[] in=subBytes(input,0,inputBuffer.remaining());
+//                inputBuffer.put(in);
+//                longs=in.length;
+//            }
             inputBuffer.put(input);
             mMediaCodec.queueInputBuffer(inputBufferIndex, 0, input.length, 0, 0);
         }
@@ -91,6 +100,7 @@ public class VideoMediaCodec implements VideoManager.VideoFrameCallBack {
             outputBufferIndex = mMediaCodec.dequeueOutputBuffer(mBufferInfo, 0);
         }
     }
+
 
     public void stop() {
         if (mMediaCodec != null) {
