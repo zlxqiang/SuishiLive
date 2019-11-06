@@ -75,16 +75,6 @@ public class VideoMediaCodec implements VideoManager.VideoFrameCallBack {
             ByteBuffer[] inputBuffers = mMediaCodec.getInputBuffers();
             ByteBuffer inputBuffer = inputBuffers[inputBufferIndex];
             inputBuffer.clear();
-//            int longs=0;
-//            if(input.length<= inputBuffer.remaining()) {
-//                inputBuffer.put(input);
-//                longs=input.length;
-//            } else {
-//                // 这样会截掉一部分
-//                byte[] in=subBytes(input,0,inputBuffer.remaining());
-//                inputBuffer.put(in);
-//                longs=in.length;
-//            }
             inputBuffer.put(input);
             mMediaCodec.queueInputBuffer(inputBufferIndex, 0, input.length, 0, 0);
         }

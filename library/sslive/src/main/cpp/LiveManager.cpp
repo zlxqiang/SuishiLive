@@ -197,10 +197,9 @@ Java_com_suishi_sslive_mode_stream_StreamManager_abgr2yuv(JNIEnv *env, jclass ty
         size_t ySize = (size_t) (width * height);
         size_t uSize = (size_t) (width * height / 4);
         VideoMachining::BGRA2I420((const uint8 *) videoSrc,
-                                  4 * width,
-                                  (uint8 *) videoDstData, y_stride,//y
-                                  (uint8 *) (videoDstData) + ySize, u_stride,//u
-                                  (uint8 *) (videoDstData) + ySize + uSize, v_stride,//v
+                                  4 * width, videoDstData, y_stride,//y
+                                  (videoDstData) + ySize, u_stride,//u
+                                  (videoDstData) + ySize + uSize, v_stride,//v
                                   width,
                                   height);
         env->ReleaseByteArrayElements(videoBuffer, videoSrc, 0);

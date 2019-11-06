@@ -116,27 +116,27 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
     private boolean InitNative() {
         int ret = 0;
         AudioConfig config = AudioManager.instance().getAudioConfig();
-        ret = StreamManager.getInstance().InitAudio(config.getmChannel(), config.getSampleRate(), 16);
+        ret = StreamManager.InitAudio(config.getmChannel(), config.getSampleRate(), 16);
         if (ret < 0) {
             Log.e(TAG, "init audio capture failed!");
             return false;
         }
-        ret = StreamManager.getInstance().InitVideo(VideoConfig.width, VideoConfig.height, VideoConfig.width, VideoConfig.height, 25, true);
+        ret = StreamManager.InitVideo(VideoConfig.width, VideoConfig.height, VideoConfig.width, VideoConfig.height, 25, true);
         if (ret < 0) {
             Log.e(TAG, "init video capture failed!");
             return false;
         }
-        ret = StreamManager.getInstance().InitAudioEncoder();
+        ret = StreamManager.InitAudioEncoder();
         if (ret < 0) {
             Log.e(TAG, "init AudioEncoder failed!");
             return false;
         }
-        ret = StreamManager.getInstance().InitVideoEncoder();
+        ret = StreamManager.InitVideoEncoder();
         if (ret < 0) {
             Log.e(TAG, "init VideoEncoder failed!");
             return false;
         }
-        ret = StreamManager.getInstance().StartPush(url);
+        ret = StreamManager.StartPush(url);
         if (ret < 0) {
             Log.d(TAG, "native push failed!");
             return false;
@@ -197,8 +197,8 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
         mFilterGLSurfaceView.pause();
         AudioManager.instance().stop();
         VideoManager.instance().stop();
-        StreamManager.getInstance().Close();
-        StreamManager.getInstance().Release();
+        StreamManager.Close();
+        StreamManager.Release();
     }
 
 
@@ -225,12 +225,12 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onAudioFrame(byte[] data, int length) {
-        if (false) {
+        if (isSupportHardWareEncode) {
             //硬编码
             //   mMediaCodecManager.getAudioMediaCodec().onAudioFrame(data, length);
         } else {
             //软编码
-            StreamManager.getInstance().Encode2AAC(data, length);
+            StreamManager.Encode2AAC(data, length);
         }
     }
 
@@ -249,7 +249,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
             mMediaCodecManager.getVideoMediaCodec().onVideoFrame(dst, length);
         } else {
             //软编码
-            StreamManager.getInstance().Encode2H264(data, length);
+            StreamManager.Encode2H264(data, length);
         }
         LogUtils.e(TAG, mFpsTools.fps() + "");
     }
@@ -262,7 +262,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onMediaCodecAudioEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
-        StreamManager.getInstance().avOutputStream(bb.array());
+        StreamManager.avOutputStream(bb.array());
         LogUtils.e(TAG, "hardware audio data");
     }
 
@@ -274,15 +274,10 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     @Override
     public void onMediaCodecVideoEncode(ByteBuffer bb, MediaCodec.BufferInfo bi) {
-        StreamManager.getInstance().avOutputStream(decodeValue(bb));
+        byte[] encodeData = new byte[bi.size];
+        bb.get(encodeData, 0, bi.size);
+        StreamManager.avOutputStream(encodeData);
         LogUtils.e(TAG, "hardware video data");
-    }
-
-    public byte[] decodeValue(ByteBuffer bytes) {
-        int len = bytes.limit() - bytes.position();
-        byte[] bytes1 = new byte[len];
-        bytes.get(bytes1);
-        return bytes1;
     }
 
     /**

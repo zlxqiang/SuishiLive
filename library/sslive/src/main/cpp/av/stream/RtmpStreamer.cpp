@@ -232,7 +232,13 @@ void *RtmpStreamer::PushVideoStreamTask(void *pObj) {
         if (pVideoData != NULL && pVideoData->mData) {
             pVideoData->mPts = pVideoData->mPts - beginTime;
             LOG_D(DEBUG, "before video encode pts:%d", pVideoData->mPts);
-            //   rtmpStreamer->videoEncoder->EncodeH264(&pVideoData);
+            //    rtmpStreamer->videoEncoder->EncodeH264(&pVideoData);
+            AVPacket *avPacket;
+            avPacket = av_packet_alloc();
+            av_init_packet(avPacket);
+            avPacket->size = pVideoData->mSize;
+            avPacket->data = pVideoData->mData;
+            pVideoData->mAVPacket = avPacket;
             LOG_D(DEBUG, "after video encode pts:%lld", pVideoData->mAVPacket->pts);
         }
 
@@ -243,7 +249,6 @@ void *RtmpStreamer::PushVideoStreamTask(void *pObj) {
     }
     return 0;
 }
-
 
 /**
 * 音视频同时推流任务
