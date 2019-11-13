@@ -1,6 +1,6 @@
 include ':app'
 include ':resource'
-include ':camera'
+
 
 def modulePrefix = ':'
 
@@ -8,7 +8,9 @@ def modulePrefix = ':'
 //include modulePrefix+'chat'
 include modulePrefix+'sslive'
 include modulePrefix+'magicfilter'
+include modulePrefix+'camera'
 
 //project(modulePrefix + 'chat').projectDir = new File(rootDir, 'library/chat')
 project(modulePrefix + 'sslive').projectDir = new File(rootDir, 'library/sslive')
 project(modulePrefix + 'magicfilter').projectDir = new File(rootDir, 'library/magicfilter')
+project(modulePrefix + 'camera').projectDir = new File(rootDir, 'library/camera')

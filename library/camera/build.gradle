@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-apply from: '../constants.gradle'
+apply from: '../../constants.gradle'
 
 android {
     compileSdkVersion project.ext.compileSdkVersion
@@ -31,4 +31,5 @@ dependencies {
 //    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
     implementation project(':resource')
  //   implementation project(':http')
+    implementation project(':magicfilter')
 }
