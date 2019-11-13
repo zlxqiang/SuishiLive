@@ -33,7 +33,7 @@ import java.util.LinkedList;
 
 public class GPUImageFilter {
 
-    protected Context mContext;
+    //  protected Context mContext;
 
     private final LinkedList<Runnable> mRunOnDraw;
     private final int mVertexShaderId;
@@ -82,17 +82,15 @@ public class GPUImageFilter {
         mGLTextureBuffer.put(TextureRotationUtil.getRotation(Rotation.NORMAL, false, true)).position(0);
     }
 
-    public void init(Context context) {
-        this.mContext = context;
-
+    public void init() {
         onInit();
         mIsInitialized = true;
         onInitialized();
     }
 
     protected void onInit() {
-        mGLProgramId = OpenGlUtils.loadProgram(OpenGlUtils.readShaderFromRawResource(mContext, mVertexShaderId),
-                OpenGlUtils.readShaderFromRawResource(mContext, mFragmentShaderId));
+        mGLProgramId = OpenGlUtils.loadProgram(OpenGlUtils.readShaderFromRawResource(mVertexShaderId),
+                OpenGlUtils.readShaderFromRawResource(mFragmentShaderId));
         mGLAttributePosition = GLES20.glGetAttribLocation(mGLProgramId, "position");
         mGLUniformTexture = GLES20.glGetUniformLocation(mGLProgramId, "inputImageTexture");
         mGLAttributeTextureCoordinate = GLES20.glGetAttribLocation(mGLProgramId,

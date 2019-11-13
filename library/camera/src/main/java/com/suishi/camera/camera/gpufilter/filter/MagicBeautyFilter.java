@@ -2,9 +2,8 @@ package com.suishi.camera.camera.gpufilter.filter;
 
 import android.opengl.GLES20;
 
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.suishi.camera.R;
-import com.suishi.camera.camera.gpufilter.basefilter.GPUImageFilter;
-import com.suishi.camera.camera.gpufilter.utils.OpenGlUtils;
 
 
 /**
@@ -18,8 +17,7 @@ public class MagicBeautyFilter extends GPUImageFilter {
     private int mLevel;
 
     public MagicBeautyFilter(){
-        super(NO_FILTER_VERTEX_SHADER ,
-                OpenGlUtils.readShaderFromRawResource(R.raw.beauty));
+        super(R.raw.beauty);
     }
 
     protected void onInit() {
@@ -64,6 +62,7 @@ public class MagicBeautyFilter extends GPUImageFilter {
     public int getBeautyLevel(){
         return mLevel;
     }
+
     public void onBeautyLevelChanged(){
         setBeautyLevel(3);//beauty level
     }

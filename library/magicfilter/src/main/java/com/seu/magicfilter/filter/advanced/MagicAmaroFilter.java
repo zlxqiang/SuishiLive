@@ -53,9 +53,9 @@ public class MagicAmaroFilter extends GPUImageFilter {
         setFloat(mGLStrengthLocation, 1.0f);
         runOnDraw(new Runnable() {
             public void run() {
-                inputTextureHandles[0] = OpenGlUtils.loadTexture(mContext, "filter/brannan_blowout.png");
-                inputTextureHandles[1] = OpenGlUtils.loadTexture(mContext, "filter/overlaymap.png");
-                inputTextureHandles[2] = OpenGlUtils.loadTexture(mContext, "filter/amaromap.png");
+                inputTextureHandles[0] = OpenGlUtils.loadTexture("filter/brannan_blowout.png");
+                inputTextureHandles[1] = OpenGlUtils.loadTexture("filter/overlaymap.png");
+                inputTextureHandles[2] = OpenGlUtils.loadTexture("filter/amaromap.png");
             }
         });
     }

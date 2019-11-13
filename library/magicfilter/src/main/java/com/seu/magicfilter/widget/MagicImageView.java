@@ -40,7 +40,7 @@ public class MagicImageView extends MagicBaseView{
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         super.onSurfaceCreated(gl, config);
-        imageInput.init(getContext());
+        imageInput.init();
     }
 
     @Override

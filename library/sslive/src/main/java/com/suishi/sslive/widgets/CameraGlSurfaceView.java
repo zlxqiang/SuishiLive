@@ -78,11 +78,11 @@ public class CameraGlSurfaceView extends BaseGlSurfaceView implements GLSurfaceV
 
         if (mCameraInputFilter == null) {
             mCameraInputFilter = new MagicCameraInputFilter();
-            mCameraInputFilter.init(getContext());
+            mCameraInputFilter.init();
         }
         if (mRecordFilter == null) {
             mRecordFilter = new MagicRecordFilter();
-            mRecordFilter.init(getContext());
+            mRecordFilter.init();
             mRecordFilter.setRecordListener(VideoManager.instance());
         }
 

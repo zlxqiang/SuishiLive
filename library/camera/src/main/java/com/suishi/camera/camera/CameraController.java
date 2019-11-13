@@ -9,7 +9,7 @@ import android.util.Log;
 
 
 import com.suishi.camera.camera.utils.CameraParamUtil;
-import com.suishi.camera.camera.utils.DensityUtils;
+import com.suishi.utils.DensityUtils;
 
 import java.io.IOException;
 import java.util.ArrayList;

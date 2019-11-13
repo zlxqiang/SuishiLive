@@ -25,11 +25,10 @@ import android.os.Message;
 import android.util.Log;
 
 
-import com.suishi.camera.ContextInstance;
+import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.suishi.camera.camera.filter.AFilter;
 import com.suishi.camera.camera.filter.NoFilter;
-import com.suishi.camera.camera.gpufilter.basefilter.GPUImageFilter;
-import com.suishi.camera.camera.gpufilter.basefilter.MagicCameraInputFilter;
 import com.suishi.camera.camera.record.gles.EglCore;
 
 import java.io.IOException;

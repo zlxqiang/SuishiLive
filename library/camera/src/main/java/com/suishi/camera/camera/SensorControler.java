@@ -8,8 +8,6 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.suishi.camera.ContextInstance;
-
 import java.util.Calendar;
 
 /**

@@ -53,10 +53,10 @@ public class MagicHefeFilter extends GPUImageFilter {
 		setFloat(mGLStrengthLocation, 1.0f);
 	    runOnDraw(new Runnable(){
 		    public void run(){
-		    	inputTextureHandles[0] = OpenGlUtils.loadTexture(mContext, "filter/edgeburn.png");
-				inputTextureHandles[1] = OpenGlUtils.loadTexture(mContext, "filter/hefemap.png");
-				inputTextureHandles[2] = OpenGlUtils.loadTexture(mContext, "filter/hefemetal.png");
-				inputTextureHandles[3] = OpenGlUtils.loadTexture(mContext, "filter/hefesoftlight.png");
+                inputTextureHandles[0] = OpenGlUtils.loadTexture("filter/edgeburn.png");
+                inputTextureHandles[1] = OpenGlUtils.loadTexture("filter/hefemap.png");
+                inputTextureHandles[2] = OpenGlUtils.loadTexture("filter/hefemetal.png");
+                inputTextureHandles[3] = OpenGlUtils.loadTexture("filter/hefesoftlight.png");
 		    }
 	    });
 	}

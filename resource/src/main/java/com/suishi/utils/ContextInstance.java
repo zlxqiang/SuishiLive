@@ -1,4 +1,4 @@
-package com.suishi.camera;
+package com.suishi.utils;
 
 import android.app.Application;
 

@@ -12,7 +12,8 @@ import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
-import com.suishi.camera.camera.utils.DensityUtils;
+
+import com.suishi.utils.DensityUtils;
 
 
 /**

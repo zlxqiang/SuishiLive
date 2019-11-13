@@ -1,6 +1,5 @@
 package com.seu.magicfilter.utils;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,6 +8,7 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.util.Log;
 
+import com.suishi.utils.ContextInstance;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 
 import java.io.BufferedReader;
@@ -116,7 +116,7 @@ public class OpenGlUtils {
         return textures[0];
     }
 
-    public static int loadTexture(final Context context, final String name) {
+    public static int loadTexture(final String name) {
         final int[] textureHandle = new int[1];
 
         GLES20.glGenTextures(1, textureHandle, 0);
@@ -124,7 +124,7 @@ public class OpenGlUtils {
         if (textureHandle[0] != 0) {
 
             // Read in the resource
-            final Bitmap bitmap = getImageFromAssetsFile(context, name);
+            final Bitmap bitmap = getImageFromAssetsFile(name);
 
             // Bind to the texture in OpenGL
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureHandle[0]);
@@ -148,9 +148,9 @@ public class OpenGlUtils {
         return textureHandle[0];
     }
 
-    private static Bitmap getImageFromAssetsFile(Context context, String fileName) {
+    private static Bitmap getImageFromAssetsFile(String fileName) {
         Bitmap image = null;
-        AssetManager am = context.getResources().getAssets();
+        AssetManager am = ContextInstance.getInstance().getResources().getAssets();
         try {
             InputStream is = am.open(fileName);
             image = BitmapFactory.decodeStream(is);
@@ -219,8 +219,8 @@ public class OpenGlUtils {
         return texture[0];
     }
 
-    public static String readShaderFromRawResource(Context context, final int resourceId) {
-        final InputStream inputStream = context.getResources().openRawResource(
+    public static String readShaderFromRawResource(final int resourceId) {
+        final InputStream inputStream = ContextInstance.getInstance().getResources().openRawResource(
                 resourceId);
         final InputStreamReader inputStreamReader = new InputStreamReader(
                 inputStream);

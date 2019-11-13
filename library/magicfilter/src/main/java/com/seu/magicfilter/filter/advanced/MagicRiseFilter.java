@@ -50,9 +50,9 @@ public class MagicRiseFilter extends GPUImageFilter {
 		super.onInitialized();
 	    runOnDraw(new Runnable(){
 		    public void run(){
-		    	inputTextureHandles[0] = OpenGlUtils.loadTexture(mContext, "filter/blackboard1024.png");
-				inputTextureHandles[1] = OpenGlUtils.loadTexture(mContext, "filter/overlaymap.png");
-				inputTextureHandles[2] = OpenGlUtils.loadTexture(mContext, "filter/risemap.png");
+                inputTextureHandles[0] = OpenGlUtils.loadTexture("filter/blackboard1024.png");
+                inputTextureHandles[1] = OpenGlUtils.loadTexture("filter/overlaymap.png");
+                inputTextureHandles[2] = OpenGlUtils.loadTexture("filter/risemap.png");
 		    }
 	    });
 	}

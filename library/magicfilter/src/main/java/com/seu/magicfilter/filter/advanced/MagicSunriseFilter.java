@@ -126,11 +126,11 @@ public class MagicSunriseFilter extends GPUImageFilter {
                 }
                 GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, 256, 2, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, ByteBuffer.wrap(arrayOfByte));
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE4);
-                mMaskGrey1TextureId = OpenGlUtils.loadTexture(mContext, "filter/amaro_mask1.jpg");
+                mMaskGrey1TextureId = OpenGlUtils.loadTexture("filter/amaro_mask1.jpg");
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE5);
-                mMaskGrey2TextureId = OpenGlUtils.loadTexture(mContext, "filter/amaro_mask2.jpg");
+                mMaskGrey2TextureId = OpenGlUtils.loadTexture("filter/amaro_mask2.jpg");
                 GLES20.glActiveTexture(GLES20.GL_TEXTURE6);
-                mMaskGrey3TextureId = OpenGlUtils.loadTexture(mContext, "filter/toy_mask1.jpg");
+                mMaskGrey3TextureId = OpenGlUtils.loadTexture("filter/toy_mask1.jpg");
             }
         });
     }

@@ -32,9 +32,9 @@ public class MagicBaseGroupFilter extends GPUImageFilter {
     }
 
     @Override
-    public void init(Context context) {
+    public void init() {
         for (GPUImageFilter filter : filters) {
-            filter.init(context);
+            filter.init();
         }
     }
 

@@ -53,8 +53,8 @@ public class MagicWaldenFilter extends GPUImageFilter {
 		setFloat(mGLStrengthLocation, 1.0f);
 	    runOnDraw(new Runnable(){
 		    public void run(){
-		    	inputTextureHandles[0] = OpenGlUtils.loadTexture(mContext, "filter/walden_map.png");
-				inputTextureHandles[1] = OpenGlUtils.loadTexture(mContext, "filter/vignette_map.png");
+                inputTextureHandles[0] = OpenGlUtils.loadTexture("filter/walden_map.png");
+                inputTextureHandles[1] = OpenGlUtils.loadTexture("filter/vignette_map.png");
 		    }
 	    });
 	}

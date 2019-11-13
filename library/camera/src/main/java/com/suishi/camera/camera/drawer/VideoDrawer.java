@@ -10,6 +10,7 @@ import android.opengl.GLSurfaceView;
 import android.view.MotionEvent;
 
 
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.suishi.camera.R;
 import com.suishi.camera.camera.filter.AFilter;
 import com.suishi.camera.camera.filter.GroupFilter;
@@ -18,7 +19,6 @@ import com.suishi.camera.camera.filter.ProcessFilter;
 import com.suishi.camera.camera.filter.RotationOESFilter;
 import com.suishi.camera.camera.filter.WaterMarkFilter;
 import com.suishi.camera.camera.gpufilter.SlideGpuFilterGroup;
-import com.suishi.camera.camera.gpufilter.basefilter.GPUImageFilter;
 import com.suishi.camera.camera.gpufilter.filter.MagicBeautyFilter;
 import com.suishi.camera.camera.media.VideoInfo;
 import com.suishi.camera.camera.utils.EasyGlUtils;

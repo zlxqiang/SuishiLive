@@ -4,12 +4,11 @@ import android.opengl.GLES20;
 import android.view.MotionEvent;
 import android.widget.Scroller;
 
-import com.suishi.camera.ContextInstance;
-import com.suishi.camera.camera.gpufilter.basefilter.GPUImageFilter;
-import com.suishi.camera.camera.gpufilter.helper.MagicFilterFactory;
-import com.suishi.camera.camera.gpufilter.helper.MagicFilterType;
-import com.suishi.camera.camera.utils.DensityUtils;
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+import com.seu.magicfilter.filter.helper.MagicFilterFactory;
+import com.seu.magicfilter.filter.helper.MagicFilterType;
 import com.suishi.camera.camera.utils.EasyGlUtils;
+import com.suishi.utils.DensityUtils;
 
 
 /**

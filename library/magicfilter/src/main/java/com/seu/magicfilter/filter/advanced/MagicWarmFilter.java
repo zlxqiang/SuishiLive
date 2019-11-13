@@ -107,8 +107,8 @@ public class MagicWarmFilter extends GPUImageFilter {
 		          arrayOfByte[(3 + (1024 + j * 4))] = ((byte)arrayOfInt8[j]);
 		        }
 		        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, 256, 2, 0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, ByteBuffer.wrap(arrayOfByte));
-		        mMaskGrey1TextureId = OpenGlUtils.loadTexture(mContext, "filter/warm_layer1.jpg");
-		        mMaskGrey2TextureId = OpenGlUtils.loadTexture(mContext, "filter/bluevintage_mask1.jpg");
+                mMaskGrey1TextureId = OpenGlUtils.loadTexture("filter/warm_layer1.jpg");
+                mMaskGrey2TextureId = OpenGlUtils.loadTexture("filter/bluevintage_mask1.jpg");
 		    }
 	    });
 	}

@@ -25,14 +25,13 @@ import android.opengl.Matrix;
 import android.util.Log;
 
 
-import com.suishi.camera.ContextInstance;
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.suishi.camera.R;
 import com.suishi.camera.camera.filter.AFilter;
 import com.suishi.camera.camera.filter.GroupFilter;
 import com.suishi.camera.camera.filter.NoFilter;
 import com.suishi.camera.camera.filter.RotationOESFilter;
 import com.suishi.camera.camera.filter.WaterMarkFilter;
-import com.suishi.camera.camera.gpufilter.basefilter.GPUImageFilter;
 import com.suishi.camera.camera.media.VideoInfo;
 import com.suishi.camera.camera.utils.EasyGlUtils;
 import com.suishi.camera.camera.utils.MatrixUtils;
