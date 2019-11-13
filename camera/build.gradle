@@ -1,0 +1,34 @@
+apply plugin: 'com.android.library'
+apply from: '../constants.gradle'
+
+android {
+    compileSdkVersion project.ext.compileSdkVersion
+
+    defaultConfig {
+        minSdkVersion project.ext.minSdkVersion
+        targetSdkVersion project.ext.targetSdkVersion
+        ndk {
+            moduleName = 'ffmpeg'
+            moduleName = 'ffmpeginvoke'
+        }
+
+    }
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            jni.srcDirs = []
+        }
+    }
+
+}
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    testImplementation 'junit:junit:4.12'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    //   androidTestImplementation 'com.android.support.test:runner:0.5'
+//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
+    implementation project(':resource')
+ //   implementation project(':http')
+}

@@ -1,5 +1,6 @@
 include ':app'
 include ':resource'
+include ':camera'
 
 def modulePrefix = ':'
 
