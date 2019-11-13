@@ -5,6 +5,7 @@ import android.content.Context;
 import androidx.multidex.MultiDexApplication;
 
 import com.seu.magicfilter.utils.MagicParams;
+import com.suishi.utils.ContextInstance;
 import com.suishi.utils.CrashHandler;
 import com.suishi.utils.DensityUtils;
 import com.yatoooon.screenadaptation.ScreenAdapterTools;
@@ -21,6 +22,7 @@ public class AppApplication extends MultiDexApplication {
         super.onCreate();
         mContext=this;
         CrashHandler.getInstance().init(this);
+        ContextInstance.init(this);
         MagicParams.context=this;
         DensityUtils.init(this);
         //存储空间检测，是否充足

@@ -38,8 +38,6 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer,
      */
     private int cameraId = 1;
 
-    private MPlayer player;
-
     public CameraView(Context context) {
         this(context, null);
         mContext = context;
@@ -71,14 +69,6 @@ public class CameraView extends GLSurfaceView implements GLSurfaceView.Renderer,
         mCamera = new CameraController();
 
 
-    }
-
-    /**
-     * 想 video 和camera 用一个surfaceview
-     */
-    private void initPlayer() {
-        player = new MPlayer();
-        player.setDisplay(new MinimalDisplay(this));
     }
 
     /**

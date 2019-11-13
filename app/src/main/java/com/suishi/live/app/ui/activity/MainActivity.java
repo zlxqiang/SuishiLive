@@ -44,11 +44,12 @@ public class MainActivity extends Activity {
 
     public class HoloTilesAdapter extends BaseAdapter {
 
-        private static final int TILES_COUNT = 2;
+        private static final int TILES_COUNT = 3;
 
         private final int[] DRAWABLES = {
                 R.drawable.blue_tile,
                 R.drawable.green_tile,
+                R.drawable.blue_tile
         };
 
         @Override
@@ -88,7 +89,7 @@ public class MainActivity extends Activity {
                 string1 = "Landscape";
                 string2 = "Rtmp";
             } else if (position == 2) {
-                string1 = "Portrait";
+                string1 = "录制";
                 string2 = "Part";
             } else if (position == 3) {
                 string1 = "Portrait";
@@ -106,7 +107,7 @@ public class MainActivity extends Activity {
                     } else if (currentPosition == 1) {
                         goPart();
                     } else if (currentPosition == 2) {
-
+                        camera();
                     } else if (currentPosition == 3) {
                     }
                 }
@@ -122,6 +123,11 @@ public class MainActivity extends Activity {
 
     private void goPart() {
         Intent intent = new Intent(this, PortraitActivity.class);
+        startActivity(intent);
+    }
+
+    private void camera() {
+        Intent intent = new Intent(this, CameraActivity.class);
         startActivity(intent);
     }
 

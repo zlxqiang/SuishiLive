@@ -9,30 +9,62 @@ import android.graphics.SurfaceTexture;
  */
 
 public interface ICamera {
-    /**open the camera*/
+    /**
+     * 打开
+     */
     void open(int cameraId);
 
+    /**
+     * @param texture
+     */
     void setPreviewTexture(SurfaceTexture texture);
-    /**set the camera config*/
+
+    /**
+     * set the camera config
+     */
     void setConfig(Config config);
 
+    /**
+     *
+     * @param callback
+     */
     void setOnPreviewFrameCallback(PreviewFrameCallback callback);
 
+    /**
+     *
+     */
     void preview();
 
+    /**
+     *
+     * @return
+     */
     Point getPreviewSize();
 
+    /**
+     *
+     * @return
+     */
     Point getPictureSize();
-    /**close the camera*/
+
+    /**
+     * close the camera
+     */
     boolean close();
 
-    class Config{
-        public float rate=1.778f; //宽高比
+    /**
+     *
+     */
+    class Config {
+        public float rate = 1.778f; //宽高比
         public int minPreviewWidth;
         public int minPictureWidth;
     }
 
-    interface PreviewFrameCallback{
+    /**
+     *
+     */
+    interface PreviewFrameCallback {
         void onPreviewFrame(byte[] bytes, int width, int height);
     }
 }

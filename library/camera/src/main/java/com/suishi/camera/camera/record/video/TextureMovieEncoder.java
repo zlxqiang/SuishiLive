@@ -30,6 +30,7 @@ import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.suishi.camera.camera.filter.AFilter;
 import com.suishi.camera.camera.filter.NoFilter;
 import com.suishi.camera.camera.record.gles.EglCore;
+import com.suishi.utils.ContextInstance;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
