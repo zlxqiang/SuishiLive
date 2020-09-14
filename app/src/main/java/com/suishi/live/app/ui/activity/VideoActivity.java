@@ -4,6 +4,7 @@ import android.content.ContentResolver;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -22,7 +23,6 @@ import com.suishi.live.app.R;
 import com.suishi.live.app.widgets.media.AndroidMediaController;
 import com.suishi.live.app.widgets.media.IjkVideoView;
 
-import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
 /**
  * 播放
@@ -67,6 +67,7 @@ public class VideoActivity extends AppCompatActivity {
 
         mVideoPath = getIntent().getStringExtra("videoPath");
         mVideoPath="rtmp://192.168.1.101/live/stream";
+
 
         Intent intent = getIntent();
         String intentAction = intent.getAction();
@@ -117,8 +118,6 @@ public class VideoActivity extends AppCompatActivity {
         mDrawerLayout.setScrimColor(Color.TRANSPARENT);
 
         // init player
-        IjkMediaPlayer.loadLibrariesOnce(null);
-        IjkMediaPlayer.native_profileBegin("libijkplayer.so");
 
         mVideoView = (IjkVideoView) findViewById(R.id.video_view);
         mVideoView.setMediaController(mMediaController);
@@ -154,7 +153,6 @@ public class VideoActivity extends AppCompatActivity {
         } else {
             mVideoView.enterBackground();
         }
-        IjkMediaPlayer.native_profileEnd();
     }
 
 }

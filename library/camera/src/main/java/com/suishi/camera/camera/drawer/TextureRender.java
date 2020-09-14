@@ -26,6 +26,7 @@ import android.util.Log;
 
 
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+import com.seu.magicfilter.utils.MagicParams;
 import com.suishi.camera.R;
 import com.suishi.camera.camera.filter.AFilter;
 import com.suishi.camera.camera.filter.GroupFilter;
@@ -35,7 +36,6 @@ import com.suishi.camera.camera.filter.WaterMarkFilter;
 import com.suishi.camera.camera.media.VideoInfo;
 import com.suishi.camera.camera.utils.EasyGlUtils;
 import com.suishi.camera.camera.utils.MatrixUtils;
-import com.suishi.utils.ContextInstance;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -135,7 +135,7 @@ public class TextureRender {
                 .order(ByteOrder.nativeOrder()).asFloatBuffer();
         mTriangleVertices.put(mTriangleVerticesData).position(0);
         Matrix.setIdentityM(mSTMatrix, 0);
-        Resources resources = ContextInstance.getInstance().getResources();
+        Resources resources = MagicParams.context.getResources();
         mShow = new NoFilter(resources);
         mShow.setMatrix(MatrixUtils.flip(MatrixUtils.getOriginalMatrix(), false, true));
         rotationFilter = new RotationOESFilter(resources);

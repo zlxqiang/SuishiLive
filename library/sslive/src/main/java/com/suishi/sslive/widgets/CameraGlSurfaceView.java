@@ -121,7 +121,6 @@ public class CameraGlSurfaceView extends BaseGlSurfaceView implements GLSurfaceV
         mRecordTextureBuffer.put(data[1]).position(0);
     }
 
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     public void onDrawFrame(GL10 gl) {
         super.onDrawFrame(gl);

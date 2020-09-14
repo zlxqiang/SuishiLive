@@ -27,10 +27,10 @@ import android.util.Log;
 
 import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+import com.seu.magicfilter.utils.MagicParams;
 import com.suishi.camera.camera.filter.AFilter;
 import com.suishi.camera.camera.filter.NoFilter;
 import com.suishi.camera.camera.record.gles.EglCore;
-import com.suishi.utils.ContextInstance;
 
 import java.io.IOException;
 import java.lang.ref.WeakReference;
@@ -379,7 +379,7 @@ public class TextureMovieEncoder implements Runnable {
     }
 
     //    private MagicFilterType type = MagicFilterType.NONE;
-    private AFilter mShowFilter = new NoFilter(ContextInstance.getInstance().getResources());
+    private AFilter mShowFilter = new NoFilter(MagicParams.context.getResources());
 //    public void setFilter(MagicFilterType type) {
 //        this.type = type;
 //    }

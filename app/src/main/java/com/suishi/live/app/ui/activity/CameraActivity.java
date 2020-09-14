@@ -1,9 +1,6 @@
 package com.suishi.live.app.ui.activity;
 
-import android.Manifest;
 import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -16,9 +13,12 @@ import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.util.Rational;
+import android.util.Size;
 import android.view.MotionEvent;
 import android.view.SurfaceHolder;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -27,6 +27,9 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.Preview;
+import androidx.camera.core.impl.OptionsBundle;
+import androidx.camera.core.impl.PreviewConfig;
 
 import com.seu.magicfilter.filter.helper.MagicFilterType;
 import com.suishi.camera.CameraView;
@@ -39,7 +42,6 @@ import com.suishi.camera.camera.utils.CameraUtils;
 import com.suishi.live.app.R;
 import com.suishi.live.app.widgets.SystemVideoView;
 import com.suishi.utils.BitmapUtil;
-import com.suishi.utils.ContextInstance;
 import com.suishi.utils.DensityUtils;
 import com.suishi.utils.ToastUtil;
 
@@ -51,8 +53,7 @@ import java.util.concurrent.Executors;
 
 
 /**
- * Created by weight68kg on 2018/5/8.
- * 首次进入-选择性别（女）-女性用用户拍摄视频
+ *
  */
 public class CameraActivity extends AppCompatActivity implements View.OnClickListener, View.OnTouchListener, SensorControler.CameraFocusListener, SlideGpuFilterGroup.OnFilterChangeListener, SurfaceHolder.Callback {
 
@@ -173,19 +174,14 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
 
     private Bitmap bitmap;
 
-    @SuppressLint("HandlerLeak")
-    private Handler handler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-            switch (msg.what) {
-                case 0:
-                    //  CarUtils.dismissLoading();
-                    break;
-            }
-
+    private Handler handler = new Handler(msg -> {
+        switch (msg.what) {
+            case 0:
+                //  CarUtils.dismissLoading();
+                break;
         }
-    };
+        return true;
+    });
 
 
     @Override
@@ -218,18 +214,6 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         findViewById(R.id.iv_flash_switch).setOnClickListener(this);
 
         addListener();
-//        performCodeWithPermission("请求照相，存储，录音权限", new CheckPermission.PermissionCallback() {
-//            @Override
-//            public void hasPermission() {
-//
-//            }
-//
-//            @Override
-//            public void noPermission() {
-//
-//            }
-//        }, Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.RECORD_AUDIO);
-
         if (getIntent().hasExtra(CAMERA_CLOSE_TAKE_PICTURE)) {
             isOpenTakePicture = getIntent().getBooleanExtra(CAMERA_CLOSE_TAKE_PICTURE, true);
         }
@@ -238,6 +222,24 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         mSensorControler.setCameraFocusListener(this);
 
     }
+
+//    private void startCamera() {
+//        // 1. preview
+//        @SuppressLint("RestrictedApi") Preview preview = new Preview(Preview.DEFAULT_CONFIG.getConfig());
+//        preview.setOnPreviewOutputUpdateListener(new Preview.OnPreviewOutputUpdateListener() {
+//            @Override
+//            public void onUpdated(Preview.PreviewOutput output) {
+//                ViewGroup parent = (ViewGroup) viewFinder.getParent();
+//                parent.removeView(viewFinder);
+//                parent.addView(viewFinder, 0);
+//
+//                viewFinder.setSurfaceTexture(output.getSurfaceTexture());
+//                updateTransform();
+//            }
+//        });
+//
+//        CameraX.bindToLifecycle(this, preview);
+//    }
 
 
     protected void addListener() {
@@ -314,6 +316,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
         });
     }
 
+    @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.iv_camera_back:
@@ -329,12 +332,14 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 ll_function.setVisibility(View.VISIBLE);
                 break;
             case R.id.iv_camera_confirm:
+                //
                 Intent intent = getIntent();
                 intent.putExtra("path", videoPath);
                 setResult(2, intent);
                 finish();
                 break;
             case R.id.btn_camera_switch:
+                //转换摄像头
                 mCameraView.switchCamera();
                 if (mCameraView.getCameraId() == 1) {
                     //前置摄像头 使用美颜
@@ -347,10 +352,11 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             case R.id.mCapture:
+                //进度条
 
                 break;
             case R.id.iv_beauty_switch:
-
+                //美颜
                 if (mCameraView.getCameraId() == 0) {
                     Toast.makeText(this, "后置摄像头 不使用美白磨皮功能", Toast.LENGTH_SHORT).show();
                     return;
@@ -377,6 +383,7 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
                 }
                 break;
             case R.id.iv_flash_switch:
+                //闪光灯
                 if (isOpenFlash) {
                     isOpenFlash = false;
                     mCameraView.openLightOn();
@@ -540,13 +547,10 @@ public class CameraActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     public static String getBaseFolder() {
-        String baseFolder = Environment.getExternalStorageDirectory() + "/cjcz/";
+        String baseFolder = Environment.getExternalStorageDirectory() + "/sslive/";
         File f = new File(baseFolder);
         if (!f.exists()) {
-            boolean b = f.mkdirs();
-            if (!b) {
-                baseFolder = ContextInstance.getInstance().getExternalFilesDir(null).getAbsolutePath() + "/";
-            }
+            f.mkdirs();
         }
         return baseFolder;
     }

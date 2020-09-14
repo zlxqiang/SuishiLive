@@ -4,16 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--1-->
     <com.suishi.camera.CameraView
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
 
+    <!--2-->
     <FrameLayout
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="match_parent">
-
 
         <com.suishi.live.app.widgets.SystemVideoView
             android:id="@+id/video"
@@ -30,6 +32,7 @@
             android:visibility="invisible" />
     </FrameLayout>
 
+    <!--3-->
     <RelativeLayout
         android:id="@+id/rl_camera_before"
         android:layout_width="match_parent"
@@ -37,25 +40,25 @@
 
         <LinearLayout
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/dimen_20"
             android:layout_marginTop="@dimen/dimen_80"
             android:layout_marginRight="@dimen/dimen_20"
-            android:orientation="vertical"
-            android:layout_height="wrap_content">
+            android:orientation="vertical">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/color_ffffff"
                 android:layout_gravity="center_horizontal"
-                android:textSize="15sp"
-                android:text="ss" />
+                android:text="ss"
+                android:textColor="@color/color_ffffff"
+                android:textSize="15sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="ss"
                 android:layout_marginTop="@dimen/dimen_10"
+                android:text="ss"
                 android:textColor="@color/color_ffffff"
                 android:textSize="@dimen/dimen_14" />
 
@@ -118,6 +121,7 @@
 
     </RelativeLayout>
 
+    <!--4-->
     <LinearLayout
         android:id="@+id/ll_function"
         android:layout_width="wrap_content"
@@ -127,6 +131,7 @@
         android:layout_marginRight="20dp"
         android:orientation="vertical">
 
+        <!--闪光灯-->
         <CheckBox
             android:id="@+id/iv_flash_switch"
             android:layout_width="wrap_content"
@@ -135,6 +140,7 @@
             android:checked="false"
             android:clickable="true" />
 
+        <!--美颜-->
         <CheckBox
             android:id="@+id/iv_beauty_switch"
             android:layout_width="wrap_content"
@@ -145,6 +151,7 @@
             android:clickable="true" />
     </LinearLayout>
 
+    <!--5-->
     <RelativeLayout
         android:id="@+id/rl_camera_later"
         android:layout_width="match_parent"

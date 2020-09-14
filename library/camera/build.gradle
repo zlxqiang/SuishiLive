@@ -27,9 +27,6 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.appcompat:appcompat:1.1.0'
-    //   androidTestImplementation 'com.android.support.test:runner:0.5'
-//    androidTestImplementation 'com.android.support.test.espresso:espresso-core:2.2.2'
-    implementation project(':resource')
- //   implementation project(':http')
+    api 'com.jlong.ui:resource:1.0.8'
     implementation project(':magicfilter')
 }

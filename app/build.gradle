@@ -1,4 +1,8 @@
 apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
 apply from: '../constants.gradle'
 
 android {
@@ -52,10 +56,17 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             jniDebuggable true
             signingConfig signingConfigs.release
+            manifestPlaceholders = [
+                    app_label: "@string/app_name"
+            ]
         }
         debug {
             jniDebuggable true
             signingConfig signingConfigs.debug
+            applicationIdSuffix '.test'
+            manifestPlaceholders = [
+                    app_label: "@string/app_name_debug"
+            ]
         }
     }
     externalNativeBuild {
@@ -67,12 +78,88 @@ android {
         sourceCompatibility = '1.8'
         targetCompatibility = '1.8'
     }
+
+    kotlinOptions {
+        // work-runtime-ktx 2.1.0 and above now requires Java 8
+        jvmTarget = "1.8"
+
+        // Enable Coroutines and Flow APIs
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+        freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
+    }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation project(':sslive')
     implementation project(':camera')
+    implementation 'com.yanzhenjie:permission:2.0.3'
+
+    def camerax_version = "1.0.0-beta08"
+    // The following line is optional, as the core library is included indirectly by camera-camera2
+    implementation "androidx.camera:camera-core:${camerax_version}"
+    implementation "androidx.camera:camera-camera2:${camerax_version}"
+    // If you want to additionally use the CameraX Lifecycle library
+    implementation "androidx.camera:camera-lifecycle:${camerax_version}"
+    // If you want to additionally use the CameraX View class
+    implementation "androidx.camera:camera-view:1.0.0-alpha15"
+    // If you want to additionally use the CameraX Extensions library
+    implementation "androidx.camera:camera-extensions:1.0.0-alpha15"
+
+
+    api 'com.jlong.ui:resource:1.0.8'
+
+    //# required, enough for most devices.
+    api 'tv.danmaku.ijk.media:ijkplayer-java:0.8.8'
+    api 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.8.8'
+    //# Other ABIs: optional
+    api 'tv.danmaku.ijk.media:ijkplayer-armv5:0.8.8'
+    // compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.8.8'
+    api 'tv.danmaku.ijk.media:ijkplayer-x86:0.8.8'
+    //  compile 'tv.danmaku.ijk.media:ijkplayer-x86_64:0.8.8'
+    // # ExoPlayer as IMediaPlayer: optional, experimental
+    api 'tv.danmaku.ijk.media:ijkplayer-exo:0.8.8'
+    api 'com.parse:parse-android:1.13.1'
+
+
+    kapt "androidx.room:room-compiler:$rootProject.roomVersion"
+    kapt "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    implementation "androidx.appcompat:appcompat:$rootProject.appCompatVersion"
+    implementation "androidx.constraintlayout:constraintlayout:$rootProject.constraintLayoutVersion"
+    implementation "androidx.core:core-ktx:$rootProject.ktxVersion"
+    implementation "androidx.fragment:fragment-ktx:$rootProject.fragmentVersion"
+    implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
+    implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
+    implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"
+    implementation "androidx.recyclerview:recyclerview:$rootProject.recyclerViewVersion"
+    implementation "androidx.room:room-runtime:$rootProject.roomVersion"
+    implementation "androidx.room:room-ktx:$rootProject.roomVersion"
+    implementation "androidx.viewpager2:viewpager2:$rootProject.viewPagerVersion"
+    implementation "androidx.work:work-runtime-ktx:$rootProject.workVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    implementation "com.google.android.material:material:$rootProject.materialVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpLoggingVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$rootProject.coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$rootProject.coroutinesVersion"
+
+    // Testing dependencies
+    androidTestImplementation "androidx.arch.core:core-testing:$rootProject.coreTestingVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:$rootProject.espressoVersion"
+    androidTestImplementation "androidx.test.ext:junit:$rootProject.testExtJunit"
+    androidTestImplementation "androidx.test.uiautomator:uiautomator:$rootProject.uiAutomatorVersion"
+    androidTestImplementation "androidx.work:work-testing:$rootProject.workVersion"
+    androidTestImplementation "com.google.truth:truth:$rootProject.truthVersion"
+    testImplementation "junit:junit:$rootProject.junitVersion"
+
 }
 
 repositories {
