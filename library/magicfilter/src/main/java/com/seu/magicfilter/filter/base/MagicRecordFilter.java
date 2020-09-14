@@ -150,6 +150,7 @@ public class MagicRecordFilter extends GPUImageFilter {
 
         GLES30.glUnmapBuffer(GLES30.GL_PIXEL_PACK_BUFFER);
         unbindPixelBuffer();
+        //这样获取渲染后的元数据性能太差了
         byte[] data = new byte[mRowStride * mInputHeight];
         byteBuffer.get(data);
         byteBuffer.clear();

@@ -1,5 +1,4 @@
 include ':app'
-include ':resource'
 
 
 def modulePrefix = ':'

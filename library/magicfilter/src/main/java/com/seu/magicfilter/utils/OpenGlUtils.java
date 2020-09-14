@@ -8,7 +8,6 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.util.Log;
 
-import com.suishi.utils.ContextInstance;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 
 import java.io.BufferedReader;
@@ -150,7 +149,7 @@ public class OpenGlUtils {
 
     private static Bitmap getImageFromAssetsFile(String fileName) {
         Bitmap image = null;
-        AssetManager am = ContextInstance.getInstance().getResources().getAssets();
+        AssetManager am = MagicParams.context.getResources().getAssets();
         try {
             InputStream is = am.open(fileName);
             image = BitmapFactory.decodeStream(is);
@@ -220,7 +219,7 @@ public class OpenGlUtils {
     }
 
     public static String readShaderFromRawResource(final int resourceId) {
-        final InputStream inputStream = ContextInstance.getInstance().getResources().openRawResource(
+        final InputStream inputStream = MagicParams.context.getResources().openRawResource(
                 resourceId);
         final InputStreamReader inputStreamReader = new InputStreamReader(
                 inputStream);

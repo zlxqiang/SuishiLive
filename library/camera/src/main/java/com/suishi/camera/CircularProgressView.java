@@ -128,7 +128,7 @@ public class CircularProgressView extends ImageView implements View.OnClickListe
 
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-/**        switch (event.getAction()) {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 if (down) {
                     downTime = System.currentTimeMillis();
@@ -164,7 +164,6 @@ public class CircularProgressView extends ImageView implements View.OnClickListe
                 }
                 break;
         }
- */
         return super.onTouchEvent(event);
     }
 

@@ -7,8 +7,8 @@ import android.widget.Scroller;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.seu.magicfilter.filter.helper.MagicFilterFactory;
 import com.seu.magicfilter.filter.helper.MagicFilterType;
+import com.seu.magicfilter.utils.MagicParams;
 import com.suishi.camera.camera.utils.EasyGlUtils;
-import com.suishi.utils.ContextInstance;
 import com.suishi.utils.DensityUtils;
 
 
@@ -43,7 +43,7 @@ public class SlideGpuFilterGroup {
 
     public SlideGpuFilterGroup() {
         initFilter();
-        scroller = new Scroller(ContextInstance.getInstance());
+        scroller = new Scroller(MagicParams.context);
     }
 
     private void initFilter() {

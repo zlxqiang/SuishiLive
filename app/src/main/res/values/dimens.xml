@@ -5,4 +5,10 @@
     <dimen name="option_button_circle_size">48dp</dimen>
     <dimen name="nice_option_width">48dp</dimen>
     <dimen name="nice_option_height">48dp</dimen>
+
+    <dimen name="dimen_5">5dp</dimen>
+    <dimen name="dimen_10">10dp</dimen>
+    <dimen name="dimen_14">14dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_80">80dp</dimen>
 </resources>

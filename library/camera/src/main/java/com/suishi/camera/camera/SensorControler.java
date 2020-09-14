@@ -8,7 +8,8 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.suishi.utils.ContextInstance;
+
+import com.seu.magicfilter.utils.MagicParams;
 
 import java.util.Calendar;
 
@@ -43,7 +44,7 @@ public class SensorControler implements SensorEventListener {
     private int foucsing = 1;
 
     private SensorControler() {
-        mSensorManager = (SensorManager) ContextInstance.getInstance().getSystemService(AppCompatActivity.SENSOR_SERVICE);
+        mSensorManager = (SensorManager) MagicParams.context.getSystemService(AppCompatActivity.SENSOR_SERVICE);
         mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);// TYPE_GRAVITY
     }
 

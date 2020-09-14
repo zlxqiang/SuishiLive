@@ -1,35 +1,77 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.3.31'
-    ext.butterknife_version = '10.0.0'
+    ext {
+        // Sdk and tools
+        compileSdkVersion = 30
+        minSdkVersion = 21
+        targetSdkVersion = 30
+
+        // App dependencies
+        appCompatVersion = '1.1.0'
+        constraintLayoutVersion = '2.0.0-beta3'
+        coreTestingVersion = '2.0.0'
+        coroutinesVersion = "1.3.0-M2"
+        espressoVersion = '3.1.1'
+        fragmentVersion = '1.1.0-alpha09'
+        glideVersion = '4.10.0'
+        gradleVersion = '4.0.1'
+        gsonVersion = '2.8.2'
+        junitVersion = '4.12'
+        kotlinVersion = '1.4.0'
+        ktlintVersion = '0.38.1'
+        ktxVersion = '1.0.2'
+        lifecycleVersion = '2.2.0'
+        materialVersion = '1.2.0'
+        navigationVersion = '2.2.0'
+        okhttpLoggingVersion = '4.7.2'
+        pagingVersion = '3.0.0-alpha02'
+        recyclerViewVersion = '1.2.0-alpha04'
+        retrofitVersion = '2.9.0'
+        roomVersion = '2.1.0'
+        runnerVersion = '1.0.1'
+        truthVersion = '0.42'
+        testExtJunit = '1.1.0'
+        uiAutomatorVersion = '2.2.0'
+        viewPagerVersion = '1.0.0'
+        workVersion = '2.1.0'
+    }
 
     repositories {
-        mavenCentral()
-        jcenter()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+
+        maven { url 'https://dl.bintray.com/umsdk/release' }
         google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven{
+            url 'https://dl.bintray.com/zlxq/jlong'
+        }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.4.2'
-        //butterknife
-        //classpath "com.jakewharton:butterknife-gradle-plugin:$butterknife_version"
-        //kotline
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        //bintray
-        classpath 'com.github.dcendents:android-maven-gradle-plugin:2.0'
-        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.8.4'
+        classpath "com.android.tools.build:gradle:${gradleVersion}"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$navigationVersion"
 
     }
 }
 
 allprojects {
     repositories {
-        jcenter()
+        maven {
+            url 'http://maven.aliyun.com/nexus/content/groups/public/'
+        }
+
+        maven { url 'https://dl.bintray.com/umsdk/release' }
         google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+        maven{
+            url 'https://dl.bintray.com/zlxq/jlong'
+        }
     }
 }
 
-task clean(type: Delete) {
-    delete rootProject.buildDir
-}
 
