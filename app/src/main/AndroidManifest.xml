@@ -59,6 +59,15 @@
             android:name=".ui.activity.CameraActivity"
             android:configChanges="keyboardHidden|orientation"
             android:screenOrientation="portrait" />
+
+        <provider
+            android:authorities="${applicationId}.provider"
+            android:name="androidx.core.content.FileProvider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
     </application>
 
 </manifest>

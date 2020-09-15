@@ -17,12 +17,6 @@
         android:visibility="gone"
         android:layout_height="match_parent">
 
-        <com.suishi.live.app.widgets.SystemVideoView
-            android:id="@+id/video"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_centerInParent="true" />
-
         <ImageView
             android:id="@+id/image_photo"
             android:layout_width="match_parent"

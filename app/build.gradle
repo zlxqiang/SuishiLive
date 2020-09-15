@@ -87,6 +87,10 @@ android {
         freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
         freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
     }
+
+    packagingOptions {
+        exclude 'lib/armeabi-v7a/libyuv.so'
+    }
 }
 
 dependencies {

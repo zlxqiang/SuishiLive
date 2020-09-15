@@ -3,26 +3,27 @@
 
 #include "VideoMachining.h"
 
+
 int VideoMachining::MirrorI420(int in_width, int in_height,
                                const uint8_t *srcData, uint8_t *dstData) {
-    return I420Mirror(srcData, in_width,
-                      srcData + (in_width * in_height), in_width / 2,
-                      srcData + (in_width * in_height * 5 / 4), in_width / 2,
-                      dstData, in_width,
-                      dstData + (in_width * in_height), in_width / 2,
-                      dstData + (in_width * in_height * 5 / 4), in_width / 2,
-                      in_width, in_height);
+//    return I420Mirror(srcData, in_width,
+//                      srcData + (in_width * in_height), in_width / 2,
+//                      srcData + (in_width * in_height * 5 / 4), in_width / 2,
+//                      dstData, in_width,
+//                      dstData + (in_width * in_height), in_width / 2,
+//                      dstData + (in_width * in_height * 5 / 4), in_width / 2,
+//                      in_width, in_height);
 }
 
 int VideoMachining::NV21TOI420(int in_width, int in_height,
                                const uint8_t *srcNV21Data, uint8_t *dstI420Data) {
 
-    return NV21ToI420((const uint8_t *) srcNV21Data, in_width,
-                      (uint8_t *) srcNV21Data + (in_width * in_height), in_width,
-                      dstI420Data, in_width,
-                      dstI420Data + (in_width * in_height), in_width / 2,
-                      dstI420Data + (in_width * in_height * 5 / 4), in_width / 2,
-                      in_width, in_height);
+//    return NV21ToI420((const uint8_t *) srcNV21Data, in_width,
+//                      (uint8_t *) srcNV21Data + (in_width * in_height), in_width,
+//                      dstI420Data, in_width,
+//                      dstI420Data + (in_width * in_height), in_width / 2,
+//                      dstI420Data + (in_width * in_height * 5 / 4), in_width / 2,
+//                      in_width, in_height);
 }
 
 int VideoMachining::RotateI420(int in_width, int in_height,
@@ -41,14 +42,14 @@ int VideoMachining::RotateI420(int in_width, int in_height,
             rotationMode = kRotate270;
             break;
     }
-    return I420Rotate(srcData, in_width,
-                      srcData + (in_width * in_height), in_width / 2,
-                      srcData + (in_width * in_height * 5 / 4), in_width / 2,
-                      dstData, in_height,
-                      dstData + (in_width * in_height), in_height / 2,
-                      dstData + (in_width * in_height * 5 / 4), in_height / 2,
-                      in_width, in_height,
-                      rotationMode);
+//    return I420Rotate(srcData, in_width,
+//                      srcData + (in_width * in_height), in_width / 2,
+//                      srcData + (in_width * in_height * 5 / 4), in_width / 2,
+//                      dstData, in_height,
+//                      dstData + (in_width * in_height), in_height / 2,
+//                      dstData + (in_width * in_height * 5 / 4), in_height / 2,
+//                      in_width, in_height,
+//                      rotationMode);
 }
 
 /**
@@ -70,16 +71,16 @@ int VideoMachining::BGRA2I420(const uint8 *src_argb, int src_stride_argb,
                               uint8 *dst_u, int dst_stride_u,
                               uint8 *dst_v, int dst_stride_v,
                               int width, int height) {
-    return ABGRToI420(src_argb,
-                      src_stride_argb,
-                      dst_y,
-                      dst_stride_y,
-                      dst_u,
-                      dst_stride_u,
-                      dst_v,
-                      dst_stride_v,
-                      width,
-                      height);
+//    return ABGRToI420(src_argb,
+//                      src_stride_argb,
+//                      dst_y,
+//                      dst_stride_y,
+//                      dst_u,
+//                      dst_stride_u,
+//                      dst_v,
+//                      dst_stride_v,
+//                      width,
+//                      height);
 
 }
 
@@ -89,14 +90,14 @@ int VideoMachining::RGBA2I420(const uint8* src_frame, int src_stride_frame,
                               uint8* dst_u, int dst_stride_u,
                               uint8* dst_v, int dst_stride_v,
                               int width, int height) {
-    return RGBAToI420(src_frame,
-                      src_stride_frame,
-                      dst_y,
-                      dst_stride_y,
-                      dst_u,
-                      dst_stride_u,
-                      dst_v,
-                      dst_stride_v,
-                      width,
-                      height);
+//    return RGBAToI420(src_frame,
+//                      src_stride_frame,
+//                      dst_y,
+//                      dst_stride_y,
+//                      dst_u,
+//                      dst_stride_u,
+//                      dst_v,
+//                      dst_stride_v,
+//                      width,
+//                      height);
 }

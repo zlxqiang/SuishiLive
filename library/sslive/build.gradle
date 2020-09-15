@@ -11,17 +11,10 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
         ndk {
             ldLibs "log"
-        }
-        externalNativeBuild {
-            cmake {
-                cppFlags "-std=c++11 -frtti -fno-exceptions"
-               abiFilters 'armeabi-v7a'
-              //  cppFlags "-frtti -fexceptions -D__STDC_FORMAT_MACROS -std=c++11"
-//                arguments '-DANDROID_PLATFORM=android-19',
-//                        '-DANDROID_TOOLCHAIN=clang', '-DANDROID_STL=stlport_static'
-            }
+            abiFilters 'armeabi-v7a'
         }
     }
     buildTypes {

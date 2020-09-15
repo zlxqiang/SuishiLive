@@ -30,12 +30,12 @@ set_target_properties(avcodec
 add_library(ffmpeg SHARED IMPORTED)
 set_target_properties(ffmpeg
                       PROPERTIES
-                      IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLibs/armeabi-v7a/libffmpeg.so)
+                      IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLib/${ANDROID_ABI}/libffmpeg.so)
 
 add_library(libyuv SHARED IMPORTED)
 set_target_properties(libyuv
                       PROPERTIES
-                      IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLibs/${ANDROID_ABI}/libyuv.so)
+                      IMPORTED_LOCATION ${CMAKE_SOURCE_DIR}/src/main/jniLib/${ANDROID_ABI}/libyuv.so)
 
 #自定义库
 file(GLOB native_src "src/main/cpp/av/*.cpp")

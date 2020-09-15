@@ -15,6 +15,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 
@@ -23,7 +24,7 @@ import com.scwang.smartrefresh.layout.util.DensityUtil;
  * Description:
  */
 @SuppressLint("AppCompatCustomView")
-public class CircularProgressView extends ImageView implements View.OnClickListener {
+public class CircularProgressView extends ImageButton implements View.OnClickListener {
 
     private int mStroke = 8;
     private int mProcess = 0;
@@ -127,45 +128,51 @@ public class CircularProgressView extends ImageView implements View.OnClickListe
     private boolean longClick = false;
 
     @Override
-    public boolean onTouchEvent(MotionEvent event) {
-        switch (event.getAction()) {
-            case MotionEvent.ACTION_DOWN:
-                if (down) {
-                    downTime = System.currentTimeMillis();
-                    down = false;
-                    click = true;
-                }
-
-                break;
-            case MotionEvent.ACTION_MOVE:
-                thisTime = System.currentTimeMillis();
-                if (thisTime - downTime >= 500) {
-                    if (isStop) return super.onTouchEvent(event);
-                    longClick = true;
-                    click = false;
-                    if (listener != null) {
-                        listener.onLongClick();
-                        mHandler.postDelayed(r, 0);//延时100毫秒
-                    }
-                } else {
-                    click = true;
-
-                }
-                break;
-            case MotionEvent.ACTION_UP:
-                down = true;
-                mHandler.removeCallbacks(r);
-                if (listener != null) {
-                    if (click) {
-                        listener.onClick();
-                    } else {
-                        listener.onLongClickUp();
-                    }
-                }
-                break;
-        }
-        return super.onTouchEvent(event);
+    public boolean performClick() {
+        return super.performClick();
     }
+
+//    @Override
+//    public boolean onTouchEvent(MotionEvent event) {
+//        switch (event.getAction()) {
+//            case MotionEvent.ACTION_DOWN:
+//                if (down) {
+//                    downTime = System.currentTimeMillis();
+//                    down = false;
+//                    click = true;
+//                    mHandler.postDelayed(r, 0);//延时100毫秒
+//                }
+//
+//                break;
+//            case MotionEvent.ACTION_MOVE:
+//                thisTime = System.currentTimeMillis();
+//                if (thisTime - downTime >= 500) {
+//                    if (isStop) return super.onTouchEvent(event);
+//                    longClick = true;
+//                    click = false;
+//                    if (listener != null) {
+//                        listener.onLongClick();
+//                        mHandler.postDelayed(r, 0);//延时100毫秒
+//                    }
+//                } else {
+//                    click = true;
+//
+//                }
+//                break;
+//            case MotionEvent.ACTION_CANCEL:
+//                down = true;
+//                mHandler.removeCallbacks(r);
+//                if (listener != null) {
+//                    if (click) {
+//                        listener.onClick();
+//                    } else {
+//                        listener.onLongClickUp();
+//                    }
+//                }
+//                break;
+//        }
+//        return super.onTouchEvent(event);
+//    }
 
     private boolean isStop;
 
@@ -196,8 +203,11 @@ public class CircularProgressView extends ImageView implements View.OnClickListe
         if(down) {
             down = false;
             downTime = System.currentTimeMillis();
-            listener.onLongClick();
+        //    listener.onLongClick();
             mHandler.postDelayed(r, 0);//延时100毫秒
+        }else{
+            down = true;
+            mHandler.removeCallbacks(r);
         }
     }
 

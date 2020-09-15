@@ -12,11 +12,11 @@
         android:layout_height="match_parent"
         android:background="#0099cc">
 
-        <com.suishi.live.app.widgets.media.IjkVideoView
-            android:id="@+id/video_view"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"/>
+<!--        <com.suishi.live.app.widgets.media.IjkVideoView-->
+<!--            android:id="@+id/video_view"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:layout_gravity="center"/>-->
 
         <TextView
             android:id="@+id/toast_text_view"
@@ -36,15 +36,15 @@
             android:background="@color/ijk_transparent_dark"
             android:padding="8dp" />
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/ijk_transparent_dark"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
-            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-            tools:context=".toolbar_widget" />
+<!--        <android.support.v7.widget.Toolbar-->
+<!--            android:id="@+id/toolbar"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:background="@color/ijk_transparent_dark"-->
+<!--            android:minHeight="?attr/actionBarSize"-->
+<!--            android:theme="@style/ThemeOverlay.AppCompat.ActionBar"-->
+<!--            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"-->
+<!--            tools:context=".toolbar_widget" />-->
     </FrameLayout>
 
     <!-- The navigation drawer -->

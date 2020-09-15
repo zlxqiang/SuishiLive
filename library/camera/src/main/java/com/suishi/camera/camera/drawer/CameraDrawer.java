@@ -31,7 +31,6 @@ import javax.microedition.khronos.opengles.GL10;
  * desc 管理图像绘制的类
  * 主要用于管理各种滤镜、画面旋转、视频编码录制等
  */
-
 public class CameraDrawer implements GLSurfaceView.Renderer {
 
     private float[] OM;
