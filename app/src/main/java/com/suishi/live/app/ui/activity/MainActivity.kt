@@ -1,6 +1,5 @@
 package com.suishi.live.app.ui.activity
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -10,6 +9,7 @@ import android.widget.BaseAdapter
 import android.widget.GridView
 import android.widget.RelativeLayout
 import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import com.suishi.live.app.R
 import com.yanzhenjie.permission.AndPermission
 import com.yanzhenjie.permission.runtime.Permission
@@ -17,7 +17,7 @@ import com.yanzhenjie.permission.runtime.Permission
 /**
  *
  */
-class MainActivity : Activity() {
+class MainActivity : AppCompatActivity() {
 
     companion object{
         fun startActivity(context: Context){
@@ -77,46 +77,28 @@ class MainActivity : Activity() {
             var string1 = ""
             var string2 = ""
             if (position == 0) {
-                string1 = "Portrait"
+                string1 = "视频播放"
                 string2 = "Flv + Local"
             } else if (position == 1) {
-                string1 = "Landscape"
+                string1 = "推流"
                 string2 = "Rtmp"
             } else if (position == 2) {
                 string1 = "录制"
                 string2 = "Part"
-            } else if (position == 3) {
-                string1 = "Portrait"
-                string2 = "Screen + Rtmp"
             }
             textView1.text = string1
             textView2.text = string2
             v.setOnClickListener {
                 if (position == 0) {
-                    goPortraitAndLocal()
+                    VideoActivity.startActivity(this@MainActivity)
                 } else if (position == 1) {
-                    goPart()
+                    PortraitActivity.startActivity(this@MainActivity)
                 } else if (position == 2) {
-                    camera()
-                } else if (position == 3) {
+                   CameraActivity.startActivity(this@MainActivity)
+                   // GLSurfaceCamera2Activity.startActivity(this@MainActivity)
                 }
             }
             return v
         }
-    }
-
-    private fun goPortraitAndLocal() {
-        val intent = Intent(this, VideoActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun goPart() {
-        val intent = Intent(this, PortraitActivity::class.java)
-        startActivity(intent)
-    }
-
-    private fun camera() {
-        val intent = Intent(this, CameraActivity::class.java)
-        startActivity(intent)
     }
 }

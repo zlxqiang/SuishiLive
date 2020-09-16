@@ -1,312 +1,363 @@
 package com.suishi.camera.camera.drawer;
 
-import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.BitmapFactory;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
-import android.view.MotionEvent;
-
 
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
-import com.suishi.camera.R;
-import com.suishi.camera.camera.filter.AFilter;
-import com.suishi.camera.camera.filter.GroupFilter;
-import com.suishi.camera.camera.filter.NoFilter;
-import com.suishi.camera.camera.filter.ProcessFilter;
-import com.suishi.camera.camera.filter.RotationOESFilter;
-import com.suishi.camera.camera.filter.WaterMarkFilter;
-import com.suishi.camera.camera.gpufilter.SlideGpuFilterGroup;
-import com.suishi.camera.camera.gpufilter.filter.MagicBeautyFilter;
-import com.suishi.camera.camera.media.VideoInfo;
-import com.suishi.camera.camera.utils.EasyGlUtils;
-import com.suishi.camera.camera.utils.MatrixUtils;
+
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.FloatBuffer;
+import java.nio.IntBuffer;
+import java.util.LinkedList;
+import java.util.Queue;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
+
+import jp.co.cyberagent.android.gpuimage.GLTextureView;
+import jp.co.cyberagent.android.gpuimage.GPUImage;
+import jp.co.cyberagent.android.gpuimage.GPUImageNativeLibrary;
+import jp.co.cyberagent.android.gpuimage.util.OpenGlUtils;
+import jp.co.cyberagent.android.gpuimage.util.Rotation;
+import jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil;
+
+import static jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil.TEXTURE_NO_ROTATION;
 
 /**
  * Created by cj on 2017/10/16.
  * desc：添加水印和美白效果
  */
 
-public class VideoDrawer implements GLSurfaceView.Renderer {
-    /**
-     * 用于后台绘制的变换矩阵
-     */
-    private float[] OM;
-    /**
-     * 用于显示的变换矩阵
-     */
-    private float[] SM = new float[16];
-    private SurfaceTexture surfaceTexture;
-    /**
-     * 可选择画面的滤镜
-     */
-    private RotationOESFilter mPreFilter;
-    /**
-     * 显示的滤镜
-     */
-    private AFilter mShow;
-    /**
-     * 美白的filter
-     */
-    private MagicBeautyFilter mBeautyFilter;
-    private AFilter mProcessFilter;
-    /**
-     * 绘制水印的滤镜
-     */
-    private final GroupFilter mBeFilter;
-    /**
-     * 多种滤镜切换
-     */
-    private SlideGpuFilterGroup mSlideFilterGroup;
+public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Renderer{
+    private static final int NO_IMAGE = -1;
 
-    /**
-     * 绘制其他样式的滤镜
-     */
-    private GPUImageFilter mGroupFilter;
-    /**
-     * 控件的长宽
-     */
-    private int viewWidth;
-    private int viewHeight;
-    /**
-     * 视频的长宽
-     */
-    private int videoWidth;
-    private int videoHeight;
-    /**
-     * 第一个视频的宽高
-     */
-    private int firstVideoRealWidth=-1;
-     private int firstVideoRealHeight=-1;
+    public static final float CUBE[] = {
+            -1.0f, -1.0f,
+            1.0f, -1.0f,
+            -1.0f, 1.0f,
+            1.0f, 1.0f,
+    };
 
-    /**
-     * 投影的位置和大小
-     * */
-    private int x;
-    private int y;
-    private int width;
-    private int height;
+    private GPUImageFilter filter;
 
-    /**
-     * 创建离屏buffer
-     */
-    private int[] fFrame = new int[1];
-    private int[] fTexture = new int[1];
-    /**
-     * 用于视频旋转的参数
-     */
-    private int rotation;
-    /**
-     * 是否开启美颜
-     */
-    private boolean isBeauty = false;
+    public final Object surfaceChangedWaiter = new Object();
 
+    private int glTextureId = NO_IMAGE;
+    private SurfaceTexture surfaceTexture = null;
+    private final FloatBuffer glCubeBuffer;
+    private final FloatBuffer glTextureBuffer;
+    private IntBuffer glRgbBuffer;
 
-    public VideoDrawer(Context context, Resources res) {
-        mPreFilter = new RotationOESFilter(res);//旋转相机操作
-        mShow = new NoFilter(res);
-        mBeFilter = new GroupFilter(res);
-        mBeautyFilter = new MagicBeautyFilter();
+    private int outputWidth;
+    private int outputHeight;
+    private int imageWidth;
+    private int imageHeight;
+    private int addedPadding;
 
-        mProcessFilter = new ProcessFilter(res);
+    private final Queue<Runnable> runOnDraw;
+    private final Queue<Runnable> runOnDrawEnd;
+    private Rotation rotation;
+    private boolean flipHorizontal;
+    private boolean flipVertical;
+    private GPUImage.ScaleType scaleType = GPUImage.ScaleType.CENTER_CROP;
 
-        mSlideFilterGroup = new SlideGpuFilterGroup();
-        OM = MatrixUtils.getOriginalMatrix();
-        MatrixUtils.flip(OM, false, true);//矩阵上下翻转
-//        mShow.setMatrix(OM);
+    private float backgroundRed = 0;
+    private float backgroundGreen = 0;
+    private float backgroundBlue = 0;
 
-        //水印
-        WaterMarkFilter waterMarkFilter = new WaterMarkFilter(res);
-        waterMarkFilter.setWaterMark(BitmapFactory.decodeResource(res, R.mipmap.watermark));
-        waterMarkFilter.setPosition(0, 70, 0, 0);
-        mBeFilter.addFilter(waterMarkFilter);
+  //  private CameraDrawer mDrawer;
 
+    public VideoDrawer(final GPUImageFilter filter) {
+        this.filter = filter;
+        runOnDraw = new LinkedList<>();
+        runOnDrawEnd = new LinkedList<>();
+
+        glCubeBuffer = ByteBuffer.allocateDirect(CUBE.length * 4)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+        glCubeBuffer.put(CUBE).position(0);
+
+        glTextureBuffer = ByteBuffer.allocateDirect(TEXTURE_NO_ROTATION.length * 4)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+        setRotation(Rotation.NORMAL, false, false);
     }
 
     @Override
-    public void onSurfaceCreated(GL10 gl, EGLConfig config) {
-        int texture[] = new int[1];
-        GLES20.glGenTextures(1, texture, 0);
-        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, texture[0]);
-        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
-        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES,
-                GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
-        surfaceTexture = new SurfaceTexture(texture[0]);
-        mPreFilter.create();
-        mPreFilter.setTextureId(texture[0]);
-
-        mBeFilter.create();
-        mProcessFilter.create();
-        mShow.create();
-        mBeautyFilter.init();
-        mBeautyFilter.setBeautyLevel(3);//默认设置3级的美颜
-        mSlideFilterGroup.init();
+    public void onSurfaceCreated(final GL10 unused, final EGLConfig config) {
+        GLES20.glClearColor(backgroundRed, backgroundGreen, backgroundBlue, 1);
+        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+        filter.ifNeedInit();
     }
 
-    public void onVideoChanged(VideoInfo info) {
-        setRotation(info.rotation);
-        if (info.rotation == 0 || info.rotation == 180) {
-            this.videoWidth = info.width;
-            this.videoHeight = info.height;
-        } else {
-            this.videoWidth = videoHeight;
-            this.videoHeight = videoWidth;
-        }
-        adjustVideoPosition();
-    }
-
-    private void adjustVideoPosition() {
-        if (firstVideoRealWidth == -1 && firstVideoRealHeight == -1) {
-            float w = (float) viewWidth / videoWidth;
-            float h = (float) viewHeight / videoHeight;
-            if (w < h) {
-                width = viewWidth;
-                height = (int) ((float) videoHeight * w);
-            } else {
-                width = (int) ((float) videoWidth * h);
-                height = viewHeight;
-            }
-            x = (viewWidth - width) / 2;
-            y = (viewHeight - height) / 2;
-            firstVideoRealWidth = width;
-            firstVideoRealHeight = height;
-        } else {
-            float w = (float) firstVideoRealWidth / videoWidth;
-            float h = (float) firstVideoRealHeight / videoHeight;
-            if (w < h) {
-                width = firstVideoRealWidth;
-                height = (int) ((float) videoHeight * w);
-            } else {
-                width = (int) ((float) videoWidth * h);
-                height = firstVideoRealHeight;
-            }
-            x = (viewWidth - firstVideoRealWidth) / 2 + (firstVideoRealWidth - width) / 2;
-            y = (viewHeight - firstVideoRealHeight) / 2 + (firstVideoRealHeight - height) / 2;
-        }
-    }
-
-    @Override
-    public void onSurfaceChanged(GL10 gl, int width, int height) {
-        viewWidth = width;
-        viewHeight = height;
-        GLES20.glDeleteFramebuffers(1, fFrame, 0);
-        GLES20.glDeleteTextures(1, fTexture, 0);
-
-        GLES20.glGenFramebuffers(1, fFrame, 0);
-        EasyGlUtils.genTexturesWithParameter(1, fTexture, 0, GLES20.GL_RGBA, viewWidth, viewHeight);
-
-        mBeFilter.setSize(viewWidth, viewHeight);
-        mProcessFilter.setSize(viewWidth, viewHeight);
-        mBeautyFilter.onDisplaySizeChanged(viewWidth, viewHeight);
-        mBeautyFilter.onInputSizeChanged(viewWidth, viewHeight);
-        mSlideFilterGroup.onSizeChanged(viewWidth, viewHeight);
-    }
-
-    @Override
-    public void onDrawFrame(GL10 gl) {
-        surfaceTexture.updateTexImage();
-        EasyGlUtils.bindFrameTexture(fFrame[0], fTexture[0]);
-        GLES20.glViewport(0, 0, viewWidth, viewHeight);
-        mPreFilter.draw();
-        EasyGlUtils.unBindFrameBuffer();
-
-        mBeFilter.setTextureId(fTexture[0]);
-        mBeFilter.draw();
-
-        if (mBeautyFilter != null && isBeauty && mBeautyFilter.getBeautyLevel() != 0) {
-            EasyGlUtils.bindFrameTexture(fFrame[0], fTexture[0]);
-            GLES20.glViewport(0, 0, viewWidth, viewHeight);
-            mBeautyFilter.onDrawFrame(mBeFilter.getOutputTexture());
-            EasyGlUtils.unBindFrameBuffer();
-            mProcessFilter.setTextureId(fTexture[0]);
-        } else {
-            mProcessFilter.setTextureId(mBeFilter.getOutputTexture());
-        }
-        mProcessFilter.draw();
-
-        mSlideFilterGroup.onDrawFrame(mProcessFilter.getOutputTexture());
-        if (mGroupFilter != null) {
-            EasyGlUtils.bindFrameTexture(fFrame[0], fTexture[0]);
-            GLES20.glViewport(0, 0, viewWidth, viewHeight);
-            mGroupFilter.onDrawFrame(mSlideFilterGroup.getOutputTexture());
-            EasyGlUtils.unBindFrameBuffer();
-            mProcessFilter.setTextureId(fTexture[0]);
-        } else {
-            mProcessFilter.setTextureId(mSlideFilterGroup.getOutputTexture());
-        }
-        mProcessFilter.draw();
-        GLES20.glViewport(x, y, width, height);
-        mShow.setTextureId(mProcessFilter.getOutputTexture());
-        mShow.draw();
-    }
-
-    public SurfaceTexture getSurfaceTexture() {
+    public SurfaceTexture getSurfaceTexture(){
         return surfaceTexture;
     }
 
-    public void setRotation(int rotation) {
+    @Override
+    public void onSurfaceChanged(final GL10 gl, final int width, final int height) {
+        outputWidth = width;
+        outputHeight = height;
+        GLES20.glViewport(0, 0, width, height);
+        GLES20.glUseProgram(filter.getProgram());
+        filter.onOutputSizeChanged(width, height);
+        adjustImageScaling();
+        synchronized (surfaceChangedWaiter) {
+            surfaceChangedWaiter.notifyAll();
+        }
+    }
+
+    @Override
+    public void onDrawFrame(final GL10 gl) {
+        GLES20.glClearColor(0, 0, 0, 0);
+        GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
+        runAll(runOnDraw);
+        filter.onDrawFrame(glTextureId, glCubeBuffer, glTextureBuffer);
+        runAll(runOnDrawEnd);
+
+        if (surfaceTexture != null) {
+            surfaceTexture.updateTexImage();
+        }
+    }
+
+
+    public static int getExternalOESTextureID() {
+        int[] texture = new int[1];
+        GLES20.glGenTextures(1, texture, 0);
+        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, texture[0]);
+        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GL10.GL_TEXTURE_MIN_FILTER, GL10.GL_LINEAR);
+        GLES20.glTexParameterf(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GL10.GL_TEXTURE_MAG_FILTER, GL10.GL_LINEAR);
+        GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GL10.GL_TEXTURE_WRAP_S, GL10.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GL10.GL_TEXTURE_WRAP_T, GL10.GL_CLAMP_TO_EDGE);
+        return texture[0];
+    }
+
+    /**
+     * Sets the background color
+     *
+     * @param red   red color value
+     * @param green green color value
+     * @param blue  red color value
+     */
+    public void setBackgroundColor(float red, float green, float blue) {
+        backgroundRed = red;
+        backgroundGreen = green;
+        backgroundBlue = blue;
+    }
+
+    private void runAll(Queue<Runnable> queue) {
+        synchronized (queue) {
+            while (!queue.isEmpty()) {
+                queue.poll().run();
+            }
+        }
+    }
+
+//    @Override
+//    public void onPreviewFrame(final byte[] data, final Camera camera) {
+//        final Camera.Size previewSize = camera.getParameters().getPreviewSize();
+//        onPreviewFrame(data, previewSize.width, previewSize.height);
+//    }
+
+    public void createSurfaceTexture(SurfaceTexture.OnFrameAvailableListener framAvailable){
+        glTextureId=getExternalOESTextureID();
+        surfaceTexture = new SurfaceTexture(glTextureId);
+        surfaceTexture.setOnFrameAvailableListener(framAvailable);
+    }
+
+    public void onPreviewFrame(final byte[] data, final int width, final int height) {
+        if (glRgbBuffer == null) {
+            glRgbBuffer = IntBuffer.allocate(width * height);
+        }
+        if (runOnDraw.isEmpty()) {
+            runOnDraw(new Runnable() {
+                @Override
+                public void run() {
+                    GPUImageNativeLibrary.YUVtoRBGA(data, width, height, glRgbBuffer.array());
+                    glTextureId = OpenGlUtils.loadTexture(glRgbBuffer, width, height, glTextureId);
+
+                    if (imageWidth != width) {
+                        imageWidth = width;
+                        imageHeight = height;
+                        adjustImageScaling();
+                    }
+                }
+            });
+        }
+    }
+
+
+    public void setFilter(final GPUImageFilter filter) {
+        runOnDraw(new Runnable() {
+
+            @Override
+            public void run() {
+                final GPUImageFilter oldFilter = VideoDrawer.this.filter;
+                VideoDrawer.this.filter = filter;
+                if (oldFilter != null) {
+                    oldFilter.destroy();
+                }
+                VideoDrawer.this.filter.ifNeedInit();
+                GLES20.glUseProgram(VideoDrawer.this.filter.getProgram());
+                VideoDrawer.this.filter.onOutputSizeChanged(outputWidth, outputHeight);
+            }
+        });
+    }
+
+    public void deleteImage() {
+        runOnDraw(new Runnable() {
+
+            @Override
+            public void run() {
+                GLES20.glDeleteTextures(1, new int[]{
+                        glTextureId
+                }, 0);
+                glTextureId = NO_IMAGE;
+            }
+        });
+    }
+
+    public void setImageBitmap(final Bitmap bitmap) {
+        setImageBitmap(bitmap, true);
+    }
+
+    public void setImageBitmap(final Bitmap bitmap, final boolean recycle) {
+        if (bitmap == null) {
+            return;
+        }
+
+        runOnDraw(new Runnable() {
+
+            @Override
+            public void run() {
+                Bitmap resizedBitmap = null;
+                if (bitmap.getWidth() % 2 == 1) {
+                    resizedBitmap = Bitmap.createBitmap(bitmap.getWidth() + 1, bitmap.getHeight(),
+                            Bitmap.Config.ARGB_8888);
+                    Canvas can = new Canvas(resizedBitmap);
+                    can.drawARGB(0x00, 0x00, 0x00, 0x00);
+                    can.drawBitmap(bitmap, 0, 0, null);
+                    addedPadding = 1;
+                } else {
+                    addedPadding = 0;
+                }
+
+                glTextureId = OpenGlUtils.loadTexture(
+                        resizedBitmap != null ? resizedBitmap : bitmap, glTextureId, recycle);
+                if (resizedBitmap != null) {
+                    resizedBitmap.recycle();
+                }
+                imageWidth = bitmap.getWidth();
+                imageHeight = bitmap.getHeight();
+                adjustImageScaling();
+            }
+        });
+    }
+
+    public void setScaleType(GPUImage.ScaleType scaleType) {
+        this.scaleType = scaleType;
+    }
+
+    protected int getFrameWidth() {
+        return outputWidth;
+    }
+
+    protected int getFrameHeight() {
+        return outputHeight;
+    }
+
+    private void adjustImageScaling() {
+        float outputWidth = this.outputWidth;
+        float outputHeight = this.outputHeight;
+        if (rotation == Rotation.ROTATION_270 || rotation == Rotation.ROTATION_90) {
+            outputWidth = this.outputHeight;
+            outputHeight = this.outputWidth;
+        }
+
+        float ratio1 = outputWidth / imageWidth;
+        float ratio2 = outputHeight / imageHeight;
+        float ratioMax = Math.max(ratio1, ratio2);
+        int imageWidthNew = Math.round(imageWidth * ratioMax);
+        int imageHeightNew = Math.round(imageHeight * ratioMax);
+
+        float ratioWidth = imageWidthNew / outputWidth;
+        float ratioHeight = imageHeightNew / outputHeight;
+
+        float[] cube = CUBE;
+        float[] textureCords = TextureRotationUtil.getRotation(rotation, flipHorizontal, flipVertical);
+        if (scaleType == GPUImage.ScaleType.CENTER_CROP) {
+            float distHorizontal = (1 - 1 / ratioWidth) / 2;
+            float distVertical = (1 - 1 / ratioHeight) / 2;
+            textureCords = new float[]{
+                    addDistance(textureCords[0], distHorizontal), addDistance(textureCords[1], distVertical),
+                    addDistance(textureCords[2], distHorizontal), addDistance(textureCords[3], distVertical),
+                    addDistance(textureCords[4], distHorizontal), addDistance(textureCords[5], distVertical),
+                    addDistance(textureCords[6], distHorizontal), addDistance(textureCords[7], distVertical),
+            };
+        } else {
+            cube = new float[]{
+                    CUBE[0] / ratioHeight, CUBE[1] / ratioWidth,
+                    CUBE[2] / ratioHeight, CUBE[3] / ratioWidth,
+                    CUBE[4] / ratioHeight, CUBE[5] / ratioWidth,
+                    CUBE[6] / ratioHeight, CUBE[7] / ratioWidth,
+            };
+        }
+
+        glCubeBuffer.clear();
+        glCubeBuffer.put(cube).position(0);
+        glTextureBuffer.clear();
+        glTextureBuffer.put(textureCords).position(0);
+    }
+
+    private float addDistance(float coordinate, float distance) {
+        return coordinate == 0.0f ? distance : 1 - distance;
+    }
+
+    public void setRotationCamera(final Rotation rotation, final boolean flipHorizontal,
+                                  final boolean flipVertical) {
+        setRotation(rotation, flipVertical, flipHorizontal);
+    }
+
+    public void setRotation(final Rotation rotation) {
         this.rotation = rotation;
-        if (mPreFilter != null) {
-            mPreFilter.setRotation(this.rotation);
+        adjustImageScaling();
+    }
+
+    public void setRotation(final Rotation rotation,
+                            final boolean flipHorizontal, final boolean flipVertical) {
+        this.flipHorizontal = flipHorizontal;
+        this.flipVertical = flipVertical;
+        setRotation(rotation);
+    }
+
+    public Rotation getRotation() {
+        return rotation;
+    }
+
+    public boolean isFlippedHorizontally() {
+        return flipHorizontal;
+    }
+
+    public boolean isFlippedVertically() {
+        return flipVertical;
+    }
+
+    protected void runOnDraw(final Runnable runnable) {
+        synchronized (runOnDraw) {
+            runOnDraw.add(runnable);
         }
     }
 
-    /**
-     * 切换开启美白效果
-     */
-    public void switchBeauty() {
-        isBeauty = !isBeauty;
-    }
-
-    /**
-     * 是否开启美颜功能
-     */
-    public void isOpenBeauty(boolean isBeauty) {
-        this.isBeauty = isBeauty;
-    }
-
-    /**
-     * 触摸事件监听
-     */
-    public void onTouch(MotionEvent event) {
-        mSlideFilterGroup.onTouchEvent(event);
-    }
-
-    /**
-     * 滤镜切换的监听
-     */
-    public void setOnFilterChangeListener(SlideGpuFilterGroup.OnFilterChangeListener listener) {
-        mSlideFilterGroup.setOnFilterChangeListener(listener);
-    }
-
-    public void checkGlError(String s) {
-        int error;
-        while ((error = GLES20.glGetError()) != GLES20.GL_NO_ERROR) {
-            throw new RuntimeException(s + ": glError " + error);
+    protected void runOnDrawEnd(final Runnable runnable) {
+        synchronized (runOnDrawEnd) {
+            runOnDrawEnd.add(runnable);
         }
     }
 
-    public void setGpuFilter(GPUImageFilter filter) {
-        if (filter != null) {
-            mGroupFilter = filter;
-            mGroupFilter.init();
-            mGroupFilter.onDisplaySizeChanged(viewWidth, viewWidth);
-            mGroupFilter.onInputSizeChanged(viewWidth, viewHeight);
-        }
-    }
-    /**
-     * 清除掉水印
-     * */
-    public void clearWaterMark(){
-        if (mBeFilter != null){
-            mBeFilter.clearAll();
-            mShow.setMatrix(OM);
-        }
-    }
+
 }

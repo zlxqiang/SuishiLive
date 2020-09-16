@@ -71,16 +71,6 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
      */
     private int width = 0, height = 0;
 
-    private TextureMovieEncoder videoEncoder;
-    private boolean recordingEnabled;
-    private int recordingStatus;
-    private static final int RECORDING_OFF = 0;
-    private static final int RECORDING_ON = 1;
-    private static final int RECORDING_RESUMED = 2;
-    private static final int RECORDING_PAUSE = 3;
-    private static final int RECORDING_RESUME = 4;
-    private static final int RECORDING_PAUSED = 5;
-    private String savePath;
     private int textureID;
     private int[] fFrame = new int[1];
     private int[] fTexture = new int[1];
@@ -104,13 +94,11 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         //必须传入上下翻转的矩阵
         OM = MatrixUtils.getOriginalMatrix();
         MatrixUtils.flip(OM, false, true);//矩阵上下翻转
-//水印
+         //水印
         WaterMarkFilter waterMarkFilter = new WaterMarkFilter(resources);
         waterMarkFilter.setWaterMark(BitmapFactory.decodeResource(resources, R.mipmap.watermark));
         waterMarkFilter.setPosition(30, 50, 0, 0);
         addFilter(waterMarkFilter);
-
-        recordingEnabled = false;
     }
 
     private void addFilter(AFilter filter) {
@@ -134,13 +122,6 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         mAfFilter.create();
         mBeautyFilter.init();
         mSlideFilterGroup.init();
-
-
-        if (recordingEnabled) {
-            recordingStatus = RECORDING_RESUMED;
-        } else {
-            recordingStatus = RECORDING_OFF;
-        }
     }
 
 
@@ -205,65 +186,10 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         mAfFilter.setTextureId(mSlideFilterGroup.getOutputTexture());
         mAfFilter.draw();
 
-
-        if (recordingEnabled) {
-            /**说明是录制状态*/
-            switch (recordingStatus) {
-                case RECORDING_OFF:
-                    videoEncoder = new TextureMovieEncoder();
-                    videoEncoder.setPreviewSize(mPreviewWidth, mPreviewHeight);
-                    videoEncoder.startRecording(new TextureMovieEncoder.EncoderConfig(
-                            savePath, mPreviewWidth, mPreviewHeight,
-                            3500000, EGL14.eglGetCurrentContext(),
-                            null));
-                    recordingStatus = RECORDING_ON;
-                    break;
-                case RECORDING_RESUMED:
-                    videoEncoder.updateSharedContext(EGL14.eglGetCurrentContext());
-                    videoEncoder.resumeRecording();
-                    recordingStatus = RECORDING_ON;
-                    break;
-                case RECORDING_ON:
-                case RECORDING_PAUSED:
-                    break;
-                case RECORDING_PAUSE:
-                    videoEncoder.pauseRecording();
-                    recordingStatus = RECORDING_PAUSED;
-                    break;
-
-                case RECORDING_RESUME:
-                    videoEncoder.resumeRecording();
-                    recordingStatus = RECORDING_ON;
-                    break;
-
-                default:
-                    throw new RuntimeException("unknown recording status " + recordingStatus);
-            }
-
-        } else {
-            switch (recordingStatus) {
-                case RECORDING_ON:
-                case RECORDING_RESUMED:
-                case RECORDING_PAUSE:
-                case RECORDING_RESUME:
-                case RECORDING_PAUSED:
-                    videoEncoder.stopRecording();
-                    recordingStatus = RECORDING_OFF;
-                    break;
-                case RECORDING_OFF:
-                    break;
-                default:
-                    throw new RuntimeException("unknown recording status " + recordingStatus);
-            }
-        }
         /**绘制显示的filter*/
         GLES20.glViewport(0, 0, width, height);
         showFilter.setTextureId(mAfFilter.getOutputTexture());
         showFilter.draw();
-        if (videoEncoder != null && recordingEnabled && recordingStatus == RECORDING_ON) {
-            videoEncoder.setTextureId(mAfFilter.getOutputTexture());
-            videoEncoder.frameAvailable(mSurfaceTextrue);
-        }
     }
 
     /**
@@ -308,45 +234,8 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         drawFilter.setFlag(id);
     }
 
-    public void startRecord() {
-        recordingEnabled = true;
-    }
-
-    public void stopRecord() {
-        recordingEnabled = false;
-    }
-
-    public void setSavePath(String path) {
-        this.savePath = path;
-    }
-
     public SurfaceTexture getTexture() {
         return mSurfaceTextrue;
-    }
-
-    public void onPause(boolean auto) {
-        if (auto) {
-            videoEncoder.pauseRecording();
-            if (recordingStatus == RECORDING_ON) {
-                recordingStatus = RECORDING_PAUSED;
-            }
-            return;
-        }
-        if (recordingStatus == RECORDING_ON) {
-            recordingStatus = RECORDING_PAUSE;
-        }
-    }
-
-    public void onResume(boolean auto) {
-        if (auto) {
-            if (recordingStatus == RECORDING_PAUSED) {
-                recordingStatus = RECORDING_RESUME;
-            }
-            return;
-        }
-        if (recordingStatus == RECORDING_PAUSED) {
-            recordingStatus = RECORDING_RESUME;
-        }
     }
 
     /**

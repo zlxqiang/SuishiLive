@@ -1,6 +1,5 @@
 package com.suishi.live.app.utils
 
-import android.graphics.Camera
 import android.graphics.Point
 import android.hardware.camera2.CameraCharacteristics
 import android.hardware.camera2.params.StreamConfigurationMap

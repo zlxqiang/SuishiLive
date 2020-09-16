@@ -17,14 +17,16 @@ import android.view.ViewGroup;
 
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatImageButton;
+
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 
 
 /**
  * Description:
  */
-@SuppressLint("AppCompatCustomView")
-public class CircularProgressView extends ImageButton implements View.OnClickListener {
+public class CircularProgressView extends AppCompatImageButton implements View.OnClickListener {
 
     private int mStroke = 8;
     private int mProcess = 0;

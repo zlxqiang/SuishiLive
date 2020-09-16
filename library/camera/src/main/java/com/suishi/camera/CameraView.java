@@ -1,39 +1,35 @@
 package com.suishi.camera;
 
 import android.content.Context;
-import android.graphics.Point;
+import android.graphics.PixelFormat;
 import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
 import android.opengl.GLSurfaceView;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
+import android.util.Size;
 import android.view.SurfaceHolder;
-import android.view.SurfaceView;
 
-
-import com.suishi.camera.camera.CameraController;
-import com.suishi.camera.camera.drawer.CameraDrawer;
-import com.suishi.camera.camera.gpufilter.SlideGpuFilterGroup;
-import com.suishi.camera.player.MPlayer;
-import com.suishi.camera.player.MinimalDisplay;
-
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+import com.seu.magicfilter.filter.advanced.MagicAntiqueFilter;
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+import com.suishi.camera.camera.drawer.VideoDrawer;
+import com.suishi.camera.camera.gpufilter.filter.MagicBeautyFilter;
 
 /**
  * Created by weight68kg on 2018/5/8.
  */
 
-public class CameraView extends SurfaceView  {
+public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameAvailableListener  {
 
-    private CameraDrawer mCameraDrawer;
+    private VideoDrawer mCameraDrawer;
 
-    private boolean isSetParm = false;
+    //private CameraController mCamera;
 
+    private Size mSize;
     /**
-     * 1 前置 0 后置
+     *
      */
-    private int cameraId = 1;
+    private SurfaceHolder.Callback mCallback=null;
+
+    private GPUImageFilter filter=new MagicAntiqueFilter();
 
     public CameraView(Context context) {
         this(context, null);
@@ -49,46 +45,84 @@ public class CameraView extends SurfaceView  {
      * 初始化OpenGL的相关信息
      */
     private void init() {
-//        //设置版本
-//        setEGLContextClientVersion(2);
-//        //设置Renderer
-//        setRenderer(this);
-//        setRenderModeDirty();
-//        //保存Context当pause时
-//        setPreserveEGLContextOnPause(true);
-//        //相机距离
-//        setCameraDistance(100);
-//        //初始化Camera的绘制类*/
-//        mCameraDrawer = new CameraDrawer(getResources());
-
+        //设置版本
+        setEGLContextClientVersion(2);
+        getHolder().setFormat(PixelFormat.RGBA_8888);
+        //保存Context当pause时
+        setPreserveEGLContextOnPause(true);
+        //设置Renderer
+        mCameraDrawer = new VideoDrawer(filter);
+        setRenderer( mCameraDrawer);
+        setRenderModeDirty();
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
     /**
      * 设置为主动渲染.
      */
     public void setRenderModeAuto() {
-       // setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
     /**
      * 设置为非主动渲染.
      */
     public void setRenderModeDirty() {
-      //  setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+        setRenderMode(GLSurfaceView.RENDERMODE_WHEN_DIRTY);
+
+    }
+
+    /**
+     * 每次Activity onResume时被调用,第一次不会打开相机
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
 
-//    public void open(int cameraId) {
-//        mCameraDrawer.setCameraId(cameraId);
-//        SurfaceTexture texture = mCameraDrawer.getTexture();
-//        texture.setOnFrameAvailableListener(this);
-//    }
+    public void addCallBack2(SurfaceHolder.Callback callback){
+        this.mCallback=callback;
+    }
 
-
-
-    public void setOnFilterChangeListener(SlideGpuFilterGroup.OnFilterChangeListener listener) {
-        mCameraDrawer.setOnFilterChangeListener(listener);
+    @Override
+    public void surfaceCreated(SurfaceHolder holder) {
+        super.surfaceCreated(holder);
+        mCameraDrawer.onSurfaceCreated(null, null);
+        mCameraDrawer.createSurfaceTexture(this);
+        if(mCallback!=null) {
+            this.mCallback.surfaceCreated(holder);
+        }
     }
 
 
+    @Override
+    public void surfaceChanged(SurfaceHolder holder, int format, int w, int h) {
+        super.surfaceChanged(holder, format, w, h);
+        if(mCallback!=null) {
+            this.mCallback.surfaceChanged(holder,format,w,h);
+        }
+    }
+
+    @Override
+    public void surfaceDestroyed(SurfaceHolder holder) {
+        super.surfaceDestroyed(holder);
+        if(mCallback!=null) {
+            this.mCallback.surfaceDestroyed(holder);
+        }
+    }
+
+
+    public void setSize(Size size){
+        this.mSize=size;
+    }
+
+    public VideoDrawer getRender(){
+        return mCameraDrawer;
+    }
+
+    @Override
+    public void onFrameAvailable(SurfaceTexture surfaceTexture) {
+        requestRender();
+    }
 }

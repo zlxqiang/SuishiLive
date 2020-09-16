@@ -1,6 +1,8 @@
 package com.suishi.live.app.ui.activity
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.ImageButton
@@ -14,6 +16,13 @@ import com.suishi.sslive.widgets.CameraGlSurfaceView
  * 推流
  */
 class PortraitActivity : Activity() {
+
+    companion object{
+        fun startActivity(context: Context){
+            val intent = Intent(context, PortraitActivity::class.java)
+            context.startActivity(intent)
+        }
+    }
 
     /**
      *

@@ -23,6 +23,16 @@ import com.suishi.live.app.R
  */
 class VideoActivity : AppCompatActivity() {
 
+    companion object{
+        private const val TAG = "VideoActivity"
+
+        fun startActivity(context: Context){
+            val intent=Intent(context,VideoActivity::class.java)
+            context.startActivity(intent)
+
+        }
+    }
+
     private var mVideoPath: String? = "rtmp://172.18.2.90/live/stream"
 
     private var mVideoUri: Uri? = null
@@ -117,19 +127,5 @@ class VideoActivity : AppCompatActivity() {
 //        } else {
 //            mVideoView!!.enterBackground()
 //        }
-    }
-
-    companion object {
-        private const val TAG = "VideoActivity"
-        fun newIntent(context: Context?, videoPath: String?, videoTitle: String?): Intent {
-            val intent = Intent(context, VideoActivity::class.java)
-            intent.putExtra("videoPath", videoPath)
-            intent.putExtra("videoTitle", videoTitle)
-            return intent
-        }
-
-        fun intentTo(context: Context, videoPath: String?, videoTitle: String?) {
-            context.startActivity(newIntent(context, videoPath, videoTitle))
-        }
     }
 }
