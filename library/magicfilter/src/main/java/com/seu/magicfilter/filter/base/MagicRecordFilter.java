@@ -38,13 +38,13 @@ public class MagicRecordFilter extends GPUImageFilter {
 
     public MagicRecordFilter() {
         super(R.raw.none_vertex, R.raw.default_fragment);
-        setTextureTransformMatrix(new float[]{
-                -1f, 0f, 0f, 0f,
-                0f, 1f, 0f, 0f,
-                0f, 0f, 1f, 0f,
-                1f, 0f, 0f, 1f});
-        mPboIndex = 0;
-        mPboNewIndex = 1;
+//        setTextureTransformMatrix(new float[]{
+//                -1f, 0f, 0f, 0f,
+//                0f, 1f, 0f, 0f,
+//                0f, 0f, 1f, 0f,
+//                1f, 0f, 0f, 1f});
+//        mPboIndex = 0;
+//        mPboNewIndex = 1;
     }
 
     @Override
@@ -89,48 +89,48 @@ public class MagicRecordFilter extends GPUImageFilter {
         }
     }
 
-
-    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
-    public int onDrawToFbo(final int textureId, final FloatBuffer cubeBuffer,
-                           final FloatBuffer textureBuffer, final long timestamp) {
-        if (mFrameBuffers == null || mPboIds == null) {
-            return OpenGlUtils.NO_TEXTURE;
-        }
-
-        GLES20.glViewport(0, 0, mInputWidth, mInputHeight);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[0]);
-        GLES20.glUseProgram(mGLProgramId);
-        runPendingOnDrawTasks();
-
-        cubeBuffer.position(0);
-        GLES20.glVertexAttribPointer(mGLAttributePosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer);
-        GLES20.glEnableVertexAttribArray(mGLAttributePosition);
-        textureBuffer.position(0);
-        GLES20.glVertexAttribPointer(mGLAttributeTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0,
-                textureBuffer);
-        GLES20.glEnableVertexAttribArray(mGLAttributeTextureCoordinate);
-        GLES20.glUniformMatrix4fv(mTextureTransformMatrixLocation, 1, false, mTextureTransformMatrix, 0);
-
-        if (textureId != OpenGlUtils.NO_TEXTURE) {
-            GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
-            GLES20.glUniform1i(mGLUniformTexture, 0);
-        }
-
-        onDrawArraysPre();
-        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-        GLES20.glDisableVertexAttribArray(mGLAttributePosition);
-        GLES20.glDisableVertexAttribArray(mGLAttributeTextureCoordinate);
-        onDrawArraysAfter();
-
-        bindPixelBuffer();
-        mLastTimestamp = timestamp;
-
-        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
-        GLES20.glViewport(0, 0, mOutputWidth, mOutputHeight);
-        return OpenGlUtils.ON_DRAWN;
-    }
+//
+//    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+//    public int onDrawToFbo(final int textureId, final FloatBuffer cubeBuffer,
+//                           final FloatBuffer textureBuffer, final long timestamp) {
+//        if (mFrameBuffers == null || mPboIds == null) {
+//            return OpenGlUtils.NO_TEXTURE;
+//        }
+//
+//        GLES20.glViewport(0, 0, mInputWidth, mInputHeight);
+//        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[0]);
+//        GLES20.glUseProgram(mGLProgramId);
+//        runPendingOnDrawTasks();
+//
+//        cubeBuffer.position(0);
+//        GLES20.glVertexAttribPointer(mGLAttributePosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer);
+//        GLES20.glEnableVertexAttribArray(mGLAttributePosition);
+//        textureBuffer.position(0);
+//        GLES20.glVertexAttribPointer(mGLAttributeTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0,
+//                textureBuffer);
+//        GLES20.glEnableVertexAttribArray(mGLAttributeTextureCoordinate);
+//        GLES20.glUniformMatrix4fv(mTextureTransformMatrixLocation, 1, false, mTextureTransformMatrix, 0);
+//
+//        if (textureId != OpenGlUtils.NO_TEXTURE) {
+//            GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+//            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
+//            GLES20.glUniform1i(mGLUniformTexture, 0);
+//        }
+//
+//        onDrawArraysPre();
+//        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+//        GLES20.glDisableVertexAttribArray(mGLAttributePosition);
+//        GLES20.glDisableVertexAttribArray(mGLAttributeTextureCoordinate);
+//        onDrawArraysAfter();
+//
+//        bindPixelBuffer();
+//        mLastTimestamp = timestamp;
+//
+//        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+//        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+//        GLES20.glViewport(0, 0, mOutputWidth, mOutputHeight);
+//        return OpenGlUtils.ON_DRAWN;
+//    }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     private void bindPixelBuffer() {

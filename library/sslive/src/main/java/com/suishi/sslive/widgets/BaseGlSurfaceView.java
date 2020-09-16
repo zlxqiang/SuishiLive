@@ -76,7 +76,7 @@ public abstract class BaseGlSurfaceView extends GLSurfaceView implements GLSurfa
 
         if (mFilter == null) {
             mFilter =  MagicFilterFactory.initFilters(MagicFilterType.NONE);
-            mFilter.init();
+            mFilter.ifNeedInit();
         }
     }
 
@@ -96,7 +96,7 @@ public abstract class BaseGlSurfaceView extends GLSurfaceView implements GLSurfa
 
     protected void onFilterChanged() {
         if (mFilter != null) {
-            mFilter.initFrameBuffer(mPreviewWidth, mPreviewHeight);
+         //   mFilter.initFrameBuffer(mPreviewWidth, mPreviewHeight);
             mFilter.onInputSizeChanged(mPreviewWidth, mPreviewHeight);
             mFilter.onDisplaySizeChanged(mSurfaceWidth, mSurfaceHeight);
         }
@@ -116,7 +116,7 @@ public abstract class BaseGlSurfaceView extends GLSurfaceView implements GLSurfa
                     mFilter.destroy();
                 mFilter = MagicFilterFactory.initFilters(type);
                 if (mFilter != null)
-                    mFilter.init();
+                    mFilter.ifNeedInit();
                 onFilterChanged();
             }
         });

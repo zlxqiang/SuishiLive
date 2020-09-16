@@ -27,7 +27,6 @@ public class MagicSweetsFilter extends GPUImageFilter {
         mMaskGrey1TextureId = -1;
     }
 
-    @Override
     protected void onDrawArraysAfter() {
         if (mToneCurveTexture[0] != -1) {
             GLES20.glActiveTexture(GLES20.GL_TEXTURE3);

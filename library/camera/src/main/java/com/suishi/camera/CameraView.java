@@ -8,15 +8,13 @@ import android.util.AttributeSet;
 import android.util.Size;
 import android.view.SurfaceHolder;
 
-import com.seu.magicfilter.filter.advanced.MagicAntiqueFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.suishi.camera.camera.drawer.VideoDrawer;
-import com.suishi.camera.camera.gpufilter.filter.MagicBeautyFilter;
+
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorBalanceFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 /**
- * Created by weight68kg on 2018/5/8.
  */
-
 public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameAvailableListener  {
 
     private VideoDrawer mCameraDrawer;
@@ -29,7 +27,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
      */
     private SurfaceHolder.Callback mCallback=null;
 
-    private GPUImageFilter filter=new MagicAntiqueFilter();
+    private GPUImageFilter filter=new GPUImageColorBalanceFilter();
 
     public CameraView(Context context) {
         this(context, null);

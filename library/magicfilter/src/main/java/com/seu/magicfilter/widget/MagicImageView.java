@@ -40,7 +40,7 @@ public class MagicImageView extends MagicBaseView{
     @Override
     public void onSurfaceCreated(GL10 gl, EGLConfig config) {
         super.onSurfaceCreated(gl, config);
-        imageInput.init();
+        imageInput.ifNeedInit();
     }
 
     @Override
@@ -55,9 +55,9 @@ public class MagicImageView extends MagicBaseView{
         if(textureId == OpenGlUtils.NO_TEXTURE)
             textureId = OpenGlUtils.loadTexture(getBitmap(), OpenGlUtils.NO_TEXTURE);
         if(filter == null)
-            imageInput.onDrawFrame(textureId, gLCubeBuffer, gLTextureBuffer);
+            imageInput.onDraw(textureId, gLCubeBuffer, gLTextureBuffer);
         else
-            filter.onDrawFrame(textureId, gLCubeBuffer, gLTextureBuffer);
+            filter.onDraw(textureId, gLCubeBuffer, gLTextureBuffer);
     }
 
     @Override

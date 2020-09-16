@@ -171,7 +171,7 @@ public class TextureRender {
 
         if (mGpuFilter != null) {
             EasyGlUtils.bindFrameTexture(fFrame[0], fTexture[1]);
-            mGpuFilter.onDrawFrame(mBeFilter.getOutputTexture());
+           // mGpuFilter.onDrawFrame(mBeFilter.getOutputTexture());
             EasyGlUtils.unBindFrameBuffer();
         }
 
@@ -346,7 +346,7 @@ public class TextureRender {
         }
         mGpuFilter = filter;
         if (filter != null) {
-            mGpuFilter.init();
+            mGpuFilter.ifNeedInit();
             mGpuFilter.onDisplaySizeChanged(info.width, info.height);
             mGpuFilter.onInputSizeChanged(info.width, info.height);
         }

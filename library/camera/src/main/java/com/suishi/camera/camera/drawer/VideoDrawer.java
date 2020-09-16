@@ -7,7 +7,8 @@ import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+
+import com.suishi.camera.camera.CameraDrawer;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -22,6 +23,7 @@ import javax.microedition.khronos.opengles.GL10;
 import jp.co.cyberagent.android.gpuimage.GLTextureView;
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageNativeLibrary;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 import jp.co.cyberagent.android.gpuimage.util.OpenGlUtils;
 import jp.co.cyberagent.android.gpuimage.util.Rotation;
 import jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil;
@@ -70,7 +72,7 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
     private float backgroundGreen = 0;
     private float backgroundBlue = 0;
 
-  //  private CameraDrawer mDrawer;
+    private CameraDrawer mDrawer;
 
     public VideoDrawer(final GPUImageFilter filter) {
         this.filter = filter;
@@ -93,6 +95,7 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
         GLES20.glClearColor(backgroundRed, backgroundGreen, backgroundBlue, 1);
         GLES20.glDisable(GLES20.GL_DEPTH_TEST);
         filter.ifNeedInit();
+        mDrawer=new CameraDrawer();
     }
 
     public SurfaceTexture getSurfaceTexture(){
@@ -116,9 +119,11 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
     public void onDrawFrame(final GL10 gl) {
         GLES20.glClearColor(0, 0, 0, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-        runAll(runOnDraw);
-        filter.onDrawFrame(glTextureId, glCubeBuffer, glTextureBuffer);
-        runAll(runOnDrawEnd);
+//        runAll(runOnDraw);
+//        filter.onDraw(glTextureId, glCubeBuffer, glTextureBuffer);
+//        runAll(runOnDrawEnd);
+
+        mDrawer.draw(glTextureId,false);
 
         if (surfaceTexture != null) {
             surfaceTexture.updateTexImage();

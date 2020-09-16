@@ -31,7 +31,7 @@ import javax.microedition.khronos.opengles.GL10;
  * desc 管理图像绘制的类
  * 主要用于管理各种滤镜、画面旋转、视频编码录制等
  */
-public class CameraDrawer implements GLSurfaceView.Renderer {
+public class GLRender implements GLSurfaceView.Renderer {
 
     private float[] OM;
     /**
@@ -78,7 +78,7 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
     private float[] SM = new float[16];     //用于显示的变换矩阵
 
 
-    public CameraDrawer(Resources resources) {
+    public GLRender(Resources resources) {
         //初始化一个滤镜 也可以叫控制器
         showFilter = new NoFilter(resources);
         drawFilter = new CameraFilter(resources);
@@ -120,7 +120,7 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
 //        showFilter.setTextureId(textureID);
         mBeFilter.create();
         mAfFilter.create();
-        mBeautyFilter.init();
+        mBeautyFilter.ifNeedInit();
         mSlideFilterGroup.init();
     }
 
@@ -173,7 +173,7 @@ public class CameraDrawer implements GLSurfaceView.Renderer {
         if (mBeautyFilter != null && mBeautyFilter.getBeautyLevel() != 0) {
             EasyGlUtils.bindFrameTexture(fFrame[0], fTexture[0]);
             GLES20.glViewport(0, 0, mPreviewWidth, mPreviewHeight);
-            mBeautyFilter.onDrawFrame(mBeFilter.getOutputTexture());
+           // mBeautyFilter.onDrawFrame(mBeFilter.getOutputTexture());
             EasyGlUtils.unBindFrameBuffer();
             mProcessFilter.setTextureId(fTexture[0]);
         } else {

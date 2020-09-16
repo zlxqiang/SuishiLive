@@ -61,9 +61,9 @@ public class SlideGpuFilterGroup {
     }
 
     public void init() {
-        curFilter.init();
-        leftFilter.init();
-        rightFilter.init();
+        curFilter.ifNeedInit();
+        leftFilter.ifNeedInit();
+        rightFilter.ifNeedInit();
     }
 
     public void onSizeChanged(int width, int height) {
@@ -90,7 +90,7 @@ public class SlideGpuFilterGroup {
     public void onDrawFrame(int textureId) {
         EasyGlUtils.bindFrameTexture(fFrame[0], fTexture[0]);
         if (direction == 0 && offset == 0) {
-            curFilter.onDrawFrame(textureId);
+         //   curFilter.onDrawFrame(textureId);
         } else if (direction == 1) {
             onDrawSlideLeft(textureId);
         } else if (direction == -1) {
@@ -143,12 +143,12 @@ public class SlideGpuFilterGroup {
         GLES20.glViewport(0, 0, width, height);
         GLES20.glEnable(GLES20.GL_SCISSOR_TEST);
         GLES20.glScissor(0, 0, offset, height);
-        leftFilter.onDrawFrame(textureId);
+       // leftFilter.onDrawFrame(textureId);
         GLES20.glDisable(GLES20.GL_SCISSOR_TEST);
         GLES20.glViewport(0, 0, width, height);
         GLES20.glEnable(GLES20.GL_SCISSOR_TEST);
         GLES20.glScissor(offset, 0, width - offset, height);
-        curFilter.onDrawFrame(textureId);
+       // curFilter.onDrawFrame(textureId);
         GLES20.glDisable(GLES20.GL_SCISSOR_TEST);
     }
 
@@ -156,12 +156,12 @@ public class SlideGpuFilterGroup {
         GLES20.glViewport(0, 0, width, height);
         GLES20.glEnable(GLES20.GL_SCISSOR_TEST);
         GLES20.glScissor(0, 0, width - offset, height);
-        curFilter.onDrawFrame(textureId);
+       // curFilter.onDrawFrame(textureId);
         GLES20.glDisable(GLES20.GL_SCISSOR_TEST);
         GLES20.glViewport(0, 0, width, height);
         GLES20.glEnable(GLES20.GL_SCISSOR_TEST);
         GLES20.glScissor(width - offset, 0, offset, height);
-        rightFilter.onDrawFrame(textureId);
+      //  rightFilter.onDrawFrame(textureId);
         GLES20.glDisable(GLES20.GL_SCISSOR_TEST);
     }
 
@@ -171,7 +171,7 @@ public class SlideGpuFilterGroup {
         rightFilter = curFilter;
         curFilter = leftFilter;
         leftFilter = getFilter(getLeftIndex());
-        leftFilter.init();
+        leftFilter.ifNeedInit();
         leftFilter.onDisplaySizeChanged(width, height);
         leftFilter.onInputSizeChanged(width, height);
         needSwitch = false;
@@ -183,7 +183,7 @@ public class SlideGpuFilterGroup {
         leftFilter = curFilter;
         curFilter = rightFilter;
         rightFilter = getFilter(getRightIndex());
-        rightFilter.init();
+        rightFilter.ifNeedInit();
         rightFilter.onDisplaySizeChanged(width, height);
         rightFilter.onInputSizeChanged(width, height);
         needSwitch = false;

@@ -322,10 +322,10 @@ public class TextureMovieEncoder implements Runnable {
 
         // Create new programs and such for the new context.
         mInput = new MagicCameraInputFilter();
-        mInput.init();
+        mInput.ifNeedInit();
         filter = null;
         if (filter != null) {
-            filter.init();
+            filter.ifNeedInit();
             filter.onInputSizeChanged(mPreviewWidth, mPreviewHeight);
             filter.onDisplaySizeChanged(mVideoWidth, mVideoHeight);
         }
@@ -345,10 +345,10 @@ public class TextureMovieEncoder implements Runnable {
         mInputWindowSurface.makeCurrent();
 
         mInput = new MagicCameraInputFilter();
-        mInput.init();
+        mInput.ifNeedInit();
         filter = null;
         if (filter != null) {
-            filter.init();
+            filter.ifNeedInit();
             filter.onInputSizeChanged(mPreviewWidth, mPreviewHeight);
             filter.onDisplaySizeChanged(mVideoWidth, mVideoHeight);
         }

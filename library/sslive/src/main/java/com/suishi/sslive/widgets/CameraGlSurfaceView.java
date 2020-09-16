@@ -78,11 +78,11 @@ public class CameraGlSurfaceView extends BaseGlSurfaceView implements GLSurfaceV
 
         if (mCameraInputFilter == null) {
             mCameraInputFilter = new MagicCameraInputFilter();
-            mCameraInputFilter.init();
+            mCameraInputFilter.ifNeedInit();
         }
         if (mRecordFilter == null) {
             mRecordFilter = new MagicRecordFilter();
-            mRecordFilter.init();
+            mRecordFilter.ifNeedInit();
             mRecordFilter.setRecordListener(VideoManager.instance());
         }
 
@@ -131,15 +131,15 @@ public class CameraGlSurfaceView extends BaseGlSurfaceView implements GLSurfaceV
         mSurfaceTexture.getTransformMatrix(mtx);
 
         //先将纹理绘制到fbo同时过滤镜
-        mFilter.setTextureTransformMatrix(mtx);
-        int id = mFilter.onDrawToTexture(mTextureId);
+  //      mFilter.setTextureTransformMatrix(mtx);
+   //     int id = mFilter.onDrawToTexture(mTextureId);
 
         //绘制到屏幕上
-        mCameraInputFilter.onDrawFrame(id, mGLCubeBuffer, mGLTextureBuffer);
+ //       mCameraInputFilter.onDraw(id, mGLCubeBuffer, mGLTextureBuffer);
 
         //绘制到另一个fbo上，同时使用pbo获取数据
-        mRecordFilter.onDrawToFbo(id, mRecordCubeBuffer, mRecordTextureBuffer,
-               mSurfaceTexture.getTimestamp());
+//        mRecordFilter.onDrawToFbo(id, mRecordCubeBuffer, mRecordTextureBuffer,
+//               mSurfaceTexture.getTimestamp());
     }
 
     @Override
@@ -150,7 +150,7 @@ public class CameraGlSurfaceView extends BaseGlSurfaceView implements GLSurfaceV
         mCameraInputFilter.onDisplaySizeChanged(mSurfaceWidth, mSurfaceHeight);
 
         //初始化fbo，pbo
-        mRecordFilter.initFrameBuffer(mRecordWidth, mRecordHeight);
+   //     mRecordFilter.initFrameBuffer(mRecordWidth, mRecordHeight);
         mRecordFilter.initPixelBuffer(mRecordWidth, mRecordHeight);
         mRecordFilter.onInputSizeChanged(mRecordWidth, mRecordHeight);
         mRecordFilter.onDisplaySizeChanged(mSurfaceWidth, mSurfaceHeight);

@@ -77,7 +77,6 @@ public class MagicSkinWhitenFilter extends GPUImageFilter {
     }
     
     protected void onDrawArraysAfter() {
-        super.onDrawArraysAfter();
         if(mToneCurveTexture[0] != -1) {
         	GLES20.glActiveTexture(GLES20.GL_TEXTURE3);
 			GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
