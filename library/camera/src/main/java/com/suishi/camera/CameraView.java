@@ -8,10 +8,10 @@ import android.util.AttributeSet;
 import android.util.Size;
 import android.view.SurfaceHolder;
 
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageColorBalanceFilter;
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
 import com.suishi.camera.camera.drawer.VideoDrawer;
 
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorBalanceFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
 
 /**
