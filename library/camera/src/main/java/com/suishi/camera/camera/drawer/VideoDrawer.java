@@ -6,9 +6,11 @@ import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
+import android.util.Size;
 
 
-import com.suishi.camera.camera.CameraDrawer;
+import com.seu.magicfilter.utils.Rotation;
+import com.seu.magicfilter.utils.TextureRotationUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -20,13 +22,10 @@ import java.util.Queue;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
-import jp.co.cyberagent.android.gpuimage.GLTextureView;
 import jp.co.cyberagent.android.gpuimage.GPUImage;
 import jp.co.cyberagent.android.gpuimage.GPUImageNativeLibrary;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 import jp.co.cyberagent.android.gpuimage.util.OpenGlUtils;
-import jp.co.cyberagent.android.gpuimage.util.Rotation;
-import jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil;
 
 import static jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil.TEXTURE_NO_ROTATION;
 
@@ -34,8 +33,7 @@ import static jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil.TEXTURE
  * Created by cj on 2017/10/16.
  * desc：添加水印和美白效果
  */
-
-public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Renderer{
+public class VideoDrawer implements GLSurfaceView.Renderer {
     private static final int NO_IMAGE = -1;
 
     public static final float CUBE[] = {
@@ -47,7 +45,6 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
 
     private GPUImageFilter filter;
 
-    public final Object surfaceChangedWaiter = new Object();
 
     private int glTextureId = NO_IMAGE;
     private SurfaceTexture surfaceTexture = null;
@@ -55,11 +52,16 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
     private final FloatBuffer glTextureBuffer;
     private IntBuffer glRgbBuffer;
 
+    /**
+     * 屏幕宽高
+     */
     private int outputWidth;
     private int outputHeight;
+    /**
+     * 预览宽高
+     */
     private int imageWidth;
     private int imageHeight;
-    private int addedPadding;
 
     private final Queue<Runnable> runOnDraw;
     private final Queue<Runnable> runOnDrawEnd;
@@ -72,7 +74,6 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
     private float backgroundGreen = 0;
     private float backgroundBlue = 0;
 
-    private CameraDrawer mDrawer;
 
     public VideoDrawer(final GPUImageFilter filter) {
         this.filter = filter;
@@ -87,15 +88,18 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
         glTextureBuffer = ByteBuffer.allocateDirect(TEXTURE_NO_ROTATION.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-        setRotation(Rotation.NORMAL, false, false);
+
+        setRotation(Rotation.NORMAL, false, true);
     }
 
     @Override
-    public void onSurfaceCreated(final GL10 unused, final EGLConfig config) {
+    public void onSurfaceCreated(final GL10 gl10, final EGLConfig config) {
         GLES20.glClearColor(backgroundRed, backgroundGreen, backgroundBlue, 1);
-        GLES20.glDisable(GLES20.GL_DEPTH_TEST);
+        GLES20.glDisable(GL10.GL_DITHER);
+        GLES20.glEnable(GL10.GL_CULL_FACE);
+        GLES20.glEnable(GL10.GL_DEPTH_TEST);
+
         filter.ifNeedInit();
-        mDrawer=new CameraDrawer();
     }
 
     public SurfaceTexture getSurfaceTexture(){
@@ -106,25 +110,22 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
     public void onSurfaceChanged(final GL10 gl, final int width, final int height) {
         outputWidth = width;
         outputHeight = height;
+
         GLES20.glViewport(0, 0, width, height);
-        GLES20.glUseProgram(filter.getProgram());
-        filter.onOutputSizeChanged(width, height);
+       // filter.onDisplaySizeChanged(width, height);
+        filter.onOutputSizeChanged(width,height);
+        //初始化顶点、文理坐标
         adjustImageScaling();
-        synchronized (surfaceChangedWaiter) {
-            surfaceChangedWaiter.notifyAll();
-        }
     }
+
 
     @Override
     public void onDrawFrame(final GL10 gl) {
-        GLES20.glClearColor(0, 0, 0, 0);
+        GLES20.glClearColor(backgroundRed, backgroundGreen, backgroundBlue, 1);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-//        runAll(runOnDraw);
-//        filter.onDraw(glTextureId, glCubeBuffer, glTextureBuffer);
-//        runAll(runOnDrawEnd);
-
-        mDrawer.draw(glTextureId,false);
-
+        runAll(runOnDraw);
+        filter.onDraw(glTextureId,glCubeBuffer,glTextureBuffer);
+        runAll(runOnDrawEnd);
         if (surfaceTexture != null) {
             surfaceTexture.updateTexImage();
         }
@@ -143,11 +144,10 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
     }
 
     /**
-     * Sets the background color
      *
-     * @param red   red color value
-     * @param green green color value
-     * @param blue  red color value
+     * @param red
+     * @param green
+     * @param blue
      */
     public void setBackgroundColor(float red, float green, float blue) {
         backgroundRed = red;
@@ -162,12 +162,6 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
             }
         }
     }
-
-//    @Override
-//    public void onPreviewFrame(final byte[] data, final Camera camera) {
-//        final Camera.Size previewSize = camera.getParameters().getPreviewSize();
-//        onPreviewFrame(data, previewSize.width, previewSize.height);
-//    }
 
     public void createSurfaceTexture(SurfaceTexture.OnFrameAvailableListener framAvailable){
         glTextureId=getExternalOESTextureID();
@@ -247,9 +241,7 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
                     Canvas can = new Canvas(resizedBitmap);
                     can.drawARGB(0x00, 0x00, 0x00, 0x00);
                     can.drawBitmap(bitmap, 0, 0, null);
-                    addedPadding = 1;
                 } else {
-                    addedPadding = 0;
                 }
 
                 glTextureId = OpenGlUtils.loadTexture(
@@ -330,7 +322,6 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
 
     public void setRotation(final Rotation rotation) {
         this.rotation = rotation;
-        adjustImageScaling();
     }
 
     public void setRotation(final Rotation rotation,
@@ -362,6 +353,11 @@ public class VideoDrawer implements GLSurfaceView.Renderer , GLTextureView.Rende
         synchronized (runOnDrawEnd) {
             runOnDrawEnd.add(runnable);
         }
+    }
+
+    public void setPreviewSize(Size size){
+        imageWidth=size.getWidth();
+        imageHeight=size.getHeight();
     }
 
 

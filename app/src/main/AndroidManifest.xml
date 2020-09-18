@@ -23,6 +23,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="${app_label}"
         android:supportsRtl="true"
+        android:hardwareAccelerated="true"
         android:theme="@style/AppTheme"
         tools:replace="android:icon,android:name,android:theme,android:allowBackup,android:label">
 

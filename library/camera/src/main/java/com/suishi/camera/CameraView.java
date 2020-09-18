@@ -13,13 +13,12 @@ import com.suishi.camera.camera.drawer.VideoDrawer;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageColorBalanceFilter;
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
 
+
 /**
  */
 public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameAvailableListener  {
 
     private VideoDrawer mCameraDrawer;
-
-    //private CameraController mCamera;
 
     private Size mSize;
     /**
@@ -86,7 +85,6 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
     @Override
     public void surfaceCreated(SurfaceHolder holder) {
         super.surfaceCreated(holder);
-        mCameraDrawer.onSurfaceCreated(null, null);
         mCameraDrawer.createSurfaceTexture(this);
         if(mCallback!=null) {
             this.mCallback.surfaceCreated(holder);
@@ -113,6 +111,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
 
     public void setSize(Size size){
         this.mSize=size;
+        mCameraDrawer.setPreviewSize(size);
     }
 
     public VideoDrawer getRender(){

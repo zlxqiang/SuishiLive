@@ -1,4 +1,4 @@
-package com.suishi.camera.camera;
+package com.suishi.camera.camera.utils;
 
 import android.content.res.Resources;
 import android.opengl.GLES11Ext;
@@ -25,12 +25,11 @@ public class OpenGLUtils {
         return texture[0];
     }
 
-    public static int loadShader(int type, String source) {
+    public static int loadShader(int type, String source) throws Exception {
         // 1. create shader
         int shader = GLES20.glCreateShader(type);
         if (shader == GLES20.GL_NONE) {
-            Log.e(TAG, "create shared failed! type: " + type);
-            return GLES20.GL_NONE;
+            throw new Exception("create shared failed! type: " + type);
         }
         // 2. load shader source
         GLES20.glShaderSource(shader, source);
@@ -43,47 +42,41 @@ public class OpenGLUtils {
             Log.e(TAG, "Error compiling shader. type: " + type + ":");
             Log.e(TAG, GLES20.glGetShaderInfoLog(shader));
             GLES20.glDeleteShader(shader); // delete shader
-            shader = GLES20.GL_NONE;
+            throw new Exception("Error compiling shader. type: " + type + ":"+GLES20.glGetShaderInfoLog(shader));
         }
         return shader;
     }
 
     public static int createProgram(String vertexSource, String fragmentSource) {
-        // 1. load shader
-        int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexSource);
-        if (vertexShader == GLES20.GL_NONE) {
-            Log.e(TAG, "load vertex shader failed! ");
-            return GLES20.GL_NONE;
+        try {
+            // 1. load shader
+            int vertexShader = loadShader(GLES20.GL_VERTEX_SHADER, vertexSource);
+            int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentSource);
+            // 2. create gl program
+            int program = GLES20.glCreateProgram();
+            if (program == GLES20.GL_NONE) {
+                throw new Exception("create program failed! ");
+            }
+            // 3. attach shader
+            GLES20.glAttachShader(program, vertexShader);
+            GLES20.glAttachShader(program, fragmentShader);
+            // we can delete shader after attach
+            GLES20.glDeleteShader(vertexShader);
+            GLES20.glDeleteShader(fragmentShader);
+            // 4. link program
+            GLES20.glLinkProgram(program);
+            // 5. check link status
+            int[] linkStatus = new int[1];
+            GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS, linkStatus, 0);
+            if (linkStatus[0] == GLES20.GL_FALSE) { // link failed
+                GLES20.glDeleteProgram(program); // delete program
+                throw new Exception("Error link program: "+GLES20.glGetProgramInfoLog(program));
+            }
+            return program;
+        }catch (Exception e){
+          throw new IllegalStateException(e);
         }
-        int fragmentShader = loadShader(GLES20.GL_FRAGMENT_SHADER, fragmentSource);
-        if (fragmentShader == GLES20.GL_NONE) {
-            Log.e(TAG, "load fragment shader failed! ");
-            return GLES20.GL_NONE;
-        }
-        // 2. create gl program
-        int program = GLES20.glCreateProgram();
-        if (program == GLES20.GL_NONE) {
-            Log.e(TAG, "create program failed! ");
-            return GLES20.GL_NONE;
-        }
-        // 3. attach shader
-        GLES20.glAttachShader(program, vertexShader);
-        GLES20.glAttachShader(program, fragmentShader);
-        // we can delete shader after attach
-        GLES20.glDeleteShader(vertexShader);
-        GLES20.glDeleteShader(fragmentShader);
-        // 4. link program
-        GLES20.glLinkProgram(program);
-        // 5. check link status
-        int[] linkStatus = new int[1];
-        GLES20.glGetProgramiv(program, GLES20.GL_LINK_STATUS, linkStatus, 0);
-        if (linkStatus[0] == GLES20.GL_FALSE) { // link failed
-            Log.e(TAG, "Error link program: ");
-            Log.e(TAG, GLES20.glGetProgramInfoLog(program));
-            GLES20.glDeleteProgram(program); // delete program
-            return GLES20.GL_NONE;
-        }
-        return program;
+
     }
 
     public static String loadFromAssets(String fileName, Resources resources) {

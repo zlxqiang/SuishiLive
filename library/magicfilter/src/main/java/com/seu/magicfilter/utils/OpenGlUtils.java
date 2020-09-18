@@ -8,17 +8,11 @@ import android.opengl.GLES20;
 import android.opengl.GLUtils;
 import android.util.Log;
 
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -163,44 +157,46 @@ public class OpenGlUtils {
     public static int loadProgram(final String strVSource, final String strFSource) {
         int iVShader;
         int iFShader;
-        int iProgId;
+        int iProgId=0;
         int[] link = new int[1];
-        iVShader = loadShader(strVSource, GLES20.GL_VERTEX_SHADER);
-        if (iVShader == 0) {
-            Log.e("Load Program", "Vertex Shader Failed");
-            return 0;
-        }
-        iFShader = loadShader(strFSource, GLES20.GL_FRAGMENT_SHADER);
-        if (iFShader == 0) {
-            Log.e("Load Program", "Fragment Shader Failed");
-            return 0;
+        try{
+            iVShader = loadShader(strVSource, GLES20.GL_VERTEX_SHADER);
+            iFShader = loadShader(strFSource, GLES20.GL_FRAGMENT_SHADER);
+            iProgId = GLES20.glCreateProgram();
+            GLES20.glAttachShader(iProgId, iVShader);
+            GLES20.glAttachShader(iProgId, iFShader);
+            GLES20.glLinkProgram(iProgId);
+            GLES20.glGetProgramiv(iProgId, GLES20.GL_LINK_STATUS, link, 0);
+            if (link[0] <= 0) {
+                throw new IllegalStateException("Linking Failed");
+            }
+            GLES20.glDeleteShader(iVShader);
+            GLES20.glDeleteShader(iFShader);
+        }catch (Exception e){
+            throw new IllegalStateException(e);
         }
 
-        iProgId = GLES20.glCreateProgram();
-        GLES20.glAttachShader(iProgId, iVShader);
-        GLES20.glAttachShader(iProgId, iFShader);
-        GLES20.glLinkProgram(iProgId);
-        GLES20.glGetProgramiv(iProgId, GLES20.GL_LINK_STATUS, link, 0);
-        if (link[0] <= 0) {
-            Log.e("Load Program", "Linking Failed");
-            return 0;
-        }
-        GLES20.glDeleteShader(iVShader);
-        GLES20.glDeleteShader(iFShader);
         return iProgId;
     }
 
-    private static int loadShader(final String strSource, final int iType) {
-        int[] compiled = new int[1];
-        int iShader = GLES20.glCreateShader(iType);
-        GLES20.glShaderSource(iShader, strSource);
-        GLES20.glCompileShader(iShader);
-        GLES20.glGetShaderiv(iShader, GLES20.GL_COMPILE_STATUS, compiled, 0);
-        if (compiled[0] == 0) {
-            Log.e("Load Shader Failed", "Compilation\n" + GLES20.glGetShaderInfoLog(iShader));
-            return 0;
+    private static int loadShader(final String source, final int type) throws Exception {
+        int shader = GLES20.glCreateShader(type);
+        if (shader == GLES20.GL_NONE) {
+            throw new Exception("create shared failed! type: " + type);
         }
-        return iShader;
+        // 2. load shader source
+        GLES20.glShaderSource(shader, source);
+        // 3. compile shared source
+        GLES20.glCompileShader(shader);
+        // 4. check compile status
+        int[] compiled = new int[1];
+        GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compiled, 0);
+        if (compiled[0] == GLES20.GL_FALSE) { // compile failed
+            GLES20.glDeleteShader(shader); // delete shader
+            throw new Exception("Error compiling shader. type: " + type + ":"+GLES20.glGetShaderInfoLog(shader));
+        }
+
+        return shader;
     }
 
     public static int getExternalOESTextureID() {

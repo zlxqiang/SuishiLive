@@ -3,6 +3,7 @@ package com.suishi.live.app.ui.activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
@@ -100,5 +101,35 @@ class MainActivity : AppCompatActivity() {
             }
             return v
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.e("A","onRestart")
+    }
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("A","onStart")
+    }
+
+    override fun onResume() {
+        super.onResume()
+        Log.e("A","onResume")
+    }
+
+    override fun onPause() {
+        super.onPause()
+        Log.e("A","onPause")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("A","onStop")
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        Log.e("A","onDestroy")
     }
 }

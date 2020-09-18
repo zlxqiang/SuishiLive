@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 
 
 import com.suishi.camera.camera.drawer.Camera2Proxy;
+import com.suishi.camera.camera.utils.OpenGLUtils;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -20,7 +21,6 @@ public class Camera2GLSurfaceView extends GLSurfaceView implements GLSurfaceView
     private static final String TAG = "Camera2GLSurfaceView";
     private Camera2Proxy mCameraProxy;
     private SurfaceTexture mSurfaceTexture;
-    private CameraDrawer mDrawer;
     private int mRatioWidth = 0;
     private int mRatioHeight = 0;
     private float mOldDistance;
@@ -48,7 +48,6 @@ public class Camera2GLSurfaceView extends GLSurfaceView implements GLSurfaceView
         mSurfaceTexture = new SurfaceTexture(mTextureId);
         mSurfaceTexture.setOnFrameAvailableListener(this);
         mCameraProxy.setPreviewSurface(mSurfaceTexture);
-        mDrawer = new CameraDrawer();
         Log.d(TAG, "onSurfaceCreated. width: " + getWidth() + ", height: " + getHeight());
         mCameraProxy.openCamera(getWidth(), getHeight());
     }
@@ -72,7 +71,6 @@ public class Camera2GLSurfaceView extends GLSurfaceView implements GLSurfaceView
         GLES20.glClearColor(0, 0, 0, 0);
         GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
         mSurfaceTexture.updateTexImage();
-        mDrawer.draw(mTextureId, mCameraProxy.isFrontCamera());
     }
 
     @Override

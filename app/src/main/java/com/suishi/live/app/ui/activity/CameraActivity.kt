@@ -42,6 +42,8 @@ import com.suishi.live.app.modle.CameraInfo
 import com.suishi.live.app.utils.OrientationLiveData
 import com.suishi.live.app.utils.getPreviewOutputSize
 import com.suishi.utils.ToastUtil
+import jp.co.cyberagent.android.gpuimage.GPUImage
+import jp.co.cyberagent.android.gpuimage.filter.GPUImage3x3ConvolutionFilter
 import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -205,7 +207,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     private val cameraThread =HandlerThread("CameraThread").apply{
         start()
-        GPUImageFilter()
     }
 
     private val cameraHandler=Handler(cameraThread.looper)
@@ -371,10 +372,12 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     override fun onResume() {
         super.onResume()
+        Log.e("B","onResume")
     }
 
     override fun onPause() {
         super.onPause()
+        Log.e("B","onPause")
         camera.close()
     }
 
@@ -388,6 +391,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     public override fun onDestroy() {
         super.onDestroy()
+        Log.e("B","onDestroy")
         cameraThread.quitSafely()
         recorder.release()
         recorderSurface.release()
@@ -450,6 +454,17 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     override fun onFocus() {
 
+    }
+
+
+    override fun onStart() {
+        super.onStart()
+        Log.e("B","onStart")
+    }
+
+    override fun onStop() {
+        super.onStop()
+        Log.e("B","onStop")
     }
 
 

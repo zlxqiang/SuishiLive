@@ -2,6 +2,9 @@ package com.seu.magicfilter.filter.base.gpuimage;
 
 import android.opengl.GLES20;
 
+import com.seu.magicfilter.R;
+import com.seu.magicfilter.utils.OpenGlUtils;
+
 public class GPUImageColorBalanceFilter extends GPUImageFilter {
 
     public static final String GPU_IMAGE_COLOR_BALANCE_FRAGMENT_SHADER = "" +
@@ -147,7 +150,7 @@ public class GPUImageColorBalanceFilter extends GPUImageFilter {
 
 
     public GPUImageColorBalanceFilter() {
-        super(NO_FILTER_VERTEX_SHADER, GPU_IMAGE_COLOR_BALANCE_FRAGMENT_SHADER);
+        super(OpenGlUtils.readShaderFromRawResource(R.raw.default_vertex), GPU_IMAGE_COLOR_BALANCE_FRAGMENT_SHADER);
         this.showdows = new float[]{0.0f, 0.0f, 0.0f};
         this.midtones = new float[]{0.0f, 0.0f, 0.0f};
         this.highlights = new float[]{0.0f, 0.0f, 0.0f};
