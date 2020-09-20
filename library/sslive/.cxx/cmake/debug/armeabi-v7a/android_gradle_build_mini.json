@@ -1,0 +1,23 @@
+{
+  "buildFiles": [
+    "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake",
+    "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/build/cmake/platforms.cmake",
+    "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "ffmpeg-handle-Debug-armeabi-v7a": {
+      "artifactName": "ffmpeg-handle",
+      "buildCommand": "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a\" ffmpeg-handle",
+      "abi": "armeabi-v7a",
+      "output": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/build/intermediates/cmake/debug/obj/armeabi-v7a/libffmpeg-handle.so",
+      "runtimeFiles": [
+        "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/jniLib/armeabi-v7a/libffmpeg.so",
+        "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/jniLib/armeabi-v7a/libyuv.so"
+      ]
+    }
+  }
+}

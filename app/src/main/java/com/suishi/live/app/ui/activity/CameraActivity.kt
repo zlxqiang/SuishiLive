@@ -36,15 +36,11 @@ import com.suishi.camera.CircularProgressView
 import com.suishi.camera.FocusImageView
 import com.suishi.camera.camera.SensorControler
 import com.suishi.camera.camera.SensorControler.CameraFocusListener
-import com.suishi.camera.camera.gpufilter.SlideGpuFilterGroup.OnFilterChangeListener
 import com.suishi.live.app.R
 import com.suishi.live.app.modle.CameraInfo
 import com.suishi.live.app.utils.OrientationLiveData
 import com.suishi.live.app.utils.getPreviewOutputSize
 import com.suishi.utils.ToastUtil
-import jp.co.cyberagent.android.gpuimage.GPUImage
-import jp.co.cyberagent.android.gpuimage.filter.GPUImage3x3ConvolutionFilter
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -58,7 +54,7 @@ import kotlin.coroutines.suspendCoroutine
  *
  */
 @RequiresApi(Build.VERSION_CODES.O)
-class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListener, CameraFocusListener, OnFilterChangeListener, SurfaceHolder.Callback,LifecycleOwner {
+class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListener, CameraFocusListener, SurfaceHolder.Callback,LifecycleOwner {
 
 
     companion object {
@@ -383,10 +379,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         super.onPause()
         Log.e("B","onPause")
         camera.close()
-    }
-
-    override fun onFilterChange(type: MagicFilterType) {
-
     }
 
     override fun onPointerCaptureChanged(hasCapture: Boolean) {

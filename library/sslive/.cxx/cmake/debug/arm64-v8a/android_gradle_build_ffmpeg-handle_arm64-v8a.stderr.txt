@@ -1,0 +1,1 @@
+ninja: error: '../../../../src/main/jniLibs/arm64-v8a/libyuv.so', needed by '../../../../build/intermediates/cmake/debug/obj/arm64-v8a/libffmpeg-handle.so', missing and no known rule to make it

@@ -32,6 +32,8 @@ import android.view.ViewTreeObserver;
 import android.widget.FrameLayout;
 import android.widget.ProgressBar;
 
+import com.seu.magicfilter.utils.Rotation;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;

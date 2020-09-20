@@ -8,21 +8,11 @@ import android.util.AttributeSet;
 import android.util.Size;
 import android.view.SurfaceHolder;
 
-import com.seu.magicfilter.filter.advanced.MagicBrooklynFilter;
-import com.seu.magicfilter.filter.advanced.MagicImageAdjustFilter;
-import com.seu.magicfilter.filter.advanced.MagicInkwellFilter;
-import com.seu.magicfilter.filter.base.MagicBaseGroupFilter;
-import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageColorBalanceFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageContrastFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageHueFilter;
-import com.seu.magicfilter.filter.helper.MagicFilterFactory;
-import com.seu.magicfilter.filter.helper.MagicFilterType;
-import com.suishi.camera.camera.drawer.VideoDrawer;
+import com.seu.magicfilter.filter.gpuimage.GPUImageAlphaBlendFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageColorBalanceFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageFilter;
+import com.suishi.camera.render.VideoDrawer;
 
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageAlphaBlendFilter;
-import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
-import jp.wasabeef.glide.transformations.gpu.GPUFilterTransformation;
 
 
 /**
@@ -37,7 +27,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
      */
     private SurfaceHolder.Callback mCallback=null;
 
-    private GPUImageFilter filter= new GPUImageAlphaBlendFilter();
+    private GPUImageFilter filter= new GPUImageColorBalanceFilter();
 
     public CameraView(Context context) {
         this(context, null);

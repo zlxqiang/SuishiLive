@@ -1,0 +1,85 @@
+[
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/AVBaseProcessor.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/AVBaseProcessor.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/AVBaseProcessor.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/Data.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/Data.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/Data.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/Encoder.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/Encoder.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/Encoder.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/ThreadQueue.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/ThreadQueue.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/ThreadQueue.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/audio/AudioEncoder.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/audio/AudioEncoder.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/audio/AudioEncoder.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/audio/AudioProcessor.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/audio/AudioProcessor.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/audio/AudioProcessor.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/stream/RtmpStreamer.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/stream/RtmpStreamer.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/stream/RtmpStreamer.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/stream/Streamer.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/stream/Streamer.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/stream/Streamer.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/video/VideoEncoder.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoEncoder.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoEncoder.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/video/VideoMachining.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoMachining.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoMachining.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/av/video/VideoProcessor.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoProcessor.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoProcessor.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/LiveManager.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/LiveManager.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/LiveManager.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/debug.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/debug.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/debug.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security   -O0 -fno-limit-debug-info  -fPIC   -o CMakeFiles/ffmpeg-handle.dir/src/main/cpp/FpsTools.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/FpsTools.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/FpsTools.cpp"
+}
+]

@@ -9,7 +9,6 @@ import android.hardware.Camera.Parameters;
 import android.hardware.Camera.Size;
 import android.view.SurfaceHolder;
 
-import com.suishi.sslive.widgets.CameraGlSurfaceView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -45,7 +44,7 @@ public class CameraHelper {
     }
 
     private CameraHelper(int cameraId) {
-        this(cameraId, CameraGlSurfaceView.RECORD_WIDTH, CameraGlSurfaceView.RECORD_HEIGHT);
+       // this(cameraId, CameraGlSurfaceView.RECORD_WIDTH, CameraGlSurfaceView.RECORD_HEIGHT);
     }
 
     private CameraHelper(int cameraId, int recordWidth, int recordHeight) {

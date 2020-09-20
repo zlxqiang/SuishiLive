@@ -10,7 +10,6 @@ import androidx.annotation.RequiresApi;
 
 import com.suishi.sslive.mode.engine.audio.AudioConfig;
 import com.suishi.sslive.mode.engine.audio.AudioManager;
-import com.suishi.sslive.mode.engine.camera.CameraHelper;
 import com.suishi.sslive.mode.engine.video.VideoConfig;
 import com.suishi.sslive.mode.engine.video.VideoManager;
 import com.suishi.sslive.mode.mediacodec.AudioMediaCodec;
@@ -18,8 +17,6 @@ import com.suishi.sslive.mode.mediacodec.MediaCodecManager;
 import com.suishi.sslive.mode.mediacodec.VideoMediaCodec;
 import com.suishi.sslive.mode.stream.StreamManager;
 import com.suishi.sslive.utils.FpsTools;
-import com.suishi.sslive.utils.HardWareSupport;
-import com.suishi.sslive.widgets.CameraGlSurfaceView;
 import com.suishi.utils.LogUtils;
 
 import java.nio.ByteBuffer;
@@ -33,7 +30,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
 
     private static String TAG = LiveManager.class.getSimpleName();
 
-    private CameraGlSurfaceView mFilterGLSurfaceView;
+   // private CameraSurfaceView mFilterGLSurfaceView;
     /**
      *
      */
@@ -51,9 +48,9 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
     private FpsTools mFpsTools = new FpsTools();
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    public LiveManager(Context context, CameraGlSurfaceView filterGLSurfaceView) {
+    public LiveManager(Context context) {
         this.mContext = context;
-        mFilterGLSurfaceView = filterGLSurfaceView;
+       // mFilterGLSurfaceView = filterGLSurfaceView;
     }
 
 
@@ -69,7 +66,7 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
         boolean audioInit = false;
         try {
             //1.视频采集器初始化
-            if (VideoManager.instance().initCameraDevice() && mFilterGLSurfaceView.resume()) {
+            if (VideoManager.instance().initCameraDevice()) {
                 VideoManager.instance().setFrameCallBack(this);
                 videoInit = true;
             } else {
@@ -183,10 +180,6 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
 
     }
 
-    public void switchCamera() {
-        CameraHelper.getInstance().switchCamera();
-    }
-
     /**
      * 锁毁推流器
      *
@@ -194,7 +187,6 @@ public class LiveManager extends OnLowMemoryCallBack implements StreamManager.Pu
      */
     public void destroy() {
         isStarting = false;
-        mFilterGLSurfaceView.pause();
         AudioManager.instance().stop();
         VideoManager.instance().stop();
         StreamManager.Close();

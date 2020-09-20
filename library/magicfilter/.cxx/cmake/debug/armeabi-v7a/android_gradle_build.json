@@ -1,0 +1,58 @@
+{
+  "stringTable": {
+    "0": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/debug/armeabi-v7a",
+    "1": "--target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dfilter_EXPORTS -I../../../../src/main/cpp/beautify/MagicBeautify.h -I../../../../src/main/cpp/bitmap/BitmapOperation.h -I../../../../src/main/cpp/bitmap/Conversion.h -I../../../../src/main/cpp/bitmap/JniBitmap.h -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security -fexceptions -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake",
+    "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/build/cmake/platforms.cmake",
+    "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/debug/armeabi-v7a\" clean"
+  ],
+  "buildTargetsCommand": "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/debug/armeabi-v7a\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "filter-Debug-armeabi-v7a": {
+      "buildCommand": "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/debug/armeabi-v7a\" filter",
+      "buildType": "debug",
+      "toolchain": "4148449235",
+      "abi": "armeabi-v7a",
+      "artifactName": "filter",
+      "files": [
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/beautify/MagicBeautify.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/bitmap/BitmapOperation.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/bitmap/Conversion.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/MagicJni.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/build/intermediates/cmake/debug/obj/armeabi-v7a/libfilter.so",
+      "runtimeFiles": []
+    }
+  },
+  "toolchains": {
+    "4148449235": {
+      "cppCompilerExecutable": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

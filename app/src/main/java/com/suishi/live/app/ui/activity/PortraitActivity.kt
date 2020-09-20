@@ -10,7 +10,6 @@ import com.suishi.live.app.R
 import com.suishi.live.app.widgets.MultiToggleImageButton
 import com.suishi.live.app.widgets.MultiToggleImageButton.OnStateChangeListener
 import com.suishi.sslive.ui.LiveManager
-import com.suishi.sslive.widgets.CameraGlSurfaceView
 
 /**
  * 推流
@@ -27,7 +26,7 @@ class PortraitActivity : Activity() {
     /**
      *
      */
-    var filter: CameraGlSurfaceView? = null
+   // var filter: CameraGlSurfaceView? = null
     /**
      *
      */
@@ -71,8 +70,8 @@ class PortraitActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_portrait)
-        filter = findViewById(R.id.surface)
-        mLiveManager = LiveManager(this, filter)
+      //  filter = findViewById(R.id.surface)
+       // mLiveManager = LiveManager(this, filter)
         //  mLFLiveView = (LivingView) findViewById(R.id.liveView);
         mMicBtn = (findViewById(R.id.record_mic_button) as MultiToggleImageButton).apply{
             setOnStateChangeListener(object :OnStateChangeListener{
@@ -93,7 +92,7 @@ class PortraitActivity : Activity() {
             setOnStateChangeListener(object :OnStateChangeListener{
                 override fun stateChanged(view: View?, state: Int) {
                     // 切换摄像头
-                    mLiveManager!!.switchCamera()
+                   // mLiveManager!!.switchCamera()
                 }
 
             })

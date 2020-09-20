@@ -2,14 +2,18 @@ package com.seu.magicfilter.filter.gpuimage;
 
 import android.opengl.GLES20;
 
+import com.seu.magicfilter.R;
+import com.seu.magicfilter.utils.OpenGlUtils;
+
 /**
  * Created by edward_chiang on 13/10/16.
  */
 public class GPUImageColorBalanceFilter extends GPUImageFilter {
 
     public static final String GPU_IMAGE_COLOR_BALANCE_FRAGMENT_SHADER = "" +
+            "#extension GL_OES_EGL_image_external : require\n" +
             "varying highp vec2 textureCoordinate;\n"   +
-            "uniform sampler2D inputImageTexture;\n"    +
+            "uniform samplerExternalOES inputImageTexture;\n"    +
             "uniform lowp vec3 shadowsShift;\n" +
             "uniform lowp vec3 midtonesShift;\n"    +
             "uniform lowp vec3 highlightsShift;\n"  +
@@ -150,11 +154,11 @@ public class GPUImageColorBalanceFilter extends GPUImageFilter {
 
 
     public GPUImageColorBalanceFilter() {
-        super(NO_FILTER_VERTEX_SHADER, GPU_IMAGE_COLOR_BALANCE_FRAGMENT_SHADER);
+        super(NO_FILTER_VERTEX_SHADER, OpenGlUtils.readShaderFromRawResource(R.raw.color_balance));
         this.showdows = new float[]{0.0f, 0.0f, 0.0f};
         this.midtones = new float[]{0.0f, 0.0f, 0.0f};
         this.highlights = new float[]{0.0f, 0.0f, 0.0f};
-        this.preserveLuminosity = true;
+        this.preserveLuminosity = false;
     }
 
     @Override

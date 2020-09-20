@@ -3,8 +3,8 @@ package com.suishi.camera.camera.filter;
 import android.content.res.Resources;
 import android.opengl.GLES20;
 
-import com.suishi.camera.camera.utils.EasyGlUtils;
-import com.suishi.camera.camera.utils.MatrixUtils;
+import com.suishi.camera.utils.EasyGlUtils;
+import com.suishi.camera.utils.MatrixUtils;
 
 
 /**

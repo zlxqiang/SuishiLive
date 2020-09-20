@@ -1,6 +1,5 @@
 package com.suishi.camera;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.BlurMaskFilter;
 import android.graphics.Canvas;
@@ -11,15 +10,9 @@ import android.graphics.RectF;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.util.AttributeSet;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-
-import android.widget.ImageButton;
-import android.widget.ImageView;
-
 import androidx.appcompat.widget.AppCompatImageButton;
-
 import com.scwang.smartrefresh.layout.util.DensityUtil;
 
 

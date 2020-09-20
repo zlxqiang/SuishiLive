@@ -20,6 +20,8 @@ import android.graphics.Point;
 import android.graphics.PointF;
 import android.opengl.GLES20;
 
+import com.seu.magicfilter.utils.OpenGlUtils;
+
 import java.io.*;
 import java.nio.ByteBuffer;
 import java.util.ArrayList;

@@ -10,8 +10,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 
 
-import com.suishi.camera.camera.drawer.Camera2Proxy;
-import com.suishi.camera.camera.utils.OpenGLUtils;
+import com.suishi.camera.Camera2Proxy;
+import com.suishi.camera.utils.OpenGLUtils;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;

@@ -18,7 +18,9 @@ package com.seu.magicfilter.filter.gpuimage;
 
 import android.annotation.SuppressLint;
 import android.opengl.GLES20;
-import jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil;
+
+import com.seu.magicfilter.utils.Rotation;
+import com.seu.magicfilter.utils.TextureRotationUtil;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -26,8 +28,6 @@ import java.nio.FloatBuffer;
 import java.util.ArrayList;
 import java.util.List;
 
-import static jp.co.cyberagent.android.gpuimage.GPUImageRenderer.CUBE;
-import static jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil.TEXTURE_NO_ROTATION;
 
 /**
  * Resembles a filter that consists of multiple filters applied after each
@@ -64,15 +64,15 @@ public class GPUImageFilterGroup extends GPUImageFilter {
             updateMergedFilters();
         }
 
-        mGLCubeBuffer = ByteBuffer.allocateDirect(CUBE.length * 4)
+        mGLCubeBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.CUBE.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-        mGLCubeBuffer.put(CUBE).position(0);
+        mGLCubeBuffer.put(TextureRotationUtil.CUBE).position(0);
 
-        mGLTextureBuffer = ByteBuffer.allocateDirect(TEXTURE_NO_ROTATION.length * 4)
+        mGLTextureBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.TEXTURE_NO_ROTATION.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-        mGLTextureBuffer.put(TEXTURE_NO_ROTATION).position(0);
+        mGLTextureBuffer.put(TextureRotationUtil.TEXTURE_NO_ROTATION).position(0);
 
         float[] flipTexture = TextureRotationUtil.getRotation(Rotation.NORMAL, false, true);
         mGLTextureFlipBuffer = ByteBuffer.allocateDirect(flipTexture.length * 4)

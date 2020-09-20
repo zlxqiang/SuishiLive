@@ -26,7 +26,10 @@ import android.hardware.Camera.Size;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView.Renderer;
 
-import jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil;
+import com.seu.magicfilter.utils.OpenGlUtils;
+import com.seu.magicfilter.utils.Rotation;
+import com.seu.magicfilter.utils.TextureRotationUtil;
+
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -38,7 +41,6 @@ import java.nio.IntBuffer;
 import java.util.LinkedList;
 import java.util.Queue;
 
-import static jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil.TEXTURE_NO_ROTATION;
 
 @TargetApi(11)
 public class GPUImageRenderer implements Renderer, PreviewCallback {
@@ -87,7 +89,7 @@ public class GPUImageRenderer implements Renderer, PreviewCallback {
                 .asFloatBuffer();
         mGLCubeBuffer.put(CUBE).position(0);
 
-        mGLTextureBuffer = ByteBuffer.allocateDirect(TEXTURE_NO_ROTATION.length * 4)
+        mGLTextureBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.TEXTURE_NO_ROTATION.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
         setRotation(Rotation.NORMAL, false, false);

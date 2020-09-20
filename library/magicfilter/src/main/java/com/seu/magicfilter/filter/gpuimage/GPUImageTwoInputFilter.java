@@ -20,9 +20,12 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import jp.co.cyberagent.android.gpuimage.util.TextureRotationUtil;
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
+
+import com.seu.magicfilter.utils.OpenGlUtils;
+import com.seu.magicfilter.utils.Rotation;
+import com.seu.magicfilter.utils.TextureRotationUtil;
 
 public class GPUImageTwoInputFilter extends GPUImageFilter {
     private static final String VERTEX_SHADER = "attribute vec4 position;\n" +

@@ -1,0 +1,7 @@
+Executable : /home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/arm64-v8a
+ffmpeg-handle
+jvmArgs : 
+

@@ -21,6 +21,8 @@ import android.content.res.AssetManager;
 import android.graphics.PointF;
 import android.opengl.GLES20;
 
+import com.seu.magicfilter.utils.OpenGlUtils;
+
 import java.io.InputStream;
 import java.nio.FloatBuffer;
 import java.util.LinkedList;
@@ -37,10 +39,12 @@ public class GPUImageFilter {
             "    gl_Position = position;\n" +
             "    textureCoordinate = inputTextureCoordinate.xy;\n" +
             "}";
+
     public static final String NO_FILTER_FRAGMENT_SHADER = "" +
+            "#extension GL_OES_EGL_image_external : require\n" +
             "varying highp vec2 textureCoordinate;\n" +
             " \n" +
-            "uniform sampler2D inputImageTexture;\n" +
+            "uniform samplerExternalOES inputImageTexture;\n" +
             " \n" +
             "void main()\n" +
             "{\n" +
@@ -76,7 +80,6 @@ public class GPUImageFilter {
 
     public void init() {
         onInit();
-        mIsInitialized = true;
         onInitialized();
     }
 
@@ -91,6 +94,11 @@ public class GPUImageFilter {
 
     public void onInitialized() {
     }
+
+    public void ifNeedInit(){
+        if(!mIsInitialized) init();
+    }
+
 
     public final void destroy() {
         mIsInitialized = false;
@@ -113,19 +121,22 @@ public class GPUImageFilter {
         if (!mIsInitialized) {
             return;
         }
-
+        //
         cubeBuffer.position(0);
         GLES20.glVertexAttribPointer(mGLAttribPosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer);
         GLES20.glEnableVertexAttribArray(mGLAttribPosition);
+        //
         textureBuffer.position(0);
         GLES20.glVertexAttribPointer(mGLAttribTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0,
                 textureBuffer);
         GLES20.glEnableVertexAttribArray(mGLAttribTextureCoordinate);
+        //
         if (textureId != OpenGlUtils.NO_TEXTURE) {
             GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
             GLES20.glUniform1i(mGLUniformTexture, 0);
         }
+
         onDrawArraysPre();
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
         GLES20.glDisableVertexAttribArray(mGLAttribPosition);

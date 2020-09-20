@@ -1,0 +1,110 @@
+{
+  "stringTable": {
+    "0": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/x86_64",
+    "1": "--target=x86_64-none-linux-android21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/sysroot -Dffmpeg_handle_EXPORTS -I../../../../src/main/cpp/yuv -I../../../../src/main/cpp/include -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security -O0 -fno-limit-debug-info -fPIC"
+  },
+  "buildFiles": [
+    "/home/xiaoqiang/Android/Sdk/ndk-bundle/build/cmake/platforms.cmake",
+    "/home/xiaoqiang/Android/Sdk/ndk-bundle/build/cmake/android.toolchain.cmake",
+    "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/CMakeLists.txt"
+  ],
+  "cleanCommands": [
+    "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/x86_64\" clean"
+  ],
+  "buildTargetsCommand": "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja  -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/x86_64\" {LIST_OF_TARGETS_TO_BUILD}",
+  "libraries": {
+    "ffmpeg-handle-Debug-x86_64": {
+      "buildCommand": "/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja -C \"/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/.cxx/cmake/debug/x86_64\" ffmpeg-handle",
+      "buildType": "debug",
+      "toolchain": "878796888",
+      "abi": "x86_64",
+      "artifactName": "ffmpeg-handle",
+      "files": [
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/AVBaseProcessor.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/Data.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/Encoder.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/ThreadQueue.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/audio/AudioEncoder.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/audio/AudioProcessor.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/stream/RtmpStreamer.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/stream/Streamer.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoEncoder.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoMachining.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/av/video/VideoProcessor.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/LiveManager.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/debug.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        },
+        {
+          "src": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/cpp/FpsTools.cpp",
+          "flagsOrdinal": 1,
+          "workingDirectoryOrdinal": 0
+        }
+      ],
+      "headers": [],
+      "output": "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/build/intermediates/cmake/debug/obj/x86_64/libffmpeg-handle.so",
+      "runtimeFiles": [
+        "/home/xiaoqiang/StudioProjects/SuishiLive/library/sslive/src/main/jniLibs/armeabi-v7a/libffmpeg.so"
+      ]
+    }
+  },
+  "toolchains": {
+    "878796888": {
+      "cppCompilerExecutable": "/home/xiaoqiang/Android/Sdk/ndk-bundle/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++"
+    }
+  },
+  "cFileExtensions": [],
+  "cppFileExtensions": [
+    "cpp"
+  ]
+}

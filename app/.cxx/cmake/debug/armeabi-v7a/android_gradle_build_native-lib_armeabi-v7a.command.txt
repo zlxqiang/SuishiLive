@@ -1,0 +1,7 @@
+Executable : /home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+arguments : 
+-C
+/home/xiaoqiang/StudioProjects/SuishiLive/app/.cxx/cmake/debug/armeabi-v7a
+native-lib
+jvmArgs : 
+

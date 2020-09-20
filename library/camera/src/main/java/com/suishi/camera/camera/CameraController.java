@@ -8,7 +8,7 @@ import android.hardware.Camera;
 import android.util.Log;
 
 
-import com.suishi.camera.camera.utils.CameraParamUtil;
+import com.suishi.camera.utils.CameraParamUtil;
 import com.suishi.utils.DensityUtils;
 
 import java.io.IOException;

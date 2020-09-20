@@ -1,0 +1,22 @@
+Executable : /home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/cmake
+arguments : 
+-H/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter
+-DCMAKE_CXX_FLAGS=-fexceptions
+-DCMAKE_FIND_ROOT_PATH=/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/release/prefab/armeabi-v7a/prefab
+-DCMAKE_BUILD_TYPE=Release
+-DCMAKE_TOOLCHAIN_FILE=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/build/cmake/android.toolchain.cmake
+-DANDROID_ABI=armeabi-v7a
+-DANDROID_NDK=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147
+-DANDROID_PLATFORM=android-21
+-DCMAKE_ANDROID_ARCH_ABI=armeabi-v7a
+-DCMAKE_ANDROID_NDK=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147
+-DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+-DCMAKE_LIBRARY_OUTPUT_DIRECTORY=/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/build/intermediates/cmake/release/obj/armeabi-v7a
+-DCMAKE_MAKE_PROGRAM=/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/bin/ninja
+-DCMAKE_SYSTEM_NAME=Android
+-DCMAKE_SYSTEM_VERSION=21
+-B/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/release/armeabi-v7a
+-GNinja
+jvmArgs : 
+
+Build command args:

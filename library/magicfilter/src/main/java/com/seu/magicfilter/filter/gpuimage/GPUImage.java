@@ -39,6 +39,8 @@ import android.provider.MediaStore;
 import android.view.Display;
 import android.view.WindowManager;
 
+import com.seu.magicfilter.utils.Rotation;
+
 import java.io.*;
 import java.net.URL;
 import java.util.List;
@@ -354,7 +356,6 @@ public class GPUImage {
 
     /**
      * Deprecated: Please use
-     * {@link GPUImageView#saveToPictures(String, String, jp.co.cyberagent.android.gpuimage.GPUImageView.OnPictureSavedListener)}
      *
      * Save current image with applied filter to Pictures. It will be stored on
      * the default Picture folder on the phone below the given folderName and
@@ -374,7 +375,6 @@ public class GPUImage {
 
     /**
      * Deprecated: Please use
-     * {@link GPUImageView#saveToPictures(String, String, jp.co.cyberagent.android.gpuimage.GPUImageView.OnPictureSavedListener)}
      *
      * Apply and save the given bitmap with applied filter to Pictures. It will
      * be stored on the default Picture folder on the phone below the given

@@ -1,0 +1,25 @@
+[
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/release/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dfilter_EXPORTS -I../../../../src/main/cpp/beautify/MagicBeautify.h -I../../../../src/main/cpp/bitmap/BitmapOperation.h -I../../../../src/main/cpp/bitmap/Conversion.h -I../../../../src/main/cpp/bitmap/JniBitmap.h  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -fexceptions -Oz -DNDEBUG  -fPIC   -o CMakeFiles/filter.dir/src/main/cpp/beautify/MagicBeautify.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/beautify/MagicBeautify.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/beautify/MagicBeautify.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/release/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dfilter_EXPORTS -I../../../../src/main/cpp/beautify/MagicBeautify.h -I../../../../src/main/cpp/bitmap/BitmapOperation.h -I../../../../src/main/cpp/bitmap/Conversion.h -I../../../../src/main/cpp/bitmap/JniBitmap.h  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -fexceptions -Oz -DNDEBUG  -fPIC   -o CMakeFiles/filter.dir/src/main/cpp/bitmap/BitmapOperation.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/bitmap/BitmapOperation.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/bitmap/BitmapOperation.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/release/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dfilter_EXPORTS -I../../../../src/main/cpp/beautify/MagicBeautify.h -I../../../../src/main/cpp/bitmap/BitmapOperation.h -I../../../../src/main/cpp/bitmap/Conversion.h -I../../../../src/main/cpp/bitmap/JniBitmap.h  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -fexceptions -Oz -DNDEBUG  -fPIC   -o CMakeFiles/filter.dir/src/main/cpp/bitmap/Conversion.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/bitmap/Conversion.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/bitmap/Conversion.cpp"
+},
+
+{
+  "directory": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/.cxx/cmake/release/armeabi-v7a",
+  "command": "/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/bin/clang++ --target=armv7-none-linux-androideabi21 --gcc-toolchain=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64 --sysroot=/home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/toolchains/llvm/prebuilt/linux-x86_64/sysroot  -Dfilter_EXPORTS -I../../../../src/main/cpp/beautify/MagicBeautify.h -I../../../../src/main/cpp/bitmap/BitmapOperation.h -I../../../../src/main/cpp/bitmap/Conversion.h -I../../../../src/main/cpp/bitmap/JniBitmap.h  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D_FORTIFY_SOURCE=2 -march=armv7-a -mthumb -Wformat -Werror=format-security  -fexceptions -Oz -DNDEBUG  -fPIC   -o CMakeFiles/filter.dir/src/main/cpp/MagicJni.cpp.o -c /home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/MagicJni.cpp",
+  "file": "/home/xiaoqiang/StudioProjects/SuishiLive/library/magicfilter/src/main/cpp/MagicJni.cpp"
+}
+]

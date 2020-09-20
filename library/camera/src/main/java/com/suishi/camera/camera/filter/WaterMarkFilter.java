@@ -4,7 +4,7 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.opengl.GLES20;
 
-import com.suishi.camera.camera.utils.MatrixUtils;
+import com.suishi.camera.utils.MatrixUtils;
 
 
 /**

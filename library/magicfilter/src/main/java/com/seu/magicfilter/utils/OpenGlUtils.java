@@ -4,6 +4,7 @@ import android.content.res.AssetManager;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLUtils;
@@ -13,7 +14,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.nio.Buffer;
+import java.nio.IntBuffer;
 
 import javax.microedition.khronos.opengles.GL10;
 
@@ -29,12 +30,10 @@ public class OpenGlUtils {
     private StringBuilder body;
 
     public static int loadTexture(final Bitmap img, final int usedTexId) {
-        return loadTexture(img, usedTexId, false);
+        return loadTexture(img, usedTexId, true);
     }
 
-    public static int loadTexture(final Bitmap img, final int usedTexId, boolean recyled) {
-        if (img == null)
-            return NO_TEXTURE;
+    public static int loadTexture(final Bitmap img, final int usedTexId, final boolean recycle) {
         int textures[] = new int[1];
         if (usedTexId == NO_TEXTURE) {
             GLES20.glGenTextures(1, textures, 0);
@@ -54,14 +53,37 @@ public class OpenGlUtils {
             GLUtils.texSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0, img);
             textures[0] = usedTexId;
         }
-        if (recyled)
+        if (recycle) {
             img.recycle();
+        }
         return textures[0];
     }
 
-    public static int loadTexture(final Buffer data, final int width, final int height, final int usedTexId) {
-        if (data == null)
-            return NO_TEXTURE;
+    public static int loadTexture(final IntBuffer data, final Camera.Size size, final int usedTexId) {
+        int textures[] = new int[1];
+        if (usedTexId == NO_TEXTURE) {
+            GLES20.glGenTextures(1, textures, 0);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                    GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                    GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                    GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                    GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, size.width, size.height,
+                    0, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, data);
+        } else {
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, usedTexId);
+            GLES20.glTexSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0, size.width,
+                    size.height, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, data);
+            textures[0] = usedTexId;
+        }
+        return textures[0];
+    }
+
+    public static int loadTexture(final IntBuffer data, final int width,int height, final int usedTexId) {
         int textures[] = new int[1];
         if (usedTexId == NO_TEXTURE) {
             GLES20.glGenTextures(1, textures, 0);
@@ -85,32 +107,11 @@ public class OpenGlUtils {
         return textures[0];
     }
 
-    public static int loadTexture(final Buffer data, final int width, final int height, final int usedTexId, final int type) {
-        if (data == null)
-            return NO_TEXTURE;
-        int textures[] = new int[1];
-        if (usedTexId == NO_TEXTURE) {
-            GLES20.glGenTextures(1, textures, 0);
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[0]);
-            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
-                    GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
-                    GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
-            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
-                    GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
-            GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
-                    GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
-            GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height,
-                    0, GLES20.GL_RGBA, type, data);
-        } else {
-            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, usedTexId);
-            GLES20.glTexSubImage2D(GLES20.GL_TEXTURE_2D, 0, 0, 0, width,
-                    height, GLES20.GL_RGBA, type, data);
-            textures[0] = usedTexId;
-        }
-        return textures[0];
+    public static int loadTextureAsBitmap(final IntBuffer data, final Camera.Size size, final int usedTexId) {
+        Bitmap bitmap = Bitmap
+                .createBitmap(data.array(), size.width, size.height, Bitmap.Config.ARGB_8888);
+        return loadTexture(bitmap, usedTexId);
     }
-
     public static int loadTexture(final String name) {
         final int[] textureHandle = new int[1];
 
