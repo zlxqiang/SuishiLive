@@ -1,20 +1,15 @@
 package com.seu.magicfilter.filter.base;
 
-import android.graphics.Bitmap;
 import android.hardware.Camera;
-import android.opengl.GLES20;
 import android.opengl.GLES30;
 import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
-import com.seu.magicfilter.R;
 import com.seu.magicfilter.beautify.MagicJni;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
-import com.seu.magicfilter.utils.OpenGlUtils;
+import com.seu.magicfilter.filter.gpuimage.GPUImageFilter;
 
 import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.nio.IntBuffer;
 
 /**

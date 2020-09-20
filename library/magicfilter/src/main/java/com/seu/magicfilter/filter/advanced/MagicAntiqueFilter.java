@@ -3,7 +3,7 @@ package com.seu.magicfilter.filter.advanced;
 import android.opengl.GLES20;
 
 import com.seu.magicfilter.R;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageFilter;
 
 import java.nio.ByteBuffer;
 
@@ -15,7 +15,7 @@ public class MagicAntiqueFilter extends GPUImageFilter {
 		super(R.raw.antique);
 	}
 	
-	protected void onDestroy(){
+	public void onDestroy(){
 		super.onDestroy();
 	    GLES20.glDeleteTextures(1, mToneCurveTexture, 0);
 	    this.mToneCurveTexture[0] = -1;
@@ -37,12 +37,12 @@ public class MagicAntiqueFilter extends GPUImageFilter {
 	    }
 	}
 	  
-	protected void onInit(){
+	public void onInit(){
 		super.onInit();
 	    mToneCurveTextureUniformLocation = GLES20.glGetUniformLocation(mGLProgramId, "curve");
 	}
 	  
-	protected void onInitialized(){
+	public void onInitialized(){
 		super.onInitialized();
 	    runOnDraw(new Runnable(){
 		    public void run(){

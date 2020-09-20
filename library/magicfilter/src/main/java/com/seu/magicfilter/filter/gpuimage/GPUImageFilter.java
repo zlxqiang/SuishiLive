@@ -48,14 +48,20 @@ public class GPUImageFilter {
             "}";
 
     private final LinkedList<Runnable> mRunOnDraw;
+
     private final String mVertexShader;
     private final String mFragmentShader;
+
     protected int mGLProgId;
+
     protected int mGLAttribPosition;
     protected int mGLUniformTexture;
+
     protected int mGLAttribTextureCoordinate;
+
     protected int mOutputWidth;
     protected int mOutputHeight;
+
     private boolean mIsInitialized;
 
     public GPUImageFilter() {
@@ -68,7 +74,7 @@ public class GPUImageFilter {
         mFragmentShader = fragmentShader;
     }
 
-    public final void init() {
+    public void init() {
         onInit();
         mIsInitialized = true;
         onInitialized();
@@ -275,4 +281,5 @@ public class GPUImageFilter {
         java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
         return s.hasNext() ? s.next() : "";
     }
+
 }

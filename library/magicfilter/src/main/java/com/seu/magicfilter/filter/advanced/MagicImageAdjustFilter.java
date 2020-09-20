@@ -1,13 +1,13 @@
 package com.seu.magicfilter.filter.advanced;
 
 import com.seu.magicfilter.filter.base.MagicBaseGroupFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageBrightnessFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageContrastFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageExposureFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageHueFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageSaturationFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageSharpenFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageBrightnessFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageContrastFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageExposureFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageHueFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageSaturationFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageSharpenFilter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,7 +19,8 @@ public class MagicImageAdjustFilter extends MagicBaseGroupFilter {
 	}
 	
 	private static List<GPUImageFilter> initFilters(){
-		List<GPUImageFilter> filters = new ArrayList<GPUImageFilter>();
+		List<GPUImageFilter> filters;
+		filters = new ArrayList<GPUImageFilter>();
 		filters.add(new GPUImageContrastFilter());
 		filters.add(new GPUImageBrightnessFilter());
 		filters.add(new GPUImageExposureFilter());

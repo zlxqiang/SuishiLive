@@ -1,7 +1,7 @@
 package com.seu.magicfilter.filter.base;
 
 import com.seu.magicfilter.R;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+import com.seu.magicfilter.filter.gpuimage.GPUImageFilter;
 
 /**
  * 绘制纹理到屏幕
