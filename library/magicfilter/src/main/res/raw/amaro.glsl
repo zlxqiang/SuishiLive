@@ -5,9 +5,9 @@ precision mediump float;
 varying mediump vec2 textureCoordinate;
 
 uniform samplerExternalOES inputImageTexture;
-uniform sampler2D inputImageTexture2; //blowout;
-uniform sampler2D inputImageTexture3; //overlay;
-uniform sampler2D inputImageTexture4; //map
+uniform samplerExternalOES inputImageTexture2; //blowout;
+uniform samplerExternalOES inputImageTexture3; //overlay;
+uniform samplerExternalOES inputImageTexture4; //map
 
 uniform float strength;
 

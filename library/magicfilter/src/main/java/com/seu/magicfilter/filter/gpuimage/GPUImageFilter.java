@@ -66,6 +66,9 @@ public class GPUImageFilter {
     protected int mOutputWidth;
     protected int mOutputHeight;
 
+    protected int mInputWidth;
+    protected int mInputHeight;
+
     private boolean mIsInitialized;
 
     public GPUImageFilter() {
@@ -112,6 +115,11 @@ public class GPUImageFilter {
     public void onOutputSizeChanged(final int width, final int height) {
         mOutputWidth = width;
         mOutputHeight = height;
+    }
+
+    public void onInputSizeChanged(final int width, final int height){
+        mInputWidth=width;
+        mInputHeight=height;
     }
 
     public void onDraw(final int textureId, final FloatBuffer cubeBuffer,

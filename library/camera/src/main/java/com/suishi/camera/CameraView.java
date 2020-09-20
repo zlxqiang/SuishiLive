@@ -8,10 +8,10 @@ import android.util.AttributeSet;
 import android.util.Size;
 import android.view.SurfaceHolder;
 
-import com.seu.magicfilter.filter.gpuimage.GPUImageAlphaBlendFilter;
+import com.seu.magicfilter.filter.advanced.MagicAmaroFilter;
 import com.seu.magicfilter.filter.gpuimage.GPUImageColorBalanceFilter;
 import com.seu.magicfilter.filter.gpuimage.GPUImageFilter;
-import com.suishi.camera.render.VideoDrawer;
+import com.suishi.camera.render.GLRender;
 
 
 
@@ -19,7 +19,7 @@ import com.suishi.camera.render.VideoDrawer;
  */
 public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameAvailableListener  {
 
-    private VideoDrawer mCameraDrawer;
+    private GLRender mCameraDrawer;
 
     private Size mSize;
     /**
@@ -27,7 +27,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
      */
     private SurfaceHolder.Callback mCallback=null;
 
-    private GPUImageFilter filter= new GPUImageColorBalanceFilter();
+    private GPUImageFilter filter= new MagicAmaroFilter();
 
     public CameraView(Context context) {
         this(context, null);
@@ -49,7 +49,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
         //保存Context当pause时
         //setPreserveEGLContextOnPause(true);
         //设置Renderer
-        mCameraDrawer = new VideoDrawer(filter);
+        mCameraDrawer = new GLRender(filter);
         setRenderer(mCameraDrawer);
        // setRenderModeDirty();
         setRenderModeDirty();
@@ -113,7 +113,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
         mCameraDrawer.setPreviewSize(size);
     }
 
-    public VideoDrawer getRender(){
+    public GLRender getRender(){
         return mCameraDrawer;
     }
 

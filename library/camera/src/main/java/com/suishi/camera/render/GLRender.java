@@ -3,7 +3,6 @@ package com.suishi.camera.render;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.SurfaceTexture;
-import android.hardware.Camera;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
@@ -32,7 +31,7 @@ import javax.microedition.khronos.opengles.GL10;
  * Created by cj on 2017/10/16.
  * desc：添加水印和美白效果
  */
-public class VideoDrawer implements GLSurfaceView.Renderer {
+public class GLRender implements GLSurfaceView.Renderer {
     private static final int NO_IMAGE = -1;
 
     private GPUImageFilter filter;
@@ -69,7 +68,7 @@ public class VideoDrawer implements GLSurfaceView.Renderer {
     private float backgroundBlue = 0;
 
 
-    public VideoDrawer(final GPUImageFilter filter) {
+    public GLRender(final GPUImageFilter filter) {
         this.filter = filter;
         runOnDraw = new LinkedList<>();
         runOnDrawEnd = new LinkedList<>();
@@ -189,14 +188,14 @@ public class VideoDrawer implements GLSurfaceView.Renderer {
 
             @Override
             public void run() {
-                final GPUImageFilter oldFilter = VideoDrawer.this.filter;
-                VideoDrawer.this.filter = filter;
+                final GPUImageFilter oldFilter = GLRender.this.filter;
+                GLRender.this.filter = filter;
                 if (oldFilter != null) {
                     oldFilter.destroy();
                 }
-                VideoDrawer.this.filter.ifNeedInit();
-                GLES20.glUseProgram(VideoDrawer.this.filter.getProgram());
-                VideoDrawer.this.filter.onOutputSizeChanged(outputWidth, outputHeight);
+                GLRender.this.filter.ifNeedInit();
+                GLES20.glUseProgram(GLRender.this.filter.getProgram());
+                GLRender.this.filter.onOutputSizeChanged(outputWidth, outputHeight);
             }
         });
     }
