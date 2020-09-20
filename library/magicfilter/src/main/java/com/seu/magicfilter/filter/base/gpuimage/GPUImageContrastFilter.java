@@ -19,6 +19,7 @@ package com.seu.magicfilter.filter.base.gpuimage;
 import android.opengl.GLES20;
 
 import com.seu.magicfilter.R;
+import com.seu.magicfilter.utils.OpenGlUtils;
 
 /**
  * Changes the contrast of the image.<br>
@@ -26,6 +27,19 @@ import com.seu.magicfilter.R;
  * contrast value ranges from 0.0 to 4.0, with 1.0 as the normal level
  */
 public class GPUImageContrastFilter extends GPUImageFilter {
+
+    private static final String framg="#extension GL_OES_EGL_image_external : require"+
+    "\n"+
+    "varying highp vec2 textureCoordinate;\n"+
+    "\n"+
+    "uniform samplerExternalOES inputImageTexture;\n"+
+    "uniform lowp float contrast;"+
+     "\n"+
+    "void main() {\n"+
+        "lowp vec4 textureColor = texture2D(inputImageTexture, textureCoordinate);\n"+
+        "\n"+
+        "gl_FragColor = vec4(((textureColor.rgb - vec3(0.5)) * contrast + vec3(0.5)), textureColor.w);\n"+
+    "}";
 
     private int mContrastLocation;
     private float mContrast;
@@ -35,7 +49,7 @@ public class GPUImageContrastFilter extends GPUImageFilter {
     }
 
     public GPUImageContrastFilter(float contrast) {
-        super(R.raw.contrast);
+        super(VERTEX_SHADER,framg);
         mContrast = contrast;
     }
 

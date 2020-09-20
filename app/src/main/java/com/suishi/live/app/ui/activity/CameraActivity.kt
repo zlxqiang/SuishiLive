@@ -207,6 +207,10 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     private val cameraThread =HandlerThread("CameraThread").apply{
         start()
+//        GPUImage(this@CameraActivity).apply {
+//            setFilter(GPUImage3x3ConvolutionFilter())
+//            setGLSurfaceView(mCameraView)
+//        }
     }
 
     private val cameraHandler=Handler(cameraThread.looper)

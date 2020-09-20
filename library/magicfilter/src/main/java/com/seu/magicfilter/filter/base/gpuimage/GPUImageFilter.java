@@ -1,222 +1,354 @@
-/*
- * Copyright (C) 2012 CyberAgent
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.seu.magicfilter.filter.base.gpuimage;
 
 import android.content.Context;
-import android.content.res.AssetManager;
 import android.graphics.PointF;
+import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 
 import com.seu.magicfilter.R;
 import com.seu.magicfilter.utils.OpenGlUtils;
+import com.seu.magicfilter.utils.Rotation;
+import com.seu.magicfilter.utils.TextureRotationUtil;
 
-import java.io.InputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 import java.util.LinkedList;
 
 public class GPUImageFilter {
-    public static final String NO_FILTER_VERTEX_SHADER = "" +
-            "attribute vec4 position;\n" +
-            "attribute vec4 inputTextureCoordinate;\n" +
-            " \n" +
+
+    /**
+     * 片段着色器
+     */
+    public static final String FRAGMENT_SHADER = "" +
+            "#extension GL_OES_EGL_image_external : require\n" +
+            "precision mediump float;" +
             "varying vec2 textureCoordinate;\n" +
-            " \n" +
-            "void main()\n" +
-            "{\n" +
-            "    gl_Position = position;\n" +
-            "    textureCoordinate = inputTextureCoordinate.xy;\n" +
+            "uniform samplerExternalOES s_texture;\n" +
+            "void main() {" +
+            "  gl_FragColor = texture2D( s_texture, textureCoordinate );\n" +
             "}";
-    public static final String NO_FILTER_FRAGMENT_SHADER = "" +
-            "varying highp vec2 textureCoordinate;\n" +
-            " \n" +
-            "uniform sampler2D inputImageTexture;\n" +
-            " \n" +
-            "void main()\n" +
-            "{\n" +
-            "     gl_FragColor = texture2D(inputImageTexture, textureCoordinate);\n" +
+    /**
+     * 顶点着色器
+     */
+    public static final String VERTEX_SHADER = "" +
+            "attribute vec4 position;" +
+            "attribute vec2 inputTextureCoordinate;" +
+            "varying vec2 textureCoordinate;" +
+            "void main()" +
+            "{" +
+            "gl_Position = position;" +
+            "textureCoordinate = inputTextureCoordinate;" +
             "}";
 
-    private final LinkedList<Runnable> runOnDraw;
-    private final String vertexShader;
-    private final String fragmentShader;
-    public int mGLProgramId;
-    private int glAttribPosition;
-    private int glUniformTexture;
-    private int glAttribTextureCoordinate;
-    private int outputWidth;
-    private int outputHeight;
-    private boolean isInitialized;
+    private final LinkedList<Runnable> mRunOnDraw;
+    private final String mVertexShader;
+    private final String mFragmentShader;
 
+    protected int mGLProgramId;
+    protected int mGLAttributePosition;
+    protected int mGLUniformTexture;
+    protected int mGLAttributeTextureCoordinate;
+
+    /**
+     * 预览尺寸
+     */
     protected int mInputWidth;
     protected int mInputHeight;
 
-    public GPUImageFilter() {
-        this(NO_FILTER_VERTEX_SHADER, NO_FILTER_FRAGMENT_SHADER);
-    }
+    protected boolean mIsInitialized;
+    protected FloatBuffer mGLCubeBuffer;
+    protected FloatBuffer mGLTextureBuffer;
 
-    public GPUImageFilter(final String vertexShader, final String fragmentShader) {
-        runOnDraw = new LinkedList<>();
-        this.vertexShader = vertexShader;
-        this.fragmentShader = fragmentShader;
+    /**
+     * 屏幕尺寸
+     */
+    protected int mOutputWidth, mOutputHeight;
+
+    protected float[] mTextureTransformMatrix;
+    protected int mTextureTransformMatrixLocation;
+
+    protected int[] mFrameBuffers = null;
+    protected int[] mFrameBufferTextures = null;
+
+    public GPUImageFilter() {
+        this(R.raw.default_fragment);
     }
 
     public GPUImageFilter(int fragmentShaderId) {
-        this(R.raw.none_vertex, fragmentShaderId);
+        this(R.raw.default_vertex, fragmentShaderId);
     }
 
     public GPUImageFilter(int vertexShaderId, int fragmentShaderId) {
-        runOnDraw = new LinkedList<>();
-        this.vertexShader =  OpenGlUtils.readShaderFromRawResource(vertexShaderId);
-        this.fragmentShader = OpenGlUtils.readShaderFromRawResource(fragmentShaderId);
+        this.mVertexShader = OpenGlUtils.readShaderFromRawResource(vertexShaderId);
+        this.mFragmentShader =OpenGlUtils.readShaderFromRawResource(fragmentShaderId);
+
+        mRunOnDraw = new LinkedList<>();
+
+        mGLCubeBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.CUBE.length * 4)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+        mGLCubeBuffer.put(TextureRotationUtil.CUBE).position(0);
+
+        mGLTextureBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.TEXTURE_NO_ROTATION.length * 4)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+        mGLTextureBuffer.put(TextureRotationUtil.getRotation(Rotation.NORMAL, false, true)).position(0);
     }
 
-    private final void init() {
+    public GPUImageFilter(String vertexShader, String fragmentShader) {
+        this.mVertexShader =vertexShader;
+        this.mFragmentShader =fragmentShader;
+
+        mRunOnDraw = new LinkedList<>();
+
+        mGLCubeBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.CUBE.length * 4)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+        mGLCubeBuffer.put(TextureRotationUtil.CUBE).position(0);
+
+        mGLTextureBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.TEXTURE_NO_ROTATION.length * 4)
+                .order(ByteOrder.nativeOrder())
+                .asFloatBuffer();
+        mGLTextureBuffer.put(TextureRotationUtil.getRotation(Rotation.NORMAL, false, true)).position(0);
+    }
+
+    public void init() {
         onInit();
         onInitialized();
     }
 
     protected void onInit() {
-//        mGLProgramId = OpenGlUtils.loadProgram(vertexShader, fragmentShader);
-//        glAttribPosition = GLES20.glGetAttribLocation(mGLProgramId, "position");
-//        glUniformTexture = GLES20.glGetUniformLocation(mGLProgramId, "inputImageTexture");
-//        glAttribTextureCoordinate = GLES20.glGetAttribLocation(mGLProgramId, "inputTextureCoordinate");
-        isInitialized = true;
-
-        /**
-         * 片段着色器
-         */
-        String FRAGMENT_SHADER = "" +
-                "#extension GL_OES_EGL_image_external : require\n" +
-                "precision mediump float;" +
-                "varying vec2 textureCoordinate;\n" +
-                "uniform samplerExternalOES s_texture;\n" +
-                "void main() {" +
-                "  gl_FragColor = texture2D( s_texture, textureCoordinate );\n" +
-                "}";
-        /**
-         * 顶点着色器
-         */
-        String VERTEX_SHADER = "" +
-                "attribute vec4 vPosition;" +
-                "attribute vec2 inputTextureCoordinate;" +
-                "varying vec2 textureCoordinate;" +
-                "void main()" +
-                "{" +
-                "gl_Position = vPosition;" +
-                "textureCoordinate = inputTextureCoordinate;" +
-                "}";
-        mGLProgramId = OpenGlUtils.loadProgram(VERTEX_SHADER, FRAGMENT_SHADER);
-        glAttribPosition = GLES20.glGetAttribLocation(mGLProgramId, "vPosition");
-        glAttribTextureCoordinate = GLES20.glGetAttribLocation(mGLProgramId, "inputTextureCoordinate");
-
+        mGLProgramId = OpenGlUtils.loadProgram(mVertexShader,
+                mFragmentShader);
+        mGLAttributePosition = GLES20.glGetAttribLocation(mGLProgramId, "position");
+        mGLUniformTexture = GLES20.glGetUniformLocation(mGLProgramId, "inputImageTexture");
+        mGLAttributeTextureCoordinate = GLES20.glGetAttribLocation(mGLProgramId,
+                "inputTextureCoordinate");
+        mTextureTransformMatrixLocation = GLES20.glGetUniformLocation(mGLProgramId, "textureTransform");
+        mIsInitialized = true;
     }
 
     protected void onInitialized() {
+
     }
 
-    public void ifNeedInit() {
-        if (!isInitialized) init();
+    public void ifNeedInit(){
+        if(!mIsInitialized) init();
     }
 
     public final void destroy() {
-        isInitialized = false;
+        mIsInitialized = false;
         GLES20.glDeleteProgram(mGLProgramId);
         onDestroy();
     }
 
     protected void onDestroy() {
+        destroyFrameBuffers();
     }
 
-    public void onOutputSizeChanged(final int width, final int height) {
-        outputWidth = width;
-        outputHeight = height;
+    public void onInputSizeChanged(final int width, final int height) {
+        mInputWidth = width;
+        mInputHeight = height;
     }
 
-    public void onDraw(final int textureId, final FloatBuffer cubeBuffer,
-                       final FloatBuffer textureBuffer) {
-        GLES20.glUseProgram(mGLProgramId);
-        runPendingOnDrawTasks();
-        if (!isInitialized) {
+    public void setTextureTransformMatrix(float[] mtx) {
+        mTextureTransformMatrix = mtx;
+    }
+
+    public void initFrameBuffer(int width, int height) {
+        if (mFrameBuffers != null && (mInputWidth != width || mInputHeight != height)) {
+            destroyFrameBuffers();
+        }
+        if (mFrameBuffers != null) {
             return;
         }
 
+        mFrameBuffers = new int[1];
+        mFrameBufferTextures = new int[1];
+
+        GLES20.glGenFramebuffers(1, mFrameBuffers, 0);
+        GLES20.glGenTextures(1, mFrameBufferTextures, 0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mFrameBufferTextures[0]);
+        GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, GLES20.GL_RGBA, width, height, 0,
+                GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, null);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                GLES20.GL_TEXTURE_WRAP_S, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D,
+                GLES20.GL_TEXTURE_WRAP_T, GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[0]);
+        GLES20.glFramebufferTexture2D(GLES20.GL_FRAMEBUFFER, GLES20.GL_COLOR_ATTACHMENT0,
+                GLES20.GL_TEXTURE_2D, mFrameBufferTextures[0], 0);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+    }
+
+    private void destroyFrameBuffers() {
+        if (mFrameBufferTextures != null) {
+            GLES20.glDeleteTextures(1, mFrameBufferTextures, 0);
+            mFrameBufferTextures = null;
+        }
+        if (mFrameBuffers != null) {
+            GLES20.glDeleteFramebuffers(1, mFrameBuffers, 0);
+            mFrameBuffers = null;
+        }
+    }
+
+    public int onDrawFrame(final int textureId, final FloatBuffer cubeBuffer,
+                           final FloatBuffer textureBuffer) {
+        if (!mIsInitialized) {
+            return OpenGlUtils.NOT_INIT;
+        }
+
+        GLES20.glUseProgram(mGLProgramId);
+        runPendingOnDrawTasks();
+        //
         cubeBuffer.position(0);
-        GLES20.glVertexAttribPointer(glAttribPosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer);
-        GLES20.glEnableVertexAttribArray(glAttribPosition);
+        GLES20.glVertexAttribPointer(mGLAttributePosition, 2, GLES20.GL_FLOAT, false, 0, cubeBuffer);
+        GLES20.glEnableVertexAttribArray(mGLAttributePosition);
+        //
         textureBuffer.position(0);
-        GLES20.glVertexAttribPointer(glAttribTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0,
+        GLES20.glVertexAttribPointer(mGLAttributeTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0,
                 textureBuffer);
-        GLES20.glEnableVertexAttribArray(glAttribTextureCoordinate);
+        GLES20.glEnableVertexAttribArray(mGLAttributeTextureCoordinate);
+
         if (textureId != OpenGlUtils.NO_TEXTURE) {
             GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
             GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
-            GLES20.glUniform1i(glUniformTexture, 0);
+            GLES20.glUniform1i(mGLUniformTexture, 0);
         }
+
         onDrawArraysPre();
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
-        GLES20.glDisableVertexAttribArray(glAttribPosition);
-        GLES20.glDisableVertexAttribArray(glAttribTextureCoordinate);
+        GLES20.glDisableVertexAttribArray(mGLAttributePosition);
+        GLES20.glDisableVertexAttribArray(mGLAttributeTextureCoordinate);
+        onDrawArraysAfter();
+
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+        return OpenGlUtils.ON_DRAWN;
+    }
+
+    public int onDrawFrame(final int textureId) {
+        if (!mIsInitialized) {
+            return OpenGlUtils.NOT_INIT;
+        }
+
+        GLES20.glUseProgram(mGLProgramId);
+        runPendingOnDrawTasks();
+
+        mGLCubeBuffer.position(0);
+        GLES20.glVertexAttribPointer(mGLAttributePosition, 2, GLES20.GL_FLOAT, false, 0, mGLCubeBuffer);
+        GLES20.glEnableVertexAttribArray(mGLAttributePosition);
+        mGLTextureBuffer.position(0);
+        GLES20.glVertexAttribPointer(mGLAttributeTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0,
+                mGLTextureBuffer);
+        GLES20.glEnableVertexAttribArray(mGLAttributeTextureCoordinate);
+
+        if (textureId != OpenGlUtils.NO_TEXTURE) {
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+            GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textureId);
+            GLES20.glUniform1i(mGLUniformTexture, 0);
+        }
+
+        onDrawArraysPre();
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+        GLES20.glDisableVertexAttribArray(mGLAttributePosition);
+        GLES20.glDisableVertexAttribArray(mGLAttributeTextureCoordinate);
+        onDrawArraysAfter();
+
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
+        return OpenGlUtils.ON_DRAWN;
+    }
+
+    //绘制到fbo，注意GL_TEXTURE_EXTERNAL_OES，这里使用SurfaceTexture纹理
+    public int onDrawToTexture(final int textureId) {
+        if (mFrameBuffers == null) {
+            return OpenGlUtils.NO_TEXTURE;
+        }
+        if (!isInitialized()) {
+            return OpenGlUtils.NOT_INIT;
+        }
+
+        GLES20.glViewport(0, 0, mInputWidth, mInputHeight);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, mFrameBuffers[0]);
+        GLES20.glUseProgram(mGLProgramId);
+        runPendingOnDrawTasks();
+
+        mGLCubeBuffer.position(0);
+        GLES20.glVertexAttribPointer(mGLAttributePosition, 2, GLES20.GL_FLOAT, false, 0, mGLCubeBuffer);
+        GLES20.glEnableVertexAttribArray(mGLAttributePosition);
+        mGLTextureBuffer.position(0);
+        GLES20.glVertexAttribPointer(mGLAttributeTextureCoordinate, 2, GLES20.GL_FLOAT, false, 0, mGLTextureBuffer);
+        GLES20.glEnableVertexAttribArray(mGLAttributeTextureCoordinate);
+
+        GLES20.glUniformMatrix4fv(mTextureTransformMatrixLocation, 1, false, mTextureTransformMatrix, 0);
+
+        if (textureId != OpenGlUtils.NO_TEXTURE) {
+            GLES20.glActiveTexture(GLES20.GL_TEXTURE0);
+            GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, textureId);
+            GLES20.glUniform1i(mGLUniformTexture, 0);
+        }
+
+        onDrawArraysPre();
+        GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
+        GLES20.glDisableVertexAttribArray(mGLAttributePosition);
+        GLES20.glDisableVertexAttribArray(mGLAttributeTextureCoordinate);
+        onDrawArraysAfter();
+
+        GLES20.glBindTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, 0);
+        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
+        GLES20.glViewport(0, 0, mOutputWidth, mOutputHeight);
+        return mFrameBufferTextures[0];
     }
 
     protected void onDrawArraysPre() {
     }
 
+    protected void onDrawArraysAfter() {
+    }
+
     protected void runPendingOnDrawTasks() {
-        synchronized (runOnDraw) {
-            while (!runOnDraw.isEmpty()) {
-                runOnDraw.removeFirst().run();
-            }
+        while (!mRunOnDraw.isEmpty()) {
+            mRunOnDraw.removeFirst().run();
         }
     }
 
     public boolean isInitialized() {
-        return isInitialized;
+        return mIsInitialized;
     }
 
-    public int getOutputWidth() {
-        return outputWidth;
+    public int getInputWidth() {
+        return mInputWidth;
     }
 
-    public int getOutputHeight() {
-        return outputHeight;
+    public int getInputHeight() {
+        return mInputHeight;
     }
 
     public int getProgram() {
         return mGLProgramId;
     }
 
-    public int getAttribPosition() {
-        return glAttribPosition;
+    public int getAttributePosition() {
+        return mGLAttributePosition;
     }
 
-    public int getAttribTextureCoordinate() {
-        return glAttribTextureCoordinate;
+    public int getAttributeTextureCoordinate() {
+        return mGLAttributeTextureCoordinate;
     }
 
     public int getUniformTexture() {
-        return glUniformTexture;
+        return mGLUniformTexture;
     }
 
     protected void setInteger(final int location, final int intValue) {
         runOnDraw(new Runnable() {
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniform1i(location, intValue);
             }
         });
@@ -226,7 +358,6 @@ public class GPUImageFilter {
         runOnDraw(new Runnable() {
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniform1f(location, floatValue);
             }
         });
@@ -236,7 +367,6 @@ public class GPUImageFilter {
         runOnDraw(new Runnable() {
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniform2fv(location, 1, FloatBuffer.wrap(arrayValue));
             }
         });
@@ -246,7 +376,6 @@ public class GPUImageFilter {
         runOnDraw(new Runnable() {
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniform3fv(location, 1, FloatBuffer.wrap(arrayValue));
             }
         });
@@ -256,7 +385,6 @@ public class GPUImageFilter {
         runOnDraw(new Runnable() {
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniform4fv(location, 1, FloatBuffer.wrap(arrayValue));
             }
         });
@@ -266,7 +394,6 @@ public class GPUImageFilter {
         runOnDraw(new Runnable() {
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniform1fv(location, arrayValue.length, FloatBuffer.wrap(arrayValue));
             }
         });
@@ -274,9 +401,9 @@ public class GPUImageFilter {
 
     protected void setPoint(final int location, final PointF point) {
         runOnDraw(new Runnable() {
+
             @Override
             public void run() {
-                ifNeedInit();
                 float[] vec2 = new float[2];
                 vec2[0] = point.x;
                 vec2[1] = point.y;
@@ -290,7 +417,6 @@ public class GPUImageFilter {
 
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniformMatrix3fv(location, 1, false, matrix, 0);
             }
         });
@@ -301,46 +427,19 @@ public class GPUImageFilter {
 
             @Override
             public void run() {
-                ifNeedInit();
                 GLES20.glUniformMatrix4fv(location, 1, false, matrix, 0);
             }
         });
     }
 
     protected void runOnDraw(final Runnable runnable) {
-        synchronized (runOnDraw) {
-            runOnDraw.addLast(runnable);
+        synchronized (mRunOnDraw) {
+            mRunOnDraw.addLast(runnable);
         }
-    }
-
-    public static String loadShader(String file, Context context) {
-        try {
-            AssetManager assetManager = context.getAssets();
-            InputStream ims = assetManager.open(file);
-
-            String re = convertStreamToString(ims);
-            ims.close();
-            return re;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return "";
-    }
-
-    public static String convertStreamToString(java.io.InputStream is) {
-        java.util.Scanner s = new java.util.Scanner(is).useDelimiter("\\A");
-        return s.hasNext() ? s.next() : "";
     }
 
     public void onDisplaySizeChanged(final int width, final int height) {
-        outputWidth = width;
-        outputHeight = height;
+        mOutputWidth = width;
+        mOutputHeight = height;
     }
-
-    public void onInputSizeChanged(final int width, final int height) {
-        mInputWidth = width;
-        mInputHeight = height;
-    }
-
 }

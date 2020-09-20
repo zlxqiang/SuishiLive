@@ -1,6 +1,7 @@
 package com.seu.magicfilter.utils;
 
 import android.content.res.AssetManager;
+import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.opengl.GLES11Ext;
@@ -25,6 +26,7 @@ public class OpenGlUtils {
     public static final int NO_TEXTURE = -1;
     public static final int NOT_INIT = -1;
     public static final int ON_DRAWN = 1;
+    private StringBuilder body;
 
     public static int loadTexture(final Bitmap img, final int usedTexId) {
         return loadTexture(img, usedTexId, false);
@@ -215,20 +217,17 @@ public class OpenGlUtils {
     }
 
     public static String readShaderFromRawResource(final int resourceId) {
-        final InputStream inputStream = MagicParams.context.getResources().openRawResource(
-                resourceId);
+        final StringBuilder body = new StringBuilder();
+        try {
+        final InputStream inputStream = MagicParams.context.getResources().openRawResource(resourceId);
         final InputStreamReader inputStreamReader = new InputStreamReader(
                 inputStream);
         final BufferedReader bufferedReader = new BufferedReader(
                 inputStreamReader);
-
         String nextLine;
-        final StringBuilder body = new StringBuilder();
-
-        try {
             while ((nextLine = bufferedReader.readLine()) != null) {
                 body.append(nextLine);
-                body.append('\n');
+                body.append("\n");
             }
         } catch (IOException e) {
             return null;
@@ -246,5 +245,22 @@ public class OpenGlUtils {
             Log.e("OpenGlUtils", msg);
             throw new RuntimeException(msg);
         }
+    }
+
+
+    public static String loadFromAssets(String fileName) {
+        String result = null;
+        try {
+            InputStream is = MagicParams.context.getResources().getAssets().open(fileName);
+            int length = is.available();
+            byte[] data = new byte[length];
+            is.read(data);
+            is.close();
+            result = new String(data, "UTF-8");
+            result = result.replace("\\r\\n", "\\n");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return result;
     }
 }

@@ -1,5 +1,6 @@
-<manifest package="com.seu.magicfilter">
+<manifest package="com.seu.magicfilter"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
-
+    <uses-feature android:glEsVersion="0x00020000" android:required="true" />
 
 </manifest>

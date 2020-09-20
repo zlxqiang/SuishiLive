@@ -53,9 +53,9 @@ public class MagicBrooklynFilter extends GPUImageFilter {
         setFloat(mGLStrengthLocation, 1.0f);
         runOnDraw(new Runnable() {
             public void run() {
-                inputTextureHandles[0] = OpenGlUtils.loadTexture("filter/brooklynCurves1.png");
-                inputTextureHandles[1] = OpenGlUtils.loadTexture("filter/filter_map_first.png");
-                inputTextureHandles[2] = OpenGlUtils.loadTexture("filter/brooklynCurves2.png");
+                inputTextureHandles[0] = OpenGlUtils.loadTexture("filter/brannan_blowout.png");
+                inputTextureHandles[1] = OpenGlUtils.loadTexture("filter/brannan_contrast.png");
+                inputTextureHandles[2] = OpenGlUtils.loadTexture("filter/brannan_luma.png");
             }
         });
     }

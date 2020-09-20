@@ -8,10 +8,21 @@ import android.util.AttributeSet;
 import android.util.Size;
 import android.view.SurfaceHolder;
 
+import com.seu.magicfilter.filter.advanced.MagicBrooklynFilter;
+import com.seu.magicfilter.filter.advanced.MagicImageAdjustFilter;
+import com.seu.magicfilter.filter.advanced.MagicInkwellFilter;
+import com.seu.magicfilter.filter.base.MagicBaseGroupFilter;
+import com.seu.magicfilter.filter.base.MagicCameraInputFilter;
 import com.seu.magicfilter.filter.base.gpuimage.GPUImageColorBalanceFilter;
-import com.seu.magicfilter.filter.base.gpuimage.GPUImageFilter;
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageContrastFilter;
+import com.seu.magicfilter.filter.base.gpuimage.GPUImageHueFilter;
+import com.seu.magicfilter.filter.helper.MagicFilterFactory;
+import com.seu.magicfilter.filter.helper.MagicFilterType;
 import com.suishi.camera.camera.drawer.VideoDrawer;
 
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageAlphaBlendFilter;
+import jp.co.cyberagent.android.gpuimage.filter.GPUImageFilter;
+import jp.wasabeef.glide.transformations.gpu.GPUFilterTransformation;
 
 
 /**
@@ -26,7 +37,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
      */
     private SurfaceHolder.Callback mCallback=null;
 
-    private GPUImageFilter filter=new GPUImageColorBalanceFilter();
+    private GPUImageFilter filter= new GPUImageAlphaBlendFilter();
 
     public CameraView(Context context) {
         this(context, null);
@@ -46,12 +57,12 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
         setEGLContextClientVersion(2);
         getHolder().setFormat(PixelFormat.RGBA_8888);
         //保存Context当pause时
-        setPreserveEGLContextOnPause(true);
+        //setPreserveEGLContextOnPause(true);
         //设置Renderer
         mCameraDrawer = new VideoDrawer(filter);
-        setRenderer( mCameraDrawer);
+        setRenderer(mCameraDrawer);
+       // setRenderModeDirty();
         setRenderModeDirty();
-        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
     /**
@@ -69,9 +80,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
 
     }
 
-    /**
-     * 每次Activity onResume时被调用,第一次不会打开相机
-     */
+
     @Override
     public void onResume() {
         super.onResume();

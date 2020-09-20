@@ -29,5 +29,4 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
     api 'com.jlong.ui:resource:1.0.8'
     implementation project(':magicfilter')
-    api 'jp.co.cyberagent.android:gpuimage:2.0.4'
 }

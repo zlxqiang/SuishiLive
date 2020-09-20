@@ -55,9 +55,9 @@ public class MagicImageView extends MagicBaseView{
         if(textureId == OpenGlUtils.NO_TEXTURE)
             textureId = OpenGlUtils.loadTexture(getBitmap(), OpenGlUtils.NO_TEXTURE);
         if(filter == null)
-            imageInput.onDraw(textureId, gLCubeBuffer, gLTextureBuffer);
+            imageInput.onDrawFrame(textureId, gLCubeBuffer, gLTextureBuffer);
         else
-            filter.onDraw(textureId, gLCubeBuffer, gLTextureBuffer);
+            filter.onDrawFrame(textureId, gLCubeBuffer, gLTextureBuffer);
     }
 
     @Override

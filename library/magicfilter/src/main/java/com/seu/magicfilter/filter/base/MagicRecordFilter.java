@@ -37,7 +37,7 @@ public class MagicRecordFilter extends GPUImageFilter {
     private Camera.PreviewCallback mRecordHelper;
 
     public MagicRecordFilter() {
-        super(R.raw.none_vertex, R.raw.default_fragment);
+        super("none_vertex", "default_fragment");
 //        setTextureTransformMatrix(new float[]{
 //                -1f, 0f, 0f, 0f,
 //                0f, 1f, 0f, 0f,
