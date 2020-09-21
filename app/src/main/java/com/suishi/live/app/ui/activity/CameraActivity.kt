@@ -30,7 +30,6 @@ import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
-import com.seu.magicfilter.filter.helper.MagicFilterType
 import com.suishi.camera.CameraView
 import com.suishi.camera.CircularProgressView
 import com.suishi.camera.FocusImageView
@@ -38,8 +37,9 @@ import com.suishi.camera.camera.CameraBuilder2
 import com.suishi.camera.camera.CameraController
 import com.suishi.camera.camera.SensorControler
 import com.suishi.camera.camera.SensorControler.CameraFocusListener
-import com.suishi.camera.camera.init.DefaultInit
-import com.suishi.camera.camera.open.DefaultOpen
+import com.suishi.camera.feature.init.DefaultInit
+import com.suishi.camera.feature.open.DefaultOpen
+import com.suishi.camera.feature.privew.DefaultPreview
 import com.suishi.live.app.R
 import com.suishi.live.app.modle.CameraInfo
 import com.suishi.live.app.utils.OrientationLiveData
@@ -263,7 +263,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         setVideoEncoder(MediaRecorder.VideoEncoder.H264)
         setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
         setInputSurface(surface)
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -309,9 +308,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
             })
         }
-
-        val controller=CameraController(CameraBuilder2().setInit(DefaultInit(this)).userOpen(DefaultOpen(this)))
-        controller.open()
 
     }
 
@@ -403,7 +399,12 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     override fun surfaceCreated(holder: SurfaceHolder?) {
         val previewSize=getPreviewOutputSize(mCameraView!!.display, characteristics, SurfaceHolder::class.java)
         mCameraView!!.post{
-            initializeCamera()
+            val controller=CameraController<CameraBuilder2>(CameraBuilder2()
+                    .setInit(DefaultInit(this))
+                    .useOpen(DefaultOpen(this))
+                    .usePreview(DefaultPreview(mCameraView!!.render.surfaceTexture)) as CameraBuilder2?)
+            controller.open()
+            controller.startPreview()
         }
     }
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {

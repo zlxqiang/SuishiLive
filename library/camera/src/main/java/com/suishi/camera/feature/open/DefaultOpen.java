@@ -1,8 +1,7 @@
-package com.suishi.camera.camera.open;
+package com.suishi.camera.feature.open;
 
 import android.Manifest;
 import android.app.Activity;
-import android.content.Context;
 import android.content.pm.PackageManager;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraDevice;
@@ -14,12 +13,13 @@ import android.util.Log;
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityCompat;
 
+import com.suishi.camera.camera.CameraBuilder2;
 import com.suishi.utils.ToastUtil;
 
 
 import static android.hardware.camera2.CameraDevice.*;
 
-public class DefaultOpen extends Open{
+public class DefaultOpen extends Open<CameraBuilder2>{
 
     private Activity mContext;
 
@@ -30,12 +30,25 @@ public class DefaultOpen extends Open{
 
     public DefaultOpen(Activity context) {
         this.mContext = context;
-        this.cameraThread =new HandlerThread("CameraThread");
-        this.cameraHandler=new Handler(cameraThread.getLooper());
-        cameraThread.start();
     }
 
-    public CameraDevice openCamera(CameraManager manager, String cameraId){
+    @Override
+    public void cameraBuilder(CameraBuilder2 builder) {
+        super.cameraBuilder(builder);
+        this.cameraThread =new HandlerThread("CameraThread");
+        cameraThread.start();
+        this.cameraHandler=new Handler(cameraThread.getLooper());
+    }
+
+    public CameraDevice getDevice() {
+        return mDevice;
+    }
+
+    public Handler getCameraHandler() {
+        return cameraHandler;
+    }
+
+    public CameraDevice openCamera(CameraManager manager, String cameraId, final StateCallback stateCallback){
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ToastUtil.shortToast("没有相机权限");
         }else {
@@ -43,34 +56,42 @@ public class DefaultOpen extends Open{
                 @Override
                 public void onOpened(@NonNull CameraDevice camera) {
                     mDevice =camera;
+                    stateCallback.onOpened(camera);
                 }
 
                 @Override
                 public void onDisconnected(@NonNull CameraDevice camera) {
+                    stateCallback.onDisconnected(camera);
                     mContext.finish();
+
                 }
 
                 @Override
                 public void onError(@NonNull CameraDevice camera, int error) {
-                    String msg = null;
+                    stateCallback.onError(camera,error);
+                    String msg;
                     switch (error) {
                         case ERROR_CAMERA_DEVICE :{
                             msg="相机设备发生了一个致命错误";
                         }
+                        break;
                         case ERROR_CAMERA_DISABLED:{
                             msg="Device policy";
                         }
+                        break;
                         case ERROR_CAMERA_IN_USE :{
                             msg="当前相机设备已经在一个更高优先级的地方打开了";
                         }
+                        break;
                         case ERROR_MAX_CAMERAS_IN_USE :{
                             msg="已打开相机数量到上限了，无法再打开新的相机了";
                         }
+                        break;
                         default: {
                             msg="UnKnown";
                         }
                     }
-                    RuntimeException exc =new  RuntimeException("Camera $cameraId error:($error) $msg");
+                    RuntimeException exc =new  RuntimeException(msg);
                     Log.e("open camera", exc.getMessage(), exc);
                 }
 

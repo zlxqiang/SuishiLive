@@ -1,4 +1,4 @@
-package com.suishi.camera.camera.face;
+package com.suishi.camera.feature.face;
 
 /**
  * 人脸检测

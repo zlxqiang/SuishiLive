@@ -1,7 +1,6 @@
-package com.suishi.camera.camera.init;
+package com.suishi.camera.feature.init;
 
 import android.content.Context;
-import android.hardware.Camera;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
 import android.hardware.camera2.CameraManager;
@@ -9,12 +8,15 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.MediaRecorder;
 import android.util.Size;
 
-import com.yzq.zxinglibrary.camera.OpenCameraInterface;
+import com.suishi.camera.camera.CameraBuilder2;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class DefaultInit extends Init{
+
+public class DefaultInit extends Init<CameraBuilder2>{
+
+    private Context mContext;
 
     private CameraManager mCameraManager;
 
@@ -22,12 +24,24 @@ public class DefaultInit extends Init{
 
     private CameraCharacteristics mCharacteristics;
 
+    private CameraInfo mCurrentCamera;
 
     public DefaultInit(Context context) {
-        mCameraManager= (CameraManager) context.getSystemService(Context.CAMERA_SERVICE);
-        mCameraInfo=getCamerList();
+        mContext=context;
+    }
+
+    @Override
+    public void cameraBuilder(CameraBuilder2 builder) {
+        super.cameraBuilder(builder);
+        mCameraManager= (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
         try {
-            mCharacteristics=mCameraManager.getCameraCharacteristics(mCameraInfo.get(0).getCameraId());
+            mCameraInfo=getCamerList();
+            if(mCameraInfo!=null && mCameraInfo.size()>0) {
+                mCurrentCamera = mCameraInfo.get(0);
+                mCharacteristics = mCameraManager.getCameraCharacteristics(mCurrentCamera.getCameraId());
+            }else{
+                throw new IllegalStateException("沒有可用相機");
+            }
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
@@ -39,30 +53,40 @@ public class DefaultInit extends Init{
 
 
     public ArrayList<CameraInfo> getCamerList(){
+        ArrayList cameraInfoList=new ArrayList<CameraInfo>();
         try {
-            ArrayList<CameraInfo> list=new ArrayList();
             for (String id:mCameraManager.getCameraIdList()) {
                 CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(id);
                 String orientation=lensOrientationString(characteristics.get(CameraCharacteristics.LENS_FACING));
                 int[] capabilities = characteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES);
                 StreamConfigurationMap cameraConfig = characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP);
-                if( Arrays.asList(capabilities).contains(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE)){
-                    for (Size size:cameraConfig.getOutputSizes( MediaRecorder.class)
-                         ) {
+                if(contains(capabilities)){
+                    Size[] config = cameraConfig.getOutputSizes(MediaRecorder.class);
+                    for (Size size:config) {
                         double secondsPerFrame = cameraConfig.getOutputMinFrameDuration(MediaRecorder.class, size) / 1_000_000_000.0;
                         int fps=0;
                         if(secondsPerFrame>0) {
                             fps=(int)(1.0/secondsPerFrame);
                         }
                         String fpsLabel=fps> 0?"$fps" : "N/A";
-                        list.add(new CameraInfo("$orientation ($id) $size $fpsLabel FPS", id, size, fps));
+                        CameraInfo info = new CameraInfo("$orientation ($id) $size $fpsLabel FPS", id, size, fps);
+                        cameraInfoList.add(info);
                     }
                 }
             }
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-        return null;
+        return cameraInfoList;
+    }
+
+    private boolean contains(int[] capabilities){
+        for (int i: capabilities){
+            if(i==CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE){
+                return true;
+            }
+        }
+        return false;
     }
 
     private String lensOrientationString(int value){
@@ -82,4 +106,12 @@ public class DefaultInit extends Init{
         }
     }
 
+
+    public ArrayList<CameraInfo> getCameraInfo() {
+        return mCameraInfo;
+    }
+
+    public CameraInfo getCurrentCamera() {
+        return mCurrentCamera;
+    }
 }

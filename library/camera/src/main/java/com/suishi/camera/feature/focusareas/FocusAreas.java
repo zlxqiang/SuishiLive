@@ -1,4 +1,4 @@
-package com.suishi.camera.camera.focusareas;
+package com.suishi.camera.feature.focusareas;
 
 /**
  *

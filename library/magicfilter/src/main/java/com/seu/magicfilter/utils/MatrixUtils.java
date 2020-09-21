@@ -1,4 +1,4 @@
-package com.suishi.camera.utils;
+package com.seu.magicfilter.utils;
 
 import android.opengl.Matrix;
 

@@ -1,4 +1,4 @@
-package com.suishi.camera.camera.takepicture;
+package com.suishi.camera.feature.takepicture;
 
 /**
  * 拍照

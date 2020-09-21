@@ -3,8 +3,8 @@ package com.seu.magicfilter.filter.filter;
 import android.content.res.Resources;
 import android.opengl.GLES20;
 
-import com.suishi.camera.utils.EasyGlUtils;
-import com.suishi.camera.utils.MatrixUtils;
+import com.seu.magicfilter.utils.EasyGlUtils;
+import com.seu.magicfilter.utils.MatrixUtils;
 
 
 /**

@@ -3,7 +3,7 @@ package com.suishi.camera.camera;
 /**
  * Camera包装类
  */
-public class CameraWrapperImpl extends ICameraWrapper<CameraBuilder> {
+public class CameraWrapperImpl extends ICameraWrapper{
 
     public CameraWrapperImpl(CameraBuilder builder) {
         this.mBuilder=builder;
@@ -16,6 +16,26 @@ public class CameraWrapperImpl extends ICameraWrapper<CameraBuilder> {
 
     @Override
     public void open() {
+
+    }
+
+    @Override
+    public void close() {
+
+    }
+
+    @Override
+    public void startPreview() {
+
+    }
+
+    @Override
+    public void stopPreview() {
+
+    }
+
+    @Override
+    public void switchCamera() {
 
     }
 

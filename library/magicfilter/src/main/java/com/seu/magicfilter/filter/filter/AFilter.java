@@ -6,7 +6,7 @@ import android.util.Log;
 import android.util.SparseArray;
 
 
-import com.suishi.camera.utils.MatrixUtils;
+import com.seu.magicfilter.utils.MatrixUtils;
 
 import java.io.InputStream;
 import java.nio.ByteBuffer;

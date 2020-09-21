@@ -1,4 +1,4 @@
-package com.suishi.camera.camera.open;
+package com.suishi.camera.feature.open;
 
 /**
  *
