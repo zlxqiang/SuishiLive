@@ -41,12 +41,12 @@
         </LinearLayout>
     </androidx.appcompat.widget.Toolbar>
 
-    <com.suishi.camera.camera.Camera2GLSurfaceView
+    <com.suishi.camera.Camera2GLSurfaceView
         android:id="@+id/camera_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/toolbar">
-    </com.suishi.camera.camera.Camera2GLSurfaceView>
+    </com.suishi.camera.Camera2GLSurfaceView>
 
     <ImageView
         android:id="@+id/take_picture_iv"

@@ -1,4 +1,4 @@
-package com.suishi.camera.camera;
+package com.suishi.camera;
 
 import android.app.Activity;
 import android.content.Context;

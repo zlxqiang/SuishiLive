@@ -1,4 +1,4 @@
-package com.suishi.camera.camera.filter;
+package com.seu.magicfilter.filter.filter;
 
 import android.content.res.Resources;
 

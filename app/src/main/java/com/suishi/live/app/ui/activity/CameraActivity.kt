@@ -34,8 +34,12 @@ import com.seu.magicfilter.filter.helper.MagicFilterType
 import com.suishi.camera.CameraView
 import com.suishi.camera.CircularProgressView
 import com.suishi.camera.FocusImageView
+import com.suishi.camera.camera.CameraBuilder2
+import com.suishi.camera.camera.CameraController
 import com.suishi.camera.camera.SensorControler
 import com.suishi.camera.camera.SensorControler.CameraFocusListener
+import com.suishi.camera.camera.init.DefaultInit
+import com.suishi.camera.camera.open.DefaultOpen
 import com.suishi.live.app.R
 import com.suishi.live.app.modle.CameraInfo
 import com.suishi.live.app.utils.OrientationLiveData
@@ -305,6 +309,9 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
             })
         }
+
+        val controller=CameraController(CameraBuilder2().setInit(DefaultInit(this)).userOpen(DefaultOpen(this)))
+        controller.open()
 
     }
 

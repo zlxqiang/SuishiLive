@@ -112,6 +112,7 @@ public class OpenGlUtils {
                 .createBitmap(data.array(), size.width, size.height, Bitmap.Config.ARGB_8888);
         return loadTexture(bitmap, usedTexId);
     }
+
     public static int loadTexture(final String name) {
         final int[] textureHandle = new int[1];
 

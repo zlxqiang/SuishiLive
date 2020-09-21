@@ -16,7 +16,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.suishi.camera.camera.Camera2GLSurfaceView;
+import com.suishi.camera.Camera2GLSurfaceView;
 import com.suishi.camera.Camera2Proxy;
 import com.suishi.camera.utils.ImageUtils;
 import com.suishi.live.app.R;
