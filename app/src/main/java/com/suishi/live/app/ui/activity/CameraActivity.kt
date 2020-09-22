@@ -33,6 +33,7 @@ import com.suishi.camera.feature.privew.DefaultPreview
 import com.suishi.camera.feature.privew.DefaultRecord
 import com.suishi.live.app.R
 import com.suishi.live.app.utils.OrientationLiveData
+import com.suishi.utils.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -137,10 +138,10 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         File(filePath)
     }
 
-    lateinit var controller:CameraController<CameraBuilder2>
-
     private lateinit var relativeOrientation: OrientationLiveData
 
+    var builder2=CameraBuilder2()
+    lateinit var controller:CameraController<CameraBuilder2>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -185,7 +186,12 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 //
 //            })
 //        }
-
+        builder2= (CameraBuilder2()
+                .setInit(DefaultInit(this@CameraActivity))
+                .useOpen(DefaultOpen(this@CameraActivity))
+                as CameraBuilder2?)!!
+        builder2.usePreview(DefaultRecord(mCameraView!!,outputFile))
+        controller=CameraController(builder2)
     }
 
     override fun onClick(view: View) {
@@ -235,15 +241,19 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
       //  val previewSize=getPreviewOutputSize(mCameraView!!.display, characteristics, SurfaceHolder::class.java)
-        mCameraView!!.post{
+      LogUtils.e("cameraActivity","surfaceCreated")
 
-        }
     }
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-
+        LogUtils.e("cameraActivity","surfaceChanged")
+        mCameraView!!.post{
+            controller.open()
+            controller.startPreview()
+            mCapture.setOnClickListener(this)
+        }
     }
     override fun surfaceDestroyed(holder: SurfaceHolder) {
-
+        LogUtils.e("cameraActivity","surfaceDestroyed")
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -260,8 +270,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
             MotionEvent.ACTION_UP -> lifecycleScope.launch(Dispatchers.Main) {
                 v.performClick()
                 //
-
-                //delay(100L)
             }
         }
         return true;

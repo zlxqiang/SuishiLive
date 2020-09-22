@@ -21,7 +21,6 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
 
     private GLRender mCameraDrawer;
 
-    private Size mSize;
     /**
      *
      */
@@ -53,6 +52,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
         setRenderer(mCameraDrawer);
        // setRenderModeDirty();
         setRenderModeDirty();
+        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
     }
 
     /**
@@ -105,12 +105,6 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
         if(mCallback!=null) {
             this.mCallback.surfaceDestroyed(holder);
         }
-    }
-
-
-    public void setSize(Size size){
-        this.mSize=size;
-        mCameraDrawer.setPreviewSize(size);
     }
 
     public GLRender getRender(){

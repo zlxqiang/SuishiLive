@@ -15,6 +15,7 @@ import com.seu.magicfilter.filter.gpuimage.GPUImageNativeLibrary;
 import com.seu.magicfilter.utils.OpenGlUtils;
 import com.seu.magicfilter.utils.Rotation;
 import com.seu.magicfilter.utils.TextureRotationUtil;
+import com.suishi.utils.LogUtils;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
@@ -86,10 +87,12 @@ public class GLRender implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceCreated(final GL10 gl10, final EGLConfig config) {
+        LogUtils.e("glrender","onSurfaceCreated");
+        GLES20.glClearColor(backgroundRed, backgroundGreen, backgroundBlue, 1);
         GLES20.glDisable(GL10.GL_DITHER);
-        GLES20.glClearColor(backgroundRed, backgroundGreen, backgroundBlue, 0);
         GLES20.glEnable(GL10.GL_CULL_FACE);
         GLES20.glEnable(GL10.GL_DEPTH_TEST);
+
         filter.ifNeedInit();
     }
 
@@ -99,6 +102,7 @@ public class GLRender implements GLSurfaceView.Renderer {
 
     @Override
     public void onSurfaceChanged(final GL10 gl, final int width, final int height) {
+        LogUtils.e("glrender","onSurfaceChanged");
         outputWidth = width;
         outputHeight = height;
 
@@ -349,6 +353,7 @@ public class GLRender implements GLSurfaceView.Renderer {
     public void setPreviewSize(Size size){
         imageWidth=size.getWidth();
         imageHeight=size.getHeight();
+        adjustImageScaling();
     }
 
 

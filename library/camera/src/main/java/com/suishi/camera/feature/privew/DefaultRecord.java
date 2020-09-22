@@ -48,7 +48,7 @@ public class DefaultRecord extends DefaultPreview{
     private boolean isRecord=false;
 
 
-    public DefaultRecord(@NonNull CameraView cameraView,File outputFile) {
+    public DefaultRecord(@NonNull CameraView cameraView,@NonNull File outputFile) {
         super(cameraView);
         this.outputFile = outputFile;
     }
@@ -56,8 +56,16 @@ public class DefaultRecord extends DefaultPreview{
     @RequiresApi(Build.VERSION_CODES.O)
     @Override
     public void cameraBuilder(CameraBuilder2 builder) {
-        recorderSurface = MediaCodec.createPersistentInputSurface();
-        recorder = createRecorder(builder,recorderSurface);
+        try {
+            recorderSurface = MediaCodec.createPersistentInputSurface();
+            MediaRecorder corder = createRecorder(builder, recorderSurface);
+            corder.prepare();
+            corder.release();
+            recorder=createRecorder(builder, recorderSurface);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         try {
             DefaultOpen open = builder.getOpen();
             if (open != null) {
@@ -83,7 +91,7 @@ public class DefaultRecord extends DefaultPreview{
     public List<Surface> getSurface() {
         List<Surface> list = super.getSurface();
         ArrayList<Surface> surfaceList = new ArrayList(list);
-       // surfaceList.add(recorderSurface);
+        surfaceList.add(recorderSurface);
         return surfaceList;
     }
 

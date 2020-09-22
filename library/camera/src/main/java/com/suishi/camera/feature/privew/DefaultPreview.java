@@ -50,6 +50,7 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
         DefaultInit init = builder.getInit();
         if (init != null) {
             CameraInfo cameraInfo =init.getCurrentCamera();
+            mCameraView.getRender().setPreviewSize(cameraInfo.getSize());
             mSurfaceTexture=mCameraView.getRender().getSurfaceTexture();
             mSurfaceTexture.setDefaultBufferSize(cameraInfo.getSize().getWidth(), cameraInfo.getSize().getHeight());
             mPreviewSurface = new Surface(mSurfaceTexture);
@@ -90,7 +91,8 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
 
     private void createCaptureSession(){
         try {
-            mCameraBuilder.getOpen().getDevice().createCaptureSession(getSurface(),new CameraCaptureSession.StateCallback(){
+            List<Surface> list = getSurface();
+            mCameraBuilder.getOpen().getDevice().createCaptureSession(list,new CameraCaptureSession.StateCallback(){
 
                 @Override
                 public void onConfigured(@NonNull CameraCaptureSession session) {
@@ -119,6 +121,7 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
             return;
         }
         try {
+            LogUtils.e("preview","start preview");
             // 开始预览，即一直发送预览的请求
             mCaptureSession.setRepeatingRequest(mPreviewRequest, null, mCameraBuilder.getOpen().getCameraHandler());
         } catch (CameraAccessException e) {
@@ -132,6 +135,7 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
             return;
         }
         try {
+            LogUtils.e("preview","stopRepeating");
             mCaptureSession.stopRepeating();
         } catch (CameraAccessException e) {
             e.printStackTrace();
@@ -140,15 +144,9 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
 
     @Override
     public void onConfigured(@NonNull CameraCaptureSession session) {
-
+        Log.e("createCaptureSession","success");
         mCaptureSession = session;
-        // 设置完后自动开始预览
-        if(isPreview){
-            startPreview();
-            LogUtils.e("onConfigured preview","start preview");
-        }else{
-            LogUtils.e("onConfigured preview","no start preview");
-        }
+        startPreview();
     }
 
     @Override
