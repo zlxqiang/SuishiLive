@@ -175,6 +175,7 @@
       "project": {
         "compilerSettingsCacheFolder": "/home/xiaoqiang/StudioProjects/SuishiLive/.cxx",
         "cxxFolder": "/home/xiaoqiang/StudioProjects/SuishiLive/.cxx",
+        "ideBuildTargetAbi": "arm64-v8a,armeabi-v7a,armeabi",
         "isBuildOnlyTargetAbiEnabled": true,
         "isCmakeBuildCohabitationEnabled": false,
         "isNativeCompilerSettingsCacheEnabled": false,

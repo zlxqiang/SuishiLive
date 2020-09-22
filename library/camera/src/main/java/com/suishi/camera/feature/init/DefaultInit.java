@@ -28,11 +28,6 @@ public class DefaultInit extends Init<CameraBuilder2>{
 
     public DefaultInit(Context context) {
         mContext=context;
-    }
-
-    @Override
-    public void cameraBuilder(CameraBuilder2 builder) {
-        super.cameraBuilder(builder);
         mCameraManager= (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
         try {
             mCameraInfo=getCamerList();
@@ -45,6 +40,12 @@ public class DefaultInit extends Init<CameraBuilder2>{
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void cameraBuilder(CameraBuilder2 builder) {
+        super.cameraBuilder(builder);
+
     }
 
     public CameraManager getCameraManager() {

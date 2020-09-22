@@ -4,6 +4,7 @@ import androidx.multidex.MultiDexApplication
 import com.seu.magicfilter.utils.MagicParams
 import com.suishi.utils.CrashHandler
 import com.suishi.utils.DensityUtils
+import com.suishi.utils.LogUtils
 import com.suishi.utils.ToastUtil
 
 /**
@@ -16,6 +17,7 @@ class AppApplication : MultiDexApplication() {
         MagicParams.context = this
         DensityUtils.init(this)
         ToastUtil.init(this)
+        LogUtils.setDebug(BuildConfig.DEBUG)
     }
 
     override fun onTrimMemory(level: Int) {

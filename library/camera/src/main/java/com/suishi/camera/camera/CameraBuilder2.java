@@ -5,9 +5,9 @@ import com.suishi.camera.feature.close.DefaultClose;
 import com.suishi.camera.feature.init.DefaultInit;
 import com.suishi.camera.feature.open.DefaultOpen;
 import com.suishi.camera.feature.privew.DefaultPreview;
-import com.suishi.camera.feature.record.DefaultRecord;
+import com.suishi.camera.feature.privew.DefaultRecord;
 
-public class CameraBuilder2 extends ICameraBuilder<DefaultInit, DefaultOpen, DefaultPreview, DefaultClose, DefaultRecord,CameraWrapper2Impl>{
+public class CameraBuilder2 extends ICameraBuilder<DefaultInit, DefaultOpen, DefaultRecord, DefaultClose,CameraWrapper2Impl>{
 
 
     @Override

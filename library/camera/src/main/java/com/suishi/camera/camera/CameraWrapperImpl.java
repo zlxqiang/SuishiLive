@@ -35,7 +35,22 @@ public class CameraWrapperImpl extends ICameraWrapper{
     }
 
     @Override
+    public void startRecord() {
+
+    }
+
+    @Override
+    public void stopRecord() {
+
+    }
+
+    @Override
     public void switchCamera() {
+
+    }
+
+    @Override
+    public void release() {
 
     }
 

@@ -4,7 +4,6 @@ import com.suishi.camera.feature.close.Close;
 import com.suishi.camera.feature.init.Init;
 import com.suishi.camera.feature.open.Open;
 import com.suishi.camera.feature.privew.Preview;
-import com.suishi.camera.feature.record.Record;
 
 import java.time.Instant;
 
@@ -14,15 +13,14 @@ import java.time.Instant;
  * 包括预览和录制尺寸、闪光灯、曝光、聚焦、摄像头切换等
  */
 
-public class CameraController<M extends ICameraBuilder> extends ICameraWrapper<Init, Open, Preview, Close, Record,M> {
+public class CameraController<M extends ICameraBuilder> extends ICameraWrapper<Init, Open, Preview, Close,M> {
 
-    private M mCameraBuilder;
 
     private ICameraWrapper mCameraWrapper;
 
     public CameraController(M cameraBuilder) {
-        this.mCameraBuilder=cameraBuilder;
-        this.mCameraWrapper=mCameraBuilder.build();
+        this.mBuilder=cameraBuilder;
+        this.mCameraWrapper=mBuilder.build();
         init();
     }
 
@@ -39,7 +37,7 @@ public class CameraController<M extends ICameraBuilder> extends ICameraWrapper<I
 
     @Override
     public void close() {
-
+        mCameraWrapper.close();
     }
 
     @Override
@@ -53,8 +51,23 @@ public class CameraController<M extends ICameraBuilder> extends ICameraWrapper<I
     }
 
     @Override
-    public void switchCamera() {
+    public void startRecord() {
+        mCameraWrapper.startRecord();
+    }
 
+    @Override
+    public void stopRecord() {
+        mCameraWrapper.stopRecord();
+    }
+
+    @Override
+    public void switchCamera() {
+     mCameraWrapper.switchCamera();
+    }
+
+    @Override
+    public void release() {
+        mCameraWrapper.release();
     }
 
 

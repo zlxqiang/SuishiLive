@@ -4,13 +4,11 @@ import com.suishi.camera.feature.close.Close;
 import com.suishi.camera.feature.init.Init;
 import com.suishi.camera.feature.open.Open;
 import com.suishi.camera.feature.privew.Preview;
-import com.suishi.camera.feature.record.Record;
 
 public abstract class CameraAssembly<W extends Init,
                 T extends Open,
                 C extends Preview,
-                D extends Close,
-                E extends Record>{
+                D extends Close>{
 
     protected W mInit;
 
@@ -19,7 +17,5 @@ public abstract class CameraAssembly<W extends Init,
     protected C mPreview;
 
     protected D mClose;
-
-    protected E mRecord;
 
 }

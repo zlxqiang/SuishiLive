@@ -1,20 +1,12 @@
 package com.suishi.live.app.ui.activity
 
-import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.ActivityInfo
-import android.content.pm.PackageManager
-import android.graphics.ImageFormat
 import android.hardware.camera2.*
-import android.media.ImageReader
-import android.media.MediaCodec
-import android.media.MediaRecorder
 import android.media.MediaScannerConnection
 import android.os.*
 import android.util.Log
 import android.view.MotionEvent
-import android.view.Surface
 import android.view.SurfaceHolder
 import android.view.View
 import android.view.View.OnTouchListener
@@ -25,10 +17,8 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.suishi.camera.CameraView
 import com.suishi.camera.CircularProgressView
@@ -40,19 +30,12 @@ import com.suishi.camera.camera.SensorControler.CameraFocusListener
 import com.suishi.camera.feature.init.DefaultInit
 import com.suishi.camera.feature.open.DefaultOpen
 import com.suishi.camera.feature.privew.DefaultPreview
+import com.suishi.camera.feature.privew.DefaultRecord
 import com.suishi.live.app.R
-import com.suishi.live.app.modle.CameraInfo
 import com.suishi.live.app.utils.OrientationLiveData
-import com.suishi.live.app.utils.getPreviewOutputSize
-import com.suishi.utils.ToastUtil
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.suspendCancellableCoroutine
 import java.io.File
-import kotlin.coroutines.resume
-import kotlin.coroutines.resumeWithException
-import kotlin.coroutines.suspendCoroutine
 
 /**
  *
@@ -106,7 +89,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     /**
      *
      */
-    var mCapture: CircularProgressView? = null
+    lateinit var mCapture: CircularProgressView
 
     /**
      *
@@ -148,126 +131,21 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
      */
     private var mSensorControler: SensorControler? = null
 
-    private val cameraManager:CameraManager by lazy{
-        getSystemService(Context.CAMERA_SERVICE) as CameraManager
-    }
-
-    private val cameraList:MutableList<CameraInfo> by lazy {
-        val availableCameras:MutableList<CameraInfo> = mutableListOf()
-        cameraManager.cameraIdList.forEach { id->
-            val characteristics=cameraManager.getCameraCharacteristics(id)
-            val orientation=lensOrientationString(characteristics.get(CameraCharacteristics.LENS_FACING)!!)
-            val capabilities=characteristics.get(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES)!!
-            val cameraConfig =characteristics.get(CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP)!!
-            if(capabilities.contains(CameraCharacteristics.REQUEST_AVAILABLE_CAPABILITIES_BACKWARD_COMPATIBLE)){
-                val targetClass=MediaRecorder::class.java
-                cameraConfig.getOutputSizes(targetClass).forEach { size->
-                    val secondsPerFrame=cameraConfig.getOutputMinFrameDuration(targetClass, size) / 1_000_000_000.0
-                    val fps=if(secondsPerFrame>0)(1.0/secondsPerFrame).toInt() else 0
-                    val fpsLabel=if(fps> 0) "$fps" else "N/A"
-                    availableCameras.add(CameraInfo("$orientation ($id) $size $fpsLabel FPS", id, size, fps))
-                }
-            }
-        }
-       availableCameras
-    }
-
-    private val characteristics:CameraCharacteristics by lazy{
-        cameraManager.getCameraCharacteristics(cameraList[0].cameraId)
-    }
-
     private val outputFile:File by lazy{
         val time = System.currentTimeMillis()
         val filePath=getPath("video/", "$time.mp4")
         File(filePath)
     }
 
-    private val previewSurface:Surface by lazy{
-        mCameraView!!.render.surfaceTexture.setDefaultBufferSize(cameraList[0].size!!.width,cameraList[0].size!!.height);
-        Surface(mCameraView!!.render.surfaceTexture)
-    }
-
-    private val recorderSurface: Surface by lazy{
-        val surface= MediaCodec.createPersistentInputSurface()
-        createRecorder(surface).apply {
-            prepare()
-            release()
-        }
-        surface
-
-    }
-
-
-    /**
-     * 保存视频
-     */
-    private val recorder:MediaRecorder by lazy{
-        createRecorder(recorderSurface)
-    }
-
-    private val cameraThread =HandlerThread("CameraThread").apply{
-        start()
-//        GPUImage(this@CameraActivity).apply {
-//            setFilter(GPUImage3x3ConvolutionFilter())
-//            setGLSurfaceView(mCameraView)
-//        }
-    }
-
-    private val cameraHandler=Handler(cameraThread.looper)
-
-
-    private lateinit var session:CameraCaptureSession
-
-    private lateinit var camera:CameraDevice
-
-    private val imageReder:ImageReader by lazy{
-        val imageReader=ImageReader.newInstance(cameraList[0].size!!.width, cameraList[0].size!!.height,
-                ImageFormat.JPEG, 2)
-        imageReader.setOnImageAvailableListener({
-            val image = it.acquireLatestImage()
-            val buffer = image.planes[0].buffer
-            val data = ByteArray(buffer.remaining())
-            buffer.get(data)
-            it.close()
-            mCameraView!!.render.onPreviewFrame(data,cameraList[0].size!!.width, cameraList[0].size!!.height)
-        }, null)
-        imageReader
-    }
-
-    private val previewRequest:CaptureRequest by lazy{
-        session.device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW).apply {
-            addTarget(previewSurface)
-        }.build()
-    }
-
-    private val recordRequest:CaptureRequest by lazy{
-        session.device.createCaptureRequest(CameraDevice.TEMPLATE_RECORD).apply {
-            addTarget(recorderSurface)
-        }.build()
-    }
-
-    private var recordingStartMillis:Long=0L
+    lateinit var controller:CameraController<CameraBuilder2>
 
     private lateinit var relativeOrientation: OrientationLiveData
 
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun createRecorder(surface: Surface)=MediaRecorder().apply{
-        setAudioSource(MediaRecorder.AudioSource.MIC)
-        setVideoSource(MediaRecorder.VideoSource.SURFACE)
-        setOutputFormat(MediaRecorder.OutputFormat.MPEG_4)
-        setOutputFile(outputFile.absoluteFile)
-        setVideoEncodingBitRate(RECORDER_VIDEO_BITRATE)
-        if(cameraList[0].fps>0) setVideoFrameRate(cameraList[0].fps)
-        setVideoSize(cameraList[0].size!!.width, cameraList[0].size!!.height)
-        setVideoEncoder(MediaRecorder.VideoEncoder.H264)
-        setAudioEncoder(MediaRecorder.AudioEncoder.AAC)
-        setInputSurface(surface)
-    }
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+
         mBeautySwitch = (findViewById(R.id.iv_beauty_switch) as CheckBox).apply{
            visibility=View.GONE
             setOnClickListener(this@CameraActivity)
@@ -277,7 +155,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         mCameraView = (findViewById(R.id.camera_view) as CameraView).apply{
            // setOnTouchListener(this@CameraActivity)
            // setOnFilterChangeListener(this@CameraActivity)
-            setSize(cameraList[0].size)
             addCallBack2(this@CameraActivity)
         }
 
@@ -302,74 +179,33 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
             setCameraFocusListener(this@CameraActivity)
         }
 
-        relativeOrientation=OrientationLiveData(this, characteristics).apply {
-            observe(this@CameraActivity, Observer {
-                //横竖屏
-
-            })
-        }
-
-    }
-
-    private fun initializeCamera()=lifecycleScope.launch(Dispatchers.Main){
-        camera=openCamera(cameraManager, cameraList[0].cameraId!!, cameraHandler)
-        val target=listOf(previewSurface, recorderSurface)
-        session=createCaptureSession(camera, target, cameraHandler)
-        session.setRepeatingRequest(previewRequest, null, cameraHandler)
-        mCapture!!.setOnTouchListener(this@CameraActivity)
-    }
-
-
-
-    private suspend fun openCamera(manager: CameraManager, cameraId: String, handler: Handler? = null):CameraDevice= suspendCancellableCoroutine{ cont->
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
-            ToastUtil.shortToast("没有相机权限")
-        }else {
-            manager.openCamera(cameraId, object : CameraDevice.StateCallback() {
-                override fun onOpened(camera: CameraDevice) {
-                    cont.resume(camera)
-                }
-
-                override fun onDisconnected(camera: CameraDevice) {
-                    this@CameraActivity.finish()
-                }
-
-                override fun onError(camera: CameraDevice, error: Int) {
-                    val msg = when (error) {
-                        ERROR_CAMERA_DEVICE -> "相机设备发生了一个致命错误"
-                        ERROR_CAMERA_DISABLED -> "Device policy"
-                        ERROR_CAMERA_IN_USE -> "当前相机设备已经在一个更高优先级的地方打开了"
-                        ERROR_MAX_CAMERAS_IN_USE -> "已打开相机数量到上限了，无法再打开新的相机了"
-                        else -> "UnKnown"
-                    }
-                    val exc = RuntimeException("Camera $cameraId error:($error) $msg")
-                    Log.e("open camera", exc.message, exc)
-
-                }
-
-            }, handler)
-        }
+//        relativeOrientation=OrientationLiveData(this, characteristics).apply {
+//            observe(this@CameraActivity, Observer {
+//                //横竖屏
+//
+//            })
+//        }
 
     }
-
-    private suspend fun createCaptureSession(device: CameraDevice, target: List<Surface>, handler: Handler? = null):CameraCaptureSession= suspendCoroutine{ cont->
-        device.createCaptureSession(target, object : CameraCaptureSession.StateCallback() {
-            override fun onConfigured(session: CameraCaptureSession) {
-                cont.resume(session)
-            }
-
-            override fun onConfigureFailed(session: CameraCaptureSession) {
-                val exc = RuntimeException("camera ${device.id} session configuration failed")
-                Log.e("create cature session", exc.message, exc)
-                cont.resumeWithException(exc)
-            }
-
-        }, handler)
-    }
-
 
     override fun onClick(view: View) {
-
+        if(!mCapture.isRunning()) {
+            mCapture.startOrStop()
+            this@CameraActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
+            controller.startRecord()
+            Log.d("camera activity", "recording started")
+        }else {
+            mCapture.startOrStop()
+            controller.stopRecord()
+            MediaScannerConnection.scanFile(this, arrayOf(outputFile.absolutePath), null, null)
+            startActivity(Intent().apply {
+                action = Intent.ACTION_VIEW
+                type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(outputFile.extension)
+                val authority = this@CameraActivity.packageName + ".provider"
+                data = FileProvider.getUriForFile(this@CameraActivity, authority, outputFile)
+                flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_CLEAR_TOP
+            })
+        }
     }
 
 
@@ -381,7 +217,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     override fun onPause() {
         super.onPause()
         Log.e("B","onPause")
-        camera.close()
+        controller.close()
     }
 
     override fun onPointerCaptureChanged(hasCapture: Boolean) {
@@ -391,20 +227,16 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     public override fun onDestroy() {
         super.onDestroy()
         Log.e("B","onDestroy")
-        cameraThread.quitSafely()
-        recorder.release()
-        recorderSurface.release()
+        //cameraThread.quitSafely()
+       // recorder.release()
+        //recorderSurface.release()
+        controller.close()
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
-        val previewSize=getPreviewOutputSize(mCameraView!!.display, characteristics, SurfaceHolder::class.java)
+      //  val previewSize=getPreviewOutputSize(mCameraView!!.display, characteristics, SurfaceHolder::class.java)
         mCameraView!!.post{
-            val controller=CameraController<CameraBuilder2>(CameraBuilder2()
-                    .setInit(DefaultInit(this))
-                    .useOpen(DefaultOpen(this))
-                    .usePreview(DefaultPreview(mCameraView!!.render.surfaceTexture)) as CameraBuilder2?)
-            controller.open()
-            controller.startPreview()
+
         }
     }
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
@@ -423,33 +255,12 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         when(event.action){
             MotionEvent.ACTION_DOWN -> lifecycleScope.launch(Dispatchers.Main) {
                 v.performClick()
-                this@CameraActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
-                session.setRepeatingRequest(recordRequest, null, cameraHandler)
-                recorder.apply {
-                    relativeOrientation.value?.let { setOrientationHint(it) }
-                    prepare()
-                    start()
-                }
-                recordingStartMillis = System.currentTimeMillis()
-                Log.d("camera activity", "recording started")
+
             }
             MotionEvent.ACTION_UP -> lifecycleScope.launch(Dispatchers.Main) {
                 v.performClick()
-                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED
-                val elapsedTimeMillis = System.currentTimeMillis() - recordingStartMillis
-                if (elapsedTimeMillis < MIN_REQUIRED_TIME_MILLIS) {
-                    delay(MIN_REQUIRED_TIME_MILLIS - elapsedTimeMillis)
-                }
-                Log.d("camera activity", "recording stopped output: $outputFile")
-                recorder.stop()
-                MediaScannerConnection.scanFile(v.context, arrayOf(outputFile.absolutePath), null, null)
-                startActivity(Intent().apply {
-                    action = Intent.ACTION_VIEW
-                    type = MimeTypeMap.getSingleton().getMimeTypeFromExtension(outputFile.extension)
-                    val authority = this@CameraActivity.packageName + ".provider"
-                    data = FileProvider.getUriForFile(v.context, authority, outputFile)
-                    flags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_ACTIVITY_CLEAR_TOP
-                })
+                //
+
                 //delay(100L)
             }
         }

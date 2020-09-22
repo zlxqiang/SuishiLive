@@ -1,8 +1,11 @@
 package com.suishi.camera.feature.takepicture;
 
+import com.suishi.camera.camera.ICameraBuilder;
+import com.suishi.camera.feature.Assembly;
+
 /**
  * 拍照
  */
-public class TakePicture {
+public abstract class TakePicture<B extends ICameraBuilder> extends Assembly<B> {
 
 }

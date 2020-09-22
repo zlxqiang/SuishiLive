@@ -19,27 +19,55 @@ import com.scwang.smartrefresh.layout.util.DensityUtil;
 /**
  * Description:
  */
-public class CircularProgressView extends AppCompatImageButton implements View.OnClickListener {
+public class CircularProgressView extends AppCompatImageButton{
 
     private int mStroke = 8;
     private int mProcess = 0;
-    private int mTotal = 10000;//最长录制10s
-    private int mNormalColor = 0x80FFFFFF;//外圈
-    private int mSecondColor = 0xFF7ed321;//进度条
-    private int centerColor = 0xFFFFFFFF;//内圈
+    /**
+     * 最长录制10s
+     */
+    private int mTotal = 10000;
+    /**
+     * 外圈
+     */
+    private int mNormalColor = 0x80FFFFFF;
+    /**
+     * 进度条
+     */
+    private int mSecondColor = 0xFF7ed321;
+    /**
+     * 内圈
+     */
+    private int centerColor = 0xFFFFFFFF;
+    /**
+     *
+     */
     private int progressShade = 0x50000000;
+    /**
+     *
+     */
     private int mStartAngle = -90;
     private RectF mRectF;
-
     private Paint normalPaint;
     private Paint centerPaint;
     private Paint progressPaint;
     private Drawable mDrawable;
-
-    BlurMaskFilter blu;//阴影
-    private long downTime;//按下时的时间
-    long thisTime;//停留时的时间
-    boolean click = false;// 是否是点击
+    /**
+     * 阴影
+     */
+    BlurMaskFilter blu;
+    /**
+     * 按下时的时间
+     */
+    private long downTime;
+    /**
+     * 停留时的时间
+     */
+    long thisTime;
+    /**
+     * 是否是点击
+     */
+    boolean click = false;
 
     public CircularProgressView(Context context) {
         this(context, null);
@@ -72,7 +100,6 @@ public class CircularProgressView extends AppCompatImageButton implements View.O
         centerPaint = new Paint();
         centerPaint.setColor(centerColor);
         centerPaint.setMaskFilter(blu);
-        setOnClickListener(this);
     }
 
     public void setTotal(int total) {
@@ -110,8 +137,6 @@ public class CircularProgressView extends AppCompatImageButton implements View.O
 
         @Override
         public void run() {
-
-            //do something
             //每隔1s循环执行run方法
             mHandler.postDelayed(this, 50);
             drawCircle();
@@ -119,7 +144,11 @@ public class CircularProgressView extends AppCompatImageButton implements View.O
     };
 
 
-    private boolean down = true;
+    /**
+     * 是否运行
+     */
+    private boolean isRunning = false;
+
     private boolean longClick = false;
 
     @Override
@@ -169,19 +198,9 @@ public class CircularProgressView extends AppCompatImageButton implements View.O
 //        return super.onTouchEvent(event);
 //    }
 
-    private boolean isStop;
-
-    public void stopTouch(boolean isStop) {
-        this.isStop = isStop;
-    }
-
     private void drawCircle() {
         mProcess = (int) (System.currentTimeMillis() - downTime);
         mDrawable.invalidateSelf();
-    }
-
-    public void stop(){
-        mHandler.removeCallbacks(r);
     }
 
     @Override
@@ -193,23 +212,24 @@ public class CircularProgressView extends AppCompatImageButton implements View.O
         }
     }
 
-    @Override
-    public void onClick(View v) {
-        if(down) {
-            down = false;
+    public void startOrStop(){
+        if(!isRunning) {
+            isRunning = true;
             downTime = System.currentTimeMillis();
-        //    listener.onLongClick();
             mHandler.postDelayed(r, 0);//延时100毫秒
         }else{
-            down = true;
+            isRunning = false;
             mHandler.removeCallbacks(r);
         }
     }
 
-    public void setCanDown(boolean is){
-        this.down=is;
+    public boolean isRunning() {
+        return isRunning;
     }
 
+    /**
+     *
+     */
     private class Progress extends Drawable {
         @Override
         public void draw(Canvas canvas) {
@@ -245,6 +265,9 @@ public class CircularProgressView extends AppCompatImageButton implements View.O
     }
 
     public interface OnLongDownListener {
+        /**
+         *
+         */
         void onLongClick();
 
         /**
@@ -252,6 +275,9 @@ public class CircularProgressView extends AppCompatImageButton implements View.O
          */
         void onClick();
 
+        /**
+         *
+         */
         void onLongClickUp();
     }
 

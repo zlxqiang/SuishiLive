@@ -5,9 +5,8 @@ import com.suishi.camera.feature.close.Close;
 import com.suishi.camera.feature.init.Init;
 import com.suishi.camera.feature.open.Open;
 import com.suishi.camera.feature.privew.Preview;
-import com.suishi.camera.feature.record.Record;
 
-public abstract class ICameraWrapper<W extends Init,T extends Open,C extends Preview,D extends Close,E extends Record,M extends ICameraBuilder> extends CameraAssembly<W,T,C,D,E> {
+public abstract class ICameraWrapper<W extends Init,T extends Open,C extends Preview,D extends Close,M extends ICameraBuilder> extends CameraAssembly<W,T,C,D> {
 
     protected M mBuilder;
 
@@ -34,13 +33,21 @@ public abstract class ICameraWrapper<W extends Init,T extends Open,C extends Pre
      */
     public abstract void stopPreview();
 
+    public abstract void startRecord();
+
+    public abstract void stopRecord();
 
     /**
      * 切換相機
      */
     public abstract void switchCamera();
 
-    M getBuilder(){
+    /**
+     * 释放
+     */
+    public abstract void release();
+
+    public M getBuilder(){
         return mBuilder;
     }
 

@@ -16,7 +16,6 @@ import androidx.core.app.ActivityCompat;
 import com.suishi.camera.camera.CameraBuilder2;
 import com.suishi.utils.ToastUtil;
 
-
 import static android.hardware.camera2.CameraDevice.*;
 
 public class DefaultOpen extends Open<CameraBuilder2>{
@@ -30,14 +29,15 @@ public class DefaultOpen extends Open<CameraBuilder2>{
 
     public DefaultOpen(Activity context) {
         this.mContext = context;
+        this.cameraThread =new HandlerThread("CameraThread");
+        cameraThread.start();
+        this.cameraHandler=new Handler(cameraThread.getLooper());
     }
 
     @Override
     public void cameraBuilder(CameraBuilder2 builder) {
         super.cameraBuilder(builder);
-        this.cameraThread =new HandlerThread("CameraThread");
-        cameraThread.start();
-        this.cameraHandler=new Handler(cameraThread.getLooper());
+
     }
 
     public CameraDevice getDevice() {
@@ -48,7 +48,7 @@ public class DefaultOpen extends Open<CameraBuilder2>{
         return cameraHandler;
     }
 
-    public CameraDevice openCamera(CameraManager manager, String cameraId, final StateCallback stateCallback){
+    public CameraDevice openCamera(CameraManager manager, String cameraId, final OpenStateCallback stateCallback){
         if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
             ToastUtil.shortToast("没有相机权限");
         }else {

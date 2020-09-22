@@ -28,8 +28,7 @@ import javax.microedition.khronos.opengles.GL10;
 
 
 /**
- * Created by cj on 2017/10/16.
- * desc：添加水印和美白效果
+ *
  */
 public class GLRender implements GLSurfaceView.Renderer {
     private static final int NO_IMAGE = -1;
