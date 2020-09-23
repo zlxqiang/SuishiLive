@@ -4,12 +4,18 @@ import android.graphics.SurfaceTexture;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCaptureSession;
 import android.hardware.camera2.CameraDevice;
+import android.hardware.camera2.CaptureFailure;
 import android.hardware.camera2.CaptureRequest;
+import android.hardware.camera2.CaptureResult;
+import android.hardware.camera2.TotalCaptureResult;
+import android.os.Build;
 import android.util.Log;
 import android.view.Surface;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
+import com.seu.magicfilter.utils.Rotation;
 import com.suishi.camera.CameraView;
 import com.suishi.camera.camera.CameraBuilder2;
 import com.suishi.camera.feature.init.CameraInfo;
@@ -30,7 +36,7 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
 
     private SurfaceTexture mSurfaceTexture;
 
-    private Surface mPreviewSurface;
+    protected Surface mPreviewSurface;
 
     private CaptureRequest.Builder mPreviewRequestBuilder;
 
@@ -50,6 +56,7 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
         DefaultInit init = builder.getInit();
         if (init != null) {
             CameraInfo cameraInfo =init.getCurrentCamera();
+            mCameraView.getRender().setRotation(Rotation.ROTATION_90, init.isFrontCamera(), false);
             mCameraView.getRender().setPreviewSize(cameraInfo.getSize());
             mSurfaceTexture=mCameraView.getRender().getSurfaceTexture();
             mSurfaceTexture.setDefaultBufferSize(cameraInfo.getSize().getWidth(), cameraInfo.getSize().getHeight());
@@ -60,23 +67,21 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
                     CameraDevice device = open.getDevice();
                     if(device!=null) {
                         mPreviewRequestBuilder = device.createCaptureRequest(CameraDevice.TEMPLATE_PREVIEW);
-//                        // 设置连续自动对焦
-//                        mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest
-//                                .CONTROL_AF_MODE_CONTINUOUS_PICTURE);
-//                        // 设置自动曝光
-//                        mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest
-//                                .CONTROL_AE_MODE_ON_AUTO_FLASH);
+                        // 设置连续自动对焦
+                        mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AF_MODE, CaptureRequest
+                                .CONTROL_AF_MODE_CONTINUOUS_PICTURE);
+                        // 设置自动曝光
+                        mPreviewRequestBuilder.set(CaptureRequest.CONTROL_AE_MODE, CaptureRequest
+                                .CONTROL_AE_MODE_ON_AUTO_FLASH);
                         mPreviewRequestBuilder.addTarget(mPreviewSurface);
                         mPreviewRequest = mPreviewRequestBuilder.build();
-                        createCaptureSession();
                     }else{
-                        ToastUtil.shortToast("打开相机");
+                        throw new IllegalStateException("camera not open");
                     }
                 }else{
                     throw new NullPointerException("camera not open");
                 }
             } catch (CameraAccessException e) {
-                e.printStackTrace();
                 throw new NullPointerException(e.getMessage());
             }
         }else{
@@ -89,25 +94,30 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
         return Arrays.asList(mPreviewSurface);
     }
 
-    private void createCaptureSession(){
+    protected void createCaptureSession(){
         try {
-            List<Surface> list = getSurface();
-            mCameraBuilder.getOpen().getDevice().createCaptureSession(list,new CameraCaptureSession.StateCallback(){
+            CameraDevice cameraDevice = mCameraBuilder.getOpen().getDevice();
+            if(cameraDevice!=null) {
+                cameraDevice.createCaptureSession(getSurface(), new CameraCaptureSession.StateCallback() {
 
-                @Override
-                public void onConfigured(@NonNull CameraCaptureSession session) {
-                    DefaultPreview.this.onConfigured(session);
-                }
+                    @RequiresApi(api = Build.VERSION_CODES.M)
+                    @Override
+                    public void onConfigured(@NonNull CameraCaptureSession session) {
+                        DefaultPreview.this.onConfigured(session);
+                    }
 
-                @Override
-                public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-                    DefaultPreview.this.onConfigureFailed(session);
-                }
+                    @Override
+                    public void onConfigureFailed(@NonNull CameraCaptureSession session) {
+                        DefaultPreview.this.onConfigureFailed(session);
+                    }
 
-            }, mCameraBuilder.getOpen().getCameraHandler());
+                }, mCameraBuilder.getOpen().getCameraHandler());
+            }else{
+                throw new NullPointerException("camera device no open");
+            }
         } catch (CameraAccessException e) {
-            e.printStackTrace();
-            Log.e("createCaptureSession",e.getMessage());
+            LogUtils.e("createCaptureSession",e.getMessage());
+            throw new IllegalStateException("cant create cap turesession:"+e.getMessage());
         }
     }
 
@@ -115,42 +125,116 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
         return mCaptureSession;
     }
 
-    public void startPreview() {
-        if (mCaptureSession == null || mPreviewRequestBuilder == null) {
-            isPreview=true;
-            return;
-        }
+    /**
+     * 等待开启预览
+     */
+    private boolean isWaitStart=false;
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public synchronized void startPreview() {
         try {
-            LogUtils.e("preview","start preview");
-            // 开始预览，即一直发送预览的请求
-            mCaptureSession.setRepeatingRequest(mPreviewRequest, null, mCameraBuilder.getOpen().getCameraHandler());
+            if(canUse() && !isPreview && !isWaitStart) {
+                isWaitStart=true;
+                mCaptureSession.setRepeatingRequest(mPreviewRequest, new CameraCaptureSession.CaptureCallback() {
+                    @Override
+                    public void onCaptureStarted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, long timestamp, long frameNumber) {
+                        super.onCaptureStarted(session, request, timestamp, frameNumber);
+                        isPreview = true;
+                        isWaitStart=false;
+                       // LogUtils.e("preview setRepeatingRequest","onCaptureStarted");
+                    }
+
+                    @Override
+                    public void onCaptureProgressed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureResult partialResult) {
+                        super.onCaptureProgressed(session, request, partialResult);
+                        //LogUtils.e("preview setRepeatingRequest","onCaptureProgressed");
+                    }
+
+                    @Override
+                    public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
+                        super.onCaptureCompleted(session, request, result);
+                       // LogUtils.e("preview setRepeatingRequest","onCaptureCompleted");
+                    }
+
+                    @Override
+                    public void onCaptureFailed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureFailure failure) {
+                        super.onCaptureFailed(session, request, failure);
+                        LogUtils.e("preview setRepeatingRequest","onCaptureFailed"+failure.toString());
+                        isPreview=false;
+                    }
+
+                    @Override
+                    public void onCaptureSequenceCompleted(@NonNull CameraCaptureSession session, int sequenceId, long frameNumber) {
+                        super.onCaptureSequenceCompleted(session, sequenceId, frameNumber);
+                        LogUtils.e("preview setRepeatingRequest","onCaptureSequenceCompleted");
+                        isPreview=false;
+                    }
+
+                    @Override
+                    public void onCaptureSequenceAborted(@NonNull CameraCaptureSession session, int sequenceId) {
+                        super.onCaptureSequenceAborted(session, sequenceId);
+                        LogUtils.e("preview setRepeatingRequest","onCaptureSequenceAborted");
+                    }
+
+                    @Override
+                    public void onCaptureBufferLost(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull Surface target, long frameNumber) {
+                        super.onCaptureBufferLost(session, request, target, frameNumber);
+                        LogUtils.e("preview setRepeatingRequest","onCaptureBufferLost");
+                    }
+                }, mCameraBuilder.getOpen().getCameraHandler());
+            }
+            LogUtils.e("preview","start preview ：isPreview="+isPreview+";isWaitStart="+isWaitStart);
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            LogUtils.e("preview start",e.getMessage());
         }
     }
 
     public void stopPreview() {
-        if (mCaptureSession == null || mPreviewRequestBuilder == null) {
-            isPreview=false;
-            return;
-        }
         try {
+            if(canUse() && isPreview && !isWaitStart) {
+                isPreview = false;
+                mCaptureSession.stopRepeating();
+            }
             LogUtils.e("preview","stopRepeating");
-            mCaptureSession.stopRepeating();
         } catch (CameraAccessException e) {
-            e.printStackTrace();
+            LogUtils.e("preview stop",e.getMessage());
         }
     }
 
+    private boolean canUse(){
+       return mCaptureSession != null && mPreviewRequest != null;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onConfigured(@NonNull CameraCaptureSession session) {
-        Log.e("createCaptureSession","success");
+        LogUtils.e("createCaptureSession","success");
         mCaptureSession = session;
         startPreview();
     }
 
     @Override
     public void onConfigureFailed(@NonNull CameraCaptureSession session) {
-        Log.e("", "ConfigureFailed. session: mCaptureSession");
+        LogUtils.e("preview", "ConfigureFailed. session: mCaptureSession");
+    }
+
+    @Override
+    public void cameraUnBuilder() {
+        super.cameraUnBuilder();
+        stopPreview();
+        if(mPreviewRequest!=null){
+            mPreviewRequest=null;
+        }
+        if(mCaptureSession!=null) {
+            mCaptureSession.close();
+            mCaptureSession = null;
+        }
+
+    }
+
+    @Override
+    public void onRelease() {
+        super.onRelease();
+
     }
 }

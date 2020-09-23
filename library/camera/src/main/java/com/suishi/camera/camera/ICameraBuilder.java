@@ -1,10 +1,14 @@
 package com.suishi.camera.camera;
 
 
+import com.suishi.camera.feature.Assembly;
 import com.suishi.camera.feature.close.Close;
 import com.suishi.camera.feature.init.Init;
 import com.suishi.camera.feature.open.Open;
 import com.suishi.camera.feature.privew.Preview;
+
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * 功能创建者

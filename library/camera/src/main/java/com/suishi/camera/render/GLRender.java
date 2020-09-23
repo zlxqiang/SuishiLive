@@ -81,8 +81,6 @@ public class GLRender implements GLSurfaceView.Renderer {
         glTextureBuffer = ByteBuffer.allocateDirect(TextureRotationUtil.TEXTURE_NO_ROTATION.length * 4)
                 .order(ByteOrder.nativeOrder())
                 .asFloatBuffer();
-
-        setRotation(Rotation.ROTATION_90, false, false);
     }
 
     @Override
@@ -110,7 +108,7 @@ public class GLRender implements GLSurfaceView.Renderer {
        // filter.onDisplaySizeChanged(width, height);
         filter.onOutputSizeChanged(width,height);
         //初始化顶点、文理坐标
-        adjustImageScaling();
+//        adjustImageScaling();
     }
 
 
@@ -310,10 +308,6 @@ public class GLRender implements GLSurfaceView.Renderer {
         return coordinate == 0.0f ? distance : 1 - distance;
     }
 
-    public void setRotationCamera(final Rotation rotation, final boolean flipHorizontal,
-                                  final boolean flipVertical) {
-        setRotation(rotation, flipVertical, flipHorizontal);
-    }
 
     public void setRotation(final Rotation rotation) {
         this.rotation = rotation;

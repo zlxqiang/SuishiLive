@@ -2,8 +2,10 @@ package com.suishi.camera.camera;
 
 import android.hardware.camera2.CameraDevice;
 import android.os.Build;
+import android.os.Looper;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 
 import com.suishi.camera.feature.close.DefaultClose;
 import com.suishi.camera.feature.init.DefaultInit;
@@ -38,19 +40,28 @@ public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen,
             mOpen.cameraBuilder(mBuilder);
         }
 
+        mClose=mBuilder.getClose();
+        if(mClose!=null){
+            mClose.cameraBuilder(mBuilder);
+        }
+
     }
 
 
     @Override
     public void open() {
-        mOpen.openCamera(mInit.getCameraManager(), mInit.getCamerList().get(0).getCameraId(), this);
+        mOpen.openCamera(mInit.getCameraManager(), mInit.getCurrentCamera().getCameraId(), this);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void close() {
-
+        if(mClose!=null){
+            mClose.cameraUnBuilder();
+        }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void startPreview() {
         if(mOpen.getDevice()!=null) {
@@ -65,6 +76,7 @@ public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen,
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void startRecord() {
         if(mPreview!=null) {
@@ -72,6 +84,7 @@ public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen,
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void stopRecord() {
         if(mPreview!=null) {
@@ -79,14 +92,21 @@ public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen,
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void switchCamera() {
-
+        close();
+        if(mInit!=null){
+            mInit.switchCamera();
+            open();
+        }
     }
 
     @Override
     public void release() {
-
+        if(mClose!=null){
+            mClose.onRelease();
+        }
     }
 
 
@@ -95,6 +115,7 @@ public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen,
         return mBuilder;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onOpened(@NonNull CameraDevice camera) {
         LogUtils.e("camera","opened camera success");
@@ -106,14 +127,6 @@ public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen,
                 throw new IllegalStateException("系统版本低");
             }
         }
-
-        mClose=mBuilder.getClose();
-        if(mClose!=null){
-            mClose.cameraBuilder(mBuilder);
-        }
-
-        startPreview();
-
     }
 
     @Override

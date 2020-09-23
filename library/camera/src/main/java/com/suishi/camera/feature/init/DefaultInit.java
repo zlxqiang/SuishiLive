@@ -1,5 +1,6 @@
 package com.suishi.camera.feature.init;
 
+import android.app.Activity;
 import android.content.Context;
 import android.hardware.camera2.CameraAccessException;
 import android.hardware.camera2.CameraCharacteristics;
@@ -8,7 +9,12 @@ import android.hardware.camera2.params.StreamConfigurationMap;
 import android.media.MediaRecorder;
 import android.util.Size;
 
+import androidx.activity.ComponentActivity;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+
 import com.suishi.camera.camera.CameraBuilder2;
+import com.suishi.camera.utils.OrientationLiveData;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -18,34 +24,50 @@ public class DefaultInit extends Init<CameraBuilder2>{
 
     private Context mContext;
 
+    private LifecycleOwner mLifecycleOwner;
+
     private CameraManager mCameraManager;
 
-    private ArrayList<CameraInfo> mCameraInfo;
+    private ArrayList<CameraInfo> mBaceCameraInfo;
+
+    private ArrayList<CameraInfo> mFrontCameraInfo;
 
     private CameraCharacteristics mCharacteristics;
 
+    private OrientationLiveData relativeOrientation;
+
     private CameraInfo mCurrentCamera;
 
-    public DefaultInit(Context context) {
+    public DefaultInit(Context context, LifecycleOwner lifecycleOwner) {
         mContext=context;
+        mLifecycleOwner=lifecycleOwner;
         mCameraManager= (CameraManager) mContext.getSystemService(Context.CAMERA_SERVICE);
-        try {
-            mCameraInfo=getCamerList();
-            if(mCameraInfo!=null && mCameraInfo.size()>0) {
-                mCurrentCamera = mCameraInfo.get(0);
-                mCharacteristics = mCameraManager.getCameraCharacteristics(mCurrentCamera.getCameraId());
-            }else{
-                throw new IllegalStateException("沒有可用相機");
-            }
-        } catch (CameraAccessException e) {
-            e.printStackTrace();
-        }
+        getCamerList();
     }
 
     @Override
     public void cameraBuilder(CameraBuilder2 builder) {
         super.cameraBuilder(builder);
+        try {
+            if(mBaceCameraInfo!=null && mBaceCameraInfo.size()>0) {
+                mCurrentCamera = mBaceCameraInfo.get(0);
+                mCharacteristics = mCameraManager.getCameraCharacteristics(mCurrentCamera.getCameraId());
+            }else if(mFrontCameraInfo!=null && mFrontCameraInfo.size()>0){
+                mCurrentCamera = mFrontCameraInfo.get(0);
+                mCharacteristics = mCameraManager.getCameraCharacteristics(mCurrentCamera.getCameraId());
+            }else{
+                throw new IllegalStateException("沒有可用相機");
+            }
+            relativeOrientation=new OrientationLiveData(mContext,mCharacteristics);
+            relativeOrientation.observe(mLifecycleOwner, new Observer<Integer>() {
+                @Override
+                public void onChanged(Integer integer) {
 
+                }
+            });
+        } catch (CameraAccessException e) {
+            throw new IllegalStateException(e.getMessage());
+        }
     }
 
     public CameraManager getCameraManager() {
@@ -53,8 +75,9 @@ public class DefaultInit extends Init<CameraBuilder2>{
     }
 
 
-    public ArrayList<CameraInfo> getCamerList(){
-        ArrayList cameraInfoList=new ArrayList<CameraInfo>();
+    public void getCamerList(){
+        mBaceCameraInfo=new ArrayList<>();
+        mFrontCameraInfo=new ArrayList<>();
         try {
             for (String id:mCameraManager.getCameraIdList()) {
                 CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(id);
@@ -71,14 +94,19 @@ public class DefaultInit extends Init<CameraBuilder2>{
                         }
                         String fpsLabel=fps> 0?"$fps" : "N/A";
                         CameraInfo info = new CameraInfo("$orientation ($id) $size $fpsLabel FPS", id, size, fps);
-                        cameraInfoList.add(info);
+                        if(characteristics.get(CameraCharacteristics.LENS_FACING) == CameraCharacteristics.LENS_FACING_FRONT){
+                            mFrontCameraInfo.add(info);
+                        }
+                        if(characteristics.get(CameraCharacteristics.LENS_FACING)== CameraCharacteristics.LENS_FACING_BACK){
+                            mBaceCameraInfo.add(info);
+                        }
+
                     }
                 }
             }
         } catch (CameraAccessException e) {
             e.printStackTrace();
         }
-        return cameraInfoList;
     }
 
     private boolean contains(int[] capabilities){
@@ -108,11 +136,66 @@ public class DefaultInit extends Init<CameraBuilder2>{
     }
 
 
-    public ArrayList<CameraInfo> getCameraInfo() {
-        return mCameraInfo;
-    }
-
     public CameraInfo getCurrentCamera() {
         return mCurrentCamera;
+    }
+
+    public void switchCamera(){
+        try {
+            CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(mCurrentCamera.getCameraId());
+            switch (characteristics.get(CameraCharacteristics.LENS_FACING)){
+                case CameraCharacteristics.LENS_FACING_BACK:{
+                   mCurrentCamera=mFrontCameraInfo.get(0);
+                }
+                break;
+                case CameraCharacteristics.LENS_FACING_FRONT:{
+                    mCurrentCamera=mBaceCameraInfo.get(0);
+                }
+                break;
+                case CameraCharacteristics.LENS_FACING_EXTERNAL:{
+
+                }
+            }
+        } catch (CameraAccessException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean isFrontCamera(){
+        if(mCurrentCamera!=null){
+            try {
+                CameraCharacteristics characteristics = mCameraManager.getCameraCharacteristics(mCurrentCamera.getCameraId());
+                switch (characteristics.get(CameraCharacteristics.LENS_FACING)){
+                    case CameraCharacteristics.LENS_FACING_BACK:{
+                       return false;
+                    }
+                    case CameraCharacteristics.LENS_FACING_FRONT:{
+                        return true;
+                    }
+                    default:{
+                        return false;
+                    }
+                }
+            } catch (CameraAccessException e) {
+                e.printStackTrace();
+            }
+        }else{
+            throw new NullPointerException("no camera can use");
+        }
+        return false;
+    }
+
+    @Override
+    public void cameraUnBuilder() {
+        super.cameraUnBuilder();
+    }
+
+    @Override
+    public void onRelease() {
+        super.onRelease();
+        mContext=null;
+        mCameraManager=null;
+        mBaceCameraInfo=null;
+        mCurrentCamera=null;
     }
 }

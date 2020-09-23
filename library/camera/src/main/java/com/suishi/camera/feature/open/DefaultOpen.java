@@ -20,6 +20,8 @@ import static android.hardware.camera2.CameraDevice.*;
 
 public class DefaultOpen extends Open<CameraBuilder2>{
 
+    private Object lock=new Object();
+
     private Activity mContext;
 
     private  CameraDevice mDevice = null;
@@ -40,6 +42,7 @@ public class DefaultOpen extends Open<CameraBuilder2>{
 
     }
 
+
     public CameraDevice getDevice() {
         return mDevice;
     }
@@ -55,19 +58,23 @@ public class DefaultOpen extends Open<CameraBuilder2>{
             StateCallback callback=new StateCallback() {
                 @Override
                 public void onOpened(@NonNull CameraDevice camera) {
-                    mDevice =camera;
-                    stateCallback.onOpened(camera);
+                    synchronized (lock) {
+                        mDevice = camera;
+                        if(mDevice!=null) {
+                            stateCallback.onOpened(mDevice);
+                        }
+                    }
                 }
 
                 @Override
                 public void onDisconnected(@NonNull CameraDevice camera) {
+                    closeCamera();
                     stateCallback.onDisconnected(camera);
-                    mContext.finish();
-
                 }
 
                 @Override
                 public void onError(@NonNull CameraDevice camera, int error) {
+                    closeCamera();
                     stateCallback.onError(camera,error);
                     String msg;
                     switch (error) {
@@ -105,4 +112,26 @@ public class DefaultOpen extends Open<CameraBuilder2>{
         return mDevice;
     }
 
+
+    public void closeCamera(){
+        if(mDevice!=null){
+            synchronized (lock) {
+                mDevice.close();
+                mDevice = null;
+            }
+        }
+    }
+
+    @Override
+    public void cameraUnBuilder() {
+        super.cameraUnBuilder();
+        closeCamera();
+    }
+
+    @Override
+    public void onRelease() {
+        super.onRelease();
+        cameraHandler.removeCallbacks(null);
+        cameraHandler.getLooper().quitSafely();
+    }
 }

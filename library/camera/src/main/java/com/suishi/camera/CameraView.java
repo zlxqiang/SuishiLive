@@ -26,7 +26,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
      */
     private SurfaceHolder.Callback mCallback=null;
 
-    private GPUImageFilter filter= new MagicAmaroFilter();
+    private GPUImageFilter filter= new GPUImageFilter();
 
     public CameraView(Context context) {
         this(context, null);
@@ -42,6 +42,8 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
      * 初始化OpenGL的相关信息
      */
     private void init() {
+        //保持屏幕常亮
+        setKeepScreenOn(true);
         //设置版本
         setEGLContextClientVersion(2);
         getHolder().setFormat(PixelFormat.RGBA_8888);

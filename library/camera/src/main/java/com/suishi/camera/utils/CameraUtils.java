@@ -36,15 +36,15 @@ public class CameraUtils {
                 break;
         }
         int result;
-//        //前置
-//        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
-//            result = (info.orientation + degrees) % 360;
-//            result = (360 - result) % 360;
-//        }
-//        //后置
-//        else {
-//            result = (info.orientation - degrees + 360) % 360;
-//        }
+        //前置
+        if (info.facing == Camera.CameraInfo.CAMERA_FACING_FRONT) {
+            result = (info.orientation + degrees) % 360;
+            result = (360 - result) % 360;
+        }
+        //后置
+        else {
+            result = (info.orientation - degrees + 360) % 360;
+        }
         result = (info.orientation - degrees + 360) % 360;
         return result;
     }

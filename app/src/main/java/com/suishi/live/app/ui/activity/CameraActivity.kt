@@ -19,6 +19,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.suishi.camera.CameraView
 import com.suishi.camera.CircularProgressView
@@ -27,6 +28,7 @@ import com.suishi.camera.camera.CameraBuilder2
 import com.suishi.camera.camera.CameraController
 import com.suishi.camera.camera.SensorControler
 import com.suishi.camera.camera.SensorControler.CameraFocusListener
+import com.suishi.camera.feature.close.DefaultClose
 import com.suishi.camera.feature.init.DefaultInit
 import com.suishi.camera.feature.open.DefaultOpen
 import com.suishi.camera.feature.privew.DefaultPreview
@@ -161,7 +163,11 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
 
         mCameraChange = (findViewById(R.id.btn_camera_switch) as ImageView).apply{
-            setOnClickListener(this@CameraActivity)
+            setOnClickListener(object :View.OnClickListener{
+                override fun onClick(v: View?) {
+                    controller.switchCamera()
+                }
+            })
         }
 
         mFocus = findViewById(R.id.focusImageView)
@@ -187,10 +193,11 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 //            })
 //        }
         builder2= (CameraBuilder2()
-                .setInit(DefaultInit(this@CameraActivity))
+                .setInit(DefaultInit(this@CameraActivity,this))
                 .useOpen(DefaultOpen(this@CameraActivity))
                 as CameraBuilder2?)!!
         builder2.usePreview(DefaultRecord(mCameraView!!,outputFile))
+        builder2.close(DefaultClose())
         controller=CameraController(builder2)
     }
 
@@ -198,7 +205,9 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         if(!mCapture.isRunning()) {
             mCapture.startOrStop()
             this@CameraActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
-            controller.startRecord()
+            mCapture.post({
+                controller.startRecord()
+            })
             Log.d("camera activity", "recording started")
         }else {
             mCapture.startOrStop()
@@ -233,27 +242,25 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     public override fun onDestroy() {
         super.onDestroy()
         Log.e("B","onDestroy")
-        //cameraThread.quitSafely()
-       // recorder.release()
-        //recorderSurface.release()
-        controller.close()
+        controller.release()
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
       //  val previewSize=getPreviewOutputSize(mCameraView!!.display, characteristics, SurfaceHolder::class.java)
       LogUtils.e("cameraActivity","surfaceCreated")
-
-    }
-    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        LogUtils.e("cameraActivity","surfaceChanged")
         mCameraView!!.post{
             controller.open()
             controller.startPreview()
             mCapture.setOnClickListener(this)
         }
     }
+    override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+        LogUtils.e("cameraActivity","surfaceChanged")
+
+    }
     override fun surfaceDestroyed(holder: SurfaceHolder) {
         LogUtils.e("cameraActivity","surfaceDestroyed")
+        controller.close()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
