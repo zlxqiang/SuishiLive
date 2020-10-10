@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * 功能创建者
+ * 负责创建配置功能
  *
  */
 public abstract class ICameraBuilder<W extends Init,

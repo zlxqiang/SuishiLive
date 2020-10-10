@@ -148,12 +148,14 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
                     public void onCaptureProgressed(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull CaptureResult partialResult) {
                         super.onCaptureProgressed(session, request, partialResult);
                         //LogUtils.e("preview setRepeatingRequest","onCaptureProgressed");
+                        isWaitStart=false;
                     }
 
                     @Override
                     public void onCaptureCompleted(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull TotalCaptureResult result) {
                         super.onCaptureCompleted(session, request, result);
                        // LogUtils.e("preview setRepeatingRequest","onCaptureCompleted");
+                        isWaitStart=false;
                     }
 
                     @Override
@@ -161,6 +163,7 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
                         super.onCaptureFailed(session, request, failure);
                         LogUtils.e("preview setRepeatingRequest","onCaptureFailed"+failure.toString());
                         isPreview=false;
+                        isWaitStart=false;
                     }
 
                     @Override
@@ -168,18 +171,21 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
                         super.onCaptureSequenceCompleted(session, sequenceId, frameNumber);
                         LogUtils.e("preview setRepeatingRequest","onCaptureSequenceCompleted");
                         isPreview=false;
+                        isWaitStart=false;
                     }
 
                     @Override
                     public void onCaptureSequenceAborted(@NonNull CameraCaptureSession session, int sequenceId) {
                         super.onCaptureSequenceAborted(session, sequenceId);
                         LogUtils.e("preview setRepeatingRequest","onCaptureSequenceAborted");
+                        isWaitStart=false;
                     }
 
                     @Override
                     public void onCaptureBufferLost(@NonNull CameraCaptureSession session, @NonNull CaptureRequest request, @NonNull Surface target, long frameNumber) {
                         super.onCaptureBufferLost(session, request, target, frameNumber);
                         LogUtils.e("preview setRepeatingRequest","onCaptureBufferLost");
+                        isWaitStart=false;
                     }
                 }, mCameraBuilder.getOpen().getCameraHandler());
             }
@@ -195,7 +201,7 @@ public class DefaultPreview extends Preview<CameraBuilder2> implements MyStateCa
                 isPreview = false;
                 mCaptureSession.stopRepeating();
             }
-            LogUtils.e("preview","stopRepeating");
+            LogUtils.e("preview","stopRepeating;isWaitStart="+isWaitStart);
         } catch (CameraAccessException e) {
             LogUtils.e("preview stop",e.getMessage());
         }

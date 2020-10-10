@@ -6,6 +6,9 @@ import com.suishi.camera.feature.init.Init;
 import com.suishi.camera.feature.open.Open;
 import com.suishi.camera.feature.privew.Preview;
 
+/**
+ * 负责使用功能
+ */
 public abstract class ICameraWrapper<W extends Init,T extends Open,C extends Preview,D extends Close,M extends ICameraBuilder> extends CameraAssembly<W,T,C,D> {
 
     protected M mBuilder;

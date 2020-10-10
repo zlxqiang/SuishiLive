@@ -2,6 +2,7 @@ package com.suishi.live.app.ui.activity
 
 import android.content.Intent
 import android.content.pm.ActivityInfo
+import android.graphics.PixelFormat
 import android.hardware.camera2.*
 import android.media.MediaScannerConnection
 import android.os.*
@@ -35,6 +36,7 @@ import com.suishi.camera.feature.privew.DefaultPreview
 import com.suishi.camera.feature.privew.DefaultRecord
 import com.suishi.live.app.R
 import com.suishi.live.app.utils.OrientationLiveData
+import com.suishi.live.app.widgets.MultiToggleImageButton
 import com.suishi.utils.LogUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -53,10 +55,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
             context.startActivityForResult(intent, 1)
         }
 
-
-        private const val RECORDER_VIDEO_BITRATE:Int=10_000_000
-        private const val MIN_REQUIRED_TIME_MILLIS:Long=1000L
-
         //获取VideoPath
         fun getPath(path: String, fileName: String): String {
             val baseFolder = Environment.getExternalStorageDirectory().toString() + "/sslive/"
@@ -71,13 +69,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
             } else p + fileName
         }
 
-        private fun lensOrientationString(value: Int) = when(value){
-            CameraCharacteristics.LENS_FACING_BACK -> "Back"
-            CameraCharacteristics.LENS_FACING_FRONT -> "Front"
-            CameraCharacteristics.LENS_FACING_EXTERNAL -> "External"
-            else-> "UnKnown"
-        }
-
     }
     /**
      *
@@ -87,12 +78,11 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     /**
      *
      */
-    var mCameraChange: ImageView? = null
-
+    var mCameraSwitch: ImageView? = null
     /**
      *
      */
-    lateinit var mCapture: CircularProgressView
+    lateinit var mCircularProgressView: CircularProgressView
 
     /**
      *
@@ -100,35 +90,25 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     var mFocus: FocusImageView? = null
 
     /**
-     *
+     * 特效
      */
-    var rlCameraBefore: RelativeLayout? = null
-
+    private var mMicBtn: MultiToggleImageButton? = null
     /**
-     *
+     * 闪光灯
      */
-    var rlCameraLater: RelativeLayout? = null
-
+    private var mFlashBtn: MultiToggleImageButton? = null
     /**
-     *
+     * 人脸识别开关
      */
-    var ivCameraConfirm: ImageView? = null
-
+    private var mFaceBtn: MultiToggleImageButton? = null
     /**
-     *
+     * 美颜开关
      */
-    var imagePhoto: ImageView? = null
-
+    private var mBeautyBtn: MultiToggleImageButton? = null
     /**
-     *
+     * 焦点开关
      */
-    var ll_function: LinearLayout? = null
-
-    /**
-     * 美颜设置
-     */
-    var mBeautySwitch: CheckBox? = null
-
+    private var mFocusBtn: MultiToggleImageButton? = null
     /**
      *
      */
@@ -148,21 +128,16 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_camera)
+        getWindow().setFormat(PixelFormat.TRANSLUCENT);
 
-        mBeautySwitch = (findViewById(R.id.iv_beauty_switch) as CheckBox).apply{
-           visibility=View.GONE
-            setOnClickListener(this@CameraActivity)
-        }
+        mCircularProgressView = findViewById(R.id.mCapture)
 
-        mCapture = findViewById(R.id.mCapture)
         mCameraView = (findViewById(R.id.camera_view) as CameraView).apply{
-           // setOnTouchListener(this@CameraActivity)
-           // setOnFilterChangeListener(this@CameraActivity)
             addCallBack2(this@CameraActivity)
+                       // setZOrderOnTop(true)
         }
 
-
-        mCameraChange = (findViewById(R.id.btn_camera_switch) as ImageView).apply{
+        mCameraSwitch = (findViewById(R.id.btn_camera_switch) as ImageView).apply{
             setOnClickListener(object :View.OnClickListener{
                 override fun onClick(v: View?) {
                     controller.switchCamera()
@@ -171,46 +146,29 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         }
 
         mFocus = findViewById(R.id.focusImageView)
-        rlCameraBefore = findViewById(R.id.rl_camera_before)
-        rlCameraLater = findViewById(R.id.rl_camera_later)
-        ivCameraConfirm = (findViewById(R.id.iv_camera_confirm) as ImageView).apply{
-            setOnClickListener(this@CameraActivity)
-        }
 
-        imagePhoto = findViewById(R.id.image_photo)
-        ll_function = findViewById(R.id.ll_function)
-        findViewById<View>(R.id.iv_camera_back).setOnClickListener(this)
-
-        findViewById<View>(R.id.iv_flash_switch).setOnClickListener(this)
         mSensorControler = SensorControler.getInstance().apply{
             setCameraFocusListener(this@CameraActivity)
         }
 
-//        relativeOrientation=OrientationLiveData(this, characteristics).apply {
-//            observe(this@CameraActivity, Observer {
-//                //横竖屏
-//
-//            })
-//        }
-        builder2= (CameraBuilder2()
-                .setInit(DefaultInit(this@CameraActivity,this))
-                .useOpen(DefaultOpen(this@CameraActivity))
-                as CameraBuilder2?)!!
+        builder2= CameraBuilder2()
+        builder2.setInit(DefaultInit(this,this))
+        builder2.useOpen(DefaultOpen(this))
         builder2.usePreview(DefaultRecord(mCameraView!!,outputFile))
         builder2.close(DefaultClose())
         controller=CameraController(builder2)
     }
 
     override fun onClick(view: View) {
-        if(!mCapture.isRunning()) {
-            mCapture.startOrStop()
+        if(!mCircularProgressView.isRunning()) {
+            mCircularProgressView.startOrStop()
             this@CameraActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
-            mCapture.post({
+            mCircularProgressView.post({
                 controller.startRecord()
             })
             Log.d("camera activity", "recording started")
         }else {
-            mCapture.startOrStop()
+            mCircularProgressView.startOrStop()
             controller.stopRecord()
             MediaScannerConnection.scanFile(this, arrayOf(outputFile.absolutePath), null, null)
             startActivity(Intent().apply {
@@ -246,12 +204,11 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
-      //  val previewSize=getPreviewOutputSize(mCameraView!!.display, characteristics, SurfaceHolder::class.java)
       LogUtils.e("cameraActivity","surfaceCreated")
         mCameraView!!.post{
             controller.open()
             controller.startPreview()
-            mCapture.setOnClickListener(this)
+            mCircularProgressView.setOnClickListener(this)
         }
     }
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
@@ -266,7 +223,6 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
     }
-
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
         when(event.action){

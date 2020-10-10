@@ -75,6 +75,18 @@
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
         </provider>
+
+<!--        <provider-->
+<!--            android:name="androidx.startup.InitializationProvider"-->
+<!--            android:authorities="${applicationId}.androidx-startup"-->
+<!--            android:exported="false"-->
+<!--            tools:node="merge">-->
+<!--            &lt;!&ndash; 自动初始化 &ndash;&gt;-->
+<!--            <meta-data-->
+<!--                android:name="com.hi.dhl.startup.library.LibaryC"-->
+<!--                android:value="androidx.startup" />-->
+<!--        </provider>-->
+
     </application>
 
 </manifest>

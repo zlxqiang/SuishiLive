@@ -19,6 +19,120 @@
   },
   {
     "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/build-tools/28.0.3/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/build-tools/29.0.2/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/build-tools/30.0.2/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/emulator/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/ndk-bundle/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/ndk/21.3.6528147/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/patcher/v4/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/platform-tools/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/platforms/android-26/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/platforms/android-27/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/platforms/android-28/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/platforms/android-29/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/platforms/android-30/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/sources/android-26/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/sources/android-27/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/sources/android-28/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/sources/android-30/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
+    "message": "Parsing /home/xiaoqiang/Android/Sdk/tools/package.xml",
+    "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
+    "tag": "release|armeabi-v7a"
+  },
+  {
+    "level": "INFO",
     "message": "- CMake found in SDK at \u0027/home/xiaoqiang/Android/Sdk/cmake/3.10.2.4988404\u0027 had version \u00273.10.2\u0027",
     "file": "/home/xiaoqiang/StudioProjects/SuishiLive/app/CMakeLists.txt",
     "tag": "release|armeabi-v7a"

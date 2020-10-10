@@ -5,6 +5,9 @@ import com.suishi.camera.feature.init.Init;
 import com.suishi.camera.feature.open.Open;
 import com.suishi.camera.feature.privew.Preview;
 
+/**
+ *
+ */
 public abstract class CameraAssembly<W extends Init,
                 T extends Open,
                 C extends Preview,

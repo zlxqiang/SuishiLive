@@ -54,7 +54,7 @@ public class CameraView extends GLSurfaceView implements SurfaceTexture.OnFrameA
         setRenderer(mCameraDrawer);
        // setRenderModeDirty();
         setRenderModeDirty();
-        setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
+        //setRenderModeAuto();
     }
 
     /**

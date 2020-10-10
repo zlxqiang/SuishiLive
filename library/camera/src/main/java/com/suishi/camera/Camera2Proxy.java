@@ -30,9 +30,32 @@ import android.view.SurfaceHolder;
 
 import androidx.annotation.NonNull;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
+import java.util.TreeMap;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
+
+import rx.Emitter;
+import rx.Observable;
+import rx.Observer;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action;
+import rx.functions.Action1;
+import rx.functions.Func0;
+import rx.functions.Func1;
+import rx.observables.AsyncOnSubscribe;
+import rx.observables.SyncOnSubscribe;
+import rx.schedulers.Schedulers;
 
 public class Camera2Proxy {
 
@@ -133,6 +156,22 @@ public class Camera2Proxy {
             mImageReader.close();
             mImageReader = null;
         }
+
+       Observable.create(new Observable.OnSubscribe<Object>() {
+
+            @Override
+            public void call(Subscriber<? super Object> subscriber) {
+                subscriber.onNext("");
+            }
+        }).subscribeOn(Schedulers.newThread()).flatMap(new Func1<Object, Observable<?>>() {
+
+            @Override
+            public Observable<?> call(Object o) {
+                return null;
+            }
+        }).observeOn(AndroidSchedulers.mainThread()).subscribe();
+
+
         mOrientationEventListener.disable();
         stopBackgroundThread(); // 对应 openCamera() 方法中的 startBackgroundThread()
     }

@@ -1,11 +1,6 @@
 # ninja log v5
-14	979	1600584637	CMakeFiles/filter.dir/src/main/cpp/bitmap/Conversion.cpp.o	96da29768a878151
-12	1205	1600584637	CMakeFiles/filter.dir/src/main/cpp/bitmap/BitmapOperation.cpp.o	a835862c1053b46e
-15	1330	1600584637	CMakeFiles/filter.dir/src/main/cpp/MagicJni.cpp.o	96ce66681de4691c
-0	1357	1600584637	CMakeFiles/filter.dir/src/main/cpp/beautify/MagicBeautify.cpp.o	4e68422b6e86fab0
-1357	1539	1600584637	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libfilter.so	34c507df55719150
-1	5427	1600602047	CMakeFiles/filter.dir/src/main/cpp/MagicJni.cpp.o	96ce66681de4691c
-0	5450	1600602047	CMakeFiles/filter.dir/src/main/cpp/bitmap/BitmapOperation.cpp.o	a835862c1053b46e
-0	5463	1600602047	CMakeFiles/filter.dir/src/main/cpp/bitmap/Conversion.cpp.o	96da29768a878151
-0	5506	1600602047	CMakeFiles/filter.dir/src/main/cpp/beautify/MagicBeautify.cpp.o	4e68422b6e86fab0
-5506	6142	1600602047	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libfilter.so	34c507df55719150
+20	3858	1601049216	CMakeFiles/filter.dir/src/main/cpp/bitmap/Conversion.cpp.o	96da29768a878151
+20	3862	1601049216	CMakeFiles/filter.dir/src/main/cpp/bitmap/BitmapOperation.cpp.o	a835862c1053b46e
+21	3892	1601049216	CMakeFiles/filter.dir/src/main/cpp/MagicJni.cpp.o	96ce66681de4691c
+20	3907	1601049216	CMakeFiles/filter.dir/src/main/cpp/beautify/MagicBeautify.cpp.o	4e68422b6e86fab0
+3907	4456	1601049217	../../../../build/intermediates/cmake/debug/obj/armeabi-v7a/libfilter.so	34c507df55719150

@@ -16,7 +16,7 @@ import com.suishi.camera.feature.privew.DefaultRecord;
 import com.suishi.utils.LogUtils;
 
 /**
- * Camera2包装类
+ * 具体实现类
  */
 public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen, DefaultRecord, DefaultClose,CameraBuilder2> implements OpenStateCallback {
 
@@ -95,7 +95,7 @@ public class CameraWrapper2Impl extends ICameraWrapper<DefaultInit, DefaultOpen,
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void switchCamera() {
-        close();
+       close();
         if(mInit!=null){
             mInit.switchCamera();
             open();

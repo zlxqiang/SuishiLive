@@ -98,6 +98,7 @@ dependencies {
     implementation project(':sslive')
     implementation project(':camera')
     implementation 'com.yanzhenjie:permission:2.0.3'
+    implementation 'androidx.drawerlayout:drawerlayout:1.0.0'
 
     def camerax_version = "1.0.0-beta08"
     // The following line is optional, as the core library is included indirectly by camera-camera2
@@ -135,6 +136,7 @@ dependencies {
     implementation "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-livedata-ktx:$rootProject.lifecycleVersion"
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$rootProject.lifecycleVersion"
+    implementation "androidx.startup:startup-runtime:1.0.0-alpha01"
     implementation "androidx.navigation:navigation-fragment-ktx:$rootProject.navigationVersion"
     implementation "androidx.navigation:navigation-ui-ktx:$rootProject.navigationVersion"
     implementation "androidx.paging:paging-runtime:$rootProject.pagingVersion"

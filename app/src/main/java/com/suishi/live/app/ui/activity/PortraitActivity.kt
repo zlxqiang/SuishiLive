@@ -70,9 +70,7 @@ class PortraitActivity : Activity() {
     override fun onCreate(savedInstanceState: Bundle) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_portrait)
-      //  filter = findViewById(R.id.surface)
-       // mLiveManager = LiveManager(this, filter)
-        //  mLFLiveView = (LivingView) findViewById(R.id.liveView);
+
         mMicBtn = (findViewById(R.id.record_mic_button) as MultiToggleImageButton).apply{
             setOnStateChangeListener(object :OnStateChangeListener{
                 override fun stateChanged(view: View?, state: Int) {

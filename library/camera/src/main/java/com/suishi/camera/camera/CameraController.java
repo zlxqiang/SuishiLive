@@ -8,8 +8,8 @@ import com.suishi.camera.feature.privew.Preview;
 import java.time.Instant;
 
 /**
- * Created by cj on 2017/8/2.
- * desc 相机的管理类 主要是Camera的一些设置
+ *
+ * desc 对外提供统一的访问
  * 包括预览和录制尺寸、闪光灯、曝光、聚焦、摄像头切换等
  */
 
