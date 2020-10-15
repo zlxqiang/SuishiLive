@@ -3,24 +3,22 @@ package com.suishi.live.app.ui.activity
 import android.content.Intent
 import android.content.pm.ActivityInfo
 import android.graphics.PixelFormat
-import android.hardware.camera2.*
 import android.media.MediaScannerConnection
-import android.os.*
+import android.os.Build
+import android.os.Bundle
+import android.os.Environment
 import android.util.Log
 import android.view.MotionEvent
 import android.view.SurfaceHolder
 import android.view.View
 import android.view.View.OnTouchListener
 import android.webkit.MimeTypeMap
-import android.widget.CheckBox
 import android.widget.ImageView
-import android.widget.LinearLayout
-import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import com.suishi.camera.CameraView
 import com.suishi.camera.CircularProgressView
@@ -32,12 +30,13 @@ import com.suishi.camera.camera.SensorControler.CameraFocusListener
 import com.suishi.camera.feature.close.DefaultClose
 import com.suishi.camera.feature.init.DefaultInit
 import com.suishi.camera.feature.open.DefaultOpen
-import com.suishi.camera.feature.privew.DefaultPreview
 import com.suishi.camera.feature.privew.DefaultRecord
 import com.suishi.live.app.R
 import com.suishi.live.app.utils.OrientationLiveData
 import com.suishi.live.app.widgets.MultiToggleImageButton
+import com.suishi.live.app.widgets.SelectorView
 import com.suishi.utils.LogUtils
+import kotlinx.android.synthetic.main.activity_camera.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.io.File
@@ -46,7 +45,7 @@ import java.io.File
  *
  */
 @RequiresApi(Build.VERSION_CODES.O)
-class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListener, CameraFocusListener, SurfaceHolder.Callback,LifecycleOwner {
+class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListener, CameraFocusListener, SurfaceHolder.Callback, LifecycleOwner {
 
 
     companion object {
@@ -70,6 +69,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
         }
 
     }
+
     /**
      *
      */
@@ -79,6 +79,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
      *
      */
     var mCameraSwitch: ImageView? = null
+
     /**
      *
      */
@@ -93,37 +94,42 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
      * 特效
      */
     private var mMicBtn: MultiToggleImageButton? = null
+
     /**
      * 闪光灯
      */
     private var mFlashBtn: MultiToggleImageButton? = null
+
     /**
      * 人脸识别开关
      */
     private var mFaceBtn: MultiToggleImageButton? = null
+
     /**
      * 美颜开关
      */
     private var mBeautyBtn: MultiToggleImageButton? = null
+
     /**
      * 焦点开关
      */
     private var mFocusBtn: MultiToggleImageButton? = null
+
     /**
      *
      */
     private var mSensorControler: SensorControler? = null
 
-    private val outputFile:File by lazy{
+    private val outputFile: File by lazy {
         val time = System.currentTimeMillis()
-        val filePath=getPath("video/", "$time.mp4")
+        val filePath = getPath("video/", "$time.mp4")
         File(filePath)
     }
 
     private lateinit var relativeOrientation: OrientationLiveData
 
-    var builder2=CameraBuilder2()
-    lateinit var controller:CameraController<CameraBuilder2>
+    var builder2 = CameraBuilder2()
+    lateinit var controller: CameraController<CameraBuilder2>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -132,13 +138,51 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
         mCircularProgressView = findViewById(R.id.mCapture)
 
-        mCameraView = (findViewById(R.id.camera_view) as CameraView).apply{
+        val strArray = ArrayList<String>()
+        strArray.add("慢动作")
+        strArray.add("短视频")
+        strArray.add("录像")
+        strArray.add("拍照")
+        strArray.add("48M")
+        strArray.add("人像")
+        strArray.add("夜景")
+        strArray.add("萌拍")
+        strArray.add("全景")
+        strArray.add("专业")
+
+        mSelectorView.setAdapter(object : SelectorView.SeletcorAdapter(this) {
+            override fun getItemCount(): Int {
+                return strArray.size;
+            }
+
+            override fun setView(view: View?, position: Int) {
+                if(position<0){
+                    (view as TextView).setText("")
+                    return
+                }
+                (view as TextView).setText(strArray.get(position))
+            }
+
+        })
+
+        mSelectorView.setOnItemCheckListener(object :SelectorView.OnItemCheckListener{
+            override fun onItemChecked(position: Int) {
+                LogUtils.e("selector item=",position.toString())
+            }
+
+            override fun onScrolled(position: Int) {
+            }
+
+        })
+
+
+        mCameraView = (findViewById(R.id.camera_view) as CameraView).apply {
             addCallBack2(this@CameraActivity)
-                       // setZOrderOnTop(true)
+            // setZOrderOnTop(true)
         }
 
-        mCameraSwitch = (findViewById(R.id.btn_camera_switch) as ImageView).apply{
-            setOnClickListener(object :View.OnClickListener{
+        mCameraSwitch = (findViewById(R.id.btn_camera_switch) as ImageView).apply {
+            setOnClickListener(object : View.OnClickListener {
                 override fun onClick(v: View?) {
                     controller.switchCamera()
                 }
@@ -147,27 +191,27 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
         mFocus = findViewById(R.id.focusImageView)
 
-        mSensorControler = SensorControler.getInstance().apply{
+        mSensorControler = SensorControler.getInstance().apply {
             setCameraFocusListener(this@CameraActivity)
         }
 
-        builder2= CameraBuilder2()
-        builder2.setInit(DefaultInit(this,this))
+        builder2 = CameraBuilder2()
+        builder2.setInit(DefaultInit(this, this))
         builder2.useOpen(DefaultOpen(this))
-        builder2.usePreview(DefaultRecord(mCameraView!!,outputFile))
+        builder2.usePreview(DefaultRecord(mCameraView!!, outputFile))
         builder2.close(DefaultClose())
-        controller=CameraController(builder2)
+        controller = CameraController(builder2)
     }
 
     override fun onClick(view: View) {
-        if(!mCircularProgressView.isRunning()) {
+        if (!mCircularProgressView.isRunning()) {
             mCircularProgressView.startOrStop()
             this@CameraActivity.requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LOCKED
             mCircularProgressView.post({
                 controller.startRecord()
             })
             Log.d("camera activity", "recording started")
-        }else {
+        } else {
             mCircularProgressView.startOrStop()
             controller.stopRecord()
             MediaScannerConnection.scanFile(this, arrayOf(outputFile.absolutePath), null, null)
@@ -184,12 +228,12 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     override fun onResume() {
         super.onResume()
-        Log.e("B","onResume")
+        Log.e("B", "onResume")
     }
 
     override fun onPause() {
         super.onPause()
-        Log.e("B","onPause")
+        Log.e("B", "onPause")
         controller.close()
     }
 
@@ -199,24 +243,26 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     public override fun onDestroy() {
         super.onDestroy()
-        Log.e("B","onDestroy")
+        Log.e("B", "onDestroy")
         controller.release()
     }
 
     override fun surfaceCreated(holder: SurfaceHolder?) {
-      LogUtils.e("cameraActivity","surfaceCreated")
-        mCameraView!!.post{
+        LogUtils.e("cameraActivity", "surfaceCreated")
+        mCameraView!!.post {
             controller.open()
             controller.startPreview()
             mCircularProgressView.setOnClickListener(this)
         }
     }
+
     override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
-        LogUtils.e("cameraActivity","surfaceChanged")
+        LogUtils.e("cameraActivity", "surfaceChanged")
 
     }
+
     override fun surfaceDestroyed(holder: SurfaceHolder) {
-        LogUtils.e("cameraActivity","surfaceDestroyed")
+        LogUtils.e("cameraActivity", "surfaceDestroyed")
         controller.close()
     }
 
@@ -225,7 +271,7 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
     }
 
     override fun onTouch(v: View, event: MotionEvent): Boolean {
-        when(event.action){
+        when (event.action) {
             MotionEvent.ACTION_DOWN -> lifecycleScope.launch(Dispatchers.Main) {
                 v.performClick()
 
@@ -245,12 +291,12 @@ class CameraActivity : AppCompatActivity(), View.OnClickListener, OnTouchListene
 
     override fun onStart() {
         super.onStart()
-        Log.e("B","onStart")
+        Log.e("B", "onStart")
     }
 
     override fun onStop() {
         super.onStop()
-        Log.e("B","onStop")
+        Log.e("B", "onStop")
     }
 
 

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+    <CheckedTextView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="100dp"
+        android:gravity="center"
+        android:textSize="@dimen/dimen_14"
+        android:textAlignment="center"
+        android:layout_height="@dimen/dimen_30"
+        android:textColor="@color/selector_item_color"/>

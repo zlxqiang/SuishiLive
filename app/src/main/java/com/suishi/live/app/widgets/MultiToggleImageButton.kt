@@ -62,7 +62,7 @@ class MultiToggleImageButton : AppCompatImageButton {
     private val mMatrix = Matrix()
     private var mAnimator: ValueAnimator? = null
 
-    constructor(context: Context?) : super(context) {
+    constructor(context: Context?) : super(context!!) {
         init()
     }
 

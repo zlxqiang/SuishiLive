@@ -6,7 +6,7 @@ import com.suishi.camera.feature.open.Open;
 import com.suishi.camera.feature.privew.Preview;
 
 /**
- *
+ * 支持的功能模块
  */
 public abstract class CameraAssembly<W extends Init,
                 T extends Open,

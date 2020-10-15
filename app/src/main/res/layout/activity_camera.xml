@@ -12,96 +12,50 @@
 
 
     <!--2-->
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:layout_height="match_parent">
-
-        <ImageView
-            android:id="@+id/image_photo"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#000"
-            android:scaleType="fitXY"
-            android:visibility="invisible" />
-
-    </FrameLayout>
-
-    <!--3-->
     <RelativeLayout
         android:id="@+id/rl_camera_before"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--上-->
         <com.suishi.live.app.widgets.TopRightWeightedLayout
             android:layout_width="match_parent"
-            android:layout_height="75dp"
-            android:gravity="center"
-            android:visibility="visible"
-            android:background="#4d000000"
+            android:layout_height="65dp"
+            android:background="#000000"
             android:clipChildren="false"
             android:clipToPadding="false"
-            android:orientation="horizontal">
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:visibility="visible">
+
             <com.suishi.live.app.widgets.MultiToggleImageButton
                 android:id="@+id/record_mic_button"
                 style="@style/NiceOption"
                 app:imageIds="@array/record_mic_icons" />
+
             <com.suishi.live.app.widgets.MultiToggleImageButton
                 android:id="@+id/camera_flash_button"
                 style="@style/NiceOption"
                 app:imageIds="@array/camera_flashmode_icons" />
+
             <com.suishi.live.app.widgets.MultiToggleImageButton
                 android:id="@+id/camera_switch_button"
                 style="@style/NiceOption"
                 app:imageIds="@array/camera_id_icons" />
+
             <com.suishi.live.app.widgets.MultiToggleImageButton
                 android:id="@+id/camera_focus_button"
                 style="@style/NiceOption"
                 app:imageIds="@array/camera_focus_icons" />
+
             <com.suishi.live.app.widgets.MultiToggleImageButton
                 android:id="@+id/camera_render_button"
                 style="@style/NiceOption"
                 app:imageIds="@array/camera_render_icons" />
+
         </com.suishi.live.app.widgets.TopRightWeightedLayout>
 
-        <ImageView
-            android:id="@+id/btn_camera_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginRight="31dp"
-            android:layout_marginBottom="41dp"
-            android:padding="5dp"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="20dp">
-
-            <com.suishi.camera.CircularProgressView
-                android:id="@+id/mCapture"
-                android:layout_width="88dp"
-                android:layout_height="88dp"
-                android:layout_centerHorizontal="true"
-                android:clickable="true" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/mCapture"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="@dimen/dimen_5"
-                android:text="ssss"
-                android:textColor="#6478D3"
-                android:textSize="12sp"
-                android:visibility="gone" />
-
-        </RelativeLayout>
-
-
+        <!--中-->
         <com.suishi.camera.FocusImageView
             android:id="@+id/focusImageView"
             android:layout_width="75dip"
@@ -111,60 +65,64 @@
             app:focus_focusing_id="@drawable/focus_focusing"
             app:focus_success_id="@drawable/focus_focused" />
 
+        <!--下-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#000"
+            android:layout_alignParentBottom="true"
+            android:orientation="vertical">
+
+            <!--导航-->
+            <com.suishi.live.app.widgets.SelectorView
+                android:id="@+id/mSelectorView"
+                android:layout_width="match_parent"
+                android:layout_height="40dp" >
+            </com.suishi.live.app.widgets.SelectorView>
+
+            <!---->
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                >
+
+                <com.suishi.utils.CircleImageView
+                    android:id="@+id/image_photo"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_alignParentLeft="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="31dp"
+                    android:scaleType="centerCrop"
+                    android:src="#efefef"
+                    app:border_color="@color/white"
+                    app:border_overlay="true"
+                    app:border_width="2dp" />
+
+                <com.suishi.camera.CircularProgressView
+                    android:id="@+id/mCapture"
+                    android:layout_width="88dp"
+                    android:layout_height="88dp"
+                    android:layout_centerInParent="true"
+                    android:clickable="true" />
+
+                <ImageView
+                    android:id="@+id/btn_camera_switch"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="31dp"
+                    android:scaleType="fitCenter"
+                    android:padding="@dimen/dimen_5"
+                    app:srcCompat="@mipmap/ic_camera_switch" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
     </RelativeLayout>
 
-    <!--4-->
-    <LinearLayout
-        android:id="@+id/ll_function"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="20dp"
-        android:orientation="vertical">
-
-        <!--闪光灯-->
-        <CheckBox
-            android:id="@+id/iv_flash_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@null"
-            android:checked="false"
-            android:clickable="true" />
-
-        <!--美颜-->
-        <CheckBox
-            android:id="@+id/iv_beauty_switch"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:background="@null"
-            android:checked="true"
-            android:clickable="true" />
-    </LinearLayout>
-
-    <!--5-->
-    <RelativeLayout
-        android:id="@+id/rl_camera_later"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:visibility="gone">
-
-        <ImageView
-            android:id="@+id/iv_camera_back"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="17dp"
-            app:srcCompat="@mipmap/ic_launcher" />
-
-        <ImageView
-            android:id="@+id/iv_camera_confirm"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
-            android:padding="17dp"
-            app:srcCompat="@mipmap/ic_launcher" />
-    </RelativeLayout>
 
 </FrameLayout>
